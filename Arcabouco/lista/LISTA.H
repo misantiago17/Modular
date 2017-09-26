@@ -6,6 +6,7 @@
 *
 *  Arquivo gerado:              LISTA.h
 *  Letras identificadoras:      LIS
+DFGHJKL;'
 *
 *  Nome da base de software:    Arcabouço para a automação de testes de programas redigidos em C
 *  Arquivo da base de software: D:\AUTOTEST\PROJETOS\LISTA.BSW
