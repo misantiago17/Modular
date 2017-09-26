@@ -1,6 +1,5 @@
 #if ! defined( LISTA_ )
 #define LISTA_
-//aaaaaaaaaaaaaaaaaaaaaa
 /***************************************************************************
 *
 *  $MCD Módulo de definição: LIS  Lista duplamente encadeada
