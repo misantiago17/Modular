@@ -334,7 +334,7 @@
 *  Função: LIS  &Ir para o elemento inicial
 *  ****/
 
-   void IrInicioLista( LIS_tppLista pLista )
+   LIS_tpCondRet IrInicioLista( LIS_tppLista pLista )
    {
 
       #ifdef _DEBUG
@@ -342,7 +342,7 @@
       #endif
 
       pLista->pElemCorr = pLista->pOrigemLista ;
-
+	  return LIS_CondRetOK;
    } /* Fim função: LIS  &Ir para o elemento inicial */
 
 /***************************************************************************
@@ -350,7 +350,7 @@
 *  Função: LIS  &Ir para o elemento final
 *  ****/
 
-   void IrFinalLista( LIS_tppLista pLista )
+   LIS_tpCondRet IrFinalLista( LIS_tppLista pLista )
    {
 
       #ifdef _DEBUG
@@ -358,7 +358,7 @@
       #endif
 
       pLista->pElemCorr = pLista->pFimLista ;
-
+	  return LIS_CondRetOK;
    } /* Fim função: LIS  &Ir para o elemento final */
 
 /***************************************************************************
