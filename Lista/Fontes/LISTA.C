@@ -98,7 +98,7 @@
 *  ****/
 
    LIS_tpCondRet LIS_CriarLista(
-             void   ( * ExcluirValor ) ( void * pDado ) )
+             void   ( * ExcluirValor ) ( void * pDado ), LIS_tppLista* pListaRet) ;
    {
 
       LIS_tpLista * pLista = NULL ;
@@ -106,14 +106,16 @@
       pLista = ( LIS_tpLista * ) malloc( sizeof( LIS_tpLista )) ;
       if ( pLista == NULL )
       {
+		*pListaRet=NULL;
          return LIS_CondRetFaltouMemoria ;
       } /* if */
 
       LimparCabeca( pLista ) ;
+	  *pListaRet=pLista;
 
       pLista->ExcluirValor = ExcluirValor ;
 
-      return pLista ;
+      return LIS_CondRetOK ;
 
    } /* Fim função: LIS  &Criar lista */
 
@@ -132,6 +134,9 @@
       LIS_EsvaziarLista( pLista ) ;
 
       free( pLista ) ;
+
+	return LIS_CondRetOK;
+
 
    } /* Fim função: LIS  &Destruir lista */
 
