@@ -13,10 +13,12 @@ DFGHJKL;'
 *
 *  Projeto: INF 1301 / 1628 Automatização dos testes de módulos C
 *  Gestor:  LES/DI/PUC-Rio
-*  Autores: avs
+*  Autores: avs, Gabriel Busquim (gb), Michelle Santiago (ms), Renan Moreira (rm)
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
+*	  5		  ms	26/set/2017 alteração do retorno das funções e seus parâmetros
+								e criação de novas funções
 *     4       avs   01/fev/2006 criar linguagem script simbólica
 *     3       avs   08/dez/2004 uniformização dos exemplos
 *     2       avs   07/jul/2003 unificação de todos os módulos em um só projeto
@@ -110,19 +112,18 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *                     exclusão do valor referenciado pelo elemento
 *                     a ser excluído.
 *                     Ver descrição do módulo.
+*	  ListaRet 		- ponteiro para a lista. 
+*					  Este ponteiro será utilizado pelas funções 
+*					  que manipulem esta lista.
 *
 *  $FV Valor retornado
-*     Se executou corretamente retorna o ponteiro para a lista.
-*     Este ponteiro será utilizado pelas funções que manipulem esta lista.
-*
-*     Se ocorreu algum erro, por exemplo falta de memória ou dados errados,
-*     a função retornará NULL.
-*     Não será dada mais informação quanto ao problema ocorrido.
+*      LIS_CondRetOK
+*	   LIS_CondRetFaltouMemoria
 *
 ***********************************************************************/
 
-   LIS_tppLista LIS_CriarLista(
-             void   ( * ExcluirValor ) ( void * pDado ) ) ;
+   LIS_tpCondRet LIS_CriarLista(
+             void   ( * ExcluirValor ) ( void * pDado ), LIS_tppLista* ListaRet) ;
 
 
 /***********************************************************************
@@ -137,11 +138,11 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *     OBS. não existe previsão para possíveis falhas de execução.
 *
 *  $FV Valor retornado
-*     LIS_CondRetOK    - destruiu sem problemas
+*     LIS_CondRetOK
 *
 ***********************************************************************/
 
-   void LIS_DestruirLista( LIS_tppLista pLista ) ;
+   LIS_tpCondRet LIS_DestruirLista( LIS_tppLista pLista ) ;
 
 
 /***********************************************************************
@@ -154,9 +155,12 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *  $EP Parâmetros
 *     pLista - ponteiro para a lista a ser esvaziada
 *
+*  $FV Valor retornado
+*     LIS_CondRetOK 
+*
 ***********************************************************************/
 
-   void LIS_EsvaziarLista( LIS_tppLista pLista ) ;
+   LIS_tpCondRet LIS_EsvaziarLista( LIS_tppLista pLista ) ;
 
 
 /***********************************************************************
@@ -240,15 +244,16 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *
 *  $EP Parâmetros
 *     pLista - ponteiro para a lista de onde se quer o valor
+*	  pValor - endereço de um ponteiro para armazenar o valor encontrado
 *
 *  $FV Valor retornado
-*     não NULL - se o elemento corrente existe
-*     NULL     - se a lista estiver vazia
-*                Pode retornar NULL se o valor inserido no elemento for NULL.
+*     LIS_CondRetOK
+*	  LIS_CondRetListaVazia
+*	  LIS_CondRetNaoAchou
 *
 ***********************************************************************/
 
-   void * LIS_ObterValor( LIS_tppLista pLista ) ;
+   LIS_tpCondRet LIS_ObterValor( LIS_tppLista pLista, void** pValor ) ;
 
 
 /***********************************************************************
@@ -262,9 +267,13 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *  $EP Parâmetros
 *     pLista - ponteiro para a lista a manipular
 *
+*  $FV Valor retornado
+*     LIS_CondRetOK
+*	  LIS_CondRetListaVazia
+*
 ***********************************************************************/
 
-   void IrInicioLista( LIS_tppLista pLista ) ;
+   LIS_tpCondRet IrInicioLista( LIS_tppLista pLista ) ;
 
 
 /***********************************************************************
@@ -278,9 +287,13 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *  $EP Parâmetros
 *     pLista - ponteiro para a lista a manipular
 *
+*  $FV Valor retornado
+*     LIS_CondRetOK
+*	  LIS_CondRetListaVazia
+*
 ***********************************************************************/
 
-   void IrFinalLista( LIS_tppLista pLista ) ;
+   LIS_tpCondRet IrFinalLista( LIS_tppLista pLista ) ;
 
 
 /***********************************************************************
@@ -338,6 +351,48 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 
    LIS_tpCondRet LIS_ProcurarValor( LIS_tppLista pLista ,
                                     void * pValor        ) ;
+
+//--------------------------------------- isso precisa ? -----------------------									
+/***********************************************************************
+*  $FC Função: LIS  &Criar um novo nó na lista
+*
+*  $ED Descrição da função
+*     Adiciona um novo elemento na lista dado seu valor a ser armazenado.
+*     Caso lista esteja completa 
+	  
+	  . 
+*
+*  $EP Parâmetros
+*     pLista - ponteiro para a lista a manipular
+*	  pNo 	 - ponteiro para o novo nó da lista
+*
+*  $FV Valor retornado
+*     LIS_CondRetOK
+*	  LIS_CondRetFimLista		
+*
+***********************************************************************/
+
+	LIS_tpCondRet CriarElemento( LIS_tppLista pLista ,
+                                void *       pValor , tpElemLista** pNo );
+	
+//--------------------------------------- isso precisa ? -----------------------
+/***********************************************************************
+*
+*  $FC Função: LIS  &Obtem o tamanho da lista
+*
+*  $ED Descrição da função
+*     Informa o número de elementos dentro da lista.
+*
+*  $EP Parâmetros
+*     pLista 	 - ponteiro para a lista a manipular
+*	  pTamanho 	 - ponteiro que armazena o número de elementos dentro da lista
+*
+*  $FV Valor retornado
+*     LIS_CondRetOK
+*	  LIS_CondRetListaVazia		
+*
+***********************************************************************/
+	LIS_tpCondRet LIS_ObterTamanhoLista( LIS_tppLista pLista , int* pTamanho);
 
 #undef LISTA_EXT
 
