@@ -348,7 +348,7 @@
       #endif
 
       pLista->pElemCorr = pLista->pOrigemLista ;
-
+	  return LIS_CondRetOK;
    } /* Fim função: LIS  &Ir para o elemento inicial */
 
 /***************************************************************************
@@ -364,7 +364,7 @@
       #endif
 
       pLista->pElemCorr = pLista->pFimLista ;
-
+	  return LIS_CondRetOK;
    } /* Fim função: LIS  &Ir para o elemento final */
 
 /***************************************************************************
