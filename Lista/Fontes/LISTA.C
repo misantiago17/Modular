@@ -93,7 +93,7 @@
 *  Função: LIS  &Criar lista
 *  ****/
 
-   LIS_tppLista LIS_CriarLista(
+   LIS_tpCondRet LIS_CriarLista(
              void   ( * ExcluirValor ) ( void * pDado ) )
    {
 
@@ -102,7 +102,7 @@
       pLista = ( LIS_tpLista * ) malloc( sizeof( LIS_tpLista )) ;
       if ( pLista == NULL )
       {
-         return NULL ;
+         return LIS_CondRetFaltouMemoria ;
       } /* if */
 
       LimparCabeca( pLista ) ;
@@ -118,7 +118,7 @@
 *  Função: LIS  &Destruir lista
 *  ****/
 
-   void LIS_DestruirLista( LIS_tppLista pLista )
+   LIS_tpCondRet LIS_DestruirLista( LIS_tppLista pLista )
    {
 
       #ifdef _DEBUG
@@ -136,7 +136,7 @@
 *  Função: LIS  &Esvaziar lista
 *  ****/
 
-   void LIS_EsvaziarLista( LIS_tppLista pLista )
+   LIS_tpCondRet LIS_EsvaziarLista( LIS_tppLista pLista )
    {
 
       tpElemLista * pElem ;
@@ -313,7 +313,7 @@
 *  Função: LIS  &Obter referência para o valor contido no elemento
 *  ****/
 
-   void * LIS_ObterValor( LIS_tppLista pLista )
+   LIS_tpCondRet LIS_ObterValor( LIS_tppLista pLista )
    {
 
       #ifdef _DEBUG
@@ -480,6 +480,13 @@
 
    } /* Fim função: LIS  &Procurar elemento contendo valor */
 
+    LIS_tpCondRet LIS_ObterTamanhoLista( LIS_tppLista pLista , int* tamanho) {
+
+	   *tamanho = pLista->numElem;
+	   return LIS_CondRetOK;
+   }
+
+
 
 /*****  Código das funções encapsuladas no módulo  *****/
 
@@ -517,8 +524,8 @@
 *
 ***********************************************************************/
 
-   tpElemLista * CriarElemento( LIS_tppLista pLista ,
-                                void *       pValor  )
+    CriarElemento( LIS_tppLista pLista ,
+                                void *       pValor,   )
    {
 
       tpElemLista * pElem ;
