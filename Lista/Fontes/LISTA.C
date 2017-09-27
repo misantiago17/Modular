@@ -322,7 +322,7 @@
 *  Função: LIS  &Obter referência para o valor contido no elemento
 *  ****/
 
-   LIS_tpCondRet LIS_ObterValor( LIS_tppLista pLista )
+   LIS_tpCondRet LIS_ObterValor( LIS_tppLista pLista, void** pValorRet ) ;
    {
 
       #ifdef _DEBUG
@@ -331,10 +331,12 @@
 
       if ( pLista->pElemCorr == NULL )
       {
-        return NULL ;
+		*pValorRet = NULL	;
+		return LIS_CondRetListaVazia	;
       } /* if */
 
-      return pLista->pElemCorr->pValor ;
+      *pValorRet=pLista->pElemCorr->pValor ;
+	  return LIS_CondRetOK	;
 
    } /* Fim função: LIS  &Obter referência para o valor contido no elemento */
 
