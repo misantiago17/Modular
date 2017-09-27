@@ -83,10 +83,8 @@
    static void LiberarElemento( LIS_tppLista   pLista ,
                                 tpElemLista  * pElem   ) ;
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////
    static tpElemLista * CriarElemento( LIS_tppLista pLista ,
                                        void *       pValor  ) ;
-//////////////////////////////////////////////////////////////////////////////////////////////////////
 
    static void LimparCabeca( LIS_tppLista pLista ) ;
 

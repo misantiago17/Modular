@@ -352,30 +352,6 @@ typedef struct LIS_tagLista * LIS_tppLista ;
    LIS_tpCondRet LIS_ProcurarValor( LIS_tppLista pLista ,
                                     void * pValor        ) ;
 
-//--------------------------------------- isso precisa ? -----------------------									
-/***********************************************************************
-*  $FC Função: LIS  &Criar um novo nó na lista
-*
-*  $ED Descrição da função
-*     Adiciona um novo elemento na lista dado seu valor a ser armazenado.
-*     Caso lista esteja completa 
-	  
-	  . 
-*
-*  $EP Parâmetros
-*     pLista - ponteiro para a lista a manipular
-*	  pNo 	 - ponteiro para o novo nó da lista
-*
-*  $FV Valor retornado
-*     LIS_CondRetOK
-*	  LIS_CondRetFimLista		
-*
-***********************************************************************/
-
-	LIS_tpCondRet CriarElemento( LIS_tppLista pLista ,
-                                void *       pValor , tpElemLista** pNo );
-	
-//--------------------------------------- isso precisa ? -----------------------
 /***********************************************************************
 *
 *  $FC Função: LIS  &Obtem o tamanho da lista
@@ -392,6 +368,7 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *	  LIS_CondRetListaVazia		
 *
 ***********************************************************************/
+
 	LIS_tpCondRet LIS_ObterTamanhoLista( LIS_tppLista pLista , int* pTamanho);
 
 #undef LISTA_EXT
