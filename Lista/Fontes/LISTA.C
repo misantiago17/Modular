@@ -9,10 +9,12 @@
 *
 *  Projeto: INF 1301 / 1628 Automatização dos testes de módulos C
 *  Gestor:  LES/DI/PUC-Rio
-*  Autores: avs
+*  Autores: avs, Gabriel Busquim (gb), Michelle Santiago (ms), Renan Moreira (rm)
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
+* 	  5     gb,rm,ms26/set/2017 criação da função de tamanho da lista e 
+								alteração das condições de retorno das funções
 *     4       avs   01/fev/2006 criar linguagem script simbólica
 *     3       avs   08/dez/2004 uniformização dos exemplos
 *     2       avs   07/jul/2003 unificação de todos os módulos em um só projeto
@@ -81,8 +83,10 @@
    static void LiberarElemento( LIS_tppLista   pLista ,
                                 tpElemLista  * pElem   ) ;
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////
    static tpElemLista * CriarElemento( LIS_tppLista pLista ,
                                        void *       pValor  ) ;
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
    static void LimparCabeca( LIS_tppLista pLista ) ;
 
@@ -155,6 +159,8 @@
       } /* while */
 
       LimparCabeca( pLista ) ;
+	  
+	  return LIS_CondRetOK;
 
    } /* Fim função: LIS  &Esvaziar lista */
 
