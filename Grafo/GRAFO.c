@@ -8,7 +8,7 @@
 *  Arquivo da base de software: ????????????????
 *
 *  Projeto: INF 1301 / 1628 Automatização dos testes de módulos C
-*  Gestor:  LES/DI/PUC-Rio
+*  Gestor:  DI/PUC-Rio
 *  Autores: Gabriel Busquim (gb), Michelle Santiago (ms), Renan Moreira (rm)
 *
 *  $HA Histórico de evolução:
