@@ -31,7 +31,7 @@
 
 #include    "Lista.h"
 
-
+//funções que ele quer testar
 static const char RESET_LISTA_CMD         [ ] = "=resetteste"     ;
 static const char CRIAR_LISTA_CMD         [ ] = "=criarlista"     ;
 static const char DESTRUIR_LISTA_CMD      [ ] = "=destruirlista"  ;
