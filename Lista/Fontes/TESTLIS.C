@@ -43,6 +43,7 @@ static const char EXC_ELEM_CMD            [ ] = "=excluirelem"    ;
 static const char IR_INICIO_CMD           [ ] = "=irinicio"       ;
 static const char IR_FIM_CMD              [ ] = "=irfinal"        ;
 static const char AVANCAR_ELEM_CMD        [ ] = "=avancarelem"    ;
+static const char OBTER_TAM_CMD           [ ] = "=obtertamanho"
 
 struct infs{
 	char Nome[100];
@@ -119,6 +120,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
       int i ;
 
       int numElem = -1 ;
+	  int guardaTamanho;
 
       StringDado[ 0 ] = 0 ;
 
@@ -378,6 +380,25 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
                       "Condicao de retorno errada ao avancar" ) ;
 
          } /* fim ativa: LIS  &Avançar elemento */
+
+		 /* LIS  &LObter Tamanho */
+		          else if ( strcmp( ComandoTeste , OBTER_TAM_CMD ) == 0 )
+         {
+
+            numLidos = LER_LerParametros( "iii" , &inxLista , &numElem ,
+                                &CondRetEsp ) ;
+
+            if ( ( numLidos != 3 )
+              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+            return TST_CompararInt( CondRetEsp ,
+                      LIS_AvancarElementoCorrente( vtListas[ inxLista ] , numElem ) ,
+                      "Condicao de retorno errada ao avancar" ) ;
+
+         } /* fim ativa: LIS  &&Obter Tamanho */
 
       return TST_CondRetNaoConhec ;
 

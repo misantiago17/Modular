@@ -356,7 +356,7 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *  $FC Função: LIS  &Obtem o tamanho da lista
 *
 *  $ED Descrição da função
-*     Informa o número de elementos dentro da lista.
+*     Retorna por referência o número de elementos dentro da lista (entre 0 e infinito).
 *
 *  $EP Parâmetros
 *     pLista 	 - ponteiro para a lista a manipular

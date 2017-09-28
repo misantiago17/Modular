@@ -112,6 +112,7 @@
 	  *pListaRet=pLista;
 
       pLista->ExcluirValor = ExcluirValor ;
+	  pLista->numElem=
 
       return LIS_CondRetOK ;
 
