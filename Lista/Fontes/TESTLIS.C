@@ -44,6 +44,14 @@ static const char IR_INICIO_CMD           [ ] = "=irinicio"       ;
 static const char IR_FIM_CMD              [ ] = "=irfinal"        ;
 static const char AVANCAR_ELEM_CMD        [ ] = "=avancarelem"    ;
 
+struct infs{
+	char Nome[100];
+	char Cidade[50];
+	char Email[100];
+	char Data[12];
+
+};
+typedef struct infs Teste_Infs;
 
 #define TRUE  1
 #define FALSE 0
@@ -52,7 +60,11 @@ static const char AVANCAR_ELEM_CMD        [ ] = "=avancarelem"    ;
 #define NAO_VAZIO 1
 
 #define DIM_VT_LISTA   10
+#define DIM_VT_INFS   10
 #define DIM_VALOR     100
+
+
+Teste_Infs* vtInfs[DIM_VT_INFS];
 
 LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 
@@ -93,6 +105,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
    {
 
       int inxLista  = -1 ,
+		  inxIns  = -1 ,
           numLidos   = -1 ,
           CondRetEsp = -1  ;
 
@@ -140,7 +153,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
             CondRetEsp=LIS_CriarLista( DestruirValor,&vtListas[inxLista]) ;
 
             return TST_CompararInt( CondRetEsp , CondRet ,
-               "Erro e=na condicao de retorno ao criar a lista"  ) ;
+               "Erro na condicao de retorno ao criar a lista"  ) ;
 
          } /* fim ativa: Testar CriarLista */
 
