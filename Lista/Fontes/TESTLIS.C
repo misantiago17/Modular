@@ -12,7 +12,8 @@
 *  Autores: avs
 *
 *  $HA Histórico de evolução:
-*     Versão  Autor    Data     Observações
+*     Versão  Autor    Data     Observaçõesadicionado teste da funcao que obtem tamanho da lista
+*     5       gb    27/09/2017  melhoria dos testes/
 *     4       avs   01/fev/2006 criar linguagem script simbólica
 *     3       avs   08/dez/2004 uniformização dos exemplos
 *     2       avs   07/jul/2003 unificação de todos os módulos em um só projeto
@@ -31,7 +32,16 @@
 
 #include    "Lista.h"
 
-//funções que ele quer testar
+
+struct infs{
+	char Nome[100];
+	char Cidade[50];
+	char Email[100];
+	char Data[12];
+
+};
+typedef struct infs Teste_Infs;
+
 static const char RESET_LISTA_CMD         [ ] = "=resetteste"     ;
 static const char CRIAR_LISTA_CMD         [ ] = "=criarlista"     ;
 static const char DESTRUIR_LISTA_CMD      [ ] = "=destruirlista"  ;
@@ -52,9 +62,13 @@ static const char AVANCAR_ELEM_CMD        [ ] = "=avancarelem"    ;
 #define NAO_VAZIO 1
 
 #define DIM_VT_LISTA   10
+#define DIM_VT_LISTA   10
 #define DIM_VALOR     100
 
 LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
+Teste_Infs* vtInfs[DIM_VT_INFS];
+
+
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
@@ -93,6 +107,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
    {
 
       int inxLista  = -1 ,
+		  inxIns  = -1 ,
           numLidos   = -1 ,
           CondRetEsp = -1  ;
 
@@ -140,7 +155,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
             CondRetEsp=LIS_CriarLista( DestruirValor,&vtListas[inxLista]) ;
 
             return TST_CompararInt( CondRetEsp , CondRet ,
-               "Erro e=na condicao de retorno ao criar a lista"  ) ;
+               "Erro na condicao de retorno ao criar a lista"  ) ;
 
          } /* fim ativa: Testar CriarLista */
 
@@ -152,7 +167,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
             numLidos = LER_LerParametros( "i" ,
                                &inxLista ) ;
 
-            if ( ( numLidos != 1 )
+            if ( ( numLidos != 2 )
               || ( ! ValidarInxLista( inxLista , NAO_VAZIO )))
             {
                return TST_CondRetParm ;
@@ -190,16 +205,16 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
          else if ( strcmp( ComandoTeste , INS_ELEM_ANTES_CMD ) == 0 )
          {
 
-            numLidos = LER_LerParametros( "isi" ,
-                       &inxLista , StringDado , &CondRetEsp ) ;
+            numLidos = LER_LerParametros( "ii" ,
+                       &inxLista , StringDado, &CondRetEsp ) ;
 
-            if ( ( numLidos != 3 )
+            if ( ( numLidos != 2 )
               || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            pDado = ( char * ) malloc( strlen( StringDado ) + 1 ) ;
+            pDado = (  Teste_Infs* ) malloc( sizeof(Teste_Infs)) ;
             if ( pDado == NULL )
             {
                return TST_CondRetMemoria ;
@@ -280,16 +295,16 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
          else if ( strcmp( ComandoTeste , OBTER_VALOR_CMD ) == 0 )
          {
 
-            numLidos = LER_LerParametros( "isi" ,
-                       &inxLista , StringDado , &ValEsp ) ;
+            numLidos = LER_LerParametros( "iiii" ,
+                       &inxLista , StringDado , &ValEsp, &CondRetEsp ) ;
 
-            if ( ( numLidos != 3 )
+            if ( ( numLidos != 4 )
               || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            pDado = ( char * ) LIS_ObterValor( vtListas[ inxLista ] ) ;
+            pDado = ( Teste_Infs* ) LIS_ObterValor( vtListas[ inxLista ] ) ;
 
             if ( ValEsp == 0 )
             {
