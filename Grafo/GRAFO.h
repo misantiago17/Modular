@@ -80,7 +80,8 @@ typedef struct GRA_tagGrafo * GRA_tppGrafo;
 
          GRA_CondRetNaoAchouVertice ,
                /* Não encontrou o vertice procurado */
-		 GRA_CondRetNaoAchouVertice ,
+
+		 GRA_CondRetNaoAchouAresta ,
                /* Não encontrou a aresta procurada */
 
          GRA_CondRetFaltouMemoria

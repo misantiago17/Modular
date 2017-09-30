@@ -41,6 +41,11 @@ typedef struct tagElemGrafo {
 	struct tpElemGrafo **pLisElem;
 	/* Ponteiro para lista de elementos para os quais o vertice aponta */
 
+	int numElem;
+	/* Numero de elementos conectado a este vertice */
+
+	int numVert;
+	/* Valor numerico deste vertice */
 } tpElemGrafo;
 
 /***********************************************************************
@@ -58,6 +63,9 @@ typedef struct GRA_tagGrafo {
 	tpElemGrafo * pElemCorr;
 	/* Ponteiro para o elemento corrente do grafo */
 
+	tpElemGrafo **listaVertices;
+	/* Lista dos ponteiros para os vertices */
+
 	int numElem;
 	/* Número de elementos do grafo */
 
@@ -68,6 +76,7 @@ typedef struct GRA_tagGrafo {
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
+tpElemGrafo CriarElemento(GRA_tpGrafo pGrafo, void * pValor);
 void LimparCabeca(GRA_tppGrafo pGrafo);
 
 /*****  Código das funções exportadas pelo módulo  *****/
@@ -77,8 +86,7 @@ void LimparCabeca(GRA_tppGrafo pGrafo);
 *  Função: Função: GRA  &Criar grafo
 *  ****/
 
-GRA_tpCondRet GRA_CriarGrafo(
-	void(*ExcluirValor) (void * pDado), GRA_tppGrafo* GrafoRet) {
+GRA_tpCondRet GRA_CriarGrafo(void(*ExcluirValor) (void * pDado), GRA_tppGrafo* GrafoRet) {
 
 	GRA_tpGrafo *pGrafo;
 
@@ -88,7 +96,8 @@ GRA_tpCondRet GRA_CriarGrafo(
 		*GrafoRet = NULL;
 		return GRA_CondRetFaltouMemoria;
 	} /* if */
-	
+	LIS_CriarLista(NULL, pGrafo->listaVertices);
+
 	LimparCabeca(pGrafo);
 	*GrafoRet = pGrafo;
 
@@ -100,27 +109,103 @@ GRA_tpCondRet GRA_CriarGrafo(
 
 /***************************************************************************
 *
+*  Função: Função: GRA  &Ir para o Vértice
+*  ****/
+
+GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert) {
+
+	IrInicioLista(pGrafo->listaVertices);
+	/*??????? Alguma outra condição de retorno pra erro aki??? */
+	if (LIS_AvancarElementoCorrente(pGrafo->listaVertices, numVert) != CondRetOK)
+		return GRA_CondRetNaoAchouVertice;
+
+	pGrafo->pElemCorr = *pGrafo->listaVertices;
+	return CondRetOK;
+}
+/***************************************************************************
+*
 *  Função: GRA  &Obter referência para o valor contido no vértice
 *  ****/
 
-LIS_tpCondRet LIS_ObterValor(LIS_tppLista pLista, void** pValorRet);
+GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet);
 {
 
-#ifdef _DEBUG
-	assert(pLista != NULL);
-#endif
+	#ifdef _DEBUG
+		assert(pGrafo != NULL);
+	#endif
 
-	if (pLista->pElemCorr == NULL)
+	if (pGrafo->pElemCorr == NULL)
 	{
 		*pValorRet = NULL;
-		return LIS_CondRetListaVazia;
+		return GRA_CondRetGrafoVazio;
 	} /* if */
 
-	*pValorRet = pLista->pElemCorr->pValor;
-	return LIS_CondRetOK;
+	*pValorRet = pGrafo->pElemCorr->pValor;
+	return GRA_CondRetOK;
 
 } /* Fim função: GRA  &Obter referência para o valor contido no vértice */
 
+/***************************************************************************
+*
+*  Função: GRA  &Inserir vértice
+*  ****/
+
+GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo, void * pValor, tpElemGrafo * elemLig)
+{
+
+	tpElemGrafo * pElem;
+
+	#ifdef _DEBUG
+		assert(pGrafo != NULL);
+	#endif
+
+	/* Criar elemento a inerir antes */
+
+	pElem = CriarElemento(pGrafo, pValor);
+	if (pElem == NULL)
+	{
+		return GRA_CondRetFaltouMemoria;
+	} /* if */
+	if (LIS_InserirElementoApos(elemLig->pLisElem, pElem) == LIS_CondRetFaltouMemoria)
+		return GRA_CondRetFaltouMemoria;
+	elemLig->pLisElem[elemLig->numElem] = pElem;
+	elemLig->numElem++;
+	if (LIS_InserirElementoApos(pElem->pLisElem, elemLig) == LIS_CondRetFaltouMemoria)
+		return GRA_CondRetFaltouMemoria;
+	pElem->pLisElem[pElem->numElem] = elemLig;
+	pElem->numElem++;
+} /* Fim função: GRA  &Inserir vértice */
+
+/***********************************************************************
+*
+*  $FC Função: GRA  -Criar o elemento
+*
+***********************************************************************/
+
+tpElemGrafo CriarElemento(GRA_tpGrafo pGrafo, void * pValor)
+{
+
+	tpElemGrafo * pElem;
+
+	pElem = (tpElemGrafo *)malloc(sizeof(tpElemGrafo));
+	if (pElem == NULL)
+	{
+		return NULL;
+	} /* if */
+
+	pElem->pValor = pValor;
+	if (LIS_CriarLista(NULL, pElem->pLisElem) != LIS_CondRetOK)
+		return NULL;
+	pElem->numElem = 0;
+
+	IrFinalLista(pGrafo->listaVertices);
+	LIS_InserirElementoApos(pGrafo->listaVertices, pElem);
+	pElem->numVert = pGrafo->numElem;
+
+	pGrafo->numElem++;
+	return pElem;
+
+} /* Fim função: LIS  -Criar o elemento */
 
 /***********************************************************************
 *
@@ -134,5 +219,4 @@ void LimparCabeca(GRA_tppGrafo pGrafo)
 	pGrafo->pOrigemGrafo = NULL;
 	pGrafo->pElemCorr = NULL;
 	pGrafo->numElem = 0;
-
 } /* Fim função: GRA  -Limpar a cabeça do grafo */
