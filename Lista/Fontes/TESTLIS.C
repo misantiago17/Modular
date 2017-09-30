@@ -61,11 +61,9 @@ typedef struct infs Teste_Infs;
 #define NAO_VAZIO 1
 
 #define DIM_VT_LISTA   10
-#define DIM_VT_INFS   10
 #define DIM_VALOR     100
 
 
-Teste_Infs* vtInfs[DIM_VT_INFS];
 
 LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 
@@ -113,7 +111,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
       TST_tpCondRet CondRet ;
 
       char   StringDado[  DIM_VALOR ] ;
-      char * pDado ;
+      Teste_Infs * pDado ;
 
       int ValEsp = -1 ;
 
@@ -186,7 +184,6 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 
             numLidos = LER_LerParametros( "i" ,
                                &inxLista ) ;
-
             if ( ( numLidos != 1 )
               || ( ! ValidarInxLista( inxLista , NAO_VAZIO )))
             {
@@ -205,22 +202,22 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
          else if ( strcmp( ComandoTeste , INS_ELEM_ANTES_CMD ) == 0 )
          {
 
-            numLidos = LER_LerParametros( "isi" ,
-                       &inxLista , StringDado , &CondRetEsp ) ;
+            numLidos = LER_LerParametros( "iii" ,
+                       &inxLista  , &CondRetEsp ) ;
 
             if ( ( numLidos != 3 )
-              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) 
+			  || ( ! ValidarInxVetor( inxVetor , NAO_VAZIO )) )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            pDado = ( char * ) malloc( strlen( StringDado ) + 1 ) ;
+            pDado = ( Teste_Infs * ) malloc( sizeof(Teste_Infs ) ;
             if ( pDado == NULL )
             {
                return TST_CondRetMemoria ;
             } /* if */
-
-            strcpy( pDado , StringDado ) ;
+			
 
 
             CondRet = LIS_InserirElementoAntes( vtListas[ inxLista ] , pDado ) ;
@@ -241,7 +238,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
          {
 
             numLidos = LER_LerParametros( "isi" ,
-                       &inxLista , StringDado , &CondRetEsp ) ;
+                       &inxLista , string  , &CondRetEsp ) ;
 
             if ( ( numLidos != 3 )
               || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
@@ -429,6 +426,40 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 ***********************************************************************/
 
    int ValidarInxLista( int inxLista , int Modo )
+   {
+
+      if ( ( inxLista <  0 )
+        || ( inxLista >= DIM_VT_LISTA ))
+      {
+         return FALSE ;
+      } /* if */
+         
+      if ( Modo == VAZIO )
+      {
+         if ( vtListas[ inxLista ] != 0 )
+         {
+            return FALSE ;
+         } /* if */
+      } else
+      {
+         if ( vtListas[ inxLista ] == 0 )
+         {
+            return FALSE ;
+         } /* if */
+      } /* if */
+         
+      return TRUE ;
+
+   } /* Fim função: TLIS -Validar indice de lista */
+
+
+   /***********************************************************************
+*
+*  $FC Função: TLIS -Validar indice de vetor de Infs
+*
+***********************************************************************/
+
+   int ValidarInxVet( int inxVet , int Modo )
    {
 
       if ( ( inxLista <  0 )
