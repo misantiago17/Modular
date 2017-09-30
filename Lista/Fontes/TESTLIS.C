@@ -110,7 +110,11 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 
       TST_tpCondRet CondRet ;
 
-      char   StringDado[  DIM_VALOR ] ;
+    char NomeRet[100];
+	char CidadeRet[50];
+	char EmailRet[100];
+	char DataRet[12];
+
       Teste_Infs * pDado ;
 
       int ValEsp = -1 ;
@@ -202,23 +206,25 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
          else if ( strcmp( ComandoTeste , INS_ELEM_ANTES_CMD ) == 0 )
          {
 
-            numLidos = LER_LerParametros( "iii" ,
-                       &inxLista  , &CondRetEsp ) ;
+            numLidos = LER_LerParametros( "issssi" ,
+                       &inxLista  ,NomeRet,DataRet,CidadeRet,EmailRet,&CondRetEsp ) ;
 
-            if ( ( numLidos != 3 )
-              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) 
-			  || ( ! ValidarInxVetor( inxVetor , NAO_VAZIO )) )
+            if ( ( numLidos != 6 )
+              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            pDado = ( Teste_Infs * ) malloc( sizeof(Teste_Infs ) ;
+            pDado = ( Teste_Infs * ) malloc( sizeof(Teste_Infs )) ;
             if ( pDado == NULL )
             {
                return TST_CondRetMemoria ;
             } /* if */
 			
-
+			pDado->Nome=NomeRet;
+			pDado->Cidade=CidadeRet;
+			pDado->Email=EmailRet;
+			pDado->Data=DataRet;
 
             CondRet = LIS_InserirElementoAntes( vtListas[ inxLista ] , pDado ) ;
 
@@ -228,7 +234,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
             } /* if */
 
             return TST_CompararInt( CondRetEsp , CondRet ,
-                     "Condicao de retorno errada ao inserir antes."                   ) ;
+                     "Condicao de retorno errada ao inserir antes." ) ;
 
          } /* fim ativa: Testar inserir elemento antes */
 
@@ -237,23 +243,20 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
          else if ( strcmp( ComandoTeste , INS_ELEM_APOS_CMD ) == 0 )
          {
 
-            numLidos = LER_LerParametros( "isi" ,
-                       &inxLista , string  , &CondRetEsp ) ;
+            numLidos = LER_LerParametros( "issssi" ,
+                       &inxLista  ,NomeRet,DataRet,CidadeRet,EmailRet,&CondRetEsp ) ;
 
-            if ( ( numLidos != 3 )
+            if ( ( numLidos != 6 )
               || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            pDado = ( char * ) malloc( strlen( StringDado ) + 1 ) ;
+            pDado = ( Teste_Infs * ) malloc( sizeof(Teste_Infs )) ;
             if ( pDado == NULL )
             {
                return TST_CondRetMemoria ;
             } /* if */
-
-            strcpy( pDado , StringDado ) ;
-
 
             CondRet = LIS_InserirElementoApos( vtListas[ inxLista ] , pDado ) ;
 

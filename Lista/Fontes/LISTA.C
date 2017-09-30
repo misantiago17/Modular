@@ -96,7 +96,7 @@
 *  ****/
 
    LIS_tpCondRet LIS_CriarLista(
-             void   ( * ExcluirValor ) ( void * pDado ), LIS_tppLista* pListaRet) ;
+             void   ( * ExcluirValor ) ( void * pDado ), LIS_tppLista* pListaRet) 
    {
 
       LIS_tpLista * pLista = NULL ;
@@ -323,7 +323,7 @@
 *  Função: LIS  &Obter referência para o valor contido no elemento
 *  ****/
 
-   LIS_tpCondRet LIS_ObterValor( LIS_tppLista pLista, void** pValorRet ) ;
+   LIS_tpCondRet LIS_ObterValor( LIS_tppLista pLista, void** pValorRet ) 
    {
 
       #ifdef _DEBUG
@@ -536,8 +536,8 @@
 *
 ***********************************************************************/
 
-    CriarElemento( LIS_tppLista pLista ,
-                                void *       pValor,   )
+   tpElemLista * CriarElemento( LIS_tppLista pLista ,
+                                void *       pValor)
    {
 
       tpElemLista * pElem ;
