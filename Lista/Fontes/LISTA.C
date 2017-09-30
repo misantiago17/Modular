@@ -54,7 +54,7 @@
 
 /***********************************************************************
 *
-*  $TC Tipo de dados: LIS Descritor da cabeça de lista
+*  $TC Tipo de dados: LIS Descritor da cabeça da lista
 *
 *
 ***********************************************************************/
