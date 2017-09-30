@@ -13,7 +13,7 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
-*     2       rm   30/09/2017 funções
+*     2       rm   30/09/2017 funções: GRA_CriarGrafo, GRA_IrVertice, GRA_ObterValor, GRA_InserirVertice, CriarElemento, LimparCabeca
 *     1       rm   27/09/2017 início desenvolvimento
 *
 ***************************************************************************/
@@ -72,12 +72,12 @@ typedef struct GRA_tagGrafo {
 	void(*ExcluirValor) (void * pValor);
 	/* Ponteiro para a função de destruição do valor contido em um elemento */
 
-} GRA_tpGrafo;
+} GRA_tppGrafo;
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
-tpElemGrafo CriarElemento(GRA_tpGrafo pGrafo, void * pValor);
-void LimparCabeca(GRA_tppGrafo pGrafo);
+tpElemGrafo *CriarElemento(GRA_tppGrafo *pGrafo, void * pValor);
+void LimparCabeca(GRA_tppGrafo *pGrafo);
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -88,51 +88,49 @@ void LimparCabeca(GRA_tppGrafo pGrafo);
 
 GRA_tpCondRet GRA_CriarGrafo(void(*ExcluirValor) (void * pDado), GRA_tppGrafo* GrafoRet) {
 
-	GRA_tpGrafo *pGrafo;
+	GRA_tppGrafo *pGrafo;
 
-	pGrafo = (GRA_tpGrafo *)malloc(sizeof(GRA_tpGrafo));
+	pGrafo = (GRA_tppGrafo *)malloc(sizeof(GRA_tppGrafo));
 	if (pGrafo == NULL)
 	{
-		*GrafoRet = NULL;
+		GrafoRet = NULL;
 		return GRA_CondRetFaltouMemoria;
 	} /* if */
 	LIS_CriarLista(NULL, pGrafo->listaVertices);
 
 	LimparCabeca(pGrafo);
-	*GrafoRet = pGrafo;
-
 	pGrafo->ExcluirValor = ExcluirValor;
 
-
+	GrafoRet = pGrafo;
 	return GRA_CondRetOK;
 } /* Fim função: GRA  &Criar grafo */
 
-/***************************************************************************
-*
-*  Função: Função: GRA  &Ir para o Vértice
-*  ****/
+  /***************************************************************************
+  *
+  *  Função: Função: GRA  &Ir para o Vértice
+  *  ****/
 
-GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert) {
+GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo *pGrafo, int numVert) {
 
 	IrInicioLista(pGrafo->listaVertices);
 	/*??????? Alguma outra condição de retorno pra erro aki??? */
-	if (LIS_AvancarElementoCorrente(pGrafo->listaVertices, numVert) != CondRetOK)
+	if (LIS_AvancarElementoCorrente(pGrafo->listaVertices, numVert) != LIS_CondRetOK)
 		return GRA_CondRetNaoAchouVertice;
 
-	pGrafo->pElemCorr = *pGrafo->listaVertices;
-	return CondRetOK;
+	pGrafo->pElemCorr = pGrafo->listaVertices;
+	return GRA_CondRetOK;
 }
 /***************************************************************************
 *
 *  Função: GRA  &Obter referência para o valor contido no vértice
 *  ****/
 
-GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet);
+GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo *pGrafo, void** pValorRet)
 {
 
-	#ifdef _DEBUG
-		assert(pGrafo != NULL);
-	#endif
+#ifdef _DEBUG
+	assert(pGrafo != NULL);
+#endif
 
 	if (pGrafo->pElemCorr == NULL)
 	{
@@ -145,19 +143,19 @@ GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet);
 
 } /* Fim função: GRA  &Obter referência para o valor contido no vértice */
 
-/***************************************************************************
-*
-*  Função: GRA  &Inserir vértice
-*  ****/
+  /***************************************************************************
+  *
+  *  Função: GRA  &Inserir vértice
+  *  ****/
 
-GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo, void * pValor, tpElemGrafo * elemLig)
+GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo *pGrafo, void * pValor, tpElemGrafo * elemLig)
 {
 
 	tpElemGrafo * pElem;
 
-	#ifdef _DEBUG
-		assert(pGrafo != NULL);
-	#endif
+#ifdef _DEBUG
+	assert(pGrafo != NULL);
+#endif
 
 	/* Criar elemento a inerir antes */
 
@@ -176,13 +174,13 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo, void * pValor, tpElemGrafo
 	pElem->numElem++;
 } /* Fim função: GRA  &Inserir vértice */
 
-/***********************************************************************
-*
-*  $FC Função: GRA  -Criar o elemento
-*
-***********************************************************************/
+  /***********************************************************************
+  *
+  *  $FC Função: GRA  -Criar o elemento
+  *
+  ***********************************************************************/
 
-tpElemGrafo CriarElemento(GRA_tpGrafo pGrafo, void * pValor)
+tpElemGrafo *CriarElemento(GRA_tppGrafo *pGrafo, void * pValor)
 {
 
 	tpElemGrafo * pElem;
@@ -205,15 +203,15 @@ tpElemGrafo CriarElemento(GRA_tpGrafo pGrafo, void * pValor)
 	pGrafo->numElem++;
 	return pElem;
 
-} /* Fim função: LIS  -Criar o elemento */
+} /* Fim função: GRA  -Criar o elemento */
 
-/***********************************************************************
-*
-*  $FC Função: GRA  -Limpar a cabeça do grafo
-*
-***********************************************************************/
+  /***********************************************************************
+  *
+  *  $FC Função: GRA  -Limpar a cabeça do grafo
+  *
+  ***********************************************************************/
 
-void LimparCabeca(GRA_tppGrafo pGrafo)
+void LimparCabeca(GRA_tppGrafo *pGrafo)
 {
 
 	pGrafo->pOrigemGrafo = NULL;

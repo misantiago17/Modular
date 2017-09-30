@@ -45,11 +45,11 @@
 *        de todos os dados nele ancorados.
 *
 ***************************************************************************/
- 
+
 #if defined( GRAFO_OWN )
-   #define GRAFO_EXT
+#define GRAFO_EXT
 #else
-   #define GRAFO_EXT extern
+#define GRAFO_EXT extern
 #endif
 
 /***** Declarações exportadas pelo módulo *****/
@@ -67,29 +67,29 @@ typedef struct GRA_tagGrafo * GRA_tppGrafo;
 *
 ***********************************************************************/
 
-   typedef enum {
+typedef enum {
 
-         GRA_CondRetOK ,
-               /* Concluiu corretamente */
+	GRA_CondRetOK,
+	/* Concluiu corretamente */
 
-         GRA_CondRetGrafoVazio ,
-               /* O grafo não contém vértices */
+	GRA_CondRetGrafoVazio,
+	/* O grafo não contém vértices */
 
-         GRA_CondRetFimGrafo ,
-               /* Foi percorrido todo o grafo */
+	GRA_CondRetFimGrafo,
+	/* Foi percorrido todo o grafo */
 
-         GRA_CondRetNaoAchouVertice ,
-               /* Não encontrou o vertice procurado */
+	GRA_CondRetNaoAchouVertice,
+	/* Não encontrou o vertice procurado */
 
-		 GRA_CondRetNaoAchouAresta ,
-               /* Não encontrou a aresta procurada */
+	GRA_CondRetNaoAchouAresta,
+	/* Não encontrou a aresta procurada */
 
-         GRA_CondRetFaltouMemoria
-               /* Faltou memória ao tentar criar um vértice do grafo */
+	GRA_CondRetFaltouMemoria
+	/* Faltou memória ao tentar criar um vértice do grafo */
 
-   } GRA_tpCondRet ;
-   
-   
+} GRA_tpCondRet;
+
+
 /***********************************************************************
 *  $FC Função: GRA  &Criar grafo
 *
@@ -104,8 +104,8 @@ typedef struct GRA_tagGrafo * GRA_tppGrafo;
 *                     exclusão do valor referenciado pelo vertice
 *                     a ser excluído.
 *                     Ver descrição do módulo.
-*	  GrafoRet 		- ponteiro para o grafo. 
-*					  Este ponteiro será utilizado pelas funções 
+*	  GrafoRet 		- ponteiro para o grafo.
+*					  Este ponteiro será utilizado pelas funções
 *					  que manipulem este grafo.
 *
 *  $FV Valor retornado
@@ -114,8 +114,8 @@ typedef struct GRA_tagGrafo * GRA_tppGrafo;
 *
 ***********************************************************************/
 
-   GRA_tpCondRet GRA_CriarGrafo(
-             void   ( * ExcluirValor ) ( void * pDado ), GRA_tppGrafo* GrafoRet) ;
+GRA_tpCondRet GRA_CriarGrafo(
+	void(*ExcluirValor) (void * pDado), GRA_tppGrafo* GrafoRet);
 
 
 /***********************************************************************
@@ -133,9 +133,9 @@ typedef struct GRA_tagGrafo * GRA_tppGrafo;
 *
 ***********************************************************************/
 
-   GRA_tpCondRet GRA_DestruirGrafo( GRA_tppGrafo pGrafo ) ;
-   
-   
+GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo);
+
+
 /***********************************************************************
 *  $FC Função: GRA  &Ir para o Vértice
 *
@@ -151,16 +151,16 @@ typedef struct GRA_tagGrafo * GRA_tppGrafo;
 *
 *  $FV Valor retornado
 *     CondRetOK         - se o vértice foi encontrado
-*     CondRetFimGrafo   - se percorreu todos os vertices de grafo 
-						  e não encontrou o vértice
+*     CondRetFimGrafo   - se percorreu todos os vertices de grafo
+e não encontrou o vértice
 *     CondRetGrafoVazio - se o grafo está vazio
 *
 ***********************************************************************/
 
-   GRA_tpCondRet GRA_IrVertice( GRA_tppGrafo pGrafo ,
-                                              int numVert ) ;
+GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo,
+	int numVert);
 
-											  
+
 /***********************************************************************
 *  $FC Função: GRA  &Obter referência para o valor contido no vértice
 *
@@ -178,9 +178,9 @@ typedef struct GRA_tagGrafo * GRA_tppGrafo;
 *
 ***********************************************************************/
 
-   GRA_tpCondRet GRA_ObterValor( GRA_tppGrafo pGrafo, void** pValorRet ) ;
+GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet);
 
-   
+
 /***********************************************************************
 *  $FC Função: GRA  &Inserir vértice
 *
@@ -198,8 +198,8 @@ typedef struct GRA_tagGrafo * GRA_tppGrafo;
 *
 ***********************************************************************/
 
-   GRA_tpCondRet GRA_InserirVertice( GRA_tppGrafo pGrafo ,
-                                           void * pValor ) ;
+GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
+	void * pValor);
 
 /***********************************************************************
 *  $FC Função: GRA  &Excluir vertice
@@ -219,15 +219,15 @@ typedef struct GRA_tagGrafo * GRA_tppGrafo;
 *
 ***********************************************************************/
 
-   GRA_tpCondRet GRA_ExcluirVertice( GRA_tppGrafo pGrafo ) ;
-   
-  
+GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo);
+
+
 /***********************************************************************
 *  $FC Função: GRA  &Criar Aresta
 *
 *  $ED Descrição da função
 *     Cria uma aresta entre dois vértices do grafo.
-*	  Se algum dos vértices não for encontrado a função retornará um erro informando 
+*	  Se algum dos vértices não for encontrado a função retornará um erro informando
 *	  que não encontrou o vértice.
 *	  A aresta também não será criada se o grafo estiver vazio.
 *
@@ -243,15 +243,15 @@ typedef struct GRA_tagGrafo * GRA_tppGrafo;
 *
 ***********************************************************************/
 
-   GRA_tpCondRet GRA_CriarAresta( GRA_tppGrafo pGrafo, int numVert1, int numVert2 ) ;
-   
-   
- /***********************************************************************
+GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2);
+
+
+/***********************************************************************
 *  $FC Função: GRA  &Excluir Aresta
 *
 *  $ED Descrição da função
 *     Excluí uma aresta entre dois vértices do grafo.
-*	  Se algum dos vértices não for encontrado a função retornará um erro informando 
+*	  Se algum dos vértices não for encontrado a função retornará um erro informando
 *	  que não encontrou o vértice.
 *	  Se o grafo estiver vazio ele também retornará um erro.
 *	  Caso a aresta nao exista a funcao tambem retoranra um erro.
@@ -268,9 +268,9 @@ typedef struct GRA_tagGrafo * GRA_tppGrafo;
 *
 ***********************************************************************/
 
-   GRA_tpCondRet GRA_ExcluirAresta( GRA_tppGrafo pGrafo, int numVert1, int numVert2 ) ;
-   
-   #undef GRAFO_EXT
+GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2);
+
+#undef GRAFO_EXT
 
 /********** Fim do módulo de definição: GRA  Grafo Genérico **********/
 
