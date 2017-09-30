@@ -78,8 +78,10 @@ typedef struct GRA_tagGrafo * GRA_tppGrafo;
          GRA_CondRetFimGrafo ,
                /* Foi percorrido todo o grafo */
 
-         GRA_CondRetNaoAchou ,
-               /* Não encontrou o valor procurado */
+         GRA_CondRetNaoAchouVertice ,
+               /* Não encontrou o vertice procurado */
+		 GRA_CondRetNaoAchouVertice ,
+               /* Não encontrou a aresta procurada */
 
          GRA_CondRetFaltouMemoria
                /* Faltou memória ao tentar criar um vértice do grafo */
@@ -165,7 +167,7 @@ typedef struct GRA_tagGrafo * GRA_tppGrafo;
 *     Obtem a referência para o valor contido no vértice corrente do grafo
 *
 *  $EP Parâmetros
-*     pGrafo - ponteiro para o grafo de onde se quer o valor
+*     pGrafo - ponteiro para o grafo de onde se quer armazenar o valor
 *	  pValorRet - endereço de um ponteiro para armazenar o valor encontrado
 *
 *  $FV Valor retornado
@@ -251,6 +253,7 @@ typedef struct GRA_tagGrafo * GRA_tppGrafo;
 *	  Se algum dos vértices não for encontrado a função retornará um erro informando 
 *	  que não encontrou o vértice.
 *	  Se o grafo estiver vazio ele também retornará um erro.
+*	  Caso a aresta nao exista a funcao tambem retoranra um erro.
 *
 *  $EP Parâmetros
 *     pGrafo    - ponteiro para o grafo na qual deve excluir a aresta.
