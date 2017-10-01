@@ -45,7 +45,7 @@
 =declararparm   pNULL          int  0
 =declararparm   pNaoNULL       int  1
 
-== ---------------------------------- TESTE 1 ----------------------------------------------
+
 == Criar a lista 0
 =criarlista      lista0 OK 
 
@@ -83,7 +83,7 @@
 == Destruir a lista
 =destruirlista   lista0   OK
 
-== ---------------------------------- TESTE 2 ----------------------------------------------
+
 == Criar uma lista com dois elementos
 =criarlista      lista1  OK
 =inselemapos     lista1  nome0  data0  cidade0  email0  OK
@@ -96,7 +96,7 @@
 == Destruir a lista
 =destruirlista   lista1   OK
 
-== ---------------------------------- TESTE 3 ----------------------------------------------
+
 == Criar uma lista com quatro elementos
 =criarlista      lista2  OK
 =inselemapos     lista2  nome0  data0  cidade0  email0  OK
