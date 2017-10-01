@@ -47,7 +47,9 @@
 
 
 == Criar a lista 0
-=criarlista      lista0 OK 
+=criarlista      lista0  OK 
+=obtertamanho    lista0  0      OK
+
 
 == Verificar ObterValor relativo a lista vazia
 =obtervalorelem  lista0  "???"  "???"  "???"  "???"  ListaVazia
@@ -60,6 +62,7 @@
 == Inserir elemento após primeiro
 =inselemapos     lista0  nome1  data1  cidade1  email1  OK
 =obtervalorelem  lista0  nome1  data1  cidade1  email1  OK
+=obtertamanho    lista0  2      OK
 
 == Inserir elemento antes do último
 =inselemantes    lista0  nome2  data2  cidade2  email2   OK
@@ -92,6 +95,7 @@
 == Esvaziar a lista e ver se ficou vazia
 =esvaziarlista   lista1   OK
 =obtervalorelem  lista1   "???"  "???"  "???"  "???" ListaVazia
+=obtertamanho    lista0    0      OK
 
 == Destruir a lista
 =destruirlista   lista1   OK

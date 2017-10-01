@@ -492,7 +492,7 @@
 
    } /* Fim função: LIS  &Procurar elemento contendo valor */
 
-    LIS_tpCondRet LIS_ObterTamanhoLista( LIS_tppLista pLista , int* tamanho) {
+    LIS_tpCondRet LIS_ObterTamanho( LIS_tppLista pLista , int* tamanho) {
 
 	   *tamanho = pLista->numElem;
 	   return LIS_CondRetOK;

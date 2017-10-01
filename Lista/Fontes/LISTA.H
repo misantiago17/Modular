@@ -368,7 +368,7 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *
 ***********************************************************************/
 
-	LIS_tpCondRet LIS_ObterTamanhoLista( LIS_tppLista pLista , int* pTamanho);
+	LIS_tpCondRet LIS_ObterTamanho( LIS_tppLista pLista , int* pTamanho);
 
 #undef LISTA_EXT
 
