@@ -302,6 +302,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
          else if ( strcmp( ComandoTeste , OBTER_VALOR_CMD ) == 0 )
          {
 			Teste_Infs* Ret;
+			TST_tpCondRet debug;
             numLidos = LER_LerParametros( "issssi" ,
                        &inxLista  ,NomeEsp,DataEsp,CidadeEsp,EmailEsp,&CondRetEsp ) ;
 
@@ -313,26 +314,40 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 
             CondRet=LIS_ObterValor( vtListas[ inxLista ],((void**)&Ret)) ;
     
-            if ( CondRet != 0 ) 
-            {
-               return TST_CompararPonteiroNulo( 0 , Ret ,
-                         "Valor não deveria existir." ) ;
-            } /* if */
 
-            if ( Ret == NULL )
-            {
-               return TST_CompararPonteiroNulo( 1 , pDado ,
-                         "Dado tipo um deveria existir." ) ;
-            } /* if */
+            debug=TST_CompararInt(CondRet , CondRetEsp ,
+                         "Retorno da funcao diferente do esperado" ) ;
 
-            return ((TST_CompararString( NomeEsp , Ret->Nome ,
-                         "Campo Nome nao e igual ao esperado" )) &&
-						 (TST_CompararString( CidadeEsp , Ret->Cidade ,
-                         "Campo Cidade nao e igual ao esperado" ))&&
-						 (TST_CompararString( EmailEsp ,Ret->Email,
-                         "Campo Email nao e igual ao esperado" ))&&
-						 (TST_CompararString(DataEsp ,  Ret->Data,
-                         "Campo Data nao e igual ao esperado" )));
+			if(debug!=TST_CondRetOK)
+				return debug;
+
+			if(CondRet==LIS_CondRetListaVazia)
+				return TST_CondRetOK;
+
+              debug=TST_CompararPonteiroNulo( 1 , Ret ,
+                         "Dado deveria existir." );
+
+            if(debug!=TST_CondRetOK)
+				return debug;
+
+             debug=TST_CompararString( NomeEsp , Ret->Nome ,
+                         "Campo Nome nao e igual ao esperado");
+			 if(debug!=TST_CondRetOK)
+				 return debug; 
+
+			  debug=TST_CompararString( CidadeEsp , Ret->Cidade ,
+                         "Campo Cidade nao e igual ao esperado" );
+			 if(debug!=TST_CondRetOK)
+				 return debug; 
+
+			     debug=TST_CompararString( EmailEsp ,Ret->Email,
+                         "Campo Email nao e igual ao esperado" );
+			 if(debug!=TST_CondRetOK)
+				 return debug; 
+
+				return TST_CompararString(DataEsp ,  Ret->Data,
+                         "Campo Data nao e igual ao esperado" );
+	
 
          } /* fim ativa: Testar obter valor do elemento corrente */
 
@@ -411,7 +426,6 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
             } /* if */
 
 			debugLIS=LIS_ObterTamanho(vtListas[ inxLista ], &numRet);
-
 			CondRet = TST_CompararInt( numElem , numRet
                        , "Numero de elementos retornado inesperado" ) ;
 
