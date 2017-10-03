@@ -1,15 +1,15 @@
 /***************************************************************************
-*  $MCI Módulo de implementação: TLIS Teste lista de símbolos
+*  $MCI Módulo de implementação: TLIS Teste grafo com cabeça
 *
-*  Arquivo gerado:              TesteLISTA.c
-*  Letras identificadoras:      TLIS
+*  Arquivo gerado:              TesteGrafo.c
+*  Letras identificadoras:      TGRA
 *
 *  Nome da base de software:    Arcabouço para a automação de testes de programas redigidos em C
 *  Arquivo da base de software: D:\AUTOTEST\PROJETOS\LISTA.BSW
 *
 *  Projeto: INF 1301 / 1628 Automatização dos testes de módulos C
 *  Gestor:  LES/DI/PUC-Rio
-*  Autores: avs,gab
+*  Autores: gab
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
@@ -31,20 +31,19 @@
 #include    "Generico.h"
 #include    "LerParm.h"
 
+#include    "Grafo.h"
 #include    "Lista.h"
 
 
-static const char RESET_LISTA_CMD         [ ] = "=resetteste"     ;
-static const char CRIAR_LISTA_CMD         [ ] = "=criarlista"     ;
-static const char DESTRUIR_LISTA_CMD      [ ] = "=destruirlista"  ;
-static const char ESVAZIAR_LISTA_CMD      [ ] = "=esvaziarlista"  ;
-static const char INS_ELEM_ANTES_CMD      [ ] = "=inselemantes"   ;
-static const char INS_ELEM_APOS_CMD       [ ] = "=inselemapos"    ;
+static const char RESET_GRAFO_CMD         [ ] = "=resetteste"     ;
+static const char CRIAR_GRAFO_CMD         [ ] = "=criargrafo"     ;
+static const char DESTRUIR_GRAFO_CMD      [ ] = "=destruirgrafo"  ;
+static const char IR_VERT_CMD             [ ] = "=irvertice"  ;
+static const char INS_VERT_CMD            [ ] = "=insvertice"   ;
 static const char OBTER_VALOR_CMD         [ ] = "=obtervalorelem" ;
-static const char EXC_ELEM_CMD            [ ] = "=excluirelem"    ;
-static const char IR_INICIO_CMD           [ ] = "=irinicio"       ;
-static const char IR_FIM_CMD              [ ] = "=irfinal"        ;
-static const char AVANCAR_ELEM_CMD        [ ] = "=avancarelem"    ;
+static const char CRIAR_ARESTA_CMD        [ ] = "=criararesta"     ;
+static const char EXC_VERT_CMD            [ ] = "=excluirvertice"    ;
+static const char EXC_ARESTA_CMD          [ ] = "=excluiraresta"     ;
 static const char OBTER_TAM_CMD           [ ] = "=obtertamanho"    ;
 
 struct infs{
@@ -80,25 +79,25 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 
 /***********************************************************************
 *
-*  $FC Função: TLIS &Testar lista
+*  $FC Função: TLIS &Testar grafo
 *
 *  $ED Descrição da função
-*     Podem ser criadas até 10 listas, identificadas pelos índices 0 a 10
+*     Podem ser criadas até 10 grafos, identificadas pelos índices 0 a 10
 *
 *     Comandos disponíveis:
 *
 *     =resetteste
-*           - anula o vetor de listas. Provoca vazamento de memória
-*     =criarlista                   inxLista CondRetEsp
-*     =destruirlista                inxLista CondRetEsp
-*     =esvaziarlista                inxLista CondRetEsp
-*     =inselemantes                 inxLista  Nome Data Cidade Email CondRetEsp
-*     =inselemapos                  inxLista  Nome Data Cidade Email CondRetEsp
-*     =obtervalorelem               inxLista  Nome Data Cidade Email CondRetEsp
-*     =excluirelem                  inxLista  CondRetEsp
-*     =irinicio                     inxLista  CondRetEsp
-*     =irfinal                      inxLista  CondRetEsp
-*     =avancarelem                  inxLista  numElem CondRetEsp
+*           - anula o vetor de grafos. Provoca vazamento de memória
+*     =criargrafo                   inxGrafo CondRetEsp
+*     =destruirgrafo                inxGrafo CondRetEsp
+*     =irvertice                    inxGrafo numVert CondRetEsp
+*     =insvertice                   inxGrafo  Nome Data Cidade Email CondRetEsp
+*     =inselemapos                  inxGrafo  Nome Data Cidade Email CondRetEsp
+*     =obtervalorelem               inxGrafo  Nome Data Cidade Email CondRetEsp
+*     =excluirelem                  inxGrafo  CondRetEsp
+*     =criararesta                  inxGrafo  numVert1 numVert2 CondRetEsp
+*     =excluirvertice               inxGrafo  CondRetEsp
+*     =excluiraresta                inxLista  numVert1 numVert2 CondRetEsp
 *     =obtertamanho                 inxLista  numElem CondRetEsp
 *
 ***********************************************************************/

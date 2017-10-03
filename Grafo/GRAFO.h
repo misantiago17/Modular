@@ -1,7 +1,7 @@
 #if ! defined( GRAFO_ )
 #define GRAFO_
 /***************************************************************************
-*  $MCD Módulo de definição: GRA  Grafo Generico
+*  $MCD Módulo de definição: GRA  Grafo Generico com Cabeça
 *
 *  Arquivo gerado:              GRAFO.h
 *  Letras identificadoras:      GRA
@@ -208,7 +208,7 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
 *     Exclui o vértice corrente do grafo dada.
 *     Se existir vértice a esquerda do corrente será o novo corrente.
 *     Se não existir e existir o vértice à direita, este se tornará corrente.
-*     Se este também não existir o grafo tornou-se vazia.
+*     Se este também não existir o grafo tornou-se vazio.
 *
 *  $EP Parâmetros
 *     pGrafo    - ponteiro para o grafo na qual deve excluir.
@@ -223,7 +223,7 @@ GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo);
 
 
 /***********************************************************************
-*  $FC Função: GRA  &Criar Aresta
+*  $FC Função: GRA  &Cria Aresta
 *
 *  $ED Descrição da função
 *     Cria uma aresta entre dois vértices do grafo.
@@ -254,7 +254,7 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2);
 *	  Se algum dos vértices não for encontrado a função retornará um erro informando
 *	  que não encontrou o vértice.
 *	  Se o grafo estiver vazio ele também retornará um erro.
-*	  Caso a aresta nao exista a funcao tambem retoranra um erro.
+*	  Caso a aresta nao exista a funcao tambem retornara um erro.
 *
 *  $EP Parâmetros
 *     pGrafo    - ponteiro para o grafo na qual deve excluir a aresta.
@@ -272,7 +272,7 @@ GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 
 #undef GRAFO_EXT
 
-/********** Fim do módulo de definição: GRA  Grafo Genérico **********/
+/********** Fim do módulo de definição: GRA  Grafo Genérico com Cabeça **********/
 
 #else
 #endif
