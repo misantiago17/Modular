@@ -33,20 +33,37 @@
 *
 ***********************************************************************/
 
-typedef struct tagElemGrafo {
+typedef struct tagVertice {
 
 	void * pValor;
 	/* Ponteiro para o valor contido no elemento */
 
-	struct tpElemGrafo **pLisElem;
+	LIS_tpLista* pLisAresta;
+	/* Ponteiro para a lista de arestas */
+
+	int numArestas;
+	/* Numero de arestas ligadas ao vertice */
+
+} GRA_tpVertice;
+
+/***********************************************************************
+*
+*  $TC Tipo de dados: GRA No da Lista Vertices
+*
+*
+***********************************************************************/
+
+typedef struct tagNoVertices {
+
+	int ident;
+	/* Identificador do vertice */
+
+	LIS_tpLista *pLisVertice;
 	/* Ponteiro para lista de elementos para os quais o vertice aponta */
 
-	int numElem;
-	/* Numero de elementos conectado a este vertice */
+} GRA_tpNoVertices;
 
-	int numVert;
-	/* Valor numerico deste vertice */
-} tpElemGrafo;
+
 
 /***********************************************************************
 *
@@ -57,22 +74,19 @@ typedef struct tagElemGrafo {
 
 typedef struct GRA_tagGrafo {
 
-	tpElemGrafo * pOrigemGrafo;
-	/* Ponteiro para a origem do grafo */
+	tpVertices* pVerticesGrafo;
+	/* Ponteiro para a lista de vertices do grafo */
 
-	tpElemGrafo * pElemCorr;
+	tpVertice* pElemCorr;
 	/* Ponteiro para o elemento corrente do grafo */
 
-	tpElemGrafo **listaVertices;
-	/* Lista dos ponteiros para os vertices */
-
-	int numElem;
+	int numVertices;
 	/* Número de elementos do grafo */
 
 	void(*ExcluirValor) (void * pValor);
 	/* Ponteiro para a função de destruição do valor contido em um elemento */
 
-} GRA_tppGrafo;
+} GRA_tpGrafo;
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
