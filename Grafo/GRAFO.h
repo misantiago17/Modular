@@ -174,7 +174,6 @@ GRA_tpCondRet GRA_IrVertice(GRA_tpGrafo pGrafo,
 *  $FV Valor retornado
 *     GRA_CondRetOK
 *	  GRA_CondRetGrafoVazio
-*	  GRA_CondRetNaoAchou
 *
 ***********************************************************************/
 

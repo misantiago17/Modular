@@ -41,9 +41,6 @@ typedef struct tagVertice {
 	LIS_tpLista* pLisAresta;
 	/* Ponteiro para a lista de arestas */
 
-	int numArestas;
-	/* Numero de arestas ligadas ao vertice */
-
 } GRA_tpVertice;
 
 /***********************************************************************
@@ -79,9 +76,6 @@ typedef struct GRA_tagGrafo {
 
 	GRA_tpVertice* pElemCorr;
 	/* Ponteiro para o elemento corrente do grafo */
-
-	int numVertices;
-	/* Número de elementos do grafo */
 
 	void(*ExcluirValor) (void * pValor);
 	/* Ponteiro para a função de destruição do valor contido em um elemento */
@@ -143,7 +137,7 @@ GRA_tpCondRet GRA_IrVertice(GRA_tpGrafo *pGrafo, int numVert) {
 *
 *  Função: GRA  &Obter referência para o valor contido no vértice
 *  ****/
-
+//Mi ----------------------------------------------------------------------------------
 GRA_tpCondRet GRA_ObterValor(GRA_tpGrafo *pGrafo, void** pValorRet)
 {
 
@@ -166,7 +160,7 @@ GRA_tpCondRet GRA_ObterValor(GRA_tpGrafo *pGrafo, void** pValorRet)
   *
   *  Função: GRA  &Inserir vértice
   *  ****/
-
+//Mi
 GRA_tpCondRet GRA_InserirVertice(GRA_tpGrafo *pGrafo, void * pValor, tpElemGrafo * elemLig)
 {
 
@@ -193,12 +187,24 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tpGrafo *pGrafo, void * pValor, tpElemGrafo
 	pElem->numElem++;
 } /* Fim função: GRA  &Inserir vértice */
 
+
+/***************************************************************************
+  *
+  *  Função: GRA  &Excluir Vertice
+  *  ****/
+  
+GRA_tpCondRet GRA_ExcluirVertice(GRA_tpGrafo pGrafo);
+{
+} /* Fim função: GRA  &Excluir vértice */
+
   /***********************************************************************
   *
   *  $FC Função: GRA  -Criar o elemento
   *
   ***********************************************************************/
 
+  // -------------------------------------------------------------------------------------
+  
 tpElemGrafo *CriarElemento(GRA_tpGrafo *pGrafo, void * pValor)
 {
 
