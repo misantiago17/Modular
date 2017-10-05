@@ -13,8 +13,7 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
-*     2       rm   30/09/2017 funções: GRA_CriarGrafo, GRA_IrVertice, GRA_ObterValor, GRA_InserirVertice, CriarElemento, LimparCabeca
-*     1       rm   27/09/2017 início desenvolvimento
+*     1      rm/ms/gb   05/10/2017 início desenvolvimento
 *
 ***************************************************************************/
 
@@ -40,7 +39,6 @@ typedef struct tagVertice {
 
 	LIS_tpLista* pLisAresta;
 	/* Ponteiro para a lista de arestas */
-
 } GRA_tpVertice;
 
 /***********************************************************************
@@ -85,7 +83,6 @@ typedef struct GRA_tagGrafo {
 /***** Protótipos das funções encapuladas no módulo *****/
 
 tpElemGrafo *CriarElemento(GRA_tpGrafo *pGrafo, void * pValor);
-void LimparCabeca(GRA_tpGrafo *pGrafo);
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -110,7 +107,7 @@ GRA_tpCondRet GRA_CriarGrafo(void(*ExcluirValor) (void * pDado), GRA_tpGrafo* Gr
 		return GRA_CondRetFaltouMemoria;
 	}
 
-	LimparCabeca(pGrafo);
+	pGrafo->pElemCorr = NULL;
 
 	pGrafo->ExcluirValor = ExcluirValor;
 
@@ -229,16 +226,3 @@ tpElemGrafo *CriarElemento(GRA_tpGrafo *pGrafo, void * pValor)
 	return pElem;
 
 } /* Fim função: GRA  -Criar o elemento */
-
-  /***********************************************************************
-  *
-  *  $FC Função: GRA  -Limpar a cabeça do grafo
-  *
-  ***********************************************************************/
-
-void LimparCabeca(GRA_tpGrafo *pGrafo)
-{
-
-	pGrafo->pElemCorr = NULL;
-	pGrafo->numVertices = 0;
-} /* Fim função: GRA  -Limpar a cabeça do grafo */
