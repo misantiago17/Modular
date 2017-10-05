@@ -95,8 +95,7 @@
 *  Função: LIS  &Criar lista
 *  ****/
 
-   LIS_tpCondRet LIS_CriarLista(
-             void   ( * ExcluirValor ) ( void * pDado ), LIS_tppLista* pListaRet) 
+   LIS_tpCondRet LIS_CriarLista(void   ( * ExcluirValor ) ( void * pDado ), LIS_tppLista* pListaRet) 
    {
 
       LIS_tpLista * pLista = NULL ;

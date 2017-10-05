@@ -74,10 +74,10 @@ typedef struct tagNoVertices {
 
 typedef struct GRA_tagGrafo {
 
-	tpVertices* pVerticesGrafo;
+	LIS_tpLista* pVerticesGrafo;
 	/* Ponteiro para a lista de vertices do grafo */
 
-	tpVertice* pElemCorr;
+	GRA_tpVertice* pElemCorr;
 	/* Ponteiro para o elemento corrente do grafo */
 
 	int numVertices;
@@ -90,8 +90,8 @@ typedef struct GRA_tagGrafo {
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
-tpElemGrafo *CriarElemento(GRA_tppGrafo *pGrafo, void * pValor);
-void LimparCabeca(GRA_tppGrafo *pGrafo);
+tpElemGrafo *CriarElemento(GRA_tpGrafo *pGrafo, void * pValor);
+void LimparCabeca(GRA_tpGrafo *pGrafo);
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -100,19 +100,24 @@ void LimparCabeca(GRA_tppGrafo *pGrafo);
 *  Função: Função: GRA  &Criar grafo
 *  ****/
 
-GRA_tpCondRet GRA_CriarGrafo(void(*ExcluirValor) (void * pDado), GRA_tppGrafo* GrafoRet) {
+GRA_tpCondRet GRA_CriarGrafo(void(*ExcluirValor) (void * pDado), GRA_tpGrafo* GrafoRet) {
 
-	GRA_tppGrafo *pGrafo;
-
-	pGrafo = (GRA_tppGrafo *)malloc(sizeof(GRA_tppGrafo));
+	GRA_tpGrafo *pGrafo;
+	
+	pGrafo = (GRA_tpGrafo *)malloc(sizeof(GRA_tpGrafo));
 	if (pGrafo == NULL)
 	{
 		GrafoRet = NULL;
 		return GRA_CondRetFaltouMemoria;
-	} /* if */
-	LIS_CriarLista(NULL, pGrafo->listaVertices);
+	}
+
+	if (LIS_CriarLista(NULL, pGrafo->pVerticesGrafo) == LIS_CondRetFaltouMemoria) {
+		GrafoRet = NULL;
+		return GRA_CondRetFaltouMemoria;
+	}
 
 	LimparCabeca(pGrafo);
+
 	pGrafo->ExcluirValor = ExcluirValor;
 
 	GrafoRet = pGrafo;
@@ -124,7 +129,7 @@ GRA_tpCondRet GRA_CriarGrafo(void(*ExcluirValor) (void * pDado), GRA_tppGrafo* G
   *  Função: Função: GRA  &Ir para o Vértice
   *  ****/
 
-GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo *pGrafo, int numVert) {
+GRA_tpCondRet GRA_IrVertice(GRA_tpGrafo *pGrafo, int numVert) {
 
 	IrInicioLista(pGrafo->listaVertices);
 	/*??????? Alguma outra condição de retorno pra erro aki??? */
@@ -139,7 +144,7 @@ GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo *pGrafo, int numVert) {
 *  Função: GRA  &Obter referência para o valor contido no vértice
 *  ****/
 
-GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo *pGrafo, void** pValorRet)
+GRA_tpCondRet GRA_ObterValor(GRA_tpGrafo *pGrafo, void** pValorRet)
 {
 
 #ifdef _DEBUG
@@ -162,7 +167,7 @@ GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo *pGrafo, void** pValorRet)
   *  Função: GRA  &Inserir vértice
   *  ****/
 
-GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo *pGrafo, void * pValor, tpElemGrafo * elemLig)
+GRA_tpCondRet GRA_InserirVertice(GRA_tpGrafo *pGrafo, void * pValor, tpElemGrafo * elemLig)
 {
 
 	tpElemGrafo * pElem;
@@ -194,7 +199,7 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo *pGrafo, void * pValor, tpElemGraf
   *
   ***********************************************************************/
 
-tpElemGrafo *CriarElemento(GRA_tppGrafo *pGrafo, void * pValor)
+tpElemGrafo *CriarElemento(GRA_tpGrafo *pGrafo, void * pValor)
 {
 
 	tpElemGrafo * pElem;
@@ -225,10 +230,9 @@ tpElemGrafo *CriarElemento(GRA_tppGrafo *pGrafo, void * pValor)
   *
   ***********************************************************************/
 
-void LimparCabeca(GRA_tppGrafo *pGrafo)
+void LimparCabeca(GRA_tpGrafo *pGrafo)
 {
 
-	pGrafo->pOrigemGrafo = NULL;
 	pGrafo->pElemCorr = NULL;
-	pGrafo->numElem = 0;
+	pGrafo->numVertices = 0;
 } /* Fim função: GRA  -Limpar a cabeça do grafo */
