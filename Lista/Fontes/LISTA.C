@@ -345,7 +345,7 @@
 *  Função: LIS  &Ir para o elemento inicial
 *  ****/
 
-   LIS_tpCondRet LIS_IrInicioLista( LIS_tppLista pLista )
+   LIS_tpCondRet IrInicioLista( LIS_tppLista pLista )
    {
 
       #ifdef _DEBUG
@@ -361,7 +361,7 @@
 *  Função: LIS  &Ir para o elemento final
 *  ****/
 
-   LIS_tpCondRet LIS_IrFinalLista( LIS_tppLista pLista )
+   LIS_tpCondRet IrFinalLista( LIS_tppLista pLista )
    {
 
       #ifdef _DEBUG
@@ -491,16 +491,11 @@
 
    } /* Fim função: LIS  &Procurar elemento contendo valor */
 
-   /***************************************************************************
-*
-*  Função: LIS  &Obter tamanho da Lista
-*  ****/
-
     LIS_tpCondRet LIS_ObterTamanho( LIS_tppLista pLista , int* tamanho) {
 
 	   *tamanho = pLista->numElem;
 	   return LIS_CondRetOK;
-   }/* Fim função: LIS  &Obter tamanho da Lista */
+   }
 
 
 

@@ -367,7 +367,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
                return TST_CondRetParm ;
             } /* if */
 
-            LIS_IrInicioLista( vtListas[ inxLista ] ) ;
+            IrInicioLista( vtListas[ inxLista ] ) ;
 
             return TST_CondRetOK ;
 
@@ -386,7 +386,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
                return TST_CondRetParm ;
             } /* if */
 
-            LIS_IrFinalLista( vtListas[ inxLista ] ) ;
+            IrFinalLista( vtListas[ inxLista ] ) ;
 
             return TST_CondRetOK ;
 

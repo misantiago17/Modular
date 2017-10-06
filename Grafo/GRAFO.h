@@ -1,5 +1,5 @@
-/*#if ! defined( GRAFO_ )
-#define GRAFO_*/
+#if ! defined( GRAFO_ )
+#define GRAFO_
 /***************************************************************************
 *  $MCD Módulo de definição: GRA  Grafo Generico com Cabeça
 *
@@ -56,7 +56,7 @@
 
 /* Tipo referência para um grafo */
 
-typedef struct GRA_tagGrafo * GRA_tppGrafo;
+typedef struct GRA_tagGrafo * GRA_tpGrafo;
 
 /***********************************************************************
 *  $TC Tipo de dados: GRA Condições de retorno
@@ -114,7 +114,8 @@ typedef enum {
 *
 ***********************************************************************/
 
-	GRA_tpCondRet GRA_CriarGrafo(void   ( * ExcluirValor ) ( void * pDado ), GRA_tppGrafo* GrafoRet);
+GRA_tpCondRet GRA_CriarGrafo(
+	void(*ExcluirValor) (void * pDado), GRA_tpGrafo* GrafoRet);
 
 
 /***********************************************************************
@@ -132,7 +133,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo);
+GRA_tpCondRet GRA_DestruirGrafo(GRA_tpGrafo pGrafo);
 
 
 /***********************************************************************
@@ -156,7 +157,7 @@ e não encontrou o vértice
 *
 ***********************************************************************/
 
-GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo,
+GRA_tpCondRet GRA_IrVertice(GRA_tpGrafo pGrafo,
 	int numVert);
 
 
@@ -176,7 +177,7 @@ GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo,
 *
 ***********************************************************************/
 
-GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet);
+GRA_tpCondRet GRA_ObterValor(GRA_tpGrafo pGrafo, void** pValorRet);
 
 
 /***********************************************************************
@@ -196,7 +197,7 @@ GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet);
 *
 ***********************************************************************/
 
-GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
+GRA_tpCondRet GRA_InserirVertice(GRA_tpGrafo pGrafo,
 	void * pValor);
 
 /***********************************************************************
@@ -217,7 +218,7 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
 *
 ***********************************************************************/
 
-GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo);
+GRA_tpCondRet GRA_ExcluirVertice(GRA_tpGrafo pGrafo);
 
 
 /***********************************************************************
@@ -241,7 +242,7 @@ GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo);
 *
 ***********************************************************************/
 
-GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2);
+GRA_tpCondRet GRA_CriarAresta(GRA_tpGrafo pGrafo, int numVert1, int numVert2);
 
 
 /***********************************************************************
@@ -266,11 +267,11 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2);
 *
 ***********************************************************************/
 
-GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2);
+GRA_tpCondRet GRA_ExcluirAresta(GRA_tpGrafo pGrafo, int numVert1, int numVert2);
 
 #undef GRAFO_EXT
 
 /********** Fim do módulo de definição: GRA  Grafo Genérico com Cabeça **********/
 
-/*#else
-#endif*/
+#else
+#endif
