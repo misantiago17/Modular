@@ -1,0 +1,6 @@
+-Revisar se criacao da lista de vertices de fato recebe null como funcao de destruicao
+-O mesmo para a funcao criarsubvertice e criar vertice
+-Perguntar sobre a funcao ir vertice
+-Perguntar se o id do vertice deve ser vsivel ou nao ao usuario
+-Como testar irFinal/IrInicio da lista
+-
