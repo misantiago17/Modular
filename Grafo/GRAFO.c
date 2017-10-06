@@ -205,6 +205,9 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tpGrafo *pGrafo, void * pValor, GRA_tpVerti
 GRA_tpCondRet GRA_ExcluirVertice(GRA_tpGrafo pGrafo);
 {
 } /* Fim função: GRA  &Excluir vértice */
+// Entrar na lista de arestas do vértice e visitar cada vértice para tirar da lista deles 
+// o nó a ser excluído; Excluir o nó; visitar todos os vértices seguintes ao nó excluído 
+// diminuito 1 de sua identificação
 
   /***********************************************************************
   *
