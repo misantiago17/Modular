@@ -301,32 +301,38 @@ GRA_tpCondRet GRA_ExisteAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 *  Função: GRA  &Excluir Aresta
 *  ****/
 
+/***************************************************************************
+*
+*  Função: GRA  &Excluir Aresta
+*  ****/
+
 GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 {
 	int tam;
 	GRA_tpVertice* pCorrenteAnterior=pGrafo->pElemCorr;
 	GRA_tpNoVertices* pVerts;
-	LIS_tpCondRet CondRet,CondRetAv=LIS_CondRetOK;
+	LIS_tpCondRet CondRetLis,CondRetAv=LIS_CondRetOK;
+	GRA_tpCondRet CondRetGra;  
 	// dependendo de ir vertice,isso e denecessario
-	CondRet=LIS_ObterTamanho(pGrafo->pVerticesGrafo,&tam);
+	CondRetLis=LIS_ObterTamanho(pGrafo->pVerticesGrafo,&tam);
 	if(tam==0) 
 		return GRA_CondRetGrafoVazio;
-	CondRet=GRA_ExisteAresta(pGrafo,numVert1,numVert2);
-	if(CondRet==GRA_CondRetNaoAchouAresta)
+	CondRetGra=GRA_ExisteAresta(pGrafo,numVert1,numVert2);
+	if(CondRetGra==GRA_CondRetNaoAchouAresta)
 		return GRA_CondRetNaoAchouAresta;
 	//chamar funcao irvertice para o vertice 2
 	while(CondRetAv!=LIS_CondRetFimLista)
 	{
-		CondRet=LIS_ObterValor(pGrafo->pElemCorr->pLisAresta,(void**)&pVerts);
-		if(CondRet!=LIS_CondRetOK)
+		CondRetLis=LIS_ObterValor(pGrafo->pElemCorr->pLisAresta,(void**)&pVerts);
+		if(CondRetLis!=LIS_CondRetOK)
 			return GRA_CondRetRetornoIncorreto;
 		if(pVerts->ident==numVert1)
 		{
-			CondRet=LIS_ExcluirElemento(pGrafo->pElemCorr->pLisAresta);
-			if(CondRet!=LIS_CondRetOK)
+			CondRetLis=LIS_ExcluirElemento(pGrafo->pElemCorr->pLisAresta);
+			if(CondRetLis!=LIS_CondRetOK)
 				return GRA_CondRetRetornoIncorreto;
-			CondRet=IrInicioLista(pGrafo->pElemCorr->pLisAresta);
-			if(CondRet!=LIS_CondRetOK)
+			CondRetLis=IrInicioLista(pGrafo->pElemCorr->pLisAresta);
+			if(CondRetLis!=LIS_CondRetOK)
 				return GRA_CondRetRetornoIncorreto;
 			break;
 		}
@@ -338,16 +344,16 @@ GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 	//chamar funcao irvertice para o vertice 1
 	while(CondRetAv!=LIS_CondRetFimLista)
 	{
-		CondRet=LIS_ObterValor(pGrafo->pElemCorr->pLisAresta,(void**)&pVerts);
-		if(CondRet!=LIS_CondRetOK)
+		CondRetLis=LIS_ObterValor(pGrafo->pElemCorr->pLisAresta,(void**)&pVerts);
+		if(CondRetLis!=LIS_CondRetOK)
 			return GRA_CondRetRetornoIncorreto;
-		if(pVerts->ident==numVert2)
+		if(pVerts->ident==numVert1)
 		{
-			CondRet=LIS_ExcluirElemento(pGrafo->pElemCorr->pLisAresta);
-			if(CondRet!=LIS_CondRetOK)
+			CondRetLis=LIS_ExcluirElemento(pGrafo->pElemCorr->pLisAresta);
+			if(CondRetLis!=LIS_CondRetOK)
 				return GRA_CondRetRetornoIncorreto;
-			CondRet=IrInicioLista(pGrafo->pElemCorr->pLisAresta);
-			if(CondRet!=LIS_CondRetOK)
+			CondRetLis=IrInicioLista(pGrafo->pElemCorr->pLisAresta);
+			if(CondRetLis!=LIS_CondRetOK)
 				return GRA_CondRetRetornoIncorreto;
 			break;
 		}
@@ -358,7 +364,6 @@ GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 
 
 } /* Fim função: GRA  &Excluir Aresta */
-
 /***************************************************************************
 *
 *  Função: GRA  &Excluir Vertice
