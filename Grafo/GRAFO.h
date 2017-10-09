@@ -84,8 +84,14 @@ typedef enum {
 	GRA_CondRetNaoAchouAresta,
 	/* Não encontrou a aresta procurada */
 
-	GRA_CondRetFaltouMemoria
+	GRA_CondRetFaltouMemoria,
 	/* Faltou memória ao tentar criar um vértice do grafo */
+
+	GRA_CondRetRetornoIncorreto,
+	/* Condicao de retorno do modulo Lista imprevista*/
+
+	GRA_CondRetInconsistencia
+	/* Encontrou-se uma inconsistencia no Grafo*/
 
 } GRA_tpCondRet;
 

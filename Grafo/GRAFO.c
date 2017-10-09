@@ -175,7 +175,8 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
 #endif
 
 	CondRet=LIS_ObterTamanho(pGrafo->pVerticesGrafo,&tam);
-	assert(CondRet==LIS_CondRetOK);
+	if(CondRet!=LIS_CondRetOK)
+		return GRA_CondRetRetornoIncorreto;
 
 	/* Criar elemento a inserir apos */
 	pVerts = CriarSubVertice(pGrafo,tam);
@@ -191,7 +192,8 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
 	} /* if */
 
 	CondRet=IrFinalLista(pGrafo->pVerticesGrafo);
-	assert(CondRet==LIS_CondRetOK);
+	if(CondRet!=LIS_CondRetOK)
+		return GRA_CondRetRetornoIncorreto;
 	if (LIS_InserirElementoApos(pGrafo->pVerticesGrafo,(void*)pVerts) == LIS_CondRetFaltouMemoria)
 		return GRA_CondRetFaltouMemoria;
 
@@ -199,6 +201,8 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
 		return GRA_CondRetFaltouMemoria;
 
 	CondRet=LIS_ObterValor(pVerts->pLisVertice,(void**)&pRet);
+	if(CondRet!=LIS_CondRetOK)
+		return GRA_CondRetRetornoIncorreto;
 	pGrafo->pElemCorr=pRet;
 	return GRA_CondRetOK;
 
@@ -212,31 +216,35 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
 GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 {
 	int tam;
-	GRA_tpVertice* pCorrenteAnterior=pGrafo->pElemCorr;
+	GRA_tpVertice* pCorrenteAnterior=pGrafo->pElemCorr; 
+	//GRA_tpNoVertices* pVertLisCorrenteAn;
 	GRA_tpNoVertices* pVert1;
 	GRA_tpNoVertices* pVert2;
-	GRA_tpNoVertices* teste;
 	LIS_tpCondRet CondRet;
 	// dependendo de ir vertice,isso e denecessario
 	CondRet=LIS_ObterTamanho(pGrafo->pVerticesGrafo,&tam);
+	if(CondRet!=LIS_CondRetOK)
+		return GRA_CondRetRetornoIncorreto;
 	if(tam==0) 
 		return GRA_CondRetGrafoVazio;
 	//chamar funcao irvertice para o vertice 1
 	//verificar retorno
-	//guardar o corrente em pvert1
+	//LIS_ObterValor(pGrafo->pVerticesGrafo,(void**)&pVert1);
 	//chamar funcao irvertice para o vertice 2
 	//verificar retorno
-	//guardar o corrente em pvert2
-	//LIS_ObterValor(pGrafo->pVerticesGrafo,(void**)&teste);
-	//pVert1=teste;
+	//LIS_ObterValor(pGrafo->pVerticesGrafo,(void**)&pVert2);
 	if (LIS_InserirElementoApos(pGrafo->pElemCorr->pLisAresta,(void*)pVert1) == LIS_CondRetFaltouMemoria)
 		return GRA_CondRetFaltouMemoria;
+	CondRet=LIS_IrInicioLista(p->pElemCorr->pLisAresta);
+	if(CondRet!=LIS_CondRetOK)
+		return GRA_CondRetRetornoIncorreto;
 	//chamar funcao irvertice para o vertice 1
 	if (LIS_InserirElementoApos(pGrafo->pElemCorr->pLisAresta,(void*)pVert2) == LIS_CondRetFaltouMemoria)
-		return GRA_CondRetFaltouMemoria;*/
-		CondRet=LIS_IrInicioLista(p->pElemCorr->pLisAresta);
-	assert(CondRet==LIS_CondRetOK);
-	pGrafo->pElemCorr=pCorrenteAnterior;
+		return GRA_CondRetFaltouMemoria;
+	CondRet=LIS_IrInicioLista(p->pElemCorr->pLisAresta);
+	if(CondRet!=LIS_CondRetOK)
+		return GRA_CondRetRetornoIncorreto;
+	pGrafo->pElemCorr=pCorrenteAnterior; 
 	return GRA_CondRetOK;
 
 
@@ -253,41 +261,103 @@ GRA_tpCondRet GRA_ExisteAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 	GRA_tpVertice* pCorrenteAnterior=pGrafo->pElemCorr;
 	GRA_tpNoVertices* pVerts;
 	LIS_tpCondRet CondRet,CondRetAv=LIS_CondRetOK;
-
 	// dependendo de ir vertice,isso e denecessario
 	CondRet=LIS_ObterTamanho(pGrafo->pVerticesGrafo,&tam);
-	assert(CondRet==LIS_CondRetOK);
-	if(tam==0){
+	if(CondRet!=LIS_CondRetOK)
+		return GRA_CondRetRetornoIncorreto;
+	if(tam==0)
 		return GRA_CondRetGrafoVazio;
-	}
-
 	//chamar funcao irvertice para o vertice 1
-	//chamar obtercorrente da lista Vertices
 	//verificar retorno
 	CondRet=LIS_ObterTamanho(pGrafo->pElemCorr->pLisAresta,&tam);
-	assert(CondRet==LIS_CondRetOK);
+	if(CondRet!=LIS_CondRetOK)
+		return GRA_CondRetRetornoIncorreto;
 	if(tam==0)
-	{
 		return GRA_CondRetNaoAchouAresta;
-	}
 	while(CondRetAv!=LIS_CondRetFimLista)
 	{
 		CondRet=LIS_ObterValor(pGrafo->pElemCorr->pLisAresta,(void**)&pVerts);
-		assert(CondRet==LIS_CondRetOK);
-		if(pVerts->ident==numVert1)
+		if(CondRet!=LIS_CondRetOK)
+			return GRA_CondRetRetornoIncorreto;
+		if(pVerts->ident==numVert2)
 		{
 			CondRet=IrInicioLista(pGrafo->pElemCorr->pLisAresta);
-			assert(CondRet==LIS_CondRetOK);
+			if(CondRet!=LIS_CondRetOK)
+				return GRA_CondRetRetornoIncorreto;
 			return GRA_CondRetOK;
 		}
 		CondRetAv=LIS_AvancarElementoCorrente(pGrafo->pElemCorr->pLisAresta,1);
 	}
 	CondRet=IrInicioLista(pGrafo->pElemCorr->pLisAresta);
-	assert(CondRet==LIS_CondRetOK);
+	if(CondRet!=LIS_CondRetOK)
+		return GRA_CondRetRetornoIncorreto;
 	pGrafo->pElemCorr=pCorrenteAnterior;
 	return GRA_CondRetNaoAchouAresta;
 
 } /* Fim função: GRA  &Existe Aresta */
+
+/***************************************************************************
+*
+*  Função: GRA  &Excluir Aresta
+*  ****/
+
+GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
+{
+	int tam;
+	GRA_tpVertice* pCorrenteAnterior=pGrafo->pElemCorr;
+	GRA_tpNoVertices* pVerts;
+	LIS_tpCondRet CondRet,CondRetAv=LIS_CondRetOK;
+	// dependendo de ir vertice,isso e denecessario
+	CondRet=LIS_ObterTamanho(pGrafo->pVerticesGrafo,&tam);
+	if(tam==0) 
+		return GRA_CondRetGrafoVazio;
+	CondRet=GRA_ExisteAresta(pGrafo,numVert1,numVert2);
+	if(CondRet==GRA_CondRetNaoAchouAresta)
+		return GRA_CondRetNaoAchouAresta;
+	//chamar funcao irvertice para o vertice 2
+	while(CondRetAv!=LIS_CondRetFimLista)
+	{
+		CondRet=LIS_ObterValor(pGrafo->pElemCorr->pLisAresta,(void**)&pVerts);
+		if(CondRet!=LIS_CondRetOK)
+			return GRA_CondRetRetornoIncorreto;
+		if(pVerts->ident==numVert1)
+		{
+			CondRet=LIS_ExcluirElemento(pGrafo->pElemCorr->pLisAresta);
+			if(CondRet!=LIS_CondRetOK)
+				return GRA_CondRetRetornoIncorreto;
+			CondRet=IrInicioLista(pGrafo->pElemCorr->pLisAresta);
+			if(CondRet!=LIS_CondRetOK)
+				return GRA_CondRetRetornoIncorreto;
+			break;
+		}
+		CondRetAv=LIS_AvancarElementoCorrente(pGrafo->pElemCorr->pLisAresta,1);
+	}
+	if(CondRetAv==LIS_CondRetFimLista)
+		return GRA_CondRetInconsistencia;
+
+	//chamar funcao irvertice para o vertice 1
+	while(CondRetAv!=LIS_CondRetFimLista)
+	{
+		CondRet=LIS_ObterValor(pGrafo->pElemCorr->pLisAresta,(void**)&pVerts);
+		if(CondRet!=LIS_CondRetOK)
+			return GRA_CondRetRetornoIncorreto;
+		if(pVerts->ident==numVert2)
+		{
+			CondRet=LIS_ExcluirElemento(pGrafo->pElemCorr->pLisAresta);
+			if(CondRet!=LIS_CondRetOK)
+				return GRA_CondRetRetornoIncorreto;
+			CondRet=IrInicioLista(pGrafo->pElemCorr->pLisAresta);
+			if(CondRet!=LIS_CondRetOK)
+				return GRA_CondRetRetornoIncorreto;
+			break;
+		}
+		CondRetAv=LIS_AvancarElementoCorrente(pGrafo->pElemCorr->pLisAresta,1);
+	}
+	pGrafo->pElemCorr=pCorrenteAnterior;
+	return GRA_CondRetOK;
+
+
+} /* Fim função: GRA  &Excluir Aresta */
 
 /***************************************************************************
 *

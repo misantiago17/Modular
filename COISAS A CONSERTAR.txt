@@ -2,5 +2,4 @@
 -O mesmo para a funcao criarsubvertice e criar vertice
 -Perguntar sobre a funcao ir vertice
 -Perguntar se o id do vertice deve ser vsivel ou nao ao usuario
--Como testar irFinal/IrInicio da lista
--
+-testar atualizacao do corrente no final da funcao

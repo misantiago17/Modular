@@ -456,40 +456,7 @@
 
    } /* Fim função: LIS  &Avançar elemento */
 
-/***************************************************************************
-*
-*  Função: LIS  &Procurar elemento contendo valor
-*  ****/
 
-   LIS_tpCondRet LIS_ProcurarValor( LIS_tppLista pLista ,
-                                    void * pValor        )
-   {
-
-      tpElemLista * pElem ;
-
-      #ifdef _DEBUG
-         assert( pLista  != NULL ) ;
-      #endif
-
-      if ( pLista->pElemCorr == NULL )
-      {
-         return LIS_CondRetListaVazia ;
-      } /* if */
-
-      for ( pElem  = pLista->pElemCorr ;
-            pElem != NULL ;
-            pElem  = pElem->pProx )
-      {
-         if ( pElem->pValor == pValor )
-         {
-            pLista->pElemCorr = pElem ;
-            return LIS_CondRetOK ;
-         } /* if */
-      } /* for */
-
-      return LIS_CondRetNaoAchou ;
-
-   } /* Fim função: LIS  &Procurar elemento contendo valor */
 
    /***************************************************************************
 *
