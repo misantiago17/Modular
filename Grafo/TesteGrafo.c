@@ -61,18 +61,18 @@ typedef struct infs Teste_Infs;
 #define VAZIO     0
 #define NAO_VAZIO 1
 
-#define DIM_VT_LISTA   10
+#define DIM_VT_GRAFO   10
 #define DIM_VALOR     100
 
 
 
-LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
+Gra_tppGrafo   vtGrafos[ DIM_VT_LISTA ] ;
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
    static void DestruirValor( void * pValor ) ;
 
-   static int ValidarInxLista( int inxLista , int Modo ) ;
+   static int ValidarInxGrafo( int inxLista , int Modo ) ;
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -105,7 +105,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
    TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
    {
 
-      int inxLista  = -1 ,
+      int inxGrafo  = -1 ,
           numLidos   = -1 ,
           CondRetEsp = -1  ;
 	  Teste_Infs* pDado;
@@ -130,14 +130,14 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 	  
 
 
-      /* Efetuar reset de teste de lista */
+      /* Efetuar reset de teste de GRAFO */
 
-         if ( strcmp( ComandoTeste , RESET_LISTA_CMD ) == 0 )
+         if ( strcmp( ComandoTeste , RESET_GRAFO_CMD ) == 0 )
          {
 
-            for( i = 0 ; i < DIM_VT_LISTA ; i++ )
+            for( i = 0 ; i < DIM_VT_GRAFO ; i++ )
             {
-               vtListas[ i ] = NULL ;
+               vtGrafos[ i ] = NULL ;
             } /* for */
 
             return TST_CondRetOK ;
