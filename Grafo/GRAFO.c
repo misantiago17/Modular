@@ -38,27 +38,12 @@ typedef struct tagVertice {
 	void * pValor;
 	/* Ponteiro para o valor contido no elemento */
 
+	int Ident;
+	/* Identficador do vertice*/
+
 	LIS_tppLista pLisAresta;
 	/* Ponteiro para a lista de arestas */
 } GRA_tpVertice;
-
-/***********************************************************************
-*
-*  $TC Tipo de dados: GRA No da Lista Vertices
-*
-*
-***********************************************************************/
-
-typedef struct tagNoVertices {
-
-	int ident;
-	/* Identificador do vertice */
-
-	LIS_tppLista pLisVertice;
-	/* Ponteiro para lista de elementos para os quais o vertice aponta */
-
-} GRA_tpNoVertices;
-
 
 
 /***********************************************************************
@@ -83,8 +68,8 @@ typedef struct GRA_tagGrafo {
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
-GRA_tpVertice *CriarVertice(GRA_tpGrafo *pGrafo, void * pValor);
-GRA_tpNoVertices *CriarSubVertice(GRA_tpGrafo *pGrafo, int tam);
+GRA_tpVertice *CriarVertice(GRA_tpGrafo *pGrafo, void * pValor,int tam);
+GRA_tpNoVertices *CriarSubVertice(GRA_tpGrafo *pGrafo);
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -207,7 +192,7 @@ GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet)
 GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
 	void * pValor)
 {
-	GRA_tpNoVertices * pVerts;
+	GRA_tpVertices * pVerts;
 	GRA_tpVertice * pVert;
 	GRA_tpVertice*  pRet;
 	int tam;
@@ -221,13 +206,13 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
 		return GRA_CondRetRetornoIncorreto;
 
 	/* Criar elemento a inserir apos */
-	pVerts = CriarSubVertice(pGrafo,tam);
+	pVerts = CriarSubVertice(pGrafo);
 	if (pVerts == NULL)
 	{
 		return GRA_CondRetFaltouMemoria;
 	} /* if */
 
-	pVert = CriarVertice(pGrafo, pValor);
+	pVert = CriarVertice(pGrafo, pValor,tam);
 	if (pVert == NULL)
 	{
 		return GRA_CondRetFaltouMemoria;
@@ -239,10 +224,10 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
 	if (LIS_InserirElementoApos(pGrafo->pVerticesGrafo,(void*)pVerts) == LIS_CondRetFaltouMemoria)
 		return GRA_CondRetFaltouMemoria;
 
-	if (LIS_InserirElementoApos(pVerts->pLisVertice,(void*)pVert) == LIS_CondRetFaltouMemoria)
+	if (LIS_InserirElementoApos(pVerts,(void*)pVert) == LIS_CondRetFaltouMemoria)
 		return GRA_CondRetFaltouMemoria;
 
-	CondRet=LIS_ObterValor(pVerts->pLisVertice,(void**)&pRet);
+	CondRet=LIS_ObterValor(pVerts,(void**)&pRet);
 	if(CondRet!=LIS_CondRetOK)
 		return GRA_CondRetRetornoIncorreto;
 	pGrafo->pElemCorr=pRet;
@@ -282,8 +267,8 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 	int tam;
 	GRA_tpVertice* pCorrenteAnterior=pGrafo->pElemCorr; 
 	//GRA_tpNoVertices* pVertLisCorrenteAn;
-	GRA_tpNoVertices* pVert1;
-	GRA_tpNoVertices* pVert2;
+	GRA_tpVertice* pVert1;
+	GRA_tpVertice* pVert2;
 	LIS_tpCondRet CondRet;
 	if(pGrafo == NULL)
 		return GRA_CondRetParametroIncorreto;
@@ -453,7 +438,7 @@ GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 ***********************************************************************/
 
 
-GRA_tpVertice *CriarVertice(GRA_tpGrafo *pGrafo, void * pValor)
+GRA_tpVertice *CriarVertice(GRA_tpGrafo *pGrafo, void * pValor , int tam)
 {
 	GRA_tpVertice * pVert;
 
@@ -463,6 +448,7 @@ GRA_tpVertice *CriarVertice(GRA_tpGrafo *pGrafo, void * pValor)
 		return NULL;
 	} /* if */
 
+	pVert->ident = tam+1;
 	pVert->pValor = pValor;
 	if (LIS_CriarLista(NULL, &(pVert->pLisAresta)) != LIS_CondRetOK)  //REVER ESSE NULL
 		return NULL;
@@ -476,19 +462,15 @@ GRA_tpVertice *CriarVertice(GRA_tpGrafo *pGrafo, void * pValor)
 *  $FC Função: GRA  -Criar o sub vertice,isto e,o vertice da lista Vertices
 *
 ***********************************************************************/
-GRA_tpNoVertices *CriarSubVertice(GRA_tpGrafo *pGrafo, int tam){
+LIS_tppLista* CriarSubVertice(GRA_tpGrafo *pGrafo, int tam){
 
-	GRA_tpNoVertices * pVerts;
+	LIS_tppLista* pVerts;
 
-	pVerts = (GRA_tpNoVertices *)malloc(sizeof(GRA_tpNoVertices));
+	pVerts =(LIS_tppLista*)malloc(sizeof(LIS_tppLista));
 	if (pVerts == NULL)
 	{
 		return NULL;
 	} /* if */
-
-	pVerts->ident = tam+1;
-	if (LIS_CriarLista(NULL,&(pVerts->pLisVertice)) != LIS_CondRetOK) // REVER ESSE NULL
-		return NULL;
 
 	return pVerts;
 }
