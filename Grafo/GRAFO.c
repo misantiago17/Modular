@@ -301,11 +301,6 @@ GRA_tpCondRet GRA_ExisteAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 *  Função: GRA  &Excluir Aresta
 *  ****/
 
-/***************************************************************************
-*
-*  Função: GRA  &Excluir Aresta
-*  ****/
-
 GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 {
 	int tam;
@@ -368,13 +363,62 @@ GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 *
 *  Função: GRA  &Excluir Vertice
 *  ****/
-
-/*GRA_tpCondRet GRA_ExcluirVertice(GRA_tpGrafo pGrafo)
+// Pegar o valor a ser exluido passaer pelo vetor de arestas dele
+GRA_tpCondRet GRA_ExcluirVertice(GRA_tpGrafo pGrafo, GRA_tpNoVertice * pVert)
 {
-}  Fim função: GRA  &Excluir vértice */
+	LIS_tpCondRet *CondRet;
+	LIS_tpCondRet *CondRetExcluir;
+	LIS_tpCondRet *CondRetPrimElem;
+	GRA_tpCondRet *CondRetGraVert;
+	int tam;
+	CondRet = LIS_ObterTamanho(pVert->pLisAresta, &tam);
+	if(CondRet!=LIS_CondRetOK){
+		CondRetExcluir = LIS_ExcluirElemento(pVert);
+		if(CondRetExcluir!=LIS_CondRetOK)
+			return GRA_CondRetGrafoVazio;
+		else {
+			LiberarVertice(pVert, pGrafo);
+			return GRA_CondRetOK;
+		}
+	} else {
+		CondRetPrimElem = LIS_IrInicioLista(pVert->pLisAresta);
+			if (CondRetPrimElem!=LIS_CondRetOK)
+				return CondRetPrimElem;
+			else {
+				for(int i=0;i==tam;i+=1){	
+				//acessar cada vertice que está como aresta do item a ser excluído 
+					CondRetGraVert = GRA_IrVertice(pGrafo,pVert->pLisAresta->pElemCorr->pValor->ident,pVert );
+					if(CondRetGraVert!=GRA_CondRetOK)
+						return CondRetVert
+					else {
+						GRA_ExcluirAresta(pGrafo,pGrafo->pElemCorr->p)
+					}
+				}
+			}		
+	}
+	
+	
+} /* Fim função: GRA  &Excluir vértice */
 
 
 /*****  Código das funções encapsuladas no módulo  *****/
+
+/***********************************************************************
+*
+*  $FC Função: GRA  -Liberar evertice do grafo
+*
+***********************************************************************/
+
+void LiberarVertice( GRA_tpNoVertice * pVert, GRA_tpGrafo * pGrafo)
+   {
+
+      if (( pGrafo->ExcluirValor != NULL ) && ( pVert->pValor != NULL)){ 
+         pGrafo->ExcluirValor( pVert->pValor ) ;
+      } /* if */
+
+      free( pVert ) ;
+
+   } /* Fim função: LIS  -Liberar elemento da lista */
 
 /***********************************************************************
 *
