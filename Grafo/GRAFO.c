@@ -13,6 +13,7 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
+*     2        rm    10/10/2017 Funções GRA_IrVertice e GRA_DestruirGrafo
 *     1      rm/ms/gb   05/10/2017 início desenvolvimento
 *
 ***************************************************************************/
@@ -116,21 +117,63 @@ GRA_tpCondRet GRA_CriarGrafo(void   ( * ExcluirValor ) ( void * pDado ), GRA_tpp
 	return GRA_CondRetOK;
 } /* Fim função: GRA  &Criar grafo */
 
-/***************************************************************************
-*
-*  Função: Função: GRA  &Ir para o Vértice
-*  ****/
+  /***********************************************************************
+  *  $FC Função: GRA  &Destruir grafo
+  *  ****/
 
-/*GRA_tpCondRet GRA_IrVertice(GRA_tpGrafo *pGrafo, int numVert) {
+GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo) {
+	GRA_tpNoVertices *verts;
+	GRA_tpVertice *vert;
 
-IrInicioLista(pGrafo->listaVertices);
-/*??????? Alguma outra condição de retorno pra erro aki??? 
-if (LIS_AvancarElementoCorrente(pGrafo->listaVertices, numVert) != LIS_CondRetOK)
-return GRA_CondRetNaoAchouVertice;
+	if (LIS_IrInicioLista(pGrafo->pVerticesGrafo) != LIS_CondRetOK)
+		return GRA_CondRetOK;
 
-pGrafo->pElemCorr = pGrafo->listaVertices;
-return GRA_CondRetOK;
-}*/
+	do {
+		if (LIS_ObterValor(pGrafo->pVerticesGrafo, &verts) != LIS_CondRetOK)
+			return GRA_CondRetRetornoIncorreto;
+
+		if (LIS_ObterValor(verts->pLisVertice, &vert) != LIS_CondRetOK)
+			return GRA_CondRetRetornoIncorreto;
+
+		GRA_ExcluirVertice(vert);
+
+		LIS_DestruirLista(verts->pLisVertice);
+
+		free(verts);
+
+	} while (LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo, 1) != LIS_CondRetFimLista);
+
+	LIS_DestruirLista(pGrafo->pVerticesGrafo);
+
+	free(pGrafo);
+
+	return GRA_CondRetOK;
+}/* Fim função: GRA  &Destruir grafo*/
+
+ /***************************************************************************
+ *
+ *  Função: Função: GRA  &Ir para o Vértice
+ *  ****/
+
+GRA_tpCondRet GRA_IrVertice(GRA_tpGrafo *pGrafo, int numVert) {
+	GRA_tpNoVertices *verts;
+
+	if (LIS_IrInicioLista(pGrafo->pVerticesGrafo) != LIS_CondRetOK)
+		return GRA_CondRetRetornoIncorreto;
+
+	if (LIS_ObterValor(pGrafo->pVerticesGrafo, &verts) != LIS_CondRetOK)
+		return GRA_CondRetRetornoIncorreto;
+
+	while (verts->ident != numVert) {
+		if (LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo, 1) == LIS_CondRetFimLista)
+			return GRA_CondRetNaoAchouVertice;
+
+		if (LIS_ObterValor(pGrafo->pVerticesGrafo, &verts) != LIS_CondRetOK)
+			return GRA_CondRetRetornoIncorreto;
+	}
+	pGrafo->pElemCorr = verts;
+	return GRA_CondRetOK;
+}/* Fim função: GRA  &Ir para o Vértice*/
 /***************************************************************************
 *
 *  Função: GRA  &Obter referência para o valor contido no vértice
