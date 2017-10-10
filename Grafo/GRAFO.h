@@ -90,8 +90,11 @@ typedef enum {
 	GRA_CondRetRetornoIncorreto,
 	/* Condicao de retorno do modulo Lista imprevista*/
 
-	GRA_CondRetInconsistencia
+	GRA_CondRetInconsistencia,
 	/* Encontrou-se uma inconsistencia no Grafo*/
+
+	GRA_CondRetParametroIncorreto
+	/* Parametro passado esta diferente do especificado*/
 
 } GRA_tpCondRet;
 
@@ -181,6 +184,26 @@ GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo,
 ***********************************************************************/
 
 GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet);
+
+/***********************************************************************
+*  $FC Função: GRA  &Retorna Identificador
+*
+*  $ED Descrição da função
+*     Retorna por referencia o identificador do vertice corrente. Caso o grafo esteja vazio, retorna 0.
+*
+*  $EP Parâmetros
+*     pGrafo - ponteiro para o grafo de onde se quer armazenar o valor
+*	  pIdent- ponteiro que guarda o identificador
+*
+*  $FV Valor retornado
+*     GRA_CondRetOK
+*	  GRA_CondRetGrafoVazio
+*
+***********************************************************************/
+
+GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo,
+	int* pIdent);
+
 
 
 /***********************************************************************

@@ -1,5 +1,5 @@
 -Revisar se criacao da lista de vertices de fato recebe null como funcao de destruicao
 -O mesmo para a funcao criarsubvertice e criar vertice
--Perguntar sobre a funcao ir vertice
--Perguntar se o id do vertice deve ser vsivel ou nao ao usuario
+-Perguntar se e preciso mudar tudo para usuario passar um identificador.
+-Perguntar se email devera ser um identificador(duvida para o t4)
 -testar atualizacao do corrente no final da funcao
