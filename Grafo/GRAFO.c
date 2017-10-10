@@ -37,6 +37,9 @@ typedef struct tagVertice {
 
 	void * pValor;
 	/* Ponteiro para o valor contido no elemento */
+	
+	int ident;
+	/* Identificador do vertice */
 
 	LIS_tppLista pLisAresta;
 	/* Ponteiro para a lista de arestas */
@@ -50,9 +53,6 @@ typedef struct tagVertice {
 ***********************************************************************/
 
 typedef struct tagNoVertices {
-
-	int ident;
-	/* Identificador do vertice */
 
 	LIS_tppLista pLisVertice;
 	/* Ponteiro para lista de elementos para os quais o vertice aponta */
@@ -156,7 +156,7 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo) {
  *  ****/
 
 GRA_tpCondRet GRA_IrVertice(GRA_tpGrafo *pGrafo, int numVert) {
-	GRA_tpNoVertices *verts;
+	GRA_tpNoVertices *vert;
 
 	if (LIS_IrInicioLista(pGrafo->pVerticesGrafo) != LIS_CondRetOK)
 		return GRA_CondRetRetornoIncorreto;
@@ -164,7 +164,7 @@ GRA_tpCondRet GRA_IrVertice(GRA_tpGrafo *pGrafo, int numVert) {
 	if (LIS_ObterValor(pGrafo->pVerticesGrafo, &verts) != LIS_CondRetOK)
 		return GRA_CondRetRetornoIncorreto;
 
-	while (verts->ident != numVert) {
+	while (vert->ident != numVert) {
 		if (LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo, 1) == LIS_CondRetFimLista)
 			return GRA_CondRetNaoAchouVertice;
 
@@ -259,7 +259,7 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
 GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo,
 	int* pIdent)
 {
-	GRA_tpNoVertices* pVert;
+	GRA_tpNoVertice* pVert;
 	LIS_tpCondRet CondRet;
 	if(pGrafo == NULL)
 		return GRA_CondRetParametroIncorreto;
@@ -439,9 +439,15 @@ GRA_tpCondRet GRA_ExcluirVertice(GRA_tpGrafo pGrafo, GRA_tpNoVertice * pVert)
 	LIS_tpCondRet *CondRet;
 	LIS_tpCondRet *CondRetExcluir;
 	LIS_tpCondRet *CondRetPrimElem;
+	LIS_tpCondRet *CondRetProxElem;
+	LIS_tpCondRet *CondRetObterValor;
+	LIS_tpCondRet *CondRetTamVert;
 	GRA_tpCondRet *CondRetGraVert;
-	int tam;
-	CondRet = LIS_ObterTamanho(pVert->pLisAresta, &tam);
+	GRA_tpCondRet *CondRetGraAres;
+	GRA-tpCondRet *CondRetGraVertProx;
+	int tamAres;
+	int tamVert;
+	CondRet = LIS_ObterTamanho(pVert->pLisAresta, &tamAres);
 	if(CondRet!=LIS_CondRetOK){
 		CondRetExcluir = LIS_ExcluirElemento(pVert);
 		if(CondRetExcluir!=LIS_CondRetOK)
@@ -455,15 +461,47 @@ GRA_tpCondRet GRA_ExcluirVertice(GRA_tpGrafo pGrafo, GRA_tpNoVertice * pVert)
 			if (CondRetPrimElem!=LIS_CondRetOK)
 				return CondRetPrimElem;
 			else {
-				for(int i=0;i==tam;i+=1){	
-				//acessar cada vertice que está como aresta do item a ser excluído 
-					CondRetGraVert = GRA_IrVertice(pGrafo,pVert->pLisAresta->pElemCorr->pValor->ident,pVert );
-					if(CondRetGraVert!=GRA_CondRetOK)
-						return CondRetVert
-					else {
-						GRA_ExcluirAresta(pGrafo,pGrafo->pElemCorr->p)
+				for(int i=0;i==tamAres;i+=1){	
+					GRA_tpVertice *Aresta;
+					CondRetObterValor = LIS_ObterValor(pVert->pLisAresta,(void**)&Aresta);
+					if (CondRetObterValor!=LIS_CondRetOK){
+						return CondRetObterValor;
+					} else {
+						CondRetGraVert = GRA_IrVertice(pGrafo,Aresta->ident); 
+						if(CondRetGraVert!=GRA_CondRetOK)
+							return CondRetVert
+						else {
+							CondRetGraAres = GRA_ExcluirAresta(pGrafo,pVert->ident,Aresta->ident);
+							if (CondRetGraAres!=GRA_CondRetOK){
+								return CondRetGraAres;
+							} else {
+								CondRetProxElem = LIS_AvancarElementoCorrente(pVert->pLisAresta,1);
+								if (CondRetProxElem!=LIS_CondRetOK)
+									return CondRetProxElem;
+							}
+						}
 					}
 				}
+				LiberarVertice(pVert,pGrafo);
+				CondRetGraVert = LIS_ObterTamanho(pGrafo->pVerticesGrafo, &tamVert);
+				if (CondRetGraVert!=LIS_CondRetOK){
+					return CondRetGraVert;
+				} else {
+					GRA_tpNoVertice * pVertProx = pVert;
+					int pVertProxIdent = pVert->ident;
+					for(int i=0;i==tamVert;i++){
+						CondRetGraVertProx = GRA_IrVertice(pGrafo,pVertProxIdent+1);
+						if (CondRetGraVertProx!=GRA_CondRetOK){
+							return CondRetGraVertProx;
+						} else {
+							pVertProx = pGrafo->pElemCorr;
+							pVertProxIdent = pVertProx->ident;
+							pGrafo->pElemCorr->ident = ident - 1;
+						}	
+					}
+				}
+				
+				return GRA_CondRetOK;
 			}		
 	}
 	
