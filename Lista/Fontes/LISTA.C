@@ -264,6 +264,7 @@
          } /* if */
                   
          pLista->pElemCorr = pElem ;
+
                   
          return LIS_CondRetOK ;
 

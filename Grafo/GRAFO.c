@@ -139,9 +139,10 @@ return GRA_CondRetOK;
 GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet)
 {
 
-#ifdef _DEBUG
-	assert(pGrafo != NULL);
-#endif
+
+	if(pGrafo == NULL)
+		return GRA_CondRetParametroIncorreto;
+
 
 	if (pGrafo->pElemCorr == NULL)
 	{
@@ -169,10 +170,8 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
 	int tam;
 	LIS_tpCondRet CondRet;
 
-
-#ifdef _DEBUG
-	assert(pGrafo != NULL);
-#endif
+	if(pGrafo == NULL)
+		return GRA_CondRetParametroIncorreto;
 
 	CondRet=LIS_ObterTamanho(pGrafo->pVerticesGrafo,&tam);
 	if(CondRet!=LIS_CondRetOK)
@@ -210,17 +209,41 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
 
 /***************************************************************************
 *
+*  Função: GRA  &Retorna Identificador
+*  ****/
+
+
+GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo,
+	int* pIdent)
+{
+	GRA_tpNoVertices* pVert;
+	LIS_tpCondRet CondRet;
+	if(pGrafo == NULL)
+		return GRA_CondRetParametroIncorreto;
+	CondRet=LIS_ObterValor(pGrafo->pVerticesGrafo,(void**)&pVert);
+	if(CondRet!=LIS_CondRetOK)
+		return GRA_CondRetRetornoIncorreto;
+	pIdent=pVert->ident;
+	return GRA_CondRetOK;
+
+} /* Fim função: GRA  &Retorna Identificador */
+
+/***************************************************************************
+*
 *  Função: GRA  &Criar Aresta
 *  ****/
 
 GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 {
+
 	int tam;
 	GRA_tpVertice* pCorrenteAnterior=pGrafo->pElemCorr; 
 	//GRA_tpNoVertices* pVertLisCorrenteAn;
 	GRA_tpNoVertices* pVert1;
 	GRA_tpNoVertices* pVert2;
 	LIS_tpCondRet CondRet;
+	if(pGrafo == NULL)
+		return GRA_CondRetParametroIncorreto;
 	// dependendo de ir vertice,isso e denecessario
 	CondRet=LIS_ObterTamanho(pGrafo->pVerticesGrafo,&tam);
 	if(CondRet!=LIS_CondRetOK)
@@ -261,6 +284,8 @@ GRA_tpCondRet GRA_ExisteAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 	GRA_tpVertice* pCorrenteAnterior=pGrafo->pElemCorr;
 	GRA_tpNoVertices* pVerts;
 	LIS_tpCondRet CondRet,CondRetAv=LIS_CondRetOK;
+	if(pGrafo == NULL)
+		return GRA_CondRetParametroIncorreto;
 	// dependendo de ir vertice,isso e denecessario
 	CondRet=LIS_ObterTamanho(pGrafo->pVerticesGrafo,&tam);
 	if(CondRet!=LIS_CondRetOK)
@@ -313,6 +338,8 @@ GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 	GRA_tpNoVertices* pVerts;
 	LIS_tpCondRet CondRetLis,CondRetAv=LIS_CondRetOK;
 	GRA_tpCondRet CondRetGra;  
+	if(pGrafo == NULL)
+		return GRA_CondRetParametroIncorreto;
 	// dependendo de ir vertice,isso e denecessario
 	CondRetLis=LIS_ObterTamanho(pGrafo->pVerticesGrafo,&tam);
 	if(tam==0) 
