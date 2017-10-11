@@ -108,7 +108,7 @@ GRA_tpCondRet GRA_CriarGrafo(void   ( * ExcluirValor ) ( void * pDado ), GRA_tpp
   *  ****/
 
 GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo) {
-	GRA_tpNoVertices *verts;
+	LIS_tppLista *verts;
 	GRA_tpVertice *vert;
 
 	if (LIS_IrInicioLista(pGrafo->pVerticesGrafo) != LIS_CondRetOK)
@@ -118,14 +118,12 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo) {
 		if (LIS_ObterValor(pGrafo->pVerticesGrafo, &verts) != LIS_CondRetOK)
 			return GRA_CondRetRetornoIncorreto;
 
-		if (LIS_ObterValor(verts->pLisVertice, &vert) != LIS_CondRetOK)
+		if (LIS_ObterValor(verts, &vert) != LIS_CondRetOK)
 			return GRA_CondRetRetornoIncorreto;
 
 		GRA_ExcluirVertice(vert);
 
-		LIS_DestruirLista(verts->pLisVertice);
-
-		free(verts);
+		LIS_DestruirLista(verts);
 
 	} while (LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo, 1) != LIS_CondRetFimLista);
 
