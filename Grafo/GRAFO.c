@@ -49,15 +49,6 @@ typedef struct tagVertice {
 
 /***********************************************************************
 *
-*  $TC Tipo de dados: GRA No da Lista Vertices
-*
-*
-***********************************************************************/
-
-
-
-/***********************************************************************
-*
 *  $TC Tipo de dados: GRA Descritor da cabeça do grafo
 *
 *
@@ -150,7 +141,8 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo) {
  *  ****/
 
 GRA_tpCondRet GRA_IrVertice(GRA_tpGrafo *pGrafo, int numVert) {
-	GRA_tpNoVertices *vert;
+	LIS_tppLista *verts;
+	GRA_tpVertice *vert;
 
 	if (LIS_IrInicioLista(pGrafo->pVerticesGrafo) != LIS_CondRetOK)
 		return GRA_CondRetRetornoIncorreto;
@@ -165,7 +157,14 @@ GRA_tpCondRet GRA_IrVertice(GRA_tpGrafo *pGrafo, int numVert) {
 		if (LIS_ObterValor(pGrafo->pVerticesGrafo, &verts) != LIS_CondRetOK)
 			return GRA_CondRetRetornoIncorreto;
 	}
-	pGrafo->pElemCorr = verts;
+
+	if (LIS_IrInicioLista(verts) != LIS_CondRetOK)
+		return GRA_CondRetRetornoIncorreto;
+
+	if (LIS_ObterValor(verts, &vert) != LIS_CondRetOK)
+		return GRA_CondRetRetornoIncorreto;
+
+	pGrafo->pElemCorr = vert;
 	return GRA_CondRetOK;
 }/* Fim função: GRA  &Ir para o Vértice*/
 /***************************************************************************
