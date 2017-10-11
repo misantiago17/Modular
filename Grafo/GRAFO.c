@@ -138,28 +138,30 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo) {
  *  Função: Função: GRA  &Ir para o Vértice
  *  ****/
 
-GRA_tpCondRet GRA_IrVertice(GRA_tpGrafo *pGrafo, int numVert) {
-	LIS_tppLista *verts;
-	GRA_tpVertice *vert;
+GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert) {
+	LIS_tppLista verts;
+	GRA_tpVertice* vert;
+
+	if(pGrafo==NULL)
+		return GRA_CondRetParametroIncorreto;
 
 	if (LIS_IrInicioLista(pGrafo->pVerticesGrafo) != LIS_CondRetOK)
 		return GRA_CondRetRetornoIncorreto;
 
-	if (LIS_ObterValor(pGrafo->pVerticesGrafo, &verts) != LIS_CondRetOK)
+	if (LIS_ObterValor(pGrafo->pVerticesGrafo,(void**) &verts) != LIS_CondRetOK)
 		return GRA_CondRetRetornoIncorreto;
 
-	while (vert->ident != numVert) {
+	LIS_ObterValor(verts,(void**) &vert);
+	while (vert->Ident != numVert) {
+
 		if (LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo, 1) == LIS_CondRetFimLista)
 			return GRA_CondRetNaoAchouVertice;
 
-		if (LIS_ObterValor(pGrafo->pVerticesGrafo, &verts) != LIS_CondRetOK)
+		if (LIS_ObterValor(verts,(void**) &vert) != LIS_CondRetOK)
 			return GRA_CondRetRetornoIncorreto;
 	}
 
-	if (LIS_IrInicioLista(verts) != LIS_CondRetOK)
-		return GRA_CondRetRetornoIncorreto;
-
-	if (LIS_ObterValor(verts, &vert) != LIS_CondRetOK)
+	if (LIS_ObterValor(verts, (void**)&vert) != LIS_CondRetOK)
 		return GRA_CondRetRetornoIncorreto;
 
 	pGrafo->pElemCorr = vert;
