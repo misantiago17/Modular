@@ -12,9 +12,10 @@
 *  Autores: Gabriel Busquim (gb), Michelle Santiago (ms), Renan Moreira (rm)
 *
 *  $HA Histórico de evolução:
-*     Versão  Autor    Data     Observações
-*     2        rm    10/10/2017 Funções GRA_IrVertice e GRA_DestruirGrafo
-*     1      rm/ms/gb   05/10/2017 início desenvolvimento
+*     Versão    Autor       Data        Observações
+* 		3		 ms		  10/10/2017    Função GRA_InserirVertice e GRA_ExcluirVertice
+*       2        rm       10/10/2017    Funções GRA_IrVertice e GRA_DestruirGrafo
+*       1      rm/ms/gb   05/10/2017    Início desenvolvimento
 *
 ***************************************************************************/
 
@@ -38,7 +39,6 @@ typedef struct tagVertice {
 	void * pValor;
 	/* Ponteiro para o valor contido no elemento */
 	
-
 	int Ident;
 	/* Identficador do vertice*/
 
