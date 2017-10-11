@@ -70,7 +70,6 @@ typedef struct GRA_tagGrafo {
 /***** Protótipos das funções encapuladas no módulo *****/
 
 GRA_tpVertice *CriarVertice(GRA_tpGrafo *pGrafo, void * pValor,int tam);
-GRA_tpNoVertices *CriarSubVertice(GRA_tpGrafo *pGrafo);
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -199,12 +198,13 @@ GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet)
 GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
 	void * pValor)
 {
-	GRA_tpVertices * pVerts;
+	LIS_tppLista  pLIS_Vert;
+	LIS_tppLista  pLIS_Verts;
 	GRA_tpVertice * pVert;
-	GRA_tpVertice*  pRet;
+	GRA_tpVertice * pRet;
 	int tam;
 	LIS_tpCondRet CondRet;
-
+		
 	if(pGrafo == NULL)
 		return GRA_CondRetParametroIncorreto;
 
@@ -212,12 +212,10 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
 	if(CondRet!=LIS_CondRetOK)
 		return GRA_CondRetRetornoIncorreto;
 
-	/* Criar elemento a inserir apos */
-	pVerts = CriarSubVertice(pGrafo);
-	if (pVerts == NULL)
-	{
+	if (LIS_CriarLista(NULL, &(pLIS_Vert)) == LIS_CondRetFaltouMemoria) 
+	{   //REVISAR ESSE NULL!!!!!!!!!!!
 		return GRA_CondRetFaltouMemoria;
-	} /* if */
+	}
 
 	pVert = CriarVertice(pGrafo, pValor,tam);
 	if (pVert == NULL)
@@ -225,22 +223,25 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
 		return GRA_CondRetFaltouMemoria;
 	} /* if */
 
+	pLIS_Verts=pLIS_Vert;
+
 	CondRet=IrFinalLista(pGrafo->pVerticesGrafo);
 	if(CondRet!=LIS_CondRetOK)
 		return GRA_CondRetRetornoIncorreto;
-	if (LIS_InserirElementoApos(pGrafo->pVerticesGrafo,(void*)pVerts) == LIS_CondRetFaltouMemoria)
+
+	if (LIS_InserirElementoApos(pGrafo->pVerticesGrafo,(void*)pLIS_Verts) == LIS_CondRetFaltouMemoria)
 		return GRA_CondRetFaltouMemoria;
 
-	if (LIS_InserirElementoApos(pVerts,(void*)pVert) == LIS_CondRetFaltouMemoria)
+	if (LIS_InserirElementoApos(pLIS_Vert,(void*)pVert) == LIS_CondRetFaltouMemoria)
 		return GRA_CondRetFaltouMemoria;
-
-	CondRet=LIS_ObterValor(pVerts,(void**)&pRet);
+	
+	CondRet=LIS_ObterValor(pLIS_Vert,(void**)&pRet);
 	if(CondRet!=LIS_CondRetOK)
 		return GRA_CondRetRetornoIncorreto;
 	pGrafo->pElemCorr=pRet;
 	return GRA_CondRetOK;
-
-} /* Fim função: GRA  &Inserir vértice */
+		}
+ /* Fim função: GRA  &Inserir vértice */
 
 /***************************************************************************
 *
@@ -546,20 +547,3 @@ GRA_tpVertice *CriarVertice(GRA_tpGrafo *pGrafo, void * pValor , int tam)
 
 } /* Fim função: GRA  -Criar o elemento */
 
-/***********************************************************************
-*
-*  $FC Função: GRA  -Criar o sub vertice,isto e,o vertice da lista Vertices
-*
-***********************************************************************/
-LIS_tppLista* CriarSubVertice(GRA_tpGrafo *pGrafo, int tam){
-
-	LIS_tppLista* pVerts;
-
-	pVerts =(LIS_tppLista*)malloc(sizeof(LIS_tppLista));
-	if (pVerts == NULL)
-	{
-		return NULL;
-	} /* if */
-
-	return pVerts;
-}
