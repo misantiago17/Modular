@@ -90,8 +90,10 @@ typedef struct LIS_tagLista * LIS_tppLista ;
          LIS_CondRetNaoAchou ,
                /* Não encontrou o valor procurado */
 
-         LIS_CondRetFaltouMemoria
+         LIS_CondRetFaltouMemoria,
                /* Faltou memória ao tentar criar um elemento de lista */
+		 LIS_CondRetParametroIncorreto
+			   /* Parametro passado esta diferente do especificado*/
 
    } LIS_tpCondRet ;
 

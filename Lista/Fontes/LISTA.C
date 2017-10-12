@@ -125,9 +125,8 @@
    LIS_tpCondRet LIS_DestruirLista( LIS_tppLista pLista )
    {
 
-      #ifdef _DEBUG
-         assert( pLista != NULL ) ;
-      #endif
+	if(pLista==NULL)
+		return LIS_CondRetParametroIncorreto;
 
       LIS_EsvaziarLista( pLista ) ;
 
@@ -149,9 +148,8 @@
       tpElemLista * pElem ;
       tpElemLista * pProx ;
 
-      #ifdef _DEBUG
-         assert( pLista != NULL ) ;
-      #endif
+	if(pLista==NULL)
+		return LIS_CondRetParametroIncorreto;
 
       pElem = pLista->pOrigemLista ;
       while ( pElem != NULL )
@@ -178,9 +176,8 @@
 
       tpElemLista * pElem ;
 
-      #ifdef _DEBUG
-         assert( pLista != NULL ) ;
-      #endif
+	if(pLista==NULL)
+		return LIS_CondRetParametroIncorreto;
 
       /* Criar elemento a inerir antes */
 
@@ -229,9 +226,8 @@
 
       tpElemLista * pElem ;
 
-      #ifdef _DEBUG
-         assert( pLista != NULL ) ;
-      #endif
+	if(pLista==NULL)
+		return LIS_CondRetParametroIncorreto;
 
       /* Criar elemento a inerir após */
 
@@ -280,9 +276,8 @@
 
       tpElemLista * pElem ;
 
-      #ifdef _DEBUG
-         assert( pLista  != NULL ) ;
-      #endif
+	if(pLista==NULL)
+		return LIS_CondRetParametroIncorreto;
 
       if ( pLista->pElemCorr == NULL )
       {
@@ -326,9 +321,8 @@
    LIS_tpCondRet LIS_ObterValor( LIS_tppLista pLista, void** pValorRet ) 
    {
 
-      #ifdef _DEBUG
-         assert( pLista != NULL ) ;
-      #endif
+	if(pLista==NULL)
+		return LIS_CondRetParametroIncorreto;
 
       if ( pLista->pElemCorr == NULL )
       {
@@ -349,9 +343,8 @@
    LIS_tpCondRet LIS_IrInicioLista( LIS_tppLista pLista )
    {
 
-      #ifdef _DEBUG
-         assert( pLista != NULL ) ;
-      #endif
+	if(pLista==NULL)
+		return LIS_CondRetParametroIncorreto;
 
       pLista->pElemCorr = pLista->pOrigemLista ;
 	  return LIS_CondRetOK;
@@ -365,9 +358,8 @@
    LIS_tpCondRet LIS_IrFinalLista( LIS_tppLista pLista )
    {
 
-      #ifdef _DEBUG
-         assert( pLista != NULL ) ;
-      #endif
+	if(pLista==NULL)
+		return LIS_CondRetParametroIncorreto;
 
       pLista->pElemCorr = pLista->pFimLista ;
 	  return LIS_CondRetOK;
@@ -386,9 +378,8 @@
 
       tpElemLista * pElem ;
 
-      #ifdef _DEBUG
-         assert( pLista != NULL ) ;
-      #endif
+	if(pLista==NULL)
+		return LIS_CondRetParametroIncorreto;
 
       /* Tratar lista vazia */
 
@@ -466,6 +457,8 @@
 
     LIS_tpCondRet LIS_ObterTamanho( LIS_tppLista pLista , int* tamanho) {
 
+		if(pLista==NULL)
+			return LIS_CondRetParametroIncorreto;
 	   *tamanho = pLista->numElem;
 	   return LIS_CondRetOK;
    }
