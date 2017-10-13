@@ -1,48 +1,109 @@
 // Script:    TesteLista.script
-// Autor:     Arndt von Staa, Michelle
-// Data:      02/abr/2008, 27/09/2017
-// PropÛsito: Testar superficialmente o mÛdulo lista genÈrica duplamente encadeada
+// Autor:     Gabriel, Michelle e Renan
+// Data:      13/out/2017
+// Prop√≥sito: Testar o m√≥dulo grafo gen√©rico
 //
 
 == Inicializar valores
-=declararparm   lista0  int 0
-=declararparm   lista1  int 1
-=declararparm   lista2  int 2
+=declararparm   grafo0  int 0
+=declararparm   grafo1  int 1
+=declararparm   grafo2  int 2
+=declararparm   grafo3  int 3
+=declararparm   grafo4  int 4
+=declararparm   grafo5  int 5
+=declararparm   grafo6  int 6
+=declararparm   grafo7  int 7
+=declararparm   grafo8  int 8
+=declararparm   grafo9  int 9
+=declararparm   grafo10  int 10
+=declararparm   grafo11 int 11
+=declararparm   grafo12 int 12
+=declararparm   grafo13 int 13
+=declararparm   grafo14 int 14
+=declararparm   grafo15 int 15
+=declararparm   grafo16 int 16
+=declararparm   grafo17 int 17
+=declararparm   grafo18 int 18
+=declararparm   grafo19 int 19
+=declararparm   grafo20 int 20
+=declararparm   grafo21 int 21
+=declararparm   grafo22 int 22
 
 == struct 0
 =declararparm   nome0    string  "Michelle"
 =declararparm   data0    string  "17/09/1996"
-=declararparm   cidade0     string  "Rio de Janeiro"
+=declararparm   cidade0  string  "Rio de Janeiro"
 =declararparm   email0   string  "michelle@gmail.com"
 
 == struct 1
 
 =declararparm   nome1    string  "Renan"
 =declararparm   data1    string  "01/01/2001"
-=declararparm   cidade1     string  "S„o Paulo"
+=declararparm   cidade1  string  "S√£o Paulo"
 =declararparm   email1   string  "renan@gmail.com"
 
 == struct 2
 
 =declararparm   nome2    string  "Gabriel"
 =declararparm   data2    string  "10/10/1910"
-=declararparm   cidade2     string  "Maranh„o"
+=declararparm   cidade2  string  "Maranh√£o"
 =declararparm   email2   string  "gabriel@gmail.com"
 
 == struct 3
 
 =declararparm   nome3    string  "Alessandro"
 =declararparm   data3    string  "15/11/2010"
-=declararparm   cidade3     string  "Natal"
+=declararparm   cidade3  string  "Tocantins"
 =declararparm   email3   string  "alessandro@gmail.com"
 
-=declararparm   OK             int  0
-=declararparm   ListaVazia     int  1
-=declararparm   FimLista       int  2
-=declararparm   NaoAchou       int  3
-=declararparm   FaltouMemoria  int  4
+== struct 3
 
-== Criar a lista 0
+=declararparm   nome3    string  "Thiago"
+=declararparm   data3    string  "25/05/0000"
+=declararparm   cidade3  string  "Natal"
+=declararparm   email3   string  "thiago@gmail.com"
+
+=declararparm   OK             		int  0
+=declararparm   GrafoVazio     		int  1
+=declararparm   FimGrafo       		int  2
+=declararparm   NaoAchouVertice   	int  3
+=declararparm   NaoAchouAresta   	int  3
+=declararparm   FaltouMemoria  		int  4
+=declararparm	RetListaIncorreto	int	 5
+=declararparm	parametroIncorreto  int  7
+
+
+== Criar grafo
+== Inserir Vertice
+== Inserir 3 Vertices
+== Inserir Aresta
+== Excluir aresta
+== Excluir Vertice
+== Ir Vertice
+== Excluir um √∫nico vertice de um grafo e inserir outro
+== Excluir um √∫nico vertice de um grafo e excluir outro - forcar erro
+== Inserir um vertice √∫nico e excluir outro que n√£o existe - erro
+== Procurar Vertice que n√£o existe - erro
+== Destruir um grafo e tentar inserir um vertice - erro
+== Apagar o primeiro e ultimo vertice
+== Criar tres vertices, pegar o valor do ultimo, apagar o do meio, pegar de novo o valor do ultimo
+== Criar uma aresta e ver se os dois v√©rtices est√£o conectados entre si
+== Excluir uma aresta e verificar se os dois est√£o sem essa conex√£o
+== Tentar criar duas vezes a mesma aresta
+== Existe aresta entre dois nos que n√£o tem aresta
+== Verificar obter valor quando o grafo est√° vazio
+== Ir vertice pra um grafo vazio
+== Esvaziar grafo e ver se ficou vazio
+== Criar grafo e ver se est√° vazio
+== Percorrer todo o grafo
+==  
+
+
+
+
+
+
+== Criar o grafo 0
 =criarlista      lista0  OK 
 =obtertamanho    lista0  0      OK
 
@@ -55,12 +116,12 @@
 =inselemantes    lista0  nome0  data0  cidade0  email0  OK
 =obtervalorelem  lista0  nome0  data0  cidade0  email0  OK
 
-== Inserir elemento apÛs primeiro
+== Inserir elemento ap√≥s primeiro
 =inselemapos     lista0  nome1  data1  cidade1  email1  OK
 =obtervalorelem  lista0  nome1  data1  cidade1  email1  OK
 =obtertamanho    lista0  2      OK
 
-== Inserir elemento antes do ˙ltimo
+== Inserir elemento antes do √∫ltimo
 =inselemantes    lista0  nome2  data2  cidade2  email2   OK
 =obtervalorelem  lista0  nome2  data2  cidade2  email2   OK
 
@@ -68,11 +129,11 @@
 =obtervalorelem  lista0   nome2  data2  cidade2  email2   OK
 =excluirelem     lista0   OK
 
-== Excluir elemento do inÌcio
+== Excluir elemento do in√≠cio
 =obtervalorelem  lista0  nome0  data0  cidade0  email0  OK
 =excluirelem     lista0   OK
 
-== Excluir elemento final, ˙nico 
+== Excluir elemento final, √∫nico 
 =obtervalorelem  lista0  nome1  data1  cidade1  email1  OK
 =excluirelem     lista0   OK
 
@@ -104,7 +165,7 @@
 =inselemapos     lista2  nome2  data2  cidade2  email2  OK
 =inselemapos     lista2  nome3  data3  cidade3  email3  OK
 
-== Verificar a lista de tr·s para diante
+== Verificar a lista de tr√°s para diante
 =obtervalorelem  lista2  nome3  data3  cidade3  email3  OK
 =avancarelem     lista2   -1     OK
 =obtervalorelem  lista2  nome2  data2  cidade2  email2  OK
@@ -114,7 +175,7 @@
 =obtervalorelem  lista2  nome0  data0  cidade0  email0  OK
 =avancarelem     lista2   -1     FimLista
 
-== Verificar a lista de frente para tr·s
+== Verificar a lista de frente para tr√°s
 =obtervalorelem  lista2  nome0  data0  cidade0  email0  OK
 =avancarelem     lista2   1      OK
 =obtervalorelem  lista2  nome1  data1  cidade1  email1  OK
@@ -124,11 +185,11 @@
 =obtervalorelem  lista2  nome3  data3  cidade3  email3  OK
 =avancarelem     lista2   1      FimLista
 
-== Verificar a lista andando demais de tr·s para diante
+== Verificar a lista andando demais de tr√°s para diante
 =avancarelem     lista2   -10     FimLista
 =obtervalorelem  lista2  nome0  data0  cidade0  email0  OK
 
-== Verificar a lista andando demais de frente para tr·s
+== Verificar a lista andando demais de frente para tr√°s
 =avancarelem     lista2   10     FimLista
 =obtervalorelem  lista2  nome3  data3  cidade3  email3  OK
 
