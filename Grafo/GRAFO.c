@@ -508,7 +508,6 @@ GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 *
 *  Função: GRA  &Excluir Vertice
 *  ****/
-// Pegar o valor a ser exluido passaer pelo vetor de arestas dele
 GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo)
 {
 	LIS_tpCondRet CondRetLis;
@@ -542,54 +541,51 @@ GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo)
 			GRA_ExcluirAresta(pGrafo,pVert->Ident,Aresta->Ident);
 			LIS_AvancarElementoCorrente(pVert->pLisAresta,1);
 		}
-		GRA_IrVertice(pGrafo,identCorrente);		
-		if(CondRetGra!=GRA_CondRetOK)
-			return GRA_CondRetInconsistencia;	
-
-		CondRetLis=LIS_ObterTamanho(pGrafo->pVerticesGrafo, &tam);
-		if (CondRetLis!=LIS_CondRetOK)
+	}
+	GRA_IrVertice(pGrafo,identCorrente);		
+	CondRetLis=LIS_ObterTamanho(pGrafo->pVerticesGrafo, &tam);
+	if (CondRetLis!=LIS_CondRetOK)
+		return GRA_CondRetRetornoIncorreto;
+	for(i=0;i<tam-identCorrente;i++)
+	{
+		LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo,1);
+		if (LIS_ObterValor(pGrafo->pVerticesGrafo,(void**)&vertices) != LIS_CondRetOK)
 			return GRA_CondRetRetornoIncorreto;
-		for(i=0;i<tam-identCorrente;i++)
-		{
-			LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo,1);
-			if (LIS_ObterValor(pGrafo->pVerticesGrafo,(void**)&vertices) != LIS_CondRetOK)
-				return GRA_CondRetRetornoIncorreto;
 
-			if (LIS_ObterValor(vertices,(void**)&vertice) != LIS_CondRetOK)
-				return GRA_CondRetRetornoIncorreto;
-			vertice->Ident=vertice->Ident-1;
-		}
-		CondRetGra=GRA_IrVertice(pGrafo,identCorrente);
-		if (CondRetGra!=GRA_CondRetOK)
-			return GRA_CondRetInconsistencia;
-		if(LIS_ExcluirElemento(pGrafo->pVerticesGrafo)!=LIS_CondRetOK)
+		if (LIS_ObterValor(vertices,(void**)&vertice) != LIS_CondRetOK)
 			return GRA_CondRetRetornoIncorreto;
-		if(LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo,1)!=LIS_CondRetFimLista)
-		{
-			if (LIS_ObterValor(pGrafo->pVerticesGrafo,(void**)&vertices) != LIS_CondRetOK)
-				return GRA_CondRetRetornoIncorreto;
+		vertice->Ident=vertice->Ident-1;
+	}
+	CondRetGra=GRA_IrVertice(pGrafo,identCorrente);
+	if (CondRetGra!=GRA_CondRetOK)
+		return GRA_CondRetInconsistencia;
+	if(LIS_ExcluirElemento(pGrafo->pVerticesGrafo)!=LIS_CondRetOK)
+		return GRA_CondRetRetornoIncorreto;
+	if(LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo,1)!=LIS_CondRetFimLista)
+	{
+		if (LIS_ObterValor(pGrafo->pVerticesGrafo,(void**)&vertices) != LIS_CondRetOK)
+			return GRA_CondRetRetornoIncorreto;
 
-			if (LIS_ObterValor(vertices,(void**)&vertice) != LIS_CondRetOK)
-				return GRA_CondRetRetornoIncorreto;
-			pGrafo->pElemCorr=vertice;
-			return GRA_CondRetOK;
-		}
-		else if(LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo,-1)!=LIS_CondRetFimLista)
-		{
-			if (LIS_ObterValor(pGrafo->pVerticesGrafo,(void**)&vertices) != LIS_CondRetOK)
-				return GRA_CondRetRetornoIncorreto;
-
-			if (LIS_ObterValor(vertices,(void**)&vertice) != LIS_CondRetOK)
-				return GRA_CondRetRetornoIncorreto;
-			pGrafo->pElemCorr=vertice;
-			return GRA_CondRetOK;
-		}
-
-		else
-			pGrafo->pElemCorr=NULL;
+		if (LIS_ObterValor(vertices,(void**)&vertice) != LIS_CondRetOK)
+			return GRA_CondRetRetornoIncorreto;
+		pGrafo->pElemCorr=vertice;
 		return GRA_CondRetOK;
 	}
-}
+	else if(LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo,-1)!=LIS_CondRetFimLista)
+	{
+		if (LIS_ObterValor(pGrafo->pVerticesGrafo,(void**)&vertices) != LIS_CondRetOK)
+			return GRA_CondRetRetornoIncorreto;
+
+		if (LIS_ObterValor(vertices,(void**)&vertice) != LIS_CondRetOK)
+			return GRA_CondRetRetornoIncorreto;
+		pGrafo->pElemCorr=vertice;
+		return GRA_CondRetOK;
+	}
+
+	else
+		pGrafo->pElemCorr=NULL;
+	return GRA_CondRetOK;
+}/*  Fim função: GRA  &Excluir Vertice */
 
 
 /*****  Código das funções encapsuladas no módulo  *****/
