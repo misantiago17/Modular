@@ -311,7 +311,6 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 
 	CondRetGra=GRA_IrVertice(pGrafo,numVert1);
 
-
 	if(CondRetGra==GRA_CondRetGrafoVazio)
 		return GRA_CondRetGrafoVazio;
 	else if(CondRetGra==GRA_CondRetNaoAchouVertice)
@@ -323,8 +322,6 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 	if(CondRetGra==GRA_CondRetNaoAchouVertice)
 	{
 		CondRetGra=GRA_IrVertice(pGrafo,IdAnterior);
-		if(CondRetGra!=GRA_CondRetOK)
-			return GRA_CondRetInconsistencia;
 		return GRA_CondRetNaoAchouVertice;
 	}
 
@@ -333,12 +330,9 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 		return GRA_CondRetFaltouMemoria;
 	CondRetLis=lis_IrInicioLista(pGrafo->pElemCorr->pLisAresta);
 	if(CondRetLis!=LIS_CondRetOK)
-
 		return GRA_CondRetRetornoIncorreto;
 
 	CondRetGra=GRA_IrVertice(pGrafo,numVert1);
-	if(CondRetGra!=GRA_CondRetOK)
-		return GRA_CondRetInconsistencia;
 
 	if (LIS_InserirElementoApos(pGrafo->pElemCorr->pLisAresta,(void*)pVert2) == LIS_CondRetFaltouMemoria)
 		return GRA_CondRetFaltouMemoria;
@@ -347,11 +341,7 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 		return GRA_CondRetRetornoIncorreto;
 
 	CondRetGra=GRA_IrVertice(pGrafo,IdAnterior);
-	if(CondRetGra!=GRA_CondRetOK)
-		return GRA_CondRetInconsistencia;
 	return GRA_CondRetOK;
-
-
 } /* Fim função: GRA  &Criar Aresta */
 
 

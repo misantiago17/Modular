@@ -97,8 +97,9 @@ Gra_tppGrafo   vtGrafos[ DIM_VT_LISTA ] ;
 *     =excluirelem                  inxGrafo  CondRetEsp
 *     =criararesta                  inxGrafo  numVert1 numVert2 CondRetEsp
 *     =excluirvertice               inxGrafo  CondRetEsp
-*     =excluiraresta                inxLista  numVert1 numVert2 CondRetEsp
-*     =obtertamanho                 inxLista  numElem CondRetEsp
+*     =excluiraresta                inxGrafo  numVert1 numVert2 CondRetEsp
+*     =obtertamanho                 inxGrafo  numElem CondRetEsp
+*	  =existearesta					inxGrafo  numVert1 numVert2 CondRetEsp
 *
 ***********************************************************************/
 
