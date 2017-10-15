@@ -275,13 +275,10 @@
 
 == contar quantas arestas o vertice 1 possui e retornar seus indices
 =irvertice		grafo6	1	OK
-<<<<<<< HEAD:Grafo/TesteGrafo.script
 =obternumarestas	grafo6	2 	OK
-=indicesarestas	grafo6	1 	2	3	OK
-=======
 =obtertamaresta	grafo6	2 	OK
-=indicesarestas	grafo6	1 	2	3	0	0	0	OK
->>>>>>> 67340e6eeaed960765d4ef74a0ea08a7dc5a9b3c:Grafo/Scripts/TesteGrafo.script
+=indicesarestas	grafo6	2 	2	3	0	0	0	OK
+
 
 == excluir as duas arestas
 =excluiraresta	grafo6	1	2	OK
@@ -290,13 +287,11 @@
 =existearesta	grafo6	1	2	NaoAchouAresta
 
 == contar quantas arestas o vertice 1 possui e tentar retornar seus indices
-<<<<<<< HEAD:Grafo/TesteGrafo.script
+
 =obternumarestas	grafo6	0 	OK
-=indicesarestas	grafo6	0	numArestasZero
-=======
 =obtertamaresta	grafo6	0 	OK
 =indicesarestas	grafo6	0	0	0	0	0	0	numArestasZero
->>>>>>> 67340e6eeaed960765d4ef74a0ea08a7dc5a9b3c:Grafo/Scripts/TesteGrafo.script
+
 
 == excluir grafo
 =destruirgrafo   grafo6   OK
