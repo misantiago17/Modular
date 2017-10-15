@@ -13,21 +13,6 @@
 =declararparm   grafo5  int 5
 =declararparm   grafo6  int 6
 =declararparm   grafo7  int 7
-=declararparm   grafo8  int 8
-=declararparm   grafo9  int 9
-=declararparm   grafo10 int 10
-=declararparm   grafo11 int 11
-=declararparm   grafo12 int 12
-=declararparm   grafo13 int 13
-=declararparm   grafo14 int 14
-=declararparm   grafo15 int 15
-=declararparm   grafo16 int 16
-=declararparm   grafo17 int 17
-=declararparm   grafo18 int 18
-=declararparm   grafo19 int 19
-=declararparm   grafo20 int 20
-=declararparm   grafo21 int 21
-=declararparm   grafo22 int 22
 
 == struct 0
 =declararparm   nome0    string  "Michelle"
@@ -291,7 +276,7 @@
 == contar quantas arestas o vertice 1 possui e retornar seus indices
 =irvertice		grafo6	1	OK
 =obtertamaresta	grafo6	2 	OK
-=indicesarestas	grafo6	2	3	OK
+=indicesarestas	grafo6	1 	2	3	OK
 
 == excluir as duas arestas
 =excluiraresta	grafo6	1	2	OK
@@ -301,23 +286,7 @@
 
 == contar quantas arestas o vertice 1 possui e tentar retornar seus indices
 =obtertamaresta	grafo6	0 	OK
-=indicesarestas	grafo6	numArestasZero
+=indicesarestas	grafo6	0	numArestasZero
 
 == excluir grafo
 =destruirgrafo   grafo6   OK
-
-== - Teste 8 -
-
-//== criar grafo7 com um vertices
-//=criargrafo			grafo7	OK
-//=inserirvertice		grafo7	nome0	data0	cidade0   email0	OK
-//=obtervalorvert		grafo7	nome0	data0	cidade0	  email0	OK
-
-//== alterar seu valor do vertice
-//=alterarvalor		grafo7	nome1	data1	cidade1   email1	OK
-//=obtervalorvert		grafo7	nome1	data1	cidade1	  email1	OK
-
-//== destruir grafo
-//=destruirgrafo   grafo7   OK
-
-// fim
