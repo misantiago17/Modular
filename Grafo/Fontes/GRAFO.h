@@ -96,7 +96,7 @@ typedef enum {
 	GRA_CondRetParametroIncorreto,
 	/* Parametro passado esta diferente do especificado*/
 
-	GRA_CondRetArestaJaExiste
+	GRA_CondRetArestaJaExiste,
 	/* Ja existe uma aresta entre os dois vertices passados*/
 
 	GRA_CondRetNumArestasZero,

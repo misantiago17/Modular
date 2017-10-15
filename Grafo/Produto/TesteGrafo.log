@@ -1,0 +1,233 @@
+
+!!! Inicio dos testes
+!!!      Construto sob teste: ..\Produto\TesteGrafo
+!!!      Script de teste:     ..\Scripts\TesteGrafo.script
+
+>>>    1  Linha:     1  Comando de teste ignorado:  ï»¿// Script:    TesteGrafo.script
+!!!    1  Linha:     2  // Autor:     Gabriel, Michelle e Renan 
+!!!    1  Linha:     3  // Data:      13/out/2017 
+!!!    1  Linha:     4  // PropÃ³sito: Testar o mÃ³dulo grafo genÃ©rico 
+!!!    1  Linha:     5  // 
+    7  == Inicializar valores
+   17  == struct 0
+   23  == struct 1
+   30  == struct 2
+   37  == struct 3
+   44  == struct 3
+ll>    2  Linha:    46  Nome já foi declarado antes:  nome3
+>>>    3  Linha:    46  Não declarou o parâmetro. 
+>>>    4  Linha:    47  Não é comando recuperar:  =declararparm   data3    string  "25/05/0000"
+>>>    5  Linha:    48  Comando de teste ignorado:  =declararparm   cidade3  string  "Natal"
+>>>    6  Linha:    49  Comando de teste ignorado:  =declararparm   email3   string  "thiago@gmail.com"
+>>>    7  Linha:    51  Comando de teste ignorado:  =declararparm   OK             		int  0
+>>>    8  Linha:    52  Comando de teste ignorado:  =declararparm   GrafoVazio     		int  1
+>>>    9  Linha:    53  Comando de teste ignorado:  =declararparm   NaoAchouVertice   	int  2
+>>>   10  Linha:    54  Comando de teste ignorado:  =declararparm   NaoAchouAresta   	int  3
+>>>   11  Linha:    55  Comando de teste ignorado:  =declararparm   FaltouMemoria  		int  4
+>>>   12  Linha:    56  Comando de teste ignorado:  =declararparm	RetListaIncorreto	int	 5
+>>>   13  Linha:    57  Comando de teste ignorado:  =declararparm	parametroIncorreto  int  6
+>>>   14  Linha:    58  Comando de teste ignorado:  =declararparm	jaExisteAresta		int	 7
+>>>   15  Linha:    59  Comando de teste ignorado:  =declararparm	arestaParaSiMesmo	int	 8
+>>>   16  Linha:    60  Comando de teste ignorado:  =declararparm	numArestasZero		int	 0
+   62  == - Teste 1 -
+>>>   17  Linha:    63  O caso de teste anterior está vazio. 
+   63  == Criar o grafo 0
+ll>   18  Linha:    64  Parâmetro não está definido:  OK
+>>>   19  Linha:    64  Erro nos parâmetros do comando:  =criargrafo      grafo0  OK
+   66  == Verificar ObterValor relativo ao grafo vazio
+ll>   20  Linha:    67  Parâmetro não está definido:  GrafoVazio
+>>>   21  Linha:    67  Erro nos parâmetros do comando:  =obtervalorvert  grafo0  "???"  "???"  "???"  "???"  GrafoVazio
+   69  == Inserir vertice em grafo vazio
+ll>   22  Linha:    70  Parâmetro não está definido:  OK
+>>>   23  Linha:    70  Erro nos parâmetros do comando:  =inserirvertice  grafo0  nome0  data0  cidade0  email0  OK
+   73  == Inserir mais de um vertice no grafo
+ll>   24  Linha:    74  Parâmetro não está definido:  OK
+>>>   25  Linha:    74  Erro nos parâmetros do comando:  =inserirvertice  grafo0  nome1  data1  cidade1  email1  OK
+>>>   26  Linha:    76  Comando de teste ignorado:  =inserirvertice  grafo0  nome2  data2  cidade2  email2  OK
+>>>   27  Linha:    77  Comando de teste ignorado:  =obtervalorvert  grafo0  nome2  data2  cidade2  email2  OK
+>>>   28  Linha:    78  Comando de teste ignorado:  =inserirvertice  grafo0  nome3  data3  cidade3  email3  OK
+>>>   29  Linha:    79  Comando de teste ignorado:  =obtervalorvert  grafo0  nome3  data3  cidade3  email3  OK
+>>>   30  Linha:    80  Comando de teste ignorado:  =obternumverts  grafo0  4      OK
+   82  == Excluir segundo vertice do grafo
+>>>   31  Linha:    83  Erro nos parâmetros do comando:  =irvertice		 grafo0   2	 OK
+>>>   32  Linha:    85  Comando de teste ignorado:  =excluirelem     grafo0   OK
+   87  == Excluir vertice do inÃ­cio
+>>>   33  Linha:    88  Erro nos parâmetros do comando:  =irvertice		 grafo0   1	 OK
+>>>   34  Linha:    90  Comando de teste ignorado:  =excluirelem     grafo0   OK
+   92  == Excluir vertice final
+>>>   35  Linha:    93  Erro nos parâmetros do comando:  =irvertice		 grafo0   2	 OK
+>>>   36  Linha:    95  Comando de teste ignorado:  =excluirelem     grafo0   OK
+   97  == Excluir vertice final, o Ãºltimo
+>>>   37  Linha:    98  Erro nos parâmetros do comando:  =irvertice		 grafo0   1	 OK
+>>>   38  Linha:   100  Comando de teste ignorado:  =excluirelem     grafo0   OK
+  102  == Ver se o grafo ficou vazio
+ll>   39  Linha:   103  Parâmetro não está definido:  ListaVazia
+>>>   40  Linha:   103  Erro nos parâmetros do comando:  =obtervalorvert  grafo0   "???"  "???"  "???"  "???"   ListaVazia
+  105  == Destruir a grafo
+ll>   41  Linha:   106  Parâmetro não está definido:  OK
+>>>   42  Linha:   106  Erro nos parâmetros do comando:  =destruirgrafo   grafo0   OK
+  108  == - Teste 2 -
+>>>   43  Linha:   110  O caso de teste anterior está vazio. 
+  110  == criar grafo1
+ll>   44  Linha:   111  Parâmetro não está definido:  OK
+>>>   45  Linha:   111  Erro nos parâmetros do comando:  =criargrafo		grafo1	OK
+  113  == adicionar um vertice
+ll>   46  Linha:   114  Parâmetro não está definido:  OK
+>>>   47  Linha:   114  Erro nos parâmetros do comando:  =inserirvertice		grafo1	nome0	data0	cidade0   email0	OK
+  117  == excluir esse vertice e adicionar outro vertice
+ll>   48  Linha:   118  Parâmetro não está definido:  OK
+>>>   49  Linha:   118  Erro nos parâmetros do comando:  =excluirvertice		grafo1	OK
+>>>   50  Linha:   120  Comando de teste ignorado:  =obtervalorvert		grafo1	nome1	data1	cidade1	  email1	OK
+  122  == ir para um vÃ©rtice que nÃ£o existe e verificar se corrente continua no Ãºnico vertice presente
+>>>   51  Linha:   123  Erro nos parâmetros do comando:  =irvertice	grafo1	2	NaoAchouVertice
+  126  == excluir o Ãºnico vertice do grafo, excluir ele novamente
+ll>   52  Linha:   127  Parâmetro não está definido:  OK
+>>>   53  Linha:   127  Erro nos parâmetros do comando:  =excluirvertice		grafo1	OK
+  130  == Destruir a grafo
+ll>   54  Linha:   131  Parâmetro não está definido:  OK
+>>>   55  Linha:   131  Erro nos parâmetros do comando:  =destruirgrafo   grafo1   OK
+  133  == - Teste 3 -
+>>>   56  Linha:   135  O caso de teste anterior está vazio. 
+  135  == criar grafo2
+ll>   57  Linha:   136  Parâmetro não está definido:  OK
+>>>   58  Linha:   136  Erro nos parâmetros do comando:  =criargrafo		grafo2	OK
+  138  == verificar se estÃ¡ vazio
+ll>   59  Linha:   139  Parâmetro não está definido:  GrafoVazio
+>>>   60  Linha:   139  Erro nos parâmetros do comando:  =obtervalorvert		grafo2	"???"	"???"	"???"	"???"	GrafoVazio
+  141  == destruir grafo
+ll>   61  Linha:   142  Parâmetro não está definido:  OK
+>>>   62  Linha:   142  Erro nos parâmetros do comando:  =destruirgrafo		grafo2	OK
+  144  == tentar adicionar um vertice
+ll>   63  Linha:   145  Parâmetro não está definido:  GrafoVazio
+>>>   64  Linha:   145  Erro nos parâmetros do comando:  =inserirvertice		grafo2	nome0	data0	cidade0   email0	GrafoVazio
+  147  == Destruir a grafo
+ll>   65  Linha:   148  Parâmetro não está definido:  OK
+>>>   66  Linha:   148  Erro nos parâmetros do comando:  =destruirgrafo   grafo2   OK
+  150  == - Teste 4 -
+>>>   67  Linha:   152  O caso de teste anterior está vazio. 
+  152  == criar grafo3
+ll>   68  Linha:   153  Parâmetro não está definido:  OK
+>>>   69  Linha:   153  Erro nos parâmetros do comando:  =criargrafo		grafo3	OK
+  155  == criar trÃªs vertices e obter tamanho do grafo
+ll>   70  Linha:   156  Parâmetro não está definido:  OK
+>>>   71  Linha:   156  Erro nos parâmetros do comando:  =inserirvertice		grafo3	nome0	data0	cidade0   email0	OK
+>>>   72  Linha:   158  Comando de teste ignorado:  =inserirvertice		grafo3	nome1	data1	cidade1   email1	OK
+>>>   73  Linha:   159  Comando de teste ignorado:  =obtervalorvert		grafo3	nome1	data1	cidade1	  email1	OK
+>>>   74  Linha:   160  Comando de teste ignorado:  =inserirvertice		grafo3	nome2	data2	cidade2   email2	OK
+>>>   75  Linha:   161  Comando de teste ignorado:  =obtervalorvert		grafo3	nome2	data2	cidade2	  email2	OK
+>>>   76  Linha:   162  Comando de teste ignorado:  =obternumverts		grafo3	3	OK
+  164  == apagar o vertice do meio
+>>>   77  Linha:   165  Erro nos parâmetros do comando:  =irvertice			grafo3	2	OK
+  168  == pegar o valor do vertice 2 que Ã© o ultimo agora
+>>>   78  Linha:   169  Erro nos parâmetros do comando:  =irvertice			grafo3	2		OK
+  172  ==inserir novo vertice
+ll>   79  Linha:   173  Parâmetro não está definido:  OK
+>>>   80  Linha:   173  Erro nos parâmetros do comando:  =inserirvertice		grafo3	nome3	data3	cidade3   email3	OK
+  176  == apagar o ultimo e o primeiro vertice
+>>>   81  Linha:   177  Erro nos parâmetros do comando:  =irvertice			grafo3	3	OK
+>>>   82  Linha:   179  Comando de teste ignorado:  =irvertice			grafo3	1	OK
+>>>   83  Linha:   180  Comando de teste ignorado:  =excluirvertice		grafo3	OK
+  182  == pegar o valor do vertice 1
+ll>   84  Linha:   183  Parâmetro não está definido:  OK
+>>>   85  Linha:   183  Erro nos parâmetros do comando:  =obtervalorvert		grafo3	nome2	data2	cidade2	  email2	OK
+  185  == apagar o ultimo vertice e verificar se ele estÃ¡ vazio
+ll>   86  Linha:   186  Parâmetro não está definido:  OK
+>>>   87  Linha:   186  Erro nos parâmetros do comando:  =excluirvertice		grafo3	OK
+  189  == Destruir a grafo
+ll>   88  Linha:   190  Parâmetro não está definido:  OK
+>>>   89  Linha:   190  Erro nos parâmetros do comando:  =destruirgrafo   grafo3   OK
+  192  == - Teste 5 -
+>>>   90  Linha:   194  O caso de teste anterior está vazio. 
+  194  == criar grafo4
+ll>   91  Linha:   195  Parâmetro não está definido:  OK
+>>>   92  Linha:   195  Erro nos parâmetros do comando:  =criargrafo		grafo4	OK
+  197  == verificar se o grafo estÃ¡ vazio
+>>>   93  Linha:   198  Erro nos parâmetros do comando:  =irvertice		grafo4	1	GrafoVazio
+  200  == obter tamanho do grafo
+>>>   94  Linha:   201  Comando não conhecido:  =obternumverts	grafo4	0	OK
+  203  == Destruir a grafo
+ll>   95  Linha:   204  Parâmetro não está definido:  OK
+>>>   96  Linha:   204  Erro nos parâmetros do comando:  =destruirgrafo   grafo4   OK
+  206  == - Teste 6 -
+>>>   97  Linha:   208  O caso de teste anterior está vazio. 
+  208  == criar grafo5 com quatro vertices
+ll>   98  Linha:   209  Parâmetro não está definido:  OK
+>>>   99  Linha:   209  Erro nos parâmetros do comando:  =criargrafo			grafo5	OK
+>>>  100  Linha:   211  Comando de teste ignorado:  =obtervalorvert		grafo5	nome0	data0	cidade0	  email0	OK
+>>>  101  Linha:   212  Comando de teste ignorado:  =inserirvertice		grafo5	nome1	data1	cidade1   email1	OK
+>>>  102  Linha:   213  Comando de teste ignorado:  =obtervalorvert		grafo5	nome1	data1	cidade1	  email1	OK
+>>>  103  Linha:   214  Comando de teste ignorado:  =inserirvertice		grafo5	nome2	data2	cidade2   email2	OK
+>>>  104  Linha:   215  Comando de teste ignorado:  =obtervalorvert		grafo5	nome2	data2	cidade2	  email2	OK
+>>>  105  Linha:   216  Comando de teste ignorado:  =inserirvertice		grafo5	nome3	data3	cidade3   email3	OK
+>>>  106  Linha:   217  Comando de teste ignorado:  =obtervalorvert		grafo5	nome3	data3	cidade3	  email3	OK
+  219  == adicionar aresta com o vertice 3
+>>>  107  Linha:   220  Comando não conhecido:  =criararesta	grafo5	1	3	OK
+  222  == obter tamanho de arestas com o vertice 1 e a existencia da aresta com o vertice 3
+>>>  108  Linha:   223  Erro nos parâmetros do comando:  =irvertice		grafo5	1	OK
+>>>  109  Linha:   225  Comando de teste ignorado:  =existearesta	grafo5	1	3	OK
+  227  == ir para o vertice 3, obter tamanho de arestas e se existe aresta com o vertice 1
+>>>  110  Linha:   228  Erro nos parâmetros do comando:  =irvertice		grafo5	3	OK
+>>>  111  Linha:   230  Comando de teste ignorado:  =existearesta	grafo5	1	3	OK
+  232  == tentar criar aresta a aresta 1 com 3 novamente
+>>>  112  Linha:   233  Comando não conhecido:  =criararesta	grafo5	1	3	jaExisteAresta
+  235  == excluir aresta 1 com 3
+ll>  113  Linha:   236  Parâmetro não está definido:  OK
+>>>  114  Linha:   236  Erro nos parâmetros do comando:  =excluiraresta	grafo5	1	3	OK
+  238  == verificar numero de aresta no vertice 1 e no vertice 3 e se a aresta 1 com 3 existe
+>>>  115  Linha:   239  Erro nos parâmetros do comando:  =irvertice		grafo5	1	OK
+>>>  116  Linha:   241  Comando de teste ignorado:  =irvertice		grafo5	3	OK
+>>>  117  Linha:   242  Comando de teste ignorado:  =obternumarestas	grafo5	0	OK
+>>>  118  Linha:   243  Comando de teste ignorado:  =existearesta	grafo5	1	3	NaoAchouAresta
+  245  == excluir aresta que nÃ£o existe
+ll>  119  Linha:   246  Parâmetro não está definido:  NaoAchouAresta
+>>>  120  Linha:   246  Erro nos parâmetros do comando:  =excluiraresta	grafo5	1	2	NaoAchouAresta
+  248  == tentar criar aresta com um vetice que nÃ£o existe
+>>>  121  Linha:   249  Comando não conhecido:  =criararesta	grafo5	1	5	NaoAchouVertice
+>>>  122  Linha:   250  Comando de teste ignorado:  =existearesta	grafo5	1	5	NaoAchouVertice
+  252  == criar aresta de um vertice com si mesmo
+>>>  123  Linha:   253  Comando não conhecido:  =criararesta	grafo5	2	2	arestaParaSiMesmo
+>>>  124  Linha:   254  Comando de teste ignorado:  =existearesta	grafo5	2	2	NaoAchouAresta
+  256  == Destruir a grafo
+ll>  125  Linha:   257  Parâmetro não está definido:  OK
+>>>  126  Linha:   257  Erro nos parâmetros do comando:  =destruirgrafo   grafo5   OK
+  259  == - Teste 7 -
+>>>  127  Linha:   261  O caso de teste anterior está vazio. 
+  261  == criar grafo6 com trÃªs vertices
+ll>  128  Linha:   262  Parâmetro não está definido:  OK
+>>>  129  Linha:   262  Erro nos parâmetros do comando:  =criargrafo			grafo6	OK
+>>>  130  Linha:   264  Comando de teste ignorado:  =obtervalorvert		grafo6	nome0	data0	cidade0	  email0	OK
+>>>  131  Linha:   265  Comando de teste ignorado:  =inserirvertice		grafo6	nome1	data1	cidade1   email1	OK
+>>>  132  Linha:   266  Comando de teste ignorado:  =obtervalorvert		grafo6	nome1	data1	cidade1	  email1	OK
+>>>  133  Linha:   267  Comando de teste ignorado:  =inserirvertice		grafo6	nome2	data2	cidade2   email2	OK
+>>>  134  Linha:   268  Comando de teste ignorado:  =obtervalorvert		grafo6	nome2	data2	cidade2	  email2	OK
+  270  == criar aresta 1 com 2 e aresta 1 com 3
+>>>  135  Linha:   271  Comando não conhecido:  =criararesta	grafo6	1	2	OK
+>>>  136  Linha:   272  Comando de teste ignorado:  =existearesta	grafo6	1	2	OK
+>>>  137  Linha:   273  Comando de teste ignorado:  =criararesta	grafo6	1	3	OK
+>>>  138  Linha:   274  Comando de teste ignorado:  =existearesta	grafo6	1	3	OK
+  276  == contar quantas arestas o vertice 1 possui e retornar seus indices
+>>>  139  Linha:   277  Erro nos parâmetros do comando:  =irvertice		grafo6	1	OK
+>>>  140  Linha:   279  Comando de teste ignorado:  =obtertamaresta	grafo6	2 	OK
+>>>  141  Linha:   280  Comando de teste ignorado:  =indicesarestas	grafo6	2 	2	3	0	0	0	OK
+  283  == excluir as duas arestas
+ll>  142  Linha:   284  Parâmetro não está definido:  OK
+>>>  143  Linha:   284  Erro nos parâmetros do comando:  =excluiraresta	grafo6	1	2	OK
+>>>  144  Linha:   286  Comando de teste ignorado:  =excluiraresta	grafo6	1	3	OK
+>>>  145  Linha:   287  Comando de teste ignorado:  =existearesta	grafo6	1	2	NaoAchouAresta
+  289  == contar quantas arestas o vertice 1 possui e tentar retornar seus indices
+ll>  146  Linha:   291  Parâmetro não está definido:  OK
+>>>  147  Linha:   291  Erro nos parâmetros do comando:  =obternumarestas	grafo6	0 	OK
+>>>  148  Linha:   293  Comando de teste ignorado:  =indicesarestas	grafo6	0	0	0	0	0	0	numArestasZero
+  296  == excluir grafo
+ll>  149  Linha:   297  Parâmetro não está definido:  OK
+>>>  150  Linha:   297  Erro nos parâmetros do comando:  =destruirgrafo   grafo6   OK
+
+!!! Número de linhas lidas:         297
+!!! Número de casos de teste:        64
+!!! Número comandos corretos:        24
+!!! Número de falhas encontradas:   150
+
+!!! Foram encontrados problemas
+
+
+!!! Numero de espacos ainda alocados: 0

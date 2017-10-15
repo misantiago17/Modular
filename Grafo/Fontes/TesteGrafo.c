@@ -39,8 +39,8 @@ static const char RESET_GRAFO_CMD         [ ] = "=resetteste"     ;
 static const char CRIAR_GRAFO_CMD         [ ] = "=criargrafo"     ;
 static const char DESTRUIR_GRAFO_CMD      [ ] = "=destruirgrafo"  ;
 static const char IR_VERT_CMD             [ ] = "=irvertice"  ;
-static const char INS_VERT_CMD            [ ] = "=insvertice"   ;
-static const char OBTER_VALOR_CMD         [ ] = "=obtervalorelem" ;
+static const char INS_VERT_CMD            [ ] = "=inserirvertice"   ;
+static const char OBTER_VALOR_CMD         [ ] = "=obtervalorvert" ;
 static const char CRIAR_ARESTA_CMD        [ ] = "=criararesta"     ;
 static const char EXISTE_ARESTA_CMD        [ ] = "=existearesta"     ;
 static const char EXC_VERT_CMD            [ ] = "=excluirvertice"    ;
@@ -70,7 +70,7 @@ typedef struct infs Teste_Infs;
 
 
 
-Gra_tppGrafo   vtGrafos[ DIM_VT_Grafo ] ;
+GRA_tppGrafo   vtGrafos[ DIM_VT_GRAFO ] ;
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
@@ -94,8 +94,8 @@ static int ValidarInxGrafo( int inxGrafo , int Modo ) ;
 *     =criargrafo                   inxGrafo CondRetEsp
 *     =destruirgrafo                inxGrafo CondRetEsp
 *     =irvertice                    inxGrafo numVert CondRetEsp
-*     =insvertice                   inxGrafo  Nome Data Cidade Email CondRetEsp
-*     =obtervalorelem               inxGrafo  Nome Data Cidade Email CondRetEsp
+*     =inserirvertice                   inxGrafo  Nome Data Cidade Email CondRetEsp
+*     =obtervalorvert               inxGrafo  Nome Data Cidade Email CondRetEsp
 *     =criararesta                  inxGrafo  numVert1 numVert2 CondRetEsp
 *     =excluirvertice               inxGrafo  CondRetEsp
 *     =excluiraresta                inxGrafo  numVert1 numVert2 CondRetEsp
@@ -150,7 +150,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 	{
 
 		numLidos = LER_LerParametros( "ii" ,
-			&inxGrafo, &CondRet ) ;
+			&inxGrafo, &CondRetEsp ) ;
 
 		if ( ( numLidos != 2 )
 			|| ( ! ValidarInxGrafo( inxGrafo , VAZIO )))
@@ -158,7 +158,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetParm ;
 		} /* if */
 
-		CondRetEsp=GRA_CriarGrafo( NULL,&vtGrafos[inxGrafo]) ;
+		CondRet=GRA_CriarGrafo( NULL,&vtGrafos[inxGrafo]) ;
 
 		return TST_CompararInt( CondRetEsp , CondRet ,
 			"Erro na condicao de retorno ao criar o Grafo"  ) ;
@@ -171,6 +171,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 	else if ( strcmp( ComandoTeste , DESTRUIR_GRAFO_CMD ) == 0 )
 	{
 
+		GRA_tpCondRet debug;
             numLidos = LER_LerParametros( "ii" ,
                                &inxGrafo,&CondRetEsp ) ;
             if ( ( numLidos != 2 )
@@ -180,13 +181,13 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
             } /* if */
 
 
-            CondRet=LIS_DestruirGrafo( vtGrafos[ inxGrafo ] ) ;
-			debug= TST_CompararInt( CondRetEsp , CondRet ,
+            debug=GRA_DestruirGrafo( vtGrafos[ inxGrafo ] ) ;
+			CondRet= TST_CompararInt( CondRetEsp , debug ,
                      "Condicao de retorno errada ao destruir o grafo.") ;
-			if(debug!=TST_CondRetOK)
-					return debug;
+			if(CondRet!=TST_CondRetOK)
+					return CondRet;
 
-			if(CondRet==LIS_CondRetOK)
+			if(debug==GRA_CondRetOK)
 				vtGrafos[ inxGrafo ] = NULL ;
 
 			 return TST_CondRetOK ;
@@ -319,7 +320,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		if(debug!=TST_CondRetOK)
 			return debug;
 
-		if(CondRet==GRA_CondRetGrafoVazia)
+		if(CondRet==GRA_CondRetGrafoVazio)
 			return TST_CondRetOK;
 
 		debug=TST_CompararPonteiroNulo( 1 , Ret ,
@@ -354,7 +355,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 	else if ( strcmp( ComandoTeste , IR_VERT_CMD ) == 0 )
 	{
 		int numVert;
-		GRA_tpCondRet CondRet;
+
 
 			numLidos = LER_LerParametros( "ii" , &inxGrafo,&numVert ) ;
 

@@ -12,6 +12,7 @@ h           =	..\Fontes
 [Modulos]
 TesteGrafo
 Grafo
+Lista
 
 [BuildInicio]
 /OUT:..\Produto\TesteGrafo.exe

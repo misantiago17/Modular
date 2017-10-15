@@ -68,7 +68,7 @@ typedef struct GRA_tagGrafo {
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
-GRA_tpVertice *CriarVertice(GRA_tpGrafo *pGrafo, void * pValor,int tam);
+GRA_tpVertice *CriarVertice( void * pValor,int tam);
 void DestruirElemVertice(void *Elem);
 void DestruirElemVertices(void *Elem);
 
@@ -254,7 +254,7 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
 		return GRA_CondRetFaltouMemoria;
 	}
 
-	pVert = CriarVertice(pGrafo, pValor,tam);
+	pVert = CriarVertice(pValor,tam);
 	if (pVert == NULL)
 	{
 		return GRA_CondRetFaltouMemoria;
@@ -340,7 +340,7 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 	pVert2=pGrafo->pElemCorr;
 	if (LIS_InserirElementoApos(pGrafo->pElemCorr->pLisAresta,(void*)pVert1) == LIS_CondRetFaltouMemoria)
 		return GRA_CondRetFaltouMemoria;
-	CondRetLis=IrInicioLista(pGrafo->pElemCorr->pLisAresta);
+	CondRetLis=LIS_IrInicioLista(pGrafo->pElemCorr->pLisAresta);
 	if(CondRetLis!=LIS_CondRetOK)
 
 		return GRA_CondRetRetornoIncorreto;
@@ -351,7 +351,7 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 
 	if (LIS_InserirElementoApos(pGrafo->pElemCorr->pLisAresta,(void*)pVert2) == LIS_CondRetFaltouMemoria)
 		return GRA_CondRetFaltouMemoria;
-	CondRetLis=IrInicioLista(pGrafo->pElemCorr->pLisAresta);
+	CondRetLis=LIS_IrInicioLista(pGrafo->pElemCorr->pLisAresta);
 	if(CondRetLis!=LIS_CondRetOK)
 		return GRA_CondRetRetornoIncorreto;
 
@@ -576,14 +576,11 @@ GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo)
 	{
 		if (LIS_ObterValor(pGrafo->pVerticesGrafo,(void**)&vertices) != LIS_CondRetOK)
 			return GRA_CondRetRetornoIncorreto;
-
 		if (LIS_ObterValor(vertices,(void**)&vertice) != LIS_CondRetOK)
 			return GRA_CondRetRetornoIncorreto;
 		pGrafo->pElemCorr=vertice;
 		return GRA_CondRetOK;
 	}
-
-	return GRA_CondRetOK;
 }/*  Fim função: GRA  &Excluir Vertice */
 
 /***************************************************************************
@@ -642,7 +639,7 @@ GRA_tpCondRet GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo,int* pDado)
 			return GRA_CondRetParametroIncorreto;
 		pDado[i]=Aresta->Ident;
 	}
-	CondRetLis=IrInicioLista(pGrafo->pElemCorr->pLisAresta);
+	CondRetLis=LIS_IrInicioLista(pGrafo->pElemCorr->pLisAresta);
 	if(CondRetLis!=LIS_CondRetOK)
 		return GRA_CondRetRetornoIncorreto;
 	return GRA_CondRetOK;
@@ -666,7 +663,7 @@ GRA_tpCondRet GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo,int* pDado)
 ***********************************************************************/
 
 
-GRA_tpVertice *CriarVertice(GRA_tpGrafo *pGrafo, void * pValor , int tam)
+GRA_tpVertice *CriarVertice(void * pValor , int tam)
 {
 	GRA_tpVertice * pVert;
 
