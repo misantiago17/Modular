@@ -63,7 +63,7 @@ typedef struct infs Teste_Infs;
 #define NAO_VAZIO 1
 
 #define DIM_VT_LISTA   10
-#define DIM_VALOR     100
+
 
 
 
@@ -436,14 +436,18 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
             } /* if */
 
 			debugLIS=LIS_ObterTamanho(vtListas[ inxLista ], &numRet);
-			CondRet = TST_CompararInt( numElem , numRet
-                       , "Numero de elementos retornado inesperado" ) ;
+			CondRet= TST_CompararInt( CondRetEsp , debugLIS,
+            "Condicao de retorno errada ao obter tamanho" ) ;
 
-			if (CondRet != TST_CondRetOK) {
+					if (CondRet != TST_CondRetOK) {
 				return CondRet;
 			}
-		   return TST_CompararInt( CondRetEsp , debugLIS,
-            "Condicao de retorno errada ao obter tamanho" ) ;
+
+			return TST_CompararInt( numElem , numRet
+                       , "Numero de elementos retornado inesperado" ) ;
+
+	
+
          } /* fim ativa: LIS  &&Obter Tamanho */
 
       return TST_CondRetNaoConhec ;

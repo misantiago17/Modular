@@ -45,6 +45,9 @@ static const char CRIAR_ARESTA_CMD        [ ] = "=criararesta"     ;
 static const char EXISTE_ARESTA_CMD        [ ] = "=existearesta"     ;
 static const char EXC_VERT_CMD            [ ] = "=excluirvertice"    ;
 static const char EXC_ARESTA_CMD          [ ] = "=excluiraresta"     ;
+static const char NUM_VERTS_CMD           [ ] = "obternumverts" ;
+static const char NUM_ARESTAS_CMD         [ ] = "=obternumarestas" ;
+static const char INDICES_ARESTAS_CMD     [ ] = "=indicesarestas" ;
 
 
 struct infs{
@@ -63,7 +66,7 @@ typedef struct infs Teste_Infs;
 #define NAO_VAZIO 1
 
 #define DIM_VT_GRAFO   10
-#define DIM_VALOR     100
+
 
 
 
@@ -366,6 +369,88 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 
 	} /* fim ativa: Testar ir Vertice  */
+
+	/* Testar Retornar numVertices */
+
+	else if ( strcmp( ComandoTeste , NUM_VERTS_CMD ) == 0 )
+	{
+
+			 GRA_tpCondRet debugGRA;
+			 int numRet;
+
+            numLidos = LER_LerParametros( "iii" , &inxLista , &numElem ,
+                                &CondRetEsp ) ;
+
+            if ( ( numLidos != 3 )
+              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+			debugGRA=GRA_NumVertices(vtGrafos[ inxGrafo ], &numRet);
+			CondRet= TST_CompararInt( CondRetEsp , debugGRA,
+            "Condicao de retorno errada ao obter numero de vertices" ) ;
+
+					if (CondRet != TST_CondRetOK) {
+				return CondRet;
+			}
+
+			return TST_CompararInt( numElem , numRet
+                       , "Numero de elementos retornado inesperado" ) ;
+
+
+	} /* fim ativa: Testar Retornar numVertices  */
+
+	/* Testar Retornar numArestas */
+
+	else if ( strcmp( ComandoTeste , NUM_ARESTAS_CMD ) == 0 )
+	{
+			 GRA_tpCondRet debugGRA;
+			 int numRet;
+
+            numLidos = LER_LerParametros( "iii" , &inxLista , &numElem ,
+                                &CondRetEsp ) ;
+
+            if ( ( numLidos != 3 )
+              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+			debugGRA=GRA_NumArestas(vtGrafos[ inxGrafo ], &numRet);
+			CondRet= TST_CompararInt( CondRetEsp , debugGRA,
+            "Condicao de retorno errada ao obter numero de arestas" ) ;
+
+					if (CondRet != TST_CondRetOK) {
+				return CondRet;
+			}
+
+			return TST_CompararInt( numElem , numRet
+                       , "Numero de elementos retornado inesperado" ) ;
+
+	} /* fim ativa: Testar Retornar numArestas */
+
+	/* Testar Retornar indice das arestas */
+
+	else if ( strcmp( ComandoTeste , INDICES_ARESTAS_CMD  ) == 0 )
+	{
+		int numVert;
+		GRA_tpCondRet CondRet
+
+		numLidos = LER_LerParametros( "iiiiIi" , &inxGrafo,&numVert, ) ;
+
+		if ( ( numLidos != 2 )
+			|| ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) )
+		{
+			return TST_CondRetParm ;
+		} /* if */
+
+		return TST_CompararInt( CondRetEsp ,GRA_IrVertice( vtGrafos[ inxGrafo ],numVert ) ,
+			"Condição de retorno errada ao ir para o vertice."   ) ;
+
+
+	} /* fim ativa: Testar ir Vertice  */
+	
 	return TST_CondRetNaoConhec;
 }
 
