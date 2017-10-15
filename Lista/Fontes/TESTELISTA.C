@@ -165,7 +165,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 
          } /* fim ativa: Testar CriarLista */
 
-      /* Testar Esvaziar lista lista */
+      /* Testar Esvaziar lista  */
 
          else if ( strcmp( ComandoTeste , ESVAZIAR_LISTA_CMD ) == 0 )
          {
@@ -183,7 +183,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 
             return TST_CondRetOK ;
 
-         } /* fim ativa: Testar Esvaziar lista lista */
+         } /* fim ativa: Testar Esvaziar lista */
 
       /* Testar Destruir lista */
 

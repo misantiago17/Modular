@@ -93,8 +93,15 @@ typedef enum {
 	GRA_CondRetInconsistencia,
 	/* Encontrou-se uma inconsistencia no Grafo*/
 
-	GRA_CondRetParametroIncorreto
+	GRA_CondRetParametroIncorreto,
 	/* Parametro passado esta diferente do especificado*/
+
+	GRA_CondRetArestaJaExiste
+	/* Ja existe uma aresta entre os dois vertices passados*/
+
+	GRA_CondRetNumArestasZero,
+
+	GRA_CondRetArestaParaSiMesmo
 
 } GRA_tpCondRet;
 
@@ -295,6 +302,78 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2);
 ***********************************************************************/
 
 GRA_tpCondRet GRA_ExisteAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2);
+
+/***********************************************************************
+*  $FC Função: GRA  &Excluir Aresta
+*
+*  $ED Descrição da função
+*     Exclui uma aresta entre dois vértices do grafo.
+*	  Se algum dos vértices não for encontrado a função retornará um erro informando
+*	  que não encontrou o vértice.
+*	  Se o grafo estiver vazio ele também retornará um erro.
+*	  Caso a aresta nao exista a funcao tambem retornara um erro.
+*
+*  $EP Parâmetros
+*     pGrafo    - ponteiro para o grafo na qual deve excluir a aresta.
+*	  numVert1  - o número do primeiro vértice.
+*	  numVert2  - o número do segundo vértice.
+*
+*  $FV Valor retornado
+*     GRA_CondRetOK
+*	  GRA_CondRetNaoAchou
+*     GRA_CondRetGrafoVazio
+*
+***********************************************************************/
+
+GRA_tpCondRet GRA_NumVertices(GRA_tppGrafo pGrafo,int *pNumVerts);
+
+/***********************************************************************
+*  $FC Função: GRA  &Excluir Aresta
+*
+*  $ED Descrição da função
+*     Exclui uma aresta entre dois vértices do grafo.
+*	  Se algum dos vértices não for encontrado a função retornará um erro informando
+*	  que não encontrou o vértice.
+*	  Se o grafo estiver vazio ele também retornará um erro.
+*	  Caso a aresta nao exista a funcao tambem retornara um erro.
+*
+*  $EP Parâmetros
+*     pGrafo    - ponteiro para o grafo na qual deve excluir a aresta.
+*	  numVert1  - o número do primeiro vértice.
+*	  numVert2  - o número do segundo vértice.
+*
+*  $FV Valor retornado
+*     GRA_CondRetOK
+*	  GRA_CondRetNaoAchou
+*     GRA_CondRetGrafoVazio
+*
+***********************************************************************/
+
+GRA_tpCondRet GRA_NumArestas(GRA_tppGrafo pGrafo,int *pNumArestas);
+
+/***********************************************************************
+*  $FC Função: GRA  &Excluir Aresta
+*
+*  $ED Descrição da função
+*     Exclui uma aresta entre dois vértices do grafo.
+*	  Se algum dos vértices não for encontrado a função retornará um erro informando
+*	  que não encontrou o vértice.
+*	  Se o grafo estiver vazio ele também retornará um erro.
+*	  Caso a aresta nao exista a funcao tambem retornara um erro.
+*
+*  $EP Parâmetros
+*     pGrafo    - ponteiro para o grafo na qual deve excluir a aresta.
+*	  numVert1  - o número do primeiro vértice.
+*	  numVert2  - o número do segundo vértice.
+*
+*  $FV Valor retornado
+*     GRA_CondRetOK
+*	  GRA_CondRetNaoAchou
+*     GRA_CondRetGrafoVazio
+*
+***********************************************************************/
+
+GRA_tpCondRet GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo,int* pDado);
 
 /***********************************************************************
 *  $FC Função: GRA  &Excluir Aresta
