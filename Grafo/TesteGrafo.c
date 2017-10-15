@@ -93,7 +93,6 @@ static int ValidarInxGrafo( int inxGrafo , int Modo ) ;
 *     =irvertice                    inxGrafo numVert CondRetEsp
 *     =insvertice                   inxGrafo  Nome Data Cidade Email CondRetEsp
 *     =obtervalorelem               inxGrafo  Nome Data Cidade Email CondRetEsp
-*     =excluirelem                  inxGrafo  CondRetEsp
 *     =criararesta                  inxGrafo  numVert1 numVert2 CondRetEsp
 *     =excluirvertice               inxGrafo  CondRetEsp
 *     =excluiraresta                inxGrafo  numVert1 numVert2 CondRetEsp
@@ -142,7 +141,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 	} /* fim ativa: Efetuar reset de teste de Grafo */
 
-	/* Testar CriarGrafo */
+	/* Testar Criar Grafo */
 
 	else if ( strcmp( ComandoTeste , CRIAR_GRAFO_CMD ) == 0 )
 	{
@@ -159,7 +158,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		CondRetEsp=GRA_CriarGrafo( NULL,&vtGrafos[inxGrafo]) ;
 
 		return TST_CompararInt( CondRetEsp , CondRet ,
-			"Erro na condicao de retorno ao criar a Grafo"  ) ;
+			"Erro na condicao de retorno ao criar o Grafo"  ) ;
 
 	} /* fim ativa: Testar CriarGrafo */
 
@@ -253,7 +252,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 	/* Testar excluir aresta */
 
-	else if ( strcmp( ComandoTeste , EXC_ARESTA_CMD ) == 0 )
+	else if ( strcmp( ComandoTeste , EXISTE_ARESTA_CMD ) == 0 )
 	{
 		int numVert1,numVert2;
 
@@ -272,6 +271,26 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 	} /* fim ativa: Testar excluir aresta */
 
+		/* Testar existe aresta */
+
+	else if ( strcmp( ComandoTeste , EXC_ARESTA_CMD ) == 0 )
+	{
+		int numVert1,numVert2;
+
+		numLidos = LER_LerParametros( "iiii" ,
+			&inxGrafo ,&numVert1,&numVert2, &CondRetEsp ) ;
+
+		if ( ( numLidos != 4 )
+			|| ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) )
+		{
+			return TST_CondRetParm ;
+		} /* if */
+
+		return TST_CompararInt( CondRetEsp ,
+			GRA_ExisteAresta( vtGrafos[ inxGrafo ],numVert1,numVert2) ,
+			"Condição de retorno errada ao excluir aresta."   ) ;
+
+	} /* fim ativa: Testar excluir aresta */
 
 	/* Testar obter valor do elemento corrente */
 
@@ -343,10 +362,12 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		} /* if */
 
 		return TST_CompararInt( CondRetEsp ,GRA_IrVertice( vtGrafos[ inxGrafo ],numVert ) ,
-			"Condição de retorno errada ao excluir."   ) ;
+			"Condição de retorno errada ao ir para o vertice."   ) ;
 
 
 	} /* fim ativa: Testar ir Vertice  */
+	return TST_CondRetNaoConhec;
+}
 
  /* Fim função: TGRA &Testar Grafo */
 
@@ -354,11 +375,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 /*****  Código das funções encapsuladas no módulo  *****/
 
 
-/***********************************************************************
-*
-*  $FC Função: TGRA -Destruir valor
-*
-***********************************************************************/
 
 
 
@@ -372,7 +388,7 @@ int ValidarInxGrafo( int inxGrafo , int Modo )
 {
 
 	if ( ( inxGrafo <  0 )
-		|| ( inxGrafo >= DIM_VT_Grafo ))
+		|| ( inxGrafo >= DIM_VT_GRAFO ))
 	{
 		return FALSE ;
 	} /* if */
@@ -398,5 +414,5 @@ int ValidarInxGrafo( int inxGrafo , int Modo )
 
 
 
-/********** Fim do módulo de implementação: TGRA Teste Grafo de símbolos **********/
+/********** Fim do módulo de implementação: TGRA Teste Grafo com cabeca **********/
 
