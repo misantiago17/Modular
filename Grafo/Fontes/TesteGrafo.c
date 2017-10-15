@@ -42,10 +42,10 @@ static const char IR_VERT_CMD             [ ] = "=irvertice"  ;
 static const char INS_VERT_CMD            [ ] = "=inserirvertice"   ;
 static const char OBTER_VALOR_CMD         [ ] = "=obtervalorvert" ;
 static const char CRIAR_ARESTA_CMD        [ ] = "=criararesta"     ;
-static const char EXISTE_ARESTA_CMD        [ ] = "=existearesta"     ;
+static const char EXISTE_ARESTA_CMD       [ ] = "=existearesta"     ;
 static const char EXC_VERT_CMD            [ ] = "=excluirvertice"    ;
 static const char EXC_ARESTA_CMD          [ ] = "=excluiraresta"     ;
-static const char NUM_VERTS_CMD           [ ] = "obternumverts" ;
+static const char NUM_VERTS_CMD           [ ] = "=obternumverts" ;
 static const char NUM_ARESTAS_CMD         [ ] = "=obternumarestas" ;
 static const char INDICES_ARESTAS_CMD     [ ] = "=indicesarestas" ;
 
@@ -241,7 +241,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		numLidos = LER_LerParametros( "ii" ,
 			&inxGrafo , &CondRetEsp ) ;
 
-		if ( ( numLidos != 3 )
+		if ( ( numLidos != 2 )
 			|| ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) )
 		{
 			return TST_CondRetParm ;
@@ -253,10 +253,31 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 	} /* fim ativa: Testar excluir vertice */
 
+	/* Testar Criar Aresta */
+
+	else if ( strcmp( ComandoTeste , CRIAR_ARESTA_CMD ) == 0 )
+	{
+		int numVert1,numVert2;
+
+		numLidos = LER_LerParametros( "iiii" ,
+			&inxGrafo ,&numVert1,&numVert2, &CondRetEsp ) ;
+
+		if ( ( numLidos != 4 )
+			|| ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) )
+		{
+			return TST_CondRetParm ;
+		} /* if */
+
+		return TST_CompararInt( CondRetEsp ,
+			GRA_CriarAresta( vtGrafos[ inxGrafo ],numVert1,numVert2) ,
+			"Condição de retorno errada ao excluir aresta."   ) ;
+
+	} /* fim ativa: Testar excluir aresta */
+
 
 	/* Testar excluir aresta */
 
-	else if ( strcmp( ComandoTeste , EXISTE_ARESTA_CMD ) == 0 )
+	else if ( strcmp( ComandoTeste , EXC_ARESTA_CMD ) == 0 )
 	{
 		int numVert1,numVert2;
 
@@ -277,7 +298,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 		/* Testar existe aresta */
 
-	else if ( strcmp( ComandoTeste , EXC_ARESTA_CMD ) == 0 )
+	else if ( strcmp( ComandoTeste , EXISTE_ARESTA_CMD ) == 0 )
 	{
 		int numVert1,numVert2;
 
@@ -292,7 +313,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 		return TST_CompararInt( CondRetEsp ,
 			GRA_ExisteAresta( vtGrafos[ inxGrafo ],numVert1,numVert2) ,
-			"Condição de retorno errada ao excluir aresta."   ) ;
+			"Condição de retorno errada ao verificar existencia da aresta."   ) ;
 
 	} /* fim ativa: Testar excluir aresta */
 
@@ -357,9 +378,9 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		int numVert;
 
 
-			numLidos = LER_LerParametros( "ii" , &inxGrafo,&numVert ) ;
+			numLidos = LER_LerParametros( "iii" , &inxGrafo,&numVert,&CondRetEsp ) ;
 
-		if ( ( numLidos != 2 )
+		if ( ( numLidos != 3 )
 			|| ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) )
 		{
 			return TST_CondRetParm ;
@@ -426,7 +447,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 				return CondRet;
 			}
 
-			return TST_CompararInt( numElem , numRet
+			return TST_CompararInt( numRet , numElem
                        , "Numero de elementos retornado inesperado" ) ;
 
 	} /* fim ativa: Testar Retornar numArestas */
@@ -444,7 +465,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			&indiceEsp[4],&CondRetEsp) ;
 
 		if ( ( numLidos != 8 )
-			|| ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) )
+			|| ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) || (!ValidarParmIndices(tamVetor,indiceEsp) ))
 		{
 			return TST_CondRetParm ;
 		} /* if */
@@ -469,7 +490,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		for(i=0;i<tamVetor;i++)
 		{
 			CondRet=TST_CompararInt( indiceEsp[i] ,indice[i]  ,
-			"Aresta do vetor nao e igual a esperada"   ) ;
+			"Aresta do vetor nao e igual  a esperada" ) ;
 			if (CondRet != TST_CondRetOK) {
 				return CondRet;
 			}
@@ -498,6 +519,39 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 ***********************************************************************/
 
 int ValidarInxGrafo( int inxGrafo , int Modo )
+{
+
+	if ( ( inxGrafo <  0 )
+		|| ( inxGrafo >= DIM_VT_GRAFO ))
+	{
+		return FALSE ;
+	} /* if */
+
+	if ( Modo == VAZIO )
+	{
+		if ( vtGrafos[ inxGrafo ] != 0 )
+		{
+			return FALSE ;
+		} /* if */
+	} else
+	{
+		if ( vtGrafos[ inxGrafo ] == 0 )
+		{
+			return FALSE ;
+		} /* if */
+	} /* if */
+
+	return TRUE ;
+
+} /* Fim função: TGRA -Validar indice de Grafo */
+
+/***********************************************************************
+*
+*  $FC Função: TGRA -Validar parametros do teste de Retornar Indices de Aresta
+*
+***********************************************************************/
+
+int ValidarInxG( int inxGrafo , int Modo )
 {
 
 	if ( ( inxGrafo <  0 )

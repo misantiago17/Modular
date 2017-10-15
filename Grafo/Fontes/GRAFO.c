@@ -386,6 +386,10 @@ GRA_tpCondRet GRA_ExisteAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 	if(CondRetGra==GRA_CondRetNaoAchouVertice)
 		return GRA_CondRetNaoAchouVertice;
 
+	CondRetGra=GRA_IrVertice(pGrafo,numVert2);
+	if(CondRetGra==GRA_CondRetNaoAchouVertice)
+		return GRA_CondRetNaoAchouVertice;
+
 	CondRetLIS=LIS_ObterTamanho(pGrafo->pElemCorr->pLisAresta,&tam);
 	if(CondRetLIS!=LIS_CondRetOK)
 		return GRA_CondRetParametroIncorreto;
@@ -398,7 +402,7 @@ GRA_tpCondRet GRA_ExisteAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 		CondRetLIS=LIS_ObterValor(pGrafo->pElemCorr->pLisAresta,(void**)&pVerts);
 		if(CondRetLIS!=LIS_CondRetOK)
 			return GRA_CondRetParametroIncorreto;
-		if(pVerts->Ident==numVert2)
+		if(pVerts->Ident==numVert1)
 		{
 			CondRetLIS=LIS_IrInicioLista(pGrafo->pElemCorr->pLisAresta);
 			if(CondRetLIS!=LIS_CondRetOK)
@@ -570,17 +574,14 @@ GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo)
 	if(LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo,0)==LIS_CondRetListaVazia)
 	{
 		pGrafo->pElemCorr=NULL;
-		return GRA_CondRetOK;
+		return GRA_CondRetOK
 	}
-	else
-	{
-		if (LIS_ObterValor(pGrafo->pVerticesGrafo,(void**)&vertices) != LIS_CondRetOK)
+	if (LIS_ObterValor(pGrafo->pVerticesGrafo,(void**)&vertices) != LIS_CondRetOK)
 			return GRA_CondRetRetornoIncorreto;
-		if (LIS_ObterValor(vertices,(void**)&vertice) != LIS_CondRetOK)
-			return GRA_CondRetRetornoIncorreto;
-		pGrafo->pElemCorr=vertice;
+	if (LIS_ObterValor(vertices,(void**)&vertice) != LIS_CondRetOK)
+	return GRA_CondRetRetornoIncorreto;
+	pGrafo->pElemCorr=vertice;
 		return GRA_CondRetOK;
-	}
 }/*  Fim função: GRA  &Excluir Vertice */
 
 /***************************************************************************
@@ -638,6 +639,7 @@ GRA_tpCondRet GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo,int* pDado)
 		if(CondRetLis!=LIS_CondRetOK)
 			return GRA_CondRetParametroIncorreto;
 		pDado[i]=Aresta->Ident;
+		LIS_AvancarElementoCorrente(pGrafo->pElemCorr->pLisAresta,1);
 	}
 	CondRetLis=LIS_IrInicioLista(pGrafo->pElemCorr->pLisAresta);
 	if(CondRetLis!=LIS_CondRetOK)

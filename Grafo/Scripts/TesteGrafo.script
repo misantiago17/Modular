@@ -1,8 +1,8 @@
-﻿// Script:    TesteGrafo.script
-// Autor:     Gabriel, Michelle e Renan
-// Data:      13/out/2017
-// Propósito: Testar o módulo grafo genérico
-//
+// Script:    TesteGrafo.script
+// Autor:     Gabriel, Michelle
+// Data:      15/10/2017
+// Proposito: Testar o modulo grafo generico com cabeca
+
 
 == Inicializar valores
 =declararparm   grafo0  int 0
@@ -24,14 +24,14 @@
 
 =declararparm   nome1    string  "Renan"
 =declararparm   data1    string  "01/01/2001"
-=declararparm   cidade1  string  "São Paulo"
+=declararparm   cidade1  string  "Sao Paulo"
 =declararparm   email1   string  "renan@gmail.com"
 
 == struct 2
 
 =declararparm   nome2    string  "Gabriel"
 =declararparm   data2    string  "10/10/1910"
-=declararparm   cidade2  string  "Maranhão"
+=declararparm   cidade2  string  "Maranhao"
 =declararparm   email2   string  "gabriel@gmail.com"
 
 == struct 3
@@ -41,12 +41,12 @@
 =declararparm   cidade3  string  "Tocantins"
 =declararparm   email3   string  "alessandro@gmail.com"
 
-== struct 3
+== struct 4
 
-=declararparm   nome3    string  "Thiago"
-=declararparm   data3    string  "25/05/0000"
-=declararparm   cidade3  string  "Natal"
-=declararparm   email3   string  "thiago@gmail.com"
+=declararparm   nome4    string  "Thiago"
+=declararparm   data4    string  "25/05/0000"
+=declararparm   cidade4  string  "Natal"
+=declararparm   email4  string  "thiago@gmail.com"
 
 =declararparm   OK             		int  0
 =declararparm   GrafoVazio     		int  1
@@ -56,11 +56,12 @@
 =declararparm	RetListaIncorreto	int	 5
 =declararparm	parametroIncorreto  int  6
 =declararparm	jaExisteAresta		int	 7
-=declararparm	arestaParaSiMesmo	int	 8
-=declararparm	numArestasZero		int	 0
+=declararparm	numArestasZero		int	 8
+=declararparm	arestaParaSiMesmo	int	 9
 
-== - Teste 1 -
+
 == Criar o grafo 0
+=resetteste
 =criargrafo      grafo0  OK 
 
 == Verificar ObterValor relativo ao grafo vazio
@@ -77,35 +78,34 @@
 =obtervalorvert  grafo0  nome2  data2  cidade2  email2  OK
 =inserirvertice  grafo0  nome3  data3  cidade3  email3  OK
 =obtervalorvert  grafo0  nome3  data3  cidade3  email3  OK
-=obternumverts  grafo0  4      OK
+=obternumverts   grafo0  4      OK
 
 == Excluir segundo vertice do grafo
 =irvertice		 grafo0   2	 OK
 =obtervalorvert  grafo0   nome1  data1  cidade1  email1   OK
-=excluirelem     grafo0   OK
+=excluirvertice     grafo0   OK
 
-== Excluir vertice do início
+== Excluir vertice do inicio
 =irvertice		 grafo0   1	 OK
-=obtervalorelem  grafo0  nome0  data0  cidade0  email0  OK
-=excluirelem     grafo0   OK
+=obtervalorvert  grafo0  nome0  data0  cidade0  email0  OK
+=excluirvertice     grafo0   OK
 
 == Excluir vertice final
 =irvertice		 grafo0   2	 OK
-=obtervalorelem  grafo0  nome3  data3  cidade3  email3  OK
-=excluirelem     grafo0   OK
+=obtervalorvert  grafo0  nome3  data3  cidade3  email3  OK
+=excluirvertice      grafo0   OK
 
-== Excluir vertice final, o último
+== Excluir vertice final, o ultimo
 =irvertice		 grafo0   1	 OK
-=obtervalorelem  grafo0  nome2  data2  cidade2  email2  OK
-=excluirelem     grafo0   OK
+=obtervalorvert  grafo0  nome2  data2  cidade2  email2  OK
+=excluirvertice     grafo0   OK
 
 == Ver se o grafo ficou vazio
-=obtervalorvert  grafo0   "???"  "???"  "???"  "???"   ListaVazia
+=obtervalorvert  grafo0   "???"  "???"  "???"  "???"   GrafoVazio
 
 == Destruir a grafo
 =destruirgrafo   grafo0   OK
 
-== - Teste 2 -
 
 == criar grafo1
 =criargrafo		grafo1	OK
@@ -119,40 +119,31 @@
 =inserirvertice		grafo1	nome1	data1	cidade1	  email1	OK
 =obtervalorvert		grafo1	nome1	data1	cidade1	  email1	OK
 
-== ir para um vértice que não existe e verificar se corrente continua no único vertice presente
+== ir para um vertice que nao existe e verificar se corrente continua no unico vertice presente
 =irvertice	grafo1	2	NaoAchouVertice
 =obtervalorvert		grafo1	nome1	data1	cidade1	  email1	OK
 
-== excluir o único vertice do grafo, excluir ele novamente
+== excluir o unico vertice do grafo, excluir ele novamente
 =excluirvertice		grafo1	OK
 =excluirvertice		grafo1	GrafoVazio
 
 == Destruir a grafo
 =destruirgrafo   grafo1   OK
 
-== - Teste 3 -
-
 == criar grafo2
 =criargrafo		grafo2	OK
 
-== verificar se está vazio
+== verificar se esta vazio
 =obtervalorvert		grafo2	"???"	"???"	"???"	"???"	GrafoVazio
 
 == destruir grafo
 =destruirgrafo		grafo2	OK
 
-== tentar adicionar um vertice
-=inserirvertice		grafo2	nome0	data0	cidade0   email0	GrafoVazio	
-
-== Destruir a grafo
-=destruirgrafo   grafo2   OK
-
-== - Teste 4 -
 
 == criar grafo3
 =criargrafo		grafo3	OK
 
-== criar três vertices e obter tamanho do grafo
+== criar tres vertices e obter tamanho do grafo
 =inserirvertice		grafo3	nome0	data0	cidade0   email0	OK
 =obtervalorvert		grafo3	nome0	data0	cidade0	  email0	OK
 =inserirvertice		grafo3	nome1	data1	cidade1   email1	OK
@@ -165,7 +156,7 @@
 =irvertice			grafo3	2	OK
 =excluirvertice		grafo3	OK
 
-== pegar o valor do vertice 2 que é o ultimo agora
+== pegar o valor do vertice 2 que e o ultimo agora
 =irvertice			grafo3	2		OK
 =obtervalorvert		grafo3	nome2	data2	cidade2	  email2	OK
 
@@ -182,19 +173,17 @@
 == pegar o valor do vertice 1
 =obtervalorvert		grafo3	nome2	data2	cidade2	  email2	OK
 
-== apagar o ultimo vertice e verificar se ele está vazio
+== apagar o ultimo vertice e verificar se ele esta vazio
 =excluirvertice		grafo3	OK
 =irvertice			grafo3	1	GrafoVazio
 
 == Destruir a grafo
 =destruirgrafo   grafo3   OK
 
-== - Teste 5 -
-
-== criar grafo4
+== criar grafo
 =criargrafo		grafo4	OK
 
-== verificar se o grafo está vazio
+== verificar se o grafo esta vazio
 =irvertice		grafo4	1	GrafoVazio
 
 == obter tamanho do grafo
@@ -203,7 +192,6 @@
 == Destruir a grafo
 =destruirgrafo   grafo4   OK
 
-== - Teste 6 -
 
 == criar grafo5 com quatro vertices
 =criargrafo			grafo5	OK
@@ -224,10 +212,11 @@
 =obternumarestas	grafo5	1	OK
 =existearesta	grafo5	1	3	OK
 
+
 == ir para o vertice 3, obter tamanho de arestas e se existe aresta com o vertice 1
 =irvertice		grafo5	3	OK
-=obternumarestas	grafo5	1	OK
 =existearesta	grafo5	1	3	OK
+=obternumarestas	grafo5	1	OK
 
 == tentar criar aresta a aresta 1 com 3 novamente
 =criararesta	grafo5	1	3	jaExisteAresta
@@ -242,10 +231,10 @@
 =obternumarestas	grafo5	0	OK
 =existearesta	grafo5	1	3	NaoAchouAresta
 
-== excluir aresta que não existe
+== excluir aresta que nao existe
 =excluiraresta	grafo5	1	2	NaoAchouAresta
 
-== tentar criar aresta com um vetice que não existe
+== tentar criar aresta com um vetice que nao existe
 =criararesta	grafo5	1	5	NaoAchouVertice
 =existearesta	grafo5	1	5	NaoAchouVertice
 
@@ -256,9 +245,7 @@
 == Destruir a grafo
 =destruirgrafo   grafo5   OK
 
-== - Teste 7 -
-
-== criar grafo6 com três vertices
+== criar grafo6 com tres vertices
 =criargrafo			grafo6	OK
 =inserirvertice		grafo6	nome0	data0	cidade0   email0	OK
 =obtervalorvert		grafo6	nome0	data0	cidade0	  email0	OK
@@ -271,12 +258,11 @@
 =criararesta	grafo6	1	2	OK
 =existearesta	grafo6	1	2	OK
 =criararesta	grafo6	1	3	OK
-=existearesta	grafo6	1	3	OK
+=existearesta	grafo6	3	1	OK
 
 == contar quantas arestas o vertice 1 possui e retornar seus indices
 =irvertice		grafo6	1	OK
 =obternumarestas	grafo6	2 	OK
-=obtertamaresta	grafo6	2 	OK
 =indicesarestas	grafo6	2 	2	3	0	0	0	OK
 
 
@@ -289,7 +275,6 @@
 == contar quantas arestas o vertice 1 possui e tentar retornar seus indices
 
 =obternumarestas	grafo6	0 	OK
-=obtertamaresta	grafo6	0 	OK
 =indicesarestas	grafo6	0	0	0	0	0	0	numArestasZero
 
 
