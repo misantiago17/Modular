@@ -1,4 +1,4 @@
-// Script:    TesteLista.script
+﻿// Script:    TesteLista.script
 // Autor:     Gabriel, Michelle e Renan
 // Data:      13/out/2017
 // Propósito: Testar o módulo grafo genérico
@@ -77,7 +77,7 @@
 =obtervalorvert  grafo0  nome2  data2  cidade2  email2  OK
 =inserirvertice  grafo0  nome3  data3  cidade3  email3  OK
 =obtervalorvert  grafo0  nome3  data3  cidade3  email3  OK
-=obtertamgrafo   grafo0  4      OK
+=obternumverts  grafo0  4      OK
 
 == Excluir segundo vertice do grafo
 =irvertice		 grafo0   2	 OK
@@ -159,7 +159,7 @@
 =obtervalorvert		grafo3	nome1	data1	cidade1	  email1	OK
 =inserirvertice		grafo3	nome2	data2	cidade2   email2	OK
 =obtervalorvert		grafo3	nome2	data2	cidade2	  email2	OK
-=obtertamgrafo		grafo3	3	OK
+=obternumverts		grafo3	3	OK
 
 == apagar o vertice do meio
 =irvertice			grafo3	2	OK
@@ -198,7 +198,7 @@
 =irvertice		grafo4	1	GrafoVazio
 
 == obter tamanho do grafo
-=obtertamgrafo	grafo4	0	OK
+=obternumverts	grafo4	0	OK
 
 == Destruir a grafo
 =destruirgrafo   grafo4   OK
@@ -221,12 +221,12 @@
 
 == obter tamanho de arestas com o vertice 1 e a existencia da aresta com o vertice 3
 =irvertice		grafo5	1	OK
-=obtertamaresta	grafo5	1	OK
+=obternumarestas	grafo5	1	OK
 =existearesta	grafo5	1	3	OK
 
 == ir para o vertice 3, obter tamanho de arestas e se existe aresta com o vertice 1
 =irvertice		grafo5	3	OK
-=obtertamaresta	grafo5	1	OK
+=obternumarestas	grafo5	1	OK
 =existearesta	grafo5	1	3	OK
 
 == tentar criar aresta a aresta 1 com 3 novamente
@@ -237,9 +237,9 @@
 
 == verificar numero de aresta no vertice 1 e no vertice 3 e se a aresta 1 com 3 existe
 =irvertice		grafo5	1	OK
-=obtertamaresta	grafo5	0	OK
+=obternumarestas	grafo5	0	OK
 =irvertice		grafo5	3	OK
-=obtertamaresta	grafo5	0	OK
+=obternumarestas	grafo5	0	OK
 =existearesta	grafo5	1	3	NaoAchouAresta
 
 == excluir aresta que não existe
@@ -275,7 +275,7 @@
 
 == contar quantas arestas o vertice 1 possui e retornar seus indices
 =irvertice		grafo6	1	OK
-=obtertamaresta	grafo6	2 	OK
+=obternumarestas	grafo6	2 	OK
 =indicesarestas	grafo6	1 	2	3	OK
 
 == excluir as duas arestas
@@ -285,7 +285,7 @@
 =existearesta	grafo6	1	2	NaoAchouAresta
 
 == contar quantas arestas o vertice 1 possui e tentar retornar seus indices
-=obtertamaresta	grafo6	0 	OK
+=obternumarestas	grafo6	0 	OK
 =indicesarestas	grafo6	0	numArestasZero
 
 == excluir grafo
