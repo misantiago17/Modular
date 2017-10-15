@@ -276,7 +276,7 @@
 == contar quantas arestas o vertice 1 possui e retornar seus indices
 =irvertice		grafo6	1	OK
 =obtertamaresta	grafo6	2 	OK
-=indicesarestas	grafo6	1 	2	3	OK
+=indicesarestas	grafo6	1 	2	3	0	0	0	OK
 
 == excluir as duas arestas
 =excluiraresta	grafo6	1	2	OK
@@ -286,7 +286,7 @@
 
 == contar quantas arestas o vertice 1 possui e tentar retornar seus indices
 =obtertamaresta	grafo6	0 	OK
-=indicesarestas	grafo6	0	numArestasZero
+=indicesarestas	grafo6	0	0	0	0	0	0	numArestasZero
 
 == excluir grafo
 =destruirgrafo   grafo6   OK
