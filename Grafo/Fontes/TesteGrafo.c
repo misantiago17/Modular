@@ -354,7 +354,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 	else if ( strcmp( ComandoTeste , IR_VERT_CMD ) == 0 )
 	{
 		int numVert;
-		GRA_tpCondRet CondRet
+		GRA_tpCondRet CondRet;
 
 			numLidos = LER_LerParametros( "ii" , &inxGrafo,&numVert ) ;
 
@@ -378,11 +378,11 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			 GRA_tpCondRet debugGRA;
 			 int numRet;
 
-            numLidos = LER_LerParametros( "iii" , &inxLista , &numElem ,
+            numLidos = LER_LerParametros( "iii" , &inxGrafo , &numElem ,
                                 &CondRetEsp ) ;
 
             if ( ( numLidos != 3 )
-              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+              || ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) )
             {
                return TST_CondRetParm ;
             } /* if */
@@ -391,7 +391,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			CondRet= TST_CompararInt( CondRetEsp , debugGRA,
             "Condicao de retorno errada ao obter numero de vertices" ) ;
 
-					if (CondRet != TST_CondRetOK) {
+			if (CondRet != TST_CondRetOK) {
 				return CondRet;
 			}
 
@@ -408,11 +408,11 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			 GRA_tpCondRet debugGRA;
 			 int numRet;
 
-            numLidos = LER_LerParametros( "iii" , &inxLista , &numElem ,
+            numLidos = LER_LerParametros( "iii" , &inxGrafo , &numElem ,
                                 &CondRetEsp ) ;
 
             if ( ( numLidos != 3 )
-              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+              || ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) )
             {
                return TST_CondRetParm ;
             } /* if */
@@ -421,7 +421,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			CondRet= TST_CompararInt( CondRetEsp , debugGRA,
             "Condicao de retorno errada ao obter numero de arestas" ) ;
 
-					if (CondRet != TST_CondRetOK) {
+			if (CondRet != TST_CondRetOK) {
 				return CondRet;
 			}
 
@@ -434,22 +434,49 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 	else if ( strcmp( ComandoTeste , INDICES_ARESTAS_CMD  ) == 0 )
 	{
-		int numVert;
-		GRA_tpCondRet CondRet
+		int tamVetor,i;
+		int indiceEsp[5];
+		int* indice;
+		GRA_tpCondRet debugGRA;
 
-		numLidos = LER_LerParametros( "iiiiIi" , &inxGrafo,&numVert, ) ;
+		numLidos = LER_LerParametros( "iiiiiiii" , &inxGrafo,&tamVetor,&indiceEsp[0],&indiceEsp[1],&indiceEsp[2],&indiceEsp[3],
+			&indiceEsp[4],&CondRetEsp) ;
 
-		if ( ( numLidos != 2 )
+		if ( ( numLidos != 8 )
 			|| ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) )
 		{
 			return TST_CondRetParm ;
 		} /* if */
+		indice=(int*)malloc(tamVetor*sizeof(int));
+		if ( indice == NULL )
+		{
+			return TST_CondRetMemoria ;
+		} /* if */
 
-		return TST_CompararInt( CondRetEsp ,GRA_IrVertice( vtGrafos[ inxGrafo ],numVert ) ,
-			"Condição de retorno errada ao ir para o vertice."   ) ;
+		debugGRA=GRA_RetornaIndiceAresta(vtGrafos[ inxGrafo ],indice);
+
+		CondRet=TST_CompararInt( CondRetEsp ,debugGRA  ,
+			"Condição de retorno errada ao retornar indices das arestas."   ) ;
+
+		if (CondRet != TST_CondRetOK) {
+				return CondRet;
+			}
+		if(tamVetor==0 && debugGRA==GRA_CondRetNumArestasZero)
+			return TST_CondRetOK;
 
 
-	} /* fim ativa: Testar ir Vertice  */
+		for(i=0;i<tamVetor;i++)
+		{
+			CondRet=TST_CompararInt( indiceEsp[i] ,indice[i]  ,
+			"Aresta do vetor nao e igual a esperada"   ) ;
+			if (CondRet != TST_CondRetOK) {
+				return CondRet;
+			}
+		}
+
+		return TST_CondRetOK;
+
+	} /* fim ativa: Retornar indice das arestas  */
 	
 	return TST_CondRetNaoConhec;
 }
