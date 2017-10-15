@@ -39,27 +39,27 @@ Estatísticas do construto
       testelista.c
 
    Estatísticas do arquivo: lista.c
-      Total linhas:             579
-      Linhas de código:         300
+      Total linhas:             544
+      Linhas de código:         269
       Linhas de comentário:     138
-      Linhas em branco:         159
+      Linhas em branco:         154
    Arquivos de inclusão de que necessita
       lista.h
 
    Estatísticas do arquivo: lista.h
-      Total linhas:             378
-      Linhas de código:          36
-      Linhas de comentário:     291
+      Total linhas:             354
+      Linhas de código:          35
+      Linhas de comentário:     268
       Linhas em branco:          51
    Arquivos em que é incluído
       lista.c
       testelista.c
 
    Estatísticas do arquivo: testelista.c
-      Total linhas:             498
+      Total linhas:             497
       Linhas de código:         283
-      Linhas de comentário:      86
-      Linhas em branco:         144
+      Linhas de comentário:      81
+      Linhas em branco:         147
    Arquivos de inclusão de que necessita
       generico.h
       lerparm.h
@@ -78,9 +78,9 @@ Estatísticas do construto
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      1610
-         Linhas de código:           154
-         Linhas de comentário:      1236
+         Total linhas do tipo:      1586
+         Linhas de código:           153
+         Linhas de comentário:      1213
          Linhas em branco:           220
          Arquivos deste tipo:          4
 
@@ -106,17 +106,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      1077
-         Linhas de código:           583
-         Linhas de comentário:       224
-         Linhas em branco:           303
+         Total linhas do tipo:      1041
+         Linhas de código:           552
+         Linhas de comentário:       219
+         Linhas em branco:           301
          Arquivos deste tipo:          2
 
 Totais para todo o construto TesteLista
 
-   Total linhas:              2687
-   Linhas de código:           737
-   Linhas de comentário:      1460
-   Linhas em branco:           523
+   Total linhas:              2627
+   Linhas de código:           705
+   Linhas de comentário:      1432
+   Linhas em branco:           521
    Arquivos processados:         6
 

@@ -47,7 +47,7 @@ INCLUDE = $(INCLUDE);$(PDEFAULT)
 ### Regras de geração
 
 all : limpa \
-   $(Fobj)\testegrafo.obj   $(Fobj)\grafo.obj \
+   $(Fobj)\testegrafo.obj   $(Fobj)\grafo.obj   $(Fobj)\lista.obj \
    Construto
 
 ### Limpar arquivos
@@ -67,11 +67,15 @@ $(Fobj)\grafo.obj :  {$(Pc)}\grafo.c \
     {$(Ph)}grafo.h              {$(Ph)}lista.h             
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
+$(Fobj)\lista.obj :  {$(Pc)}\lista.c \
+    {$(Ph)}lista.h             
+   cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
+
 
 ### Terminação
 
 Construto : \
-   $(Fobj)\testegrafo.obj   $(Fobj)\grafo.obj
+   $(Fobj)\testegrafo.obj   $(Fobj)\grafo.obj   $(Fobj)\lista.obj
     cd $(Fobj)
     LINK $(L) @$(NOME).build >> $(Ferr)\$(NOME).err
 

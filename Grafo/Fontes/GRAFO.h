@@ -75,9 +75,6 @@ typedef enum {
 	GRA_CondRetGrafoVazio,
 	/* O grafo não contém vértices */
 
-	GRA_CondRetFimGrafo,
-	/* Foi percorrido todo o grafo */
-
 	GRA_CondRetNaoAchouVertice,
 	/* Não encontrou o vertice procurado */
 
@@ -93,15 +90,16 @@ typedef enum {
 	GRA_CondRetInconsistencia,
 	/* Encontrou-se uma inconsistencia no Grafo*/
 
-	GRA_CondRetParametroIncorreto,
-	/* Parametro passado esta diferente do especificado*/
 
 	GRA_CondRetArestaJaExiste,
 	/* Ja existe uma aresta entre os dois vertices passados*/
 
 	GRA_CondRetNumArestasZero,
 
-	GRA_CondRetArestaParaSiMesmo
+	GRA_CondRetArestaParaSiMesmo,
+
+		GRA_CondRetParametroIncorreto
+	/* Parametro passado esta diferente do especificado*/
 
 } GRA_tpCondRet;
 
