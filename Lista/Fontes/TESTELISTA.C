@@ -71,7 +71,6 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
-   static void DestruirValor( void * pValor ) ;
 
    static int ValidarInxLista( int inxLista , int Modo ) ;
 
@@ -159,7 +158,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetEsp=LIS_CriarLista( DestruirValor,&vtListas[inxLista]) ;
+            CondRetEsp=LIS_CriarLista( NULL,&vtListas[inxLista]) ;
 
             return TST_CompararInt( CondRetEsp , CondRet ,
                "Erro na condicao de retorno ao criar a lista"  ) ;
@@ -190,19 +189,27 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 
          else if ( strcmp( ComandoTeste , DESTRUIR_LISTA_CMD ) == 0 )
          {
-
-            numLidos = LER_LerParametros( "i" ,
-                               &inxLista ) ;
-            if ( ( numLidos != 1 )
+			 TST_tpCondRet debug;
+            numLidos = LER_LerParametros( "ii" ,
+                               &inxLista,&CondRetEsp ) ;
+            if ( ( numLidos != 2 )
               || ( ! ValidarInxLista( inxLista , NAO_VAZIO )))
             {
                return TST_CondRetParm ;
             } /* if */
 
-            LIS_DestruirLista( vtListas[ inxLista ] ) ;
-            vtListas[ inxLista ] = NULL ;
+            CondRet=LIS_DestruirLista( vtListas[ inxLista ] ) ;
+			debug= TST_CompararInt( CondRetEsp , CondRet ,
+                     "Condicao de retorno errada ao destruir a lista.") ;
 
-            return TST_CondRetOK ;
+			if(debug!=TST_CondRetOK)
+				return debug;
+
+			if(CondRet==LIS_CondRetOK)
+				vtListas[ inxLista ] = NULL ;
+
+			 return TST_CondRetOK ;
+       
 
          } /* fim ativa: Testar Destruir lista */
 
@@ -315,11 +322,11 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
                return TST_CondRetParm ;
             } /* if */
 
-            CondRet=LIS_ObterValor( vtListas[ inxLista ],((void**)&Ret)) ;
+            CondRet=LIS_ObterValor( vtListas[ inxLista ],(void**)&Ret) ;
     
 
             debug=TST_CompararInt(CondRet , CondRetEsp ,
-                         "Retorno da funcao diferente do esperado" ) ;
+                         "Retorno de obter valor diferente do esperado" ) ;
 
 			if(debug!=TST_CondRetOK)
 				return debug;
@@ -444,21 +451,6 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
    } /* Fim função: TLIS &Testar lista */
 
 
-/*****  Código das funções encapsuladas no módulo  *****/
-
-
-/***********************************************************************
-*
-*  $FC Função: TLIS -Destruir valor
-*
-***********************************************************************/
-
-   void DestruirValor( void * pValor )
-   {
-
-      free( pValor ) ;
-
-   } /* Fim função: TLIS -Destruir valor */
 
 
 /***********************************************************************
