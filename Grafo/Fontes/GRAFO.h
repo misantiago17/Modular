@@ -74,7 +74,11 @@ typedef enum {
 
 	GRA_CondRetGrafoVazio,
 	/* O grafo não contém vértices */
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> origin/master
 	GRA_CondRetNaoAchouVertice,
 	/* Não encontrou o vertice procurado */
 
@@ -84,23 +88,35 @@ typedef enum {
 	GRA_CondRetFaltouMemoria,
 	/* Faltou memória ao tentar criar um vértice do grafo */
 
-	GRA_CondRetRetornoIncorreto,
+	GRA_CondRetRetornoLisIncorreto,
 	/* Condicao de retorno do modulo Lista imprevista*/
+<<<<<<< HEAD
 
 	GRA_CondRetInconsistencia,
 	/* Encontrou-se uma inconsistencia no Grafo*/
 
+=======
+	
+	GRA_CondRetParametroIncorreto,
+	/* Parametro passado esta diferente do especificado*/
+>>>>>>> origin/master
 
 	GRA_CondRetArestaJaExiste,
 	/* Ja existe uma aresta entre os dois vertices passados*/
 
 	GRA_CondRetNumArestasZero,
+	/* Não ha arestas neste vertice*/
 
+<<<<<<< HEAD
 	GRA_CondRetArestaParaSiMesmo,
 
 		GRA_CondRetParametroIncorreto
 	/* Parametro passado esta diferente do especificado*/
 
+=======
+	GRA_CondRetArestaParaSiMesmo
+	/* Aresta de vertice tentando apontar para p proprio vertice*/
+>>>>>>> origin/master
 } GRA_tpCondRet;
 
 
@@ -128,7 +144,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-	GRA_tpCondRet GRA_CriarGrafo(void   ( * ExcluirValor ) ( void * pDado ), GRA_tppGrafo* GrafoRet);
+GRA_tpCondRet GRA_CriarGrafo(void(*ExcluirValor) (void * pDado), GRA_tppGrafo* GrafoRet);
 
 
 /***********************************************************************
@@ -137,12 +153,13 @@ typedef enum {
 *  $ED Descrição da função
 *     Destrói o grafo fornecida.
 *     O parâmetro ponteiro para o grafo não é modificado.
-*     Se ocorrer algum erro durante a destruição, o grafo resultará
-*     estruturalmente incorreta.
-*     OBS. não existe previsão para possíveis falhas de execução.
+*     Se ocorrer algum erro durante a destruição, o grafo resultado
+*     estará estruturalmente incorreto.
 *
 *  $FV Valor retornado
 *     GRA_CondRetOK
+*	  GRA_CondRetParametroIncorreto
+*	  GRA_CondRetRetornoLisIncorreto
 *
 ***********************************************************************/
 
@@ -153,23 +170,23 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo);
 *  $FC Função: GRA  &Ir para o Vértice
 *
 *  $ED Descrição da função
-*     Leva a corrente até o vértice numVert do grafo
+*     Leva o corrente até o vértice numVert do grafo
 *     Explora o grafo até encontrar o vértice identificado por numVert
 *
 *  $EP Parâmetros
-*     pGrafo  - ponteiro para a grafo a ser manipulada
+*     pGrafo  - ponteiro para o grafo a ser manipulado
 *     numVert - o número do vértice a ser encontrado
 *
 *  $FV Valor retornado
-*     CondRetOK         - se o vértice foi encontrado
-*     CondRetFimGrafo   - se percorreu todos os vertices de grafo
-e não encontrou o vértice
-*     CondRetGrafoVazio - se o grafo está vazio
+*     CondRetOK
+*     GRA_CondRetParametroIncorreto
+*     GRA_CondRetRetornoLisIncorreto
+*     GRA_CondRetGrafoVazio
+*     GRA_CondRetNaoAchouVertice
 *
 ***********************************************************************/
 
-GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo,
-	int numVert);
+GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert);
 
 
 /***********************************************************************
@@ -179,36 +196,17 @@ GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo,
 *     Obtem a referência para o valor contido no vértice corrente do grafo
 *
 *  $EP Parâmetros
-*     pGrafo - ponteiro para o grafo de onde se quer armazenar o valor
+*     pGrafo - ponteiro para o grafo de onde se quer descobrir o valor
 *	  pValorRet - endereço de um ponteiro para armazenar o valor encontrado
 *
 *  $FV Valor retornado
 *     GRA_CondRetOK
-*	  GRA_CondRetGrafoVazio
+*     GRA_CondRetParametroIncorreto
+*     GRA_CondRetGrafoVazio
 *
 ***********************************************************************/
 
 GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet);
-
-/***********************************************************************
-*  $FC Função: GRA  &Retorna Identificador
-*
-*  $ED Descrição da função
-*     Retorna por referencia o identificador do vertice corrente. Caso o grafo esteja vazio, retorna 0.
-*
-*  $EP Parâmetros
-*     pGrafo - ponteiro para o grafo de onde se quer armazenar o valor
-*	  pIdent- ponteiro que guarda o identificador
-*
-*  $FV Valor retornado
-*     GRA_CondRetOK
-*	  GRA_CondRetGrafoVazio
-*
-***********************************************************************/
-
-GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo,
-	int* pIdent);
-
 
 
 /***********************************************************************
@@ -224,12 +222,13 @@ GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo,
 *
 *  $FV Valor retornado
 *     GRA_CondRetOK
+*     GRA_CondRetParametroIncorreto
+*     GRA_CondRetRetornoLisIncorreto
 *     GRA_CondRetFaltouMemoria
 *
 ***********************************************************************/
 
-GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
-	void * pValor);
+GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo, void * pValor);
 
 /***********************************************************************
 *  $FC Função: GRA  &Excluir vertice
@@ -238,14 +237,16 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo,
 *     Exclui o vértice corrente do grafo dada.
 *     Se existir vértice a esquerda do corrente será o novo corrente.
 *     Se não existir e existir o vértice à direita, este se tornará corrente.
-*     Se este também não existir o grafo tornou-se vazio.
+*     Se este também não existir o grafo tornou-se vazio e o corrente se torna NULL.
 *
 *  $EP Parâmetros
 *     pGrafo    - ponteiro para o grafo na qual deve excluir.
 *
 *  $FV Valor retornado
 *     GRA_CondRetOK
+*     GRA_CondRetParametroIncorreto
 *     GRA_CondRetGrafoVazio
+*     GRA_CondRetRetornoLisIncorreto
 *
 ***********************************************************************/
 
@@ -261,6 +262,8 @@ GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo);
 *	  que não encontrou o vértice.
 *	  A aresta também não será criada se o grafo estiver vazio.
 *     O elemento corrente do grafo nao sera alterado.
+*     Só é possivel criar uma aresta entre dois vertices.
+*     Não é possivel criar uma aresta de um vertice para si mesmo.
 *
 *  $EP Parâmetros
 *     pGrafo    - ponteiro para o grafo na qual deve-se criar a aresta.
@@ -269,8 +272,12 @@ GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo);
 *
 *  $FV Valor retornado
 *     GRA_CondRetOK
-*	  GRA_CondRetNaoAchou
+*     GRA_CondRetArestaParaSiMesmo
+*     GRA_CondRetParametroIncorreto
 *     GRA_CondRetGrafoVazio
+*     GRA_CondRetNaoAchouVertice
+*     GRA_CondRetArestaJaExiste
+*     GRA_CondRetFaltouMemoria
 *
 ***********************************************************************/
 
@@ -283,8 +290,6 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2);
 *     Verifica se ha uma aresta entre dois vertices do grafo.
 *	  Se algum dos vértices não for encontrado a função retornará um erro informando
 *	  que não encontrou o vértice.
-*	  Se exibira uma mensagem de erro caso o grafo esteja vazio.
-*     Se exibira uma mensagem de erro caso a aresta nao seja encontrada.
 *     O elemento corrente do grafo nao sera alterado.
 *
 *  $EP Parâmetros
@@ -294,8 +299,10 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2);
 *
 *  $FV Valor retornado
 *     GRA_CondRetOK
-*	  GRA_CondRetNaoAchou
+*     GRA_CondRetParametroIncorreto
 *     GRA_CondRetGrafoVazio
+*     GRA_CondRetNaoAchouVertice
+*     GRA_CondRetNaoAchouAresta
 *
 ***********************************************************************/
 
@@ -318,84 +325,75 @@ GRA_tpCondRet GRA_ExisteAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2);
 *
 *  $FV Valor retornado
 *     GRA_CondRetOK
-*	  GRA_CondRetNaoAchou
+*     GRA_CondRetParametroIncorreto
 *     GRA_CondRetGrafoVazio
+*     GRA_CondRetNaoAchouAresta
+*     GRA_CondRetNaoAchouVertice
+*     GRA_CondRetRetornoLisIncorreto
 *
 ***********************************************************************/
 
-GRA_tpCondRet GRA_NumVertices(GRA_tppGrafo pGrafo,int *pNumVerts);
+GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2);
 
 /***********************************************************************
-*  $FC Função: GRA  &Excluir Aresta
+*  $FC Função: GRA  &Retornar Numero de Arestas
 *
 *  $ED Descrição da função
-*     Exclui uma aresta entre dois vértices do grafo.
-*	  Se algum dos vértices não for encontrado a função retornará um erro informando
-*	  que não encontrou o vértice.
-*	  Se o grafo estiver vazio ele também retornará um erro.
-*	  Caso a aresta nao exista a funcao tambem retornara um erro.
+*     Retorna por referencia o numero de arestas que o vertice corrente possui.
+*	  
 *
 *  $EP Parâmetros
-*     pGrafo    - ponteiro para o grafo na qual deve excluir a aresta.
-*	  numVert1  - o número do primeiro vértice.
-*	  numVert2  - o número do segundo vértice.
+*     pGrafo       - ponteiro para o grafo no qual se deseja descobrir o numero de arestas do vertice.
+*	  pNumArestas  - endereço de um ponteiro para armazenar o numero de arestas encontrado
 *
 *  $FV Valor retornado
 *     GRA_CondRetOK
-*	  GRA_CondRetNaoAchou
+*	  GRA_CondRetParametroIncorreto
 *     GRA_CondRetGrafoVazio
+*     GRA_CondRetRetornoLisIncorreto
 *
 ***********************************************************************/
 
 GRA_tpCondRet GRA_NumArestas(GRA_tppGrafo pGrafo,int *pNumArestas);
 
 /***********************************************************************
-*  $FC Função: GRA  &Excluir Aresta
+*  $FC Função: GRA  &Retornar Numero de Vertices
 *
 *  $ED Descrição da função
-*     Exclui uma aresta entre dois vértices do grafo.
-*	  Se algum dos vértices não for encontrado a função retornará um erro informando
-*	  que não encontrou o vértice.
-*	  Se o grafo estiver vazio ele também retornará um erro.
-*	  Caso a aresta nao exista a funcao tambem retornara um erro.
+*     Retorna por referencia o numero de vertices que o grafo possui.
 *
 *  $EP Parâmetros
-*     pGrafo    - ponteiro para o grafo na qual deve excluir a aresta.
-*	  numVert1  - o número do primeiro vértice.
-*	  numVert2  - o número do segundo vértice.
+*     pGrafo     - ponteiro para o grafo no qual se deseja descobrir o numero de vertices total.
+*	  pNumVerts  - endereço de um ponteiro para armazenar o numero de vertices encontrado
 *
 *  $FV Valor retornado
 *     GRA_CondRetOK
-*	  GRA_CondRetNaoAchou
-*     GRA_CondRetGrafoVazio
+*	  GRA_CondRetParametroIncorreto
+*     GRA_CondRetRetornoLisIncorreto
 *
 ***********************************************************************/
 
-GRA_tpCondRet GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo,int* pDado);
+GRA_tpCondRet GRA_NumVertices(GRA_tppGrafo pGrafo, int *pNumVerts);
 
 /***********************************************************************
-*  $FC Função: GRA  &Excluir Aresta
+*  $FC Função: GRA  &RetornarIndicesAresta
 *
 *  $ED Descrição da função
-*     Exclui uma aresta entre dois vértices do grafo.
-*	  Se algum dos vértices não for encontrado a função retornará um erro informando
-*	  que não encontrou o vértice.
-*	  Se o grafo estiver vazio ele também retornará um erro.
-*	  Caso a aresta nao exista a funcao tambem retornara um erro.
+*     Retorna um vetor com o indice do vertice ligado a cada aresta que o vertice corrente possui
 *
 *  $EP Parâmetros
-*     pGrafo    - ponteiro para o grafo na qual deve excluir a aresta.
-*	  numVert1  - o número do primeiro vértice.
-*	  numVert2  - o número do segundo vértice.
+*     pGrafo    - ponteiro para o grafo que possui o vertice desejado.
+*	  pDado     - endereço de um ponteiro para armazenar o vetor dos identificadores encontrados
 *
 *  $FV Valor retornado
 *     GRA_CondRetOK
-*	  GRA_CondRetNaoAchou
-*     GRA_CondRetGrafoVazio
+*	  GRA_CondRetNumArestasZero
+*	  GRA_CondRetParametroIncorreto
+*	  GRA_CondRetRetornoLisIncorreto
 *
 ***********************************************************************/
 
-GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2);
+GRA_tpCondRet GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo, int* pDado);
 
 #undef GRAFO_EXT
 
