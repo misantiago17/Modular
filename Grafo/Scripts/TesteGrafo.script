@@ -12,7 +12,7 @@
 =declararparm   grafo4  int 4
 =declararparm   grafo5  int 5
 =declararparm   grafo6  int 6
-=declararparm   grafo7  int 7
+
 
 == struct 0
 =declararparm   nome0    string  "Michelle"
@@ -41,12 +41,6 @@
 =declararparm   cidade3  string  "Tocantins"
 =declararparm   email3   string  "alessandro@gmail.com"
 
-== struct 4
-
-=declararparm   nome4    string  "Thiago"
-=declararparm   data4    string  "25/05/0000"
-=declararparm   cidade4  string  "Natal"
-=declararparm   email4  string  "thiago@gmail.com"
 
 =declararparm   OK             		int  0
 =declararparm   GrafoVazio     		int  1
@@ -54,7 +48,7 @@
 =declararparm   NaoAchouAresta   	int  3
 =declararparm   FaltouMemoria  		int  4
 =declararparm	RetListaIncorreto	int	 5
-=declararparm	parametroIncorreto  int  6
+=declararparm	parametroIncorreto       int  6
 =declararparm	jaExisteAresta		int	 7
 =declararparm	numArestasZero		int	 8
 =declararparm	arestaParaSiMesmo	int	 9
@@ -121,7 +115,7 @@
 =inserirvertice		grafo1	nome1	data1	cidade1	  email1	OK
 =obtervalorvert		grafo1	nome1	data1	cidade1	  email1	OK
 
-== ir para um vertice que nao existe e verificar se corrente continua no unico vertice presente
+== ir para um vertice que nao existe e verificar se o corrente continua no unico vertice presente
 =irvertice	grafo1	2	NaoAchouVertice
 =obtervalorvert		grafo1	nome1	data1	cidade1	  email1	OK
 
