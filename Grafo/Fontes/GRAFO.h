@@ -189,7 +189,24 @@ GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert);
 
 GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet);
 
+/***********************************************************************
+*  $FC Função: GRA  &Obter referência para o identificador do Vertice Corrente
+*
+*  $ED Descrição da função
+*     Obtem a referência para o identifacdor do vértice corrente do grafo
+*
+*  $EP Parâmetros
+*     pGrafo - ponteiro para o grafo de onde se quer descobrir o valor
+*	  numIdent - endereço de uma variavel de tipo int para armazenar o valor encontrado
+*
+*  $FV Valor retornado
+*     GRA_CondRetOK
+*     GRA_CondRetParametroIncorreto
+*     GRA_CondRetGrafoVazio
+*
+***********************************************************************/
 
+GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent) ;
 /***********************************************************************
 *  $FC Função: GRA  &Inserir vértice
 *
