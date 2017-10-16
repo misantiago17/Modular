@@ -185,7 +185,7 @@
 == obter tamanho do grafo
 =obternumverts	grafo4	0	OK
 
-== Destruir a grafo
+== Destruir o grafo
 =destruirgrafo   grafo4   OK
 
 
@@ -199,6 +199,15 @@
 =obtervalorvert		grafo5	nome2	data2	cidade2	  email2	OK
 =inserirvertice		grafo5	nome3	data3	cidade3   email3	OK
 =obtervalorvert		grafo5	nome3	data3	cidade3	  email3	OK
+
+==excluir o primeiro vertice e verificar se o identificador dos demais foi alterado
+=irvertice	grafo5	  1	OK
+=excluirvertice  grafo5	        OK
+=retornaident   grafo5    1     OK
+=irvertice	grafo5	  2	OK
+=retornaident  grafo5     2     OK
+=irvertice	grafo5	  3	OK
+=retornaident grafo5      3      OK
 
 == adicionar aresta com o vertice 3
 =criararesta	grafo5	1	3	OK
@@ -238,7 +247,7 @@
 =criararesta	grafo5	2	2	arestaParaSiMesmo
 =existearesta	grafo5	2	2	NaoAchouAresta
 
-== Destruir a grafo
+== Destruir o grafo
 =destruirgrafo   grafo5   OK
 
 == criar grafo6 com tres vertices
