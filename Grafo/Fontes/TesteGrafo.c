@@ -551,31 +551,60 @@ int ValidarInxGrafo( int inxGrafo , int Modo )
 *
 ***********************************************************************/
 
-int ValidarInxG( int inxGrafo , int Modo )
+int ValidarParmIndices( int tamVetor , int indiceEsp )
 {
-
-	if ( ( inxGrafo <  0 )
-		|| ( inxGrafo >= DIM_VT_GRAFO ))
+	switch(tamVetor)
 	{
-		return FALSE ;
-	} /* if */
+	case 0:
+		if(indiceEsp[0]==0 && indiceEsp[1]==0 && indiceEsp[2]==0 && indiceEsp[3]==0 && indiceEsp[4]==0)
+			return TRUE;
+			break;
+		else
+			return FALSE;
+			break;
 
-	if ( Modo == VAZIO )
-	{
-		if ( vtGrafos[ inxGrafo ] != 0 )
-		{
-			return FALSE ;
-		} /* if */
-	} else
-	{
-		if ( vtGrafos[ inxGrafo ] == 0 )
-		{
-			return FALSE ;
-		} /* if */
-	} /* if */
+	case 1:
+		if(indiceEsp[0]!=0 && indiceEsp[1]==0 && indiceEsp[2]==0 && indiceEsp[3]==0 && indiceEsp[4]==0)
+			return TRUE;
+			break;
+		else
+			return FALSE;
+			break;
 
-	return TRUE ;
+	case 2:
+		if(indiceEsp[0]!=0 && indiceEsp[1]!=0 && indiceEsp[2]==0 && indiceEsp[3]==0 && indiceEsp[4]==0)
+			return TRUE;
+			break;
+		else
+			return FALSE;
+			break;
 
+	case 3:
+		if(indiceEsp[0]!=0 && indiceEsp[1]!=0 && indiceEsp[2]!=0 && indiceEsp[3]==0 && indiceEsp[4]==0)
+			return TRUE;
+			break;
+		else
+			return FALSE;
+			break;
+
+	case 4:
+		if(indiceEsp[0]!=0 && indiceEsp[1]!=0 && indiceEsp[2]!=0 && indiceEsp[3]!=0 && indiceEsp[4]==0)
+			return TRUE;
+			break;
+		else
+			return FALSE;
+			break;
+	case 5:
+		if(indiceEsp[0]!=0 && indiceEsp[1]!=0 && indiceEsp[2]!=0 && indiceEsp[3]!=0 && indiceEsp[4]!=0)
+			return TRUE;
+			break;
+		else
+			return FALSE;
+			break;
+	default:
+			return FALSE;
+
+	}
 } /* Fim função: TGRA -Validar indice de Grafo */
 
 
