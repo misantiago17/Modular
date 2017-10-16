@@ -5,16 +5,15 @@
 *  Letras identificadoras:      GRA
 *
 *  Nome da base de software:    Arcabouço para a automação de testes de programas redigidos em C
-*  Arquivo da base de software: ????????????????
 *
 *  Projeto: INF 1301 / 1628 Automatização dos testes de módulos C
 *  Gestor:  DI/PUC-Rio
 *  Autores: Gabriel Busquim (gb), Michelle Santiago (ms), Renan Moreira (rm)
 *
 *  $HA Histórico de evolução:
-*     Versão  Autor    Data     Observações
-*     2        rm    10/10/2017 Funções GRA_IrVertice e GRA_DestruirGrafo
-*     1      rm/ms/gb   05/10/2017 início desenvolvimento
+*     Versão  Autor   	 Data     	Observações
+*     2        rm    	10/10/2017 	Funções GRA_IrVertice e GRA_DestruirGrafo
+*     1      rm/ms/gb   05/10/2017 	início desenvolvimento
 *
 ***************************************************************************/
 
@@ -72,7 +71,6 @@ GRA_tpVertice *CriarVertice( void * pValor,int tam);
 void DestruirElemVertice(void *Elem);
 void DestruirElemVertices(void *Elem);
 
-
 /*****  Código das funções exportadas pelo módulo  *****/
 
 /***************************************************************************
@@ -103,6 +101,7 @@ GRA_tpCondRet GRA_CriarGrafo(void   ( * ExcluirValor ) ( void * pDado ), GRA_tpp
 	return GRA_CondRetOK;
 } /* Fim função: GRA  &Criar grafo */
 
+
   /***********************************************************************
   *  $FC Função: GRA  &Destruir grafo
   *  ****/
@@ -114,7 +113,7 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo)
 	GRA_tpVertice *vert;
 
 	if(pGrafo==NULL)
-		GRA_CondRetParametroIncorreto;
+		return GRA_CondRetParametroIncorreto;
 	if(LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo,0)!=LIS_CondRetListaVazia)
 	{
 		CondRetLis=LIS_IrInicioLista(pGrafo->pVerticesGrafo);
@@ -202,6 +201,8 @@ GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert) {
 	pGrafo->pElemCorr = vert;
 	return GRA_CondRetOK;
 }/* Fim função: GRA  &Ir para o Vértice*/
+
+
 /***************************************************************************
 *
 *  Função: GRA  &Obter referência para o valor contido no vértice
@@ -226,11 +227,11 @@ GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet)
 
 } /* Fim função: GRA  &Obter referência para o valor contido no vértice */
 
+
 /***************************************************************************
 *
 *  Função: GRA  &Inserir vértice
 *  ****/
-
 
 GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo, void * pValor)
 {
@@ -276,13 +277,14 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo, void * pValor)
 		return GRA_CondRetRetornoLisIncorreto;
 	pGrafo->pElemCorr=pRet;
 	return GRA_CondRetOK;
-		}
- /* Fim função: GRA  &Inserir vértice */
+}/* Fim função: GRA  &Inserir vértice */
+
 
  /***************************************************************************
  *
  *  Função: GRA  &Excluir Vertice
  *  ****/
+ 
 GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo)
 {
 	GRA_tpCondRet CondRetGra;
@@ -345,6 +347,7 @@ GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo)
 		return GRA_CondRetOK;
 	}
 }/*  Fim função: GRA  &Excluir Vertice */
+
 
 /***************************************************************************
 *
@@ -482,6 +485,7 @@ GRA_tpCondRet GRA_ExisteAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 
 }  /*Fim função: GRA  &Existe Aresta */
 
+
 /***************************************************************************
 *
 *  Função: GRA  &Excluir Aresta
@@ -564,6 +568,7 @@ GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 	
 }/*  Fim função: GRA  &Excluir Aresta */
 
+
  /***************************************************************************
  *
  *  Função: GRA  &Retornar Numero de Arestas
@@ -579,6 +584,7 @@ GRA_tpCondRet GRA_NumArestas(GRA_tppGrafo pGrafo, int *pNumArestas)
 		return GRA_CondRetRetornoLisIncorreto;
 	return GRA_CondRetOK;
 }/* Fim função: GRA  &Retornar Numero de Arestas*/
+
 
 /***************************************************************************
 *
@@ -622,9 +628,7 @@ GRA_tpCondRet GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo,int* pDado)
 	if(CondRetLis!=LIS_CondRetOK)
 		return GRA_CondRetRetornoLisIncorreto;
 	return GRA_CondRetOK;
-
-
-
+	
 }/* Fim função: GRA  &RetornarIndicesAresta*/
 		
 

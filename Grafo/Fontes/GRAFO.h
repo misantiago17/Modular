@@ -137,6 +137,9 @@ GRA_tpCondRet GRA_CriarGrafo(void(*ExcluirValor) (void * pDado), GRA_tppGrafo* G
 *     Se ocorrer algum erro durante a destruição, o grafo resultado
 *     estará estruturalmente incorreto.
 *
+*  $EP Parâmetros
+*	  pGrafo 		- ponteiro para o grafo.
+*
 *  $FV Valor retornado
 *     GRA_CondRetOK
 *	  GRA_CondRetParametroIncorreto
@@ -159,7 +162,7 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo);
 *     numVert - o número do vértice a ser encontrado
 *
 *  $FV Valor retornado
-*     CondRetOK
+*     GRA_CondRetOK
 *     GRA_CondRetParametroIncorreto
 *     GRA_CondRetRetornoLisIncorreto
 *     GRA_CondRetGrafoVazio
@@ -255,6 +258,7 @@ GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo);
 *     GRA_CondRetOK
 *     GRA_CondRetArestaParaSiMesmo
 *     GRA_CondRetParametroIncorreto
+*	  GRA_CondRetRetornoLisIncorreto
 *     GRA_CondRetGrafoVazio
 *     GRA_CondRetNaoAchouVertice
 *     GRA_CondRetArestaJaExiste
@@ -322,7 +326,6 @@ GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 *  $ED Descrição da função
 *     Retorna por referencia o numero de arestas que o vertice corrente possui.
 *	  
-*
 *  $EP Parâmetros
 *     pGrafo       - ponteiro para o grafo no qual se deseja descobrir o numero de arestas do vertice.
 *	  pNumArestas  - endereço de um ponteiro para armazenar o numero de arestas encontrado
