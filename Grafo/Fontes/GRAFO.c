@@ -130,6 +130,7 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo)
 			 {
 				pGrafo->ExcluirValor(vert->pValor);
 			 } /* if */
+			 free(vert->pValor);
 		
 		}
 	    while(LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo,1)!=LIS_CondRetFimLista);
@@ -210,6 +211,7 @@ GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert) {
 
 GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent) 
 {
+	int tam;
 	LIS_tpCondRet CondRet;
 	if(pGrafo==NULL)
 		return GRA_CondRetParametroIncorreto;
@@ -218,7 +220,7 @@ GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent)
 		return GRA_CondRetRetornoLisIncorreto;
 	if(tam==0) 
 		return GRA_CondRetGrafoVazio;
-	*numIdent=pGrafo->pElemCorr->ident;
+	*numIdent=pGrafo->pElemCorr->Ident;
 	return GRA_CondRetOK;
 }/* Fim função: GRA  &Retorna Identificador*/
 

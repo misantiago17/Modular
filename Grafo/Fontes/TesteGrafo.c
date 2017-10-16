@@ -48,6 +48,7 @@ static const char EXC_ARESTA_CMD          [ ] = "=excluiraresta"     ;
 static const char NUM_VERTS_CMD           [ ] = "=obternumverts" ;
 static const char NUM_ARESTAS_CMD         [ ] = "=obternumarestas" ;
 static const char INDICES_ARESTAS_CMD     [ ] = "=indicesarestas" ;
+static const char RET_IDENT_CMD           [ ] = "=retornaident" ;
 
 
 struct infs{
@@ -391,6 +392,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 	else if ( strcmp( ComandoTeste , RET_IDENT_CMD ) == 0 )
 	{
+		GRA_tpCondRet debugGRA;
 		int numIdent;
 		int numIdentEsp;
 
@@ -402,13 +404,13 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetParm ;
 		} /* if */
 
-		debugGRA=GRA_RetornaIdentificador(vtGrafos[ inxGrafo ],&numIdent)
+		debugGRA=GRA_RetornaIdentificador(vtGrafos[ inxGrafo ],&numIdent);
 		CondRet= TST_CompararInt( CondRetEsp , debugGRA,"Condicao de retorno errada ao retornar identificador do vertice corrente" ) ;
 		if (CondRet != TST_CondRetOK) {
 				return CondRet;
 		}
 
-		return TST_CompararInt( numElem , numIdent
+		return TST_CompararInt( numIdentEsp , numIdent
                        , "Identificador retornado inesperado" ) ;
 
 
