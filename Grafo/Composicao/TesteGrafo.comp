@@ -1,4 +1,4 @@
-# Composicao do programa de teste de um grafo generica
+# Composicao do programa de teste de um grafo generico com cabeca
 
 [Diretorios]
 
@@ -15,7 +15,7 @@ Grafo
 Lista
 
 [BuildInicio]
-/OUT:..\Produto\TRAB1-2.EXE.exe
+/OUT:..\Produto\TRAB1-2.exe
 /INCREMENTAL:NO
 /MACHINE:IX86
 

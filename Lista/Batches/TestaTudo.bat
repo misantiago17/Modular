@@ -4,7 +4,7 @@ cls
 
 if exist ..\Scripts\estatisticas.estat  del ..\Scripts\estatisticas.estat
 
-..\Produto\TesteLista	/s..\Scripts\TesteLista	/l..\Produto\TesteLista	/a..\Scripts\estatisticas
+..\Produto\TRAB1-1	/s..\Scripts\TesteLista	/l..\Produto\TRAB1-1	/a..\Scripts\estatisticas
 
 
 ..\..\Tools\exbestat /e..\Scripts\estatisticas
