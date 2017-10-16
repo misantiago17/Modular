@@ -1,11 +1,4 @@
 testegrafo.c
+..\Fontes\testegrafo.c(468) : warning C4013: 'ValidarParmIndices' undefined; assuming extern returning int
 grafo.c
-lista.c
-Microsoft (R) Incremental Linker Version 10.00.40219.01
-Copyright (C) Microsoft Corporation.  All rights reserved.
-
-/OUT:..\Produto\TesteGrafo.exe 
-/INCREMENTAL:NO 
-/MACHINE:IX86 
-testegrafo.obj grafo.obj lista.obj 
-ArcaboucoTeste.lib 
+..\Fontes\grafo.c(630) : error C2143: syntax error : missing ';' before '}'
