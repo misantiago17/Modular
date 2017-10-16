@@ -67,9 +67,9 @@ typedef struct GRA_tagGrafo {
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
-GRA_tpVertice *CriarVertice( void * pValor,int tam);
-void DestruirElemVertice(void *Elem);
-void DestruirElemVertices(void *Elem);
+static GRA_tpVertice *CriarVertice( void * pValor,int tam);
+static void DestruirElemVertice(void *Elem);
+static void DestruirElemVertices(void *Elem);
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -202,6 +202,27 @@ GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert) {
 	return GRA_CondRetOK;
 }/* Fim função: GRA  &Ir para o Vértice*/
 
+<<<<<<< HEAD
+=======
+/***************************************************************************
+ *
+ *  Função: Função: GRA  &Retorna Identificador
+ *  ****/
+
+GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent) 
+{
+	LIS_tpCondRet CondRet;
+	if(pGrafo==NULL)
+		return GRA_CondRetParametroIncorreto;
+	CondRet=LIS_ObterTamanho(pGrafo->pVerticesGrafo,&tam);
+	if(CondRet!=LIS_CondRetOK)
+		return GRA_CondRetRetornoLisIncorreto;
+	if(tam==0) 
+		return GRA_CondRetGrafoVazio;
+	*numIdent=pGrafo->pElemCorr->ident;
+	return GRA_CondRetOK;
+}/* Fim função: GRA  &Retorna Identificador*/
+>>>>>>> bb1efb1414e26ea0fb54cb44615014931dc008d7
 
 /***************************************************************************
 *

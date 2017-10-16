@@ -227,7 +227,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		return TST_CompararInt( CondRetEsp , CondRet ,
 			"Condicao de retorno errada ao inserir vertice." ) ;
 
-	} /* fim ativa: Testar inserir elemento antes */
+	} /* fim ativa: Testar inserir vertice */
 
 
 	/* Testar excluir vertice */
@@ -269,7 +269,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			GRA_CriarAresta( vtGrafos[ inxGrafo ],numVert1,numVert2) ,
 			"Condição de retorno errada ao excluir aresta."   ) ;
 
-	} /* fim ativa: Testar excluir aresta */
+	} /* fim ativa: Testar criar aresta */
 
 
 	/* Testar excluir aresta */
@@ -312,7 +312,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			GRA_ExisteAresta( vtGrafos[ inxGrafo ],numVert1,numVert2) ,
 			"Condição de retorno errada ao verificar existencia da aresta."   ) ;
 
-	} /* fim ativa: Testar excluir aresta */
+	} /* fim ativa: Testar existe aresta */
 
 	/* Testar obter valor do elemento corrente */
 
@@ -388,6 +388,34 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 
 	} /* fim ativa: Testar ir Vertice  */
+
+
+		/* Testar Retornar Identificador */
+
+	else if ( strcmp( ComandoTeste , RET_IDENT_CMD ) == 0 )
+	{
+		int numIdent;
+		int numIdentEsp;
+
+		numLidos = LER_LerParametros( "iii" , &inxGrafo,&numIdentEsp,&CondRetEsp ) ;
+
+		if ( ( numLidos != 3 )
+			|| ( ! ValidarInxGrafo( inxGrafo)) )
+		{
+			return TST_CondRetParm ;
+		} /* if */
+
+		debugGRA=GRA_RetornaIdentificador(vtGrafos[ inxGrafo ],&numIdent)
+		CondRet= TST_CompararInt( CondRetEsp , debugGRA,"Condicao de retorno errada ao retornar identificador do vertice corrente" ) ;
+		if (CondRet != TST_CondRetOK) {
+				return CondRet;
+		}
+
+		return TST_CompararInt( numElem , numIdent
+                       , "Identificador retornado inesperado" ) ;
+
+
+	} /* fim ativa: Retornar Identificador  */
 
 	/* Testar Retornar numVertices */
 
