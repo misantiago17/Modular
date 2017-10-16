@@ -1,0 +1,81 @@
+﻿------ Autores ------
+
+
+---------  Descrição  ------------
+
+Módulos Grafo genérico com cabeça e Lista genérica duplamente encadeada 
+e seus respectivos módulos de teste.
+
+Fontes:
+			
+- Módulos de implementação:							
+
+							LISTA.C
+							GRAFO.C
+							TESTELISTA.C
+							TESTEGRAFO.C	
+
+
+								
+- Módulos de definição:
+
+							LISTA.H
+							GRAFO.H
+							TESTELISTA.H
+							TESTEGRAFO.H											DEFINICOES.H
+
+			
+- Arcabouco de teste:
+							ArcaboucoTeste.lib
+
+- Arquivos de Script:
+							
+							TESTELISTA.script
+							TESTEGRAFO.script
+
+- Arquivos de Log:
+
+							TESTELISTA.log
+							TESTEGRAFO.log
+								
+- Arquivos Executáveis:
+							TRAB1-1.exe
+							TRAB1-2.exe
+
+- Arquivos Bat:
+
+							COMPILA.bat
+							COMPILATUDO.bat
+							CRIALIB.bat
+							GERAMAKE.bat
+							GERATUDO.bat
+							LIMPAOBJ.bat
+							LIMPATUDO.bat
+							TESTATUDO.bat
+							TUDO.bat
+							vsvars32.bat
+
+- Arquivos de Relatorio:
+							Relatorios/RELATORIO-LLA.txt
+							Relatorios/RELATORIO-GBG.txt
+
+- Arquivo Leiame:
+
+							LEIAME.TXT
+
+- Arquivo de documentacao:
+							EspecificacaoDeRequisitos.txt
+							Arquitetura.png
+							Interfaces.png
+							ModeloFisico.png
+
+-------------  Modo de uso  -------------
+
+- Extrair o conteudo do arquivo .zip
+- Abrir o cmd
+
+Para compilar e executar os testes:
+	- Entrar na pasta "Batches" do respectivo modulo
+	- Executar vsvars32.bat e tudo.bat
+	- Executavel com o programa e o log de saída será gerado em "Produto"
+

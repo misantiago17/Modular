@@ -15,7 +15,7 @@ Grafo
 Lista
 
 [BuildInicio]
-/OUT:..\Produto\TesteGrafo.exe
+/OUT:..\Produto\TRAB1-2.EXE.exe
 /INCREMENTAL:NO
 /MACHINE:IX86
 
