@@ -1,4 +1,38 @@
 testegrafo.c
 ..\Fontes\testegrafo.c(468) : warning C4013: 'ValidarParmIndices' undefined; assuming extern returning int
 grafo.c
-..\Fontes\grafo.c(630) : error C2143: syntax error : missing ';' before '}'
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(593) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(597) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(598) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(600) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(602) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(604) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(605) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(609) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(612) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(613) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(615) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(617) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(619) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(620) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(621) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(623) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(625) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(626) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(628) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(631) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(632) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(633) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(634) : warning C4702: unreachable code
+c:\users\usuario\documents\github\modular\grafo\fontes\grafo.c(635) : warning C4702: unreachable code
+lista.c
+Microsoft (R) Incremental Linker Version 10.00.40219.01
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/OUT:..\Produto\TesteGrafo.exe 
+/INCREMENTAL:NO 
+/MACHINE:IX86 
+testegrafo.obj grafo.obj lista.obj 
+ArcaboucoTeste.lib 
+testegrafo.obj : error LNK2019: unresolved external symbol _ValidarParmIndices referenced in function _TST_EfetuarComando
+..\Produto\TesteGrafo.exe : fatal error LNK1120: 1 unresolved externals
