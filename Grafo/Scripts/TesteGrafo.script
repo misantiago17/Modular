@@ -106,6 +106,8 @@
 == Destruir a grafo
 =destruirgrafo   grafo0   OK
 
+== Inserir vertice em grafo destruido
+=inserirvertice  grafo0  nome3  data3  cidade3  email3  parametroIncorreto
 
 == criar grafo1
 =criargrafo		grafo1	OK

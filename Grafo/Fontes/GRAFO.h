@@ -86,10 +86,7 @@ typedef enum {
 
 	GRA_CondRetRetornoLisIncorreto,
 	/* Condicao de retorno do modulo Lista imprevista*/
-
-	GRA_CondRetInconsistencia,
-	/* Encontrou-se uma inconsistencia no Grafo*/
-
+	
 	GRA_CondRetParametroIncorreto,
 	/* Parametro passado esta diferente do especificado*/
 

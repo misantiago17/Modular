@@ -32,19 +32,19 @@ Estatísticas do construto
       testegrafo.c
 
    Estatísticas do arquivo: grafo.c
-      Total linhas:             745
-      Linhas de código:         496
+      Total linhas:             689
+      Linhas de código:         444
       Linhas de comentário:     116
-      Linhas em branco:         146
+      Linhas em branco:         142
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
 
    Estatísticas do arquivo: grafo.h
-      Total linhas:             387
-      Linhas de código:          36
-      Linhas de comentário:     301
-      Linhas em branco:          50
+      Total linhas:             384
+      Linhas de código:          35
+      Linhas de comentário:     300
+      Linhas em branco:          49
    Arquivos em que é incluído
       grafo.c
       testegrafo.c
@@ -75,10 +75,10 @@ Estatísticas do construto
       lista.c
 
    Estatísticas do arquivo: testegrafo.c
-      Total linhas:             585
-      Linhas de código:         343
+      Total linhas:             609
+      Linhas de código:         369
       Linhas de comentário:      88
-      Linhas em branco:         169
+      Linhas em branco:         167
    Arquivos de inclusão de que necessita
       generico.h
       grafo.h
@@ -97,10 +97,10 @@ Estatísticas do construto
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      1973
-         Linhas de código:           189
-         Linhas de comentário:      1514
-         Linhas em branco:           270
+         Total linhas do tipo:      1970
+         Linhas de código:           188
+         Linhas de comentário:      1513
+         Linhas em branco:           269
          Arquivos deste tipo:          5
 
   Tipo: obj      Path: ..\Objetos
@@ -125,17 +125,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      1874
-         Linhas de código:          1108
+         Total linhas do tipo:      1842
+         Linhas de código:          1082
          Linhas de comentário:       342
-         Linhas em branco:           469
+         Linhas em branco:           463
          Arquivos deste tipo:          3
 
 Totais para todo o construto TesteGrafo
 
-   Total linhas:              3847
-   Linhas de código:          1297
-   Linhas de comentário:      1856
-   Linhas em branco:           739
+   Total linhas:              3812
+   Linhas de código:          1270
+   Linhas de comentário:      1855
+   Linhas em branco:           732
    Arquivos processados:         8
 

@@ -62,9 +62,6 @@ typedef struct infs Teste_Infs;
 #define TRUE  1
 #define FALSE 0
 
-#define VAZIO     0
-#define NAO_VAZIO 1
-
 #define DIM_VT_GRAFO   10
 
 
@@ -75,8 +72,8 @@ GRA_tppGrafo   vtGrafos[ DIM_VT_GRAFO ] ;
 /***** Protótipos das funções encapuladas no módulo *****/
 
 
-static int ValidarInxGrafo( int inxGrafo , int Modo ) ;
-
+static int ValidarInxGrafo( int inxGrafo) ;
+static int ValidarParmIndices(int tamVetor, int *indiceEsp);
 /*****  Código das funções exportadas pelo módulo  *****/
 
 
@@ -153,7 +150,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			&inxGrafo, &CondRetEsp ) ;
 
 		if ( ( numLidos != 2 )
-			|| ( ! ValidarInxGrafo( inxGrafo , VAZIO )))
+			|| ( ! ValidarInxGrafo( inxGrafo)))
 		{
 			return TST_CondRetParm ;
 		} /* if */
@@ -175,7 +172,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
             numLidos = LER_LerParametros( "ii" ,
                                &inxGrafo,&CondRetEsp ) ;
             if ( ( numLidos != 2 )
-              || ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )))
+              || ( ! ValidarInxGrafo( inxGrafo)))
             {
                return TST_CondRetParm ;
             } /* if */
@@ -204,7 +201,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			&inxGrafo  ,NomeRet,DataRet,CidadeRet,EmailRet,&CondRetEsp ) ;
 
 		if ( ( numLidos != 6 )
-			|| ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) )
+			|| ( ! ValidarInxGrafo( inxGrafo)) )
 		{
 			return TST_CondRetParm ;
 		} /* if */
@@ -242,7 +239,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			&inxGrafo , &CondRetEsp ) ;
 
 		if ( ( numLidos != 2 )
-			|| ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) )
+			|| ( ! ValidarInxGrafo( inxGrafo)) )
 		{
 			return TST_CondRetParm ;
 		} /* if */
@@ -263,7 +260,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			&inxGrafo ,&numVert1,&numVert2, &CondRetEsp ) ;
 
 		if ( ( numLidos != 4 )
-			|| ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) )
+			|| ( ! ValidarInxGrafo( inxGrafo)) )
 		{
 			return TST_CondRetParm ;
 		} /* if */
@@ -285,7 +282,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			&inxGrafo ,&numVert1,&numVert2, &CondRetEsp ) ;
 
 		if ( ( numLidos != 4 )
-			|| ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) )
+			|| ( ! ValidarInxGrafo( inxGrafo)) )
 		{
 			return TST_CondRetParm ;
 		} /* if */
@@ -306,7 +303,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			&inxGrafo ,&numVert1,&numVert2, &CondRetEsp ) ;
 
 		if ( ( numLidos != 4 )
-			|| ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) )
+			|| ( ! ValidarInxGrafo( inxGrafo)) )
 		{
 			return TST_CondRetParm ;
 		} /* if */
@@ -327,7 +324,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			&inxGrafo  ,NomeEsp,DataEsp,CidadeEsp,EmailEsp,&CondRetEsp ) ;
 
 		if ( ( numLidos != 6 )
-			|| ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) )
+			|| ( ! ValidarInxGrafo( inxGrafo)) )
 		{
 			return TST_CondRetParm ;
 		} /* if */
@@ -381,7 +378,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			numLidos = LER_LerParametros( "iii" , &inxGrafo,&numVert,&CondRetEsp ) ;
 
 		if ( ( numLidos != 3 )
-			|| ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) )
+			|| ( ! ValidarInxGrafo( inxGrafo)) )
 		{
 			return TST_CondRetParm ;
 		} /* if */
@@ -404,7 +401,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
                                 &CondRetEsp ) ;
 
             if ( ( numLidos != 3 )
-              || ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) )
+              || ( ! ValidarInxGrafo( inxGrafo )) )
             {
                return TST_CondRetParm ;
             } /* if */
@@ -434,7 +431,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
                                 &CondRetEsp ) ;
 
             if ( ( numLidos != 3 )
-              || ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) )
+              || ( ! ValidarInxGrafo( inxGrafo )) )
             {
                return TST_CondRetParm ;
             } /* if */
@@ -465,7 +462,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			&indiceEsp[4],&CondRetEsp) ;
 
 		if ( ( numLidos != 8 )
-			|| ( ! ValidarInxGrafo( inxGrafo , NAO_VAZIO )) || (!ValidarParmIndices(tamVetor,indiceEsp) ))
+			|| ( ! ValidarInxGrafo( inxGrafo )) || (!ValidarParmIndices(tamVetor,indiceEsp) ))
 		{
 			return TST_CondRetParm ;
 		} /* if */
@@ -518,27 +515,13 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 *
 ***********************************************************************/
 
-int ValidarInxGrafo( int inxGrafo , int Modo )
+int ValidarInxGrafo( int inxGrafo)
 {
 
 	if ( ( inxGrafo <  0 )
 		|| ( inxGrafo >= DIM_VT_GRAFO ))
 	{
 		return FALSE ;
-	} /* if */
-
-	if ( Modo == VAZIO )
-	{
-		if ( vtGrafos[ inxGrafo ] != 0 )
-		{
-			return FALSE ;
-		} /* if */
-	} else
-	{
-		if ( vtGrafos[ inxGrafo ] == 0 )
-		{
-			return FALSE ;
-		} /* if */
 	} /* if */
 
 	return TRUE ;
@@ -551,56 +534,68 @@ int ValidarInxGrafo( int inxGrafo , int Modo )
 *
 ***********************************************************************/
 
-int ValidarParmIndices( int tamVetor , int indiceEsp )
+int ValidarParmIndices( int tamVetor , int *indiceEsp )
 {
 	switch(tamVetor)
 	{
 	case 0:
-		if(indiceEsp[0]==0 && indiceEsp[1]==0 && indiceEsp[2]==0 && indiceEsp[3]==0 && indiceEsp[4]==0)
+		if (indiceEsp[0] == 0 && indiceEsp[1] == 0 && indiceEsp[2] == 0 && indiceEsp[3] == 0 && indiceEsp[4] == 0) {
 			return TRUE;
 			break;
-		else
+		}
+		else {
 			return FALSE;
 			break;
+		}
 
 	case 1:
-		if(indiceEsp[0]!=0 && indiceEsp[1]==0 && indiceEsp[2]==0 && indiceEsp[3]==0 && indiceEsp[4]==0)
+		if (indiceEsp[0] != 0 && indiceEsp[1] == 0 && indiceEsp[2] == 0 && indiceEsp[3] == 0 && indiceEsp[4] == 0) {
 			return TRUE;
 			break;
-		else
+		}
+		else {
 			return FALSE;
 			break;
+		}
 
 	case 2:
-		if(indiceEsp[0]!=0 && indiceEsp[1]!=0 && indiceEsp[2]==0 && indiceEsp[3]==0 && indiceEsp[4]==0)
+		if (indiceEsp[0] != 0 && indiceEsp[1] != 0 && indiceEsp[2] == 0 && indiceEsp[3] == 0 && indiceEsp[4] == 0) {
 			return TRUE;
 			break;
-		else
+		}
+		else {
 			return FALSE;
 			break;
+		}
 
 	case 3:
-		if(indiceEsp[0]!=0 && indiceEsp[1]!=0 && indiceEsp[2]!=0 && indiceEsp[3]==0 && indiceEsp[4]==0)
+		if (indiceEsp[0] != 0 && indiceEsp[1] != 0 && indiceEsp[2] != 0 && indiceEsp[3] == 0 && indiceEsp[4] == 0) {
 			return TRUE;
 			break;
-		else
+		}
+		else {
 			return FALSE;
 			break;
+		}
 
 	case 4:
-		if(indiceEsp[0]!=0 && indiceEsp[1]!=0 && indiceEsp[2]!=0 && indiceEsp[3]!=0 && indiceEsp[4]==0)
+		if (indiceEsp[0] != 0 && indiceEsp[1] != 0 && indiceEsp[2] != 0 && indiceEsp[3] != 0 && indiceEsp[4] == 0) {
 			return TRUE;
 			break;
-		else
+		}
+		else {
 			return FALSE;
 			break;
+		}
 	case 5:
-		if(indiceEsp[0]!=0 && indiceEsp[1]!=0 && indiceEsp[2]!=0 && indiceEsp[3]!=0 && indiceEsp[4]!=0)
+		if (indiceEsp[0] != 0 && indiceEsp[1] != 0 && indiceEsp[2] != 0 && indiceEsp[3] != 0 && indiceEsp[4] != 0) {
 			return TRUE;
 			break;
-		else
+		}
+		else {
 			return FALSE;
 			break;
+		}
 	default:
 			return FALSE;
 
