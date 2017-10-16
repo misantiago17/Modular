@@ -59,8 +59,6 @@ typedef struct infs Teste_Infs;
 #define TRUE  1
 #define FALSE 0
 
-#define VAZIO     0
-#define NAO_VAZIO 1
 
 #define DIM_VT_LISTA   10
 
@@ -72,7 +70,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 /***** Protótipos das funções encapuladas no módulo *****/
 
 
-   static int ValidarInxLista( int inxLista , int Modo ) ;
+   static int ValidarInxLista( int inxLista ) ;
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -153,7 +151,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
                        &inxLista, &CondRet ) ;
 
             if ( ( numLidos != 2 )
-              || ( ! ValidarInxLista( inxLista , VAZIO )))
+              || ( ! ValidarInxLista( inxLista )))
             {
                return TST_CondRetParm ;
             } /* if */
@@ -174,7 +172,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
                                &inxLista ) ;
 
             if ( ( numLidos != 1 )
-              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )))
+              || ( ! ValidarInxLista( inxLista )))
             {
                return TST_CondRetParm ;
             } /* if */
@@ -193,7 +191,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
             numLidos = LER_LerParametros( "ii" ,
                                &inxLista,&CondRetEsp ) ;
             if ( ( numLidos != 2 )
-              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )))
+              || ( ! ValidarInxLista( inxLista  )))
             {
                return TST_CondRetParm ;
             } /* if */
@@ -222,7 +220,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
                        &inxLista  ,NomeRet,DataRet,CidadeRet,EmailRet,&CondRetEsp ) ;
 
             if ( ( numLidos != 6 )
-              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+              || ( ! ValidarInxLista( inxLista  )) )
             {
                return TST_CondRetParm ;
             } /* if */
@@ -259,7 +257,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
                        &inxLista  ,NomeRet,DataRet,CidadeRet,EmailRet,&CondRetEsp ) ;
 
             if ( ( numLidos != 6 )
-              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+              || ( ! ValidarInxLista( inxLista )) )
             {
                return TST_CondRetParm ;
             } /* if */
@@ -296,7 +294,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
                   &inxLista , &CondRetEsp ) ;
 
             if ( ( numLidos != 2 )
-              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+              || ( ! ValidarInxLista( inxLista  )) )
             {
                return TST_CondRetParm ;
             } /* if */
@@ -317,7 +315,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
                        &inxLista  ,NomeEsp,DataEsp,CidadeEsp,EmailEsp,&CondRetEsp ) ;
 
             if ( ( numLidos != 6 )
-              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+              || ( ! ValidarInxLista( inxLista  )) )
             {
                return TST_CondRetParm ;
             } /* if */
@@ -369,7 +367,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
             numLidos = LER_LerParametros( "i" , &inxLista ) ;
 
             if ( ( numLidos != 1 )
-              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+              || ( ! ValidarInxLista( inxLista  )) )
             {
                return TST_CondRetParm ;
             } /* if */
@@ -388,7 +386,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
             numLidos = LER_LerParametros( "i" , &inxLista ) ;
 
             if ( ( numLidos != 1 )
-              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+              || ( ! ValidarInxLista( inxLista  )) )
             {
                return TST_CondRetParm ;
             } /* if */
@@ -408,7 +406,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
                                 &CondRetEsp ) ;
 
             if ( ( numLidos != 3 )
-              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+              || ( ! ValidarInxLista( inxLista  )) )
             {
                return TST_CondRetParm ;
             } /* if */
@@ -430,7 +428,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
                                 &CondRetEsp ) ;
 
             if ( ( numLidos != 3 )
-              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+              || ( ! ValidarInxLista( inxLista  )) )
             {
                return TST_CondRetParm ;
             } /* if */
@@ -463,7 +461,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 *
 ***********************************************************************/
 
-   int ValidarInxLista( int inxLista , int Modo )
+   int ValidarInxLista( int inxLista  )
    {
 
       if ( ( inxLista <  0 )
@@ -472,20 +470,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
          return FALSE ;
       } /* if */
          
-      if ( Modo == VAZIO )
-      {
-         if ( vtListas[ inxLista ] != 0 )
-         {
-            return FALSE ;
-         } /* if */
-      } else
-      {
-         if ( vtListas[ inxLista ] == 0 )
-         {
-            return FALSE ;
-         } /* if */
-      } /* if */
-         
+  
       return TRUE ;
 
    } /* Fim função: TLIS -Validar indice de lista */
