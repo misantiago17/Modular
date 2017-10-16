@@ -71,12 +71,10 @@ GRA_tppGrafo   vtGrafos[ DIM_VT_GRAFO ] ;
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
-
 static int ValidarInxGrafo( int inxGrafo) ;
 static int ValidarParmIndices(int tamVetor, int *indiceEsp);
+
 /*****  Código das funções exportadas pelo módulo  *****/
-
-
 /***********************************************************************
 *
 *  $FC Função: TGRA &Testar grafo
@@ -86,12 +84,11 @@ static int ValidarParmIndices(int tamVetor, int *indiceEsp);
 *
 *     Comandos disponíveis:
 *
-*     =resetteste
-*           - anula o vetor de grafos. Provoca vazamento de memória
+*     =resetteste - anula o vetor de grafos. Provoca vazamento de memória
 *     =criargrafo                   inxGrafo CondRetEsp
 *     =destruirgrafo                inxGrafo CondRetEsp
 *     =irvertice                    inxGrafo numVert CondRetEsp
-*     =inserirvertice                   inxGrafo  Nome Data Cidade Email CondRetEsp
+*     =inserirvertice               inxGrafo  Nome Data Cidade Email CondRetEsp
 *     =obtervalorvert               inxGrafo  Nome Data Cidade Email CondRetEsp
 *     =criararesta                  inxGrafo  numVert1 numVert2 CondRetEsp
 *     =excluirvertice               inxGrafo  CondRetEsp
