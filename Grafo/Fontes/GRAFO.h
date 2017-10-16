@@ -172,6 +172,25 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo);
 
 GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert);
 
+/***********************************************************************
+*  $FC Função: GRA  &Retorna Identificador
+*
+*  $ED Descrição da função
+*     Retorna o identificador do vértice.
+*
+*  $EP Parâmetros
+*     pGrafo  - ponteiro para o grafo a ser manipulado
+*     numIdent - ponteiro para armazenar o valor do identificador
+*
+*  $FV Valor retornado
+*     GRA_CondRetOK
+*     GRA_CondRetParametroIncorreto
+*     GRA_CondRetRetornoLisIncorreto
+*     GRA_CondRetGrafoVazio
+*
+***********************************************************************/
+
+GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent);
 
 /***********************************************************************
 *  $FC Função: GRA  &Obter referência para o valor contido no vértice

@@ -202,11 +202,10 @@ GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert) {
 	return GRA_CondRetOK;
 }/* Fim função: GRA  &Ir para o Vértice*/
 
-<<<<<<< HEAD
-=======
+
 /***************************************************************************
  *
- *  Função: Função: GRA  &Retorna Identificador
+ *  Função:  &Retorna Identificador
  *  ****/
 
 GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent) 
@@ -222,7 +221,7 @@ GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent)
 	*numIdent=pGrafo->pElemCorr->ident;
 	return GRA_CondRetOK;
 }/* Fim função: GRA  &Retorna Identificador*/
->>>>>>> bb1efb1414e26ea0fb54cb44615014931dc008d7
+
 
 /***************************************************************************
 *
