@@ -45,7 +45,6 @@
 *
 *  $TC Tipo de dados: GRA Elemento do grafo
 *
-*
 ***********************************************************************/
 
 typedef struct tagVertice {
@@ -58,13 +57,13 @@ typedef struct tagVertice {
 
 	LIS_tppLista pLisAresta;
 	/* Ponteiro para a lista de arestas */
+	
 } GRA_tpVertice;
 
 
 /***********************************************************************
 *
 *  $TC Tipo de dados: GRA Descritor da cabeça do grafo
-*
 *
 ***********************************************************************/
 
@@ -115,10 +114,12 @@ GRA_tpCondRet GRA_CriarGrafo(void   ( * ExcluirValor ) ( void * pDado ), GRA_tpp
 
 	*GrafoRet = pGrafo;
 	return GRA_CondRetOK;
+	
 } /* Fim função: GRA  &Criar grafo */
 
 
   /***********************************************************************
+  *
   *  $FC Função: GRA  &Destruir grafo
   *  ****/
 
@@ -157,6 +158,7 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo)
 	pGrafo->pElemCorr=NULL;
 	pGrafo->pVerticesGrafo=NULL;
 	return GRA_CondRetOK;
+	
 }/* Fim função: GRA  &Destruir grafo*/
 
 
@@ -166,6 +168,7 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo)
  *  ****/
 
 GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert) {
+	
 	LIS_tppLista verts;
 	GRA_tpVertice* vert;
 	int tam,contador=0;
@@ -217,6 +220,7 @@ GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert) {
 
 	pGrafo->pElemCorr = vert;
 	return GRA_CondRetOK;
+	
 }/* Fim função: GRA  &Ir para o Vértice*/
 
 
@@ -238,6 +242,7 @@ GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent)
 		return GRA_CondRetGrafoVazio;
 	*numIdent=pGrafo->pElemCorr->Ident;
 	return GRA_CondRetOK;
+	
 }/* Fim função: GRA  &Retorna Identificador*/
 
 
@@ -248,8 +253,6 @@ GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent)
 
 GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet)
 {
-
-
 	if(pGrafo == NULL)
 		return GRA_CondRetParametroIncorreto;
 
@@ -315,6 +318,7 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo, void * pValor)
 		return GRA_CondRetRetornoLisIncorreto;
 	pGrafo->pElemCorr=pRet;
 	return GRA_CondRetOK;
+	
 }/* Fim função: GRA  &Inserir vértice */
 
 
@@ -621,6 +625,7 @@ GRA_tpCondRet GRA_NumArestas(GRA_tppGrafo pGrafo, int *pNumArestas)
 	if (LIS_ObterTamanho(pGrafo->pElemCorr->pLisAresta, pNumArestas) != LIS_CondRetOK)
 		return GRA_CondRetRetornoLisIncorreto;
 	return GRA_CondRetOK;
+	
 }/* Fim função: GRA  &Retornar Numero de Arestas*/
 
 
@@ -669,20 +674,13 @@ GRA_tpCondRet GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo,int* pDado)
 	
 }/* Fim função: GRA  &RetornarIndicesAresta*/
 		
-
-
-
+		
 /*****  Código das funções encapsuladas no módulo  *****/
-
-
-
-
 /***********************************************************************
 *
 *  $FC Função: GRA  -Criar o vertice da lista Vertice
 *
 ***********************************************************************/
-
 
 GRA_tpVertice *CriarVertice(void * pValor , int tam)
 {
@@ -708,6 +706,7 @@ GRA_tpVertice *CriarVertice(void * pValor , int tam)
 *  $FC Função: GRA  -Destruir elemento da Lista Vertices
 *
 ***********************************************************************/
+
 void DestruirElemVertices(void *Elem)
 {
 	LIS_tppLista Lis=(LIS_tppLista)Elem;
