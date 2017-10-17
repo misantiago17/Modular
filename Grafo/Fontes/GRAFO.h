@@ -415,6 +415,7 @@ GRA_tpCondRet GRA_NumVertices(GRA_tppGrafo pGrafo, int *pNumVerts);
 *
 *  $FV Valor retornado
 *     GRA_CondRetOK
+*	  GRA_CondRetGrafoVazio
 *	  GRA_CondRetNumArestasZero
 *	  GRA_CondRetParametroIncorreto
 *	  GRA_CondRetRetornoLisIncorreto
