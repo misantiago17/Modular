@@ -12,7 +12,8 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor   	 Data     	Observações GRA_RetornaIdentificador
-*     8      rm/ms/gb   16/10/2017 	revisoes finais e pequenas correcoes
+*     9      rm/ms/gb   16/10/2017 	revisoes finais e pequenas correcoes
+*     8        ms       16/10/2017 	alteracao na descricao de GRA_RetornaIdentificador
 *     7        rm       15/10/2017 	descricao das funcoes GRA_NumVertices, GRA_NumArestas, GRA_RetornaIndiceAresta
 *     6        gb       14/10/2017 	inclusao GRA_NumVertices, GRA_NumArestas, GRA_RetornaIndiceAresta
 *     5        gb       10/10/2017 	inclusao GRA_RetornaIdentificador
@@ -23,33 +24,11 @@
 *
 *  $ED Descrição do módulo
 *
-*	  Implementa um grafo genérico.
-*	  Apenas um grafo irá existir e ele irá aglomerar todas as listas presentes.
-*	  O Grafo possuí uma cabeça que acopla o módulo Lista com o módulo Grafo.
-*
-*****************************************************************************
-*     Cada lista é homogênea quanto ao tipo dos dados que armazena.
-*     Cada elemento da lista referencia o valor que contém.
-*
-*     Os ponteiros para os dados são copiados para elementos da lista.
-*        Não é copiado o valor apontado por estes ponteiros.
-*
-*     O controle da destruição do valor de um elemento a ser excluído
-*        é realizado por uma função fornecida pelo usuário.
-*
-*     Cada lista referencia uma função que determina como devem ser
-*        desalocados os dados nela contidos.
-*
-*     A função de liberação dos valores contidos nos elementos deve
-*        assegurar a liberação de todos os espaços referênciados pelo
-*        valor contido em um elemento.
-*        Esta função é chamada antes de se desalocar um elemento
-*        de uma lista.
-*        Caso não seja necessário desalocar o valor referenciado pelo
-*        elemento, o ponteiro para a função de liberação poderá ser NULL .
-*        Caso o elemento da lista seja a única âncora do valor referenciado,
-*        esta função deve promover a destruição (free) desse valor e
-*        de todos os dados nele ancorados.
+*	 O modulo Grafo implementa um grafo genérico com cabeca e suas respectivas funcionalidades.
+*    O modulo Lista foi acoplado a ele para que sua implementacao fosse possivel.
+*	 O controle da destruição do valor de um elemento a ser excluído é realizado por uma função fornecida pelo usuário.
+*	 Caso não seja necessário desalocar o valor referenciado pelo elemento, o ponteiro para a função de liberação poderá ser NULL .
+*	 
 *
 ***************************************************************************/
 
@@ -113,9 +92,6 @@ typedef enum {
 *
 *  $ED Descrição da função
 *     Cria um grafo genérico.
-*     Os possíveis tipos são desconhecidos a priori.
-*     A tipagem é implicita.
-*     Não existe identificador de tipo associado ao grafo.
 *
 *  $EP Parâmetros
 *     ExcluirValor  - ponteiro para a função que processa a
@@ -141,8 +117,6 @@ GRA_tpCondRet GRA_CriarGrafo(void(*ExcluirValor) (void * pDado), GRA_tppGrafo* G
 *  $ED Descrição da função
 *     Destrói o grafo fornecida.
 *     O parâmetro ponteiro para o grafo não é modificado.
-*     Se ocorrer algum erro durante a destruição, o grafo resultado
-*     estará estruturalmente incorreto.
 *		
 *
 *  $EP Parâmetros
@@ -162,12 +136,12 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo);
 *  $FC Função: GRA  &Ir para o Vértice
 *
 *  $ED Descrição da função
-*     Leva o corrente até o vértice numVert do grafo
-*     Explora o grafo até encontrar o vértice identificado por numVert
+*     Leva o corrente do grafo até o vértice de identificador numVert do grafo
+*     Caso o identificador nao seja encontrado,o corrente permancera o mesmo. 
 *
 *  $EP Parâmetros
 *     pGrafo  - ponteiro para o grafo a ser manipulado(nao-nulo)
-*     numVert - o número do vértice a ser encontrado
+*     numVert - o identificador do vértice a ser encontrado
 *
 *  $FV Valor retornado
 *     GRA_CondRetOK
@@ -205,6 +179,7 @@ GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent);
 *
 *  $ED Descrição da função
 *     Obtem a referência para o valor contido no vértice corrente do grafo
+*	  Caso o grafo esteja vazio,retorna um erro
 *
 *  $EP Parâmetros
 *     pGrafo - ponteiro para o grafo de onde se quer descobrir o valor(nao-nulo)
@@ -227,7 +202,7 @@ GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet);
 *
 *  $EP Parâmetros
 *     pGrafo - ponteiro para o grafo de onde se quer descobrir o valor(nao-nulo)
-*	  numIdent - endereço de uma variavel de tipo int para armazenar o valor encontrado
+*	  numIdent - ponteiro de uma variavel de tipo int para armazenar o valor encontrado
 *
 *  $FV Valor retornado
 *     GRA_CondRetOK
@@ -242,6 +217,7 @@ GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent) ;
 *
 *  $ED Descrição da função
 *     Insere novo vértice no grafo.
+*	  
 *
 *  $EP Parâmetros
 *     pGrafo - ponteiro para o grafo onde deve ser inserido o vértice(nao-nulo)
@@ -262,10 +238,12 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo, void * pValor);
 *  $FC Função: GRA  &Excluir vertice
 *
 *  $ED Descrição da função
-*     Exclui o vértice corrente do grafo dada.
-*     Se existir vértice a esquerda do corrente será o novo corrente.
-*     Se não existir e existir o vértice à direita, este se tornará corrente.
+*     Exclui o vértice corrente do grafo dado.
+*     Caso exista um vertice cujo identificador e imediatamente menor do que o identificador do vertice apagado,este será o novo corrente.
+*     Se não existir e existir um vertice cujo identificador e imediatamente maior, este se tornará o novo corrente.
 *     Se este também não existir o grafo tornou-se vazio e o corrente se torna NULL.
+*     Quando um vertice e excluido, todos os identificadores que sao sucessores do identificador do vertice excluido
+*      sao decrescidos de uma unidade.
 *
 *  $EP Parâmetros
 *     pGrafo    - ponteiro para o grafo na qual deve excluir.(nao-nulo)
@@ -372,7 +350,7 @@ GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 *	  
 *  $EP Parâmetros
 *     pGrafo       - ponteiro para o grafo no qual se deseja descobrir o numero de arestas do vertice(nao-nulo).
-*	  pNumArestas  - endereço de um ponteiro para armazenar o numero de arestas encontrado
+*	  pNumArestas  -  ponteiro para armazenar o numero de arestas encontrado
 *
 *  $FV Valor retornado
 *     GRA_CondRetOK
@@ -392,7 +370,7 @@ GRA_tpCondRet GRA_NumArestas(GRA_tppGrafo pGrafo,int *pNumArestas);
 *
 *  $EP Parâmetros
 *     pGrafo     - ponteiro para o grafo no qual se deseja descobrir o numero de vertices total(nao-nulo).
-*	  pNumVerts  - endereço de um ponteiro para armazenar o numero de vertices encontrado
+*	  pNumVerts  - ponteiro para armazenar o numero de vertices encontrado
 *
 *  $FV Valor retornado
 *     GRA_CondRetOK
@@ -407,11 +385,11 @@ GRA_tpCondRet GRA_NumVertices(GRA_tppGrafo pGrafo, int *pNumVerts);
 *  $FC Função: GRA  &RetornarIndicesAresta
 *
 *  $ED Descrição da função
-*     Retorna um vetor com o indice do vertice ligado a cada aresta que o vertice corrente possui
+*     Retorna um vetor com o identificador de cada vertice que possui aresta com o vertice corrente
 *
 *  $EP Parâmetros
 *     pGrafo    - ponteiro para o grafo que possui o vertice desejado(nao-nulo).
-*	  pDado     - endereço de um ponteiro para armazenar o vetor dos identificadores encontrados
+*	  pDado     - vetor ja alocado para armazenar os identificadores encontrados
 *
 *  $FV Valor retornado
 *     GRA_CondRetOK
