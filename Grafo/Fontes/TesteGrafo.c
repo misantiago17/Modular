@@ -9,12 +9,15 @@
 *
 *  Projeto: INF 1301 / 1628 Automatização dos testes de módulos C
 *  Gestor:  LES/DI/PUC-Rio
-*  Autores: gab
+*  Autores: gb, ms, rm
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
-*     6       gab   01/out/2017 implementacao dos testes da funcao ObterTamanho e utilizando uma estrutura que guarde Nome, Data, Cidade e Email.
-*     5       gab   01/out/2017 modificacao no módulo de teste para que as funções do módulo Grafo retornem uma condição de retorno
+*     8      rm/ms/gb   16/10/2017 	revisoes finais e pequenas correcoes
+*     8       gb   15/out/2017 ALTERAÇÕES
+*     7       gb   14/out/2017 ALTERAÇÕES
+*     6       gb   01/out/2017 implementacao dos testes da funcao ObterTamanho e utilizando uma estrutura que guarde Nome, Data, Cidade e Email.
+*     5       gb   01/out/2017 modificacao no módulo de teste para que as funções do módulo Grafo retornem uma condição de retorno
 *     4       avs   01/fev/2006 criar linguagem script simbólica
 *     3       avs   08/dez/2004 uniformização dos exemplos
 *     2       avs   07/jul/2003 unificação de todos os módulos em um só projeto
