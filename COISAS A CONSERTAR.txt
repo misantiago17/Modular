@@ -1,5 +1,0 @@
-
--testar atualizacao do corrente no final da funcao
--restringir intervalor dos indicex no teste
--tirar else da excluir vertice
--conversar sobre insercao POS DESTRUICAO
