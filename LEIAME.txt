@@ -1,5 +1,7 @@
 ﻿------ Autores ------
-
+Gabriel Busquim
+Michelle Beadle
+Renan Moreira
 
 ---------  Descrição  ------------
 
@@ -35,8 +37,8 @@ Fontes:
 
 - Arquivos de Log:
 
-							TESTELISTA.log
-							TESTEGRAFO.log
+							TRAB1-1.log
+							TRAB1-2.log
 								
 - Arquivos Executáveis:
 							TRAB1-1.exe
@@ -56,18 +58,18 @@ Fontes:
 							vsvars32.bat
 
 - Arquivos de Relatorio:
-							Relatorios/RELATORIO-LLA.txt
-							Relatorios/RELATORIO-GBG.txt
+							Relatorios/RELATORIO-Gabriel de Andrade Busquim.txt
+							Relatorios/RELATORIO-Michelle.txt
+							Relatorios/RELATORIO-Renan.txt
 
 - Arquivo Leiame:
 
 							LEIAME.TXT
 
 - Arquivo de documentacao:
-							EspecificacaoDeRequisitos.txt
-							Arquitetura.png
-							Interfaces.png
-							ModeloFisico.png
+							Requisitos.pdf
+							Arquitetura.pdf
+							Modelo Físico.pdf
 
 -------------  Modo de uso  -------------
 
@@ -76,6 +78,6 @@ Fontes:
 
 Para compilar e executar os testes:
 	- Entrar na pasta "Batches" do respectivo modulo
-	- Executar vsvars32.bat e tudo.bat
+	- Executar vsvars32.bat e Tudo.bat
 	- Executavel com o programa e o log de saída será gerado em "Produto"
 
