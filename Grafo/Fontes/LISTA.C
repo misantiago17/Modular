@@ -13,12 +13,13 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
-* 	  5     gb,rm,ms26/set/2017 criação da função de tamanho da lista e 
-								alteração das condições de retorno das funções
-*     4       avs   01/fev/2006 criar linguagem script simbólica
-*     3       avs   08/dez/2004 uniformização dos exemplos
-*     2       avs   07/jul/2003 unificação de todos os módulos em um só projeto
-*     1       avs   16/abr/2003 início desenvolvimento
+*     7     gb/rm/ms 16/oct/2017 revisoes finais e pequenas correcoes
+* 	  6        gb    08/oct/2017 remocao funcao LIS_ProcurarValor
+* 	  5     gb/rm/ms 26/set/2017 criação da função de tamanho da lista e alteração das condições de retorno das funções
+*     4       avs    01/fev/2006 criar linguagem script simbólica
+*     3       avs    08/dez/2004 uniformização dos exemplos
+*     2       avs    07/jul/2003 unificação de todos os módulos em um só projeto
+*     1       avs    16/abr/2003 início desenvolvimento
 *
 ***************************************************************************/
 
