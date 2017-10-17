@@ -143,9 +143,10 @@ GRA_tpCondRet GRA_CriarGrafo(void(*ExcluirValor) (void * pDado), GRA_tppGrafo* G
 *     O parâmetro ponteiro para o grafo não é modificado.
 *     Se ocorrer algum erro durante a destruição, o grafo resultado
 *     estará estruturalmente incorreto.
+*		
 *
 *  $EP Parâmetros
-*	  pGrafo 		- ponteiro para o grafo.
+*	  pGrafo 		- ponteiro para o grafo(nao-nulo).
 *
 *  $FV Valor retornado
 *     GRA_CondRetOK
@@ -165,7 +166,7 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo);
 *     Explora o grafo até encontrar o vértice identificado por numVert
 *
 *  $EP Parâmetros
-*     pGrafo  - ponteiro para o grafo a ser manipulado
+*     pGrafo  - ponteiro para o grafo a ser manipulado(nao-nulo)
 *     numVert - o número do vértice a ser encontrado
 *
 *  $FV Valor retornado
@@ -186,7 +187,7 @@ GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert);
 *     Retorna o identificador do vértice.
 *
 *  $EP Parâmetros
-*     pGrafo  - ponteiro para o grafo a ser manipulado
+*     pGrafo  - ponteiro para o grafo a ser manipulado(nao-nulo)
 *     numIdent - ponteiro para armazenar o valor do identificador
 *
 *  $FV Valor retornado
@@ -206,7 +207,7 @@ GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent);
 *     Obtem a referência para o valor contido no vértice corrente do grafo
 *
 *  $EP Parâmetros
-*     pGrafo - ponteiro para o grafo de onde se quer descobrir o valor
+*     pGrafo - ponteiro para o grafo de onde se quer descobrir o valor(nao-nulo)
 *	  pValorRet - endereço de um ponteiro para armazenar o valor encontrado
 *
 *  $FV Valor retornado
@@ -225,7 +226,7 @@ GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet);
 *     Obtem a referência para o identifacdor do vértice corrente do grafo
 *
 *  $EP Parâmetros
-*     pGrafo - ponteiro para o grafo de onde se quer descobrir o valor
+*     pGrafo - ponteiro para o grafo de onde se quer descobrir o valor(nao-nulo)
 *	  numIdent - endereço de uma variavel de tipo int para armazenar o valor encontrado
 *
 *  $FV Valor retornado
@@ -243,7 +244,7 @@ GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent) ;
 *     Insere novo vértice no grafo.
 *
 *  $EP Parâmetros
-*     pGrafo - ponteiro para o grafo onde deve ser inserido o vértice
+*     pGrafo - ponteiro para o grafo onde deve ser inserido o vértice(nao-nulo)
 *     pValor - ponteiro para o valor do novo vértice
 *              Pode ser NULL
 *
@@ -267,7 +268,7 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo, void * pValor);
 *     Se este também não existir o grafo tornou-se vazio e o corrente se torna NULL.
 *
 *  $EP Parâmetros
-*     pGrafo    - ponteiro para o grafo na qual deve excluir.
+*     pGrafo    - ponteiro para o grafo na qual deve excluir.(nao-nulo)
 *
 *  $FV Valor retornado
 *     GRA_CondRetOK
@@ -293,7 +294,7 @@ GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo);
 *     Não é possivel criar uma aresta de um vertice para si mesmo.
 *
 *  $EP Parâmetros
-*     pGrafo    - ponteiro para o grafo na qual deve-se criar a aresta.
+*     pGrafo    - ponteiro para o grafo na qual deve-se criar a aresta.(nao-nulo)
 *	  numVert1  - identificador do primeiro vértice.
 *	  numVert2  - identificador do segundo vértice.
 *
@@ -321,7 +322,7 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2);
 *     O elemento corrente do grafo nao sera alterado.
 *
 *  $EP Parâmetros
-*     pGrafo    - ponteiro para o grafo na qual deve-se criar a aresta.
+*     pGrafo    - ponteiro para o grafo na qual deve-se criar a aresta.(nao-nulo)
 *	  numVert1  - identificador do primeiro vértice.
 *	  numVert2  - identificador do segundo vértice.
 *
@@ -347,7 +348,7 @@ GRA_tpCondRet GRA_ExisteAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2);
 *	  Caso a aresta nao exista a funcao tambem retornara um erro.
 *
 *  $EP Parâmetros
-*     pGrafo    - ponteiro para o grafo na qual deve excluir a aresta.
+*     pGrafo    - ponteiro para o grafo na qual deve excluir a aresta(nao-nulo).
 *	  numVert1  - o número do primeiro vértice.
 *	  numVert2  - o número do segundo vértice.
 *
@@ -370,7 +371,7 @@ GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 *     Retorna por referencia o numero de arestas que o vertice corrente possui.
 *	  
 *  $EP Parâmetros
-*     pGrafo       - ponteiro para o grafo no qual se deseja descobrir o numero de arestas do vertice.
+*     pGrafo       - ponteiro para o grafo no qual se deseja descobrir o numero de arestas do vertice(nao-nulo).
 *	  pNumArestas  - endereço de um ponteiro para armazenar o numero de arestas encontrado
 *
 *  $FV Valor retornado
@@ -390,7 +391,7 @@ GRA_tpCondRet GRA_NumArestas(GRA_tppGrafo pGrafo,int *pNumArestas);
 *     Retorna por referencia o numero de vertices que o grafo possui.
 *
 *  $EP Parâmetros
-*     pGrafo     - ponteiro para o grafo no qual se deseja descobrir o numero de vertices total.
+*     pGrafo     - ponteiro para o grafo no qual se deseja descobrir o numero de vertices total(nao-nulo).
 *	  pNumVerts  - endereço de um ponteiro para armazenar o numero de vertices encontrado
 *
 *  $FV Valor retornado
@@ -409,7 +410,7 @@ GRA_tpCondRet GRA_NumVertices(GRA_tppGrafo pGrafo, int *pNumVerts);
 *     Retorna um vetor com o indice do vertice ligado a cada aresta que o vertice corrente possui
 *
 *  $EP Parâmetros
-*     pGrafo    - ponteiro para o grafo que possui o vertice desejado.
+*     pGrafo    - ponteiro para o grafo que possui o vertice desejado(nao-nulo).
 *	  pDado     - endereço de um ponteiro para armazenar o vetor dos identificadores encontrados
 *
 *  $FV Valor retornado
