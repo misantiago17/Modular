@@ -94,8 +94,21 @@
 =obtervalorvert  	grafo0  nome2  data2  cidade2  email2  OK
 =excluirvertice  	grafo0  OK
 
+
 == Ver se o grafo ficou vazio
 =obtervalorvert  	grafo0  "???"  "???"  "???"  "???"   GrafoVazio
+
+== Inserir vertices no grafo vazio e percorrer o grafo
+=inserirvertice  	grafo0  nome1  data1  cidade1  email1  OK
+=obtervalorvert  	grafo0  nome1  data1  cidade1  email1  OK
+=inserirvertice  	grafo0  nome2  data2  cidade2  email2  OK
+=obtervalorvert  	grafo0  nome2  data2  cidade2  email2  OK
+=inserirvertice  	grafo0  nome3  data3  cidade3  email3  OK
+=obtervalorvert  	grafo0  nome3  data3  cidade3  email3  OK
+=obternumverts   	grafo0  3      OK
+=irvertice			grafo0	1		OK
+=irvertice			grafo0	2		OK
+=irvertice			grafo0	3		OK
 
 == Destruir a grafo
 =destruirgrafo   	grafo0  OK

@@ -4,7 +4,7 @@ GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
 Composição do construto: ..\Composicao\TesteGrafo.comp
 
    Nome do Construto:           TesteGrafo
-   Diretório base:              C:\Users\Lorene Busquim\Documents\Modular\Grafo\Composicao
+   Diretório base:              C:\Users\Usuario\Documents\GitHub\Modular\Grafo\Composicao
 
    Arquivo composição:          ..\Composicao\TesteGrafo.comp
    Arquivo plataforma:          gmake.parm
@@ -32,19 +32,19 @@ Estatísticas do construto
       testegrafo.c
 
    Estatísticas do arquivo: grafo.c
-      Total linhas:             711
+      Total linhas:             730
       Linhas de código:         459
-      Linhas de comentário:     121
-      Linhas em branco:         145
+      Linhas de comentário:     134
+      Linhas em branco:         151
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
 
    Estatísticas do arquivo: grafo.h
-      Total linhas:             401
-      Linhas de código:          36
-      Linhas de comentário:     316
-      Linhas em branco:          49
+      Total linhas:             431
+      Linhas de código:          37
+      Linhas de comentário:     344
+      Linhas em branco:          50
    Arquivos em que é incluído
       grafo.c
       testegrafo.c
@@ -58,9 +58,9 @@ Estatísticas do construto
       testegrafo.c
 
    Estatísticas do arquivo: lista.c
-      Total linhas:             544
+      Total linhas:             545
       Linhas de código:         269
-      Linhas de comentário:     138
+      Linhas de comentário:     139
       Linhas em branco:         154
    Arquivos de inclusão de que necessita
       lista.h
@@ -75,10 +75,10 @@ Estatísticas do construto
       lista.c
 
    Estatísticas do arquivo: testegrafo.c
-      Total linhas:             639
+      Total linhas:             643
       Linhas de código:         389
-      Linhas de comentário:      90
-      Linhas em branco:         176
+      Linhas de comentário:      96
+      Linhas em branco:         174
    Arquivos de inclusão de que necessita
       generico.h
       grafo.h
@@ -97,10 +97,10 @@ Estatísticas do construto
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      1987
-         Linhas de código:           189
-         Linhas de comentário:      1529
-         Linhas em branco:           269
+         Total linhas do tipo:      2017
+         Linhas de código:           190
+         Linhas de comentário:      1557
+         Linhas em branco:           270
          Arquivos deste tipo:          5
 
   Tipo: obj      Path: ..\Objetos
@@ -125,17 +125,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      1894
+         Total linhas do tipo:      1918
          Linhas de código:          1117
-         Linhas de comentário:       349
-         Linhas em branco:           475
+         Linhas de comentário:       369
+         Linhas em branco:           479
          Arquivos deste tipo:          3
 
 Totais para todo o construto TesteGrafo
 
-   Total linhas:              3881
-   Linhas de código:          1306
-   Linhas de comentário:      1878
-   Linhas em branco:           744
+   Total linhas:              3935
+   Linhas de código:          1307
+   Linhas de comentário:      1926
+   Linhas em branco:           749
    Arquivos processados:         8
 
