@@ -13,7 +13,7 @@
 *  $HA Histórico de evolução:
 *     Versão  Autor   	 Data     	Observações
 *    18      rm/ms/gb   16/10/2017 	revisoes finais e pequenas correcoes
-*    17        gb    	14/10/2017 	funcoes: GRA_NumArestas, GRA_RetornaIndiceAresta
+*    17        gb    	14/10/2017 	funcoes: GRA_NumArestas, GRA_RetornaIndiceAresta,GRA_NumVertices
 *    16        ms    	13/10/2017 	alteracao GRA_IrVertice, GRA_CriarAresta, GRA_ExisteAresta, GRA_ExcluirAresta
 *    15        gb    	12/10/2017 	alteracao GRA_CriarAresta, GRA_InserirAresta
 *    14        gb    	11/10/2017 	alteracao GRA_InserirVertice
@@ -21,10 +21,10 @@
 *    12      rm/ms/gb   11/10/2017 	revisao nas structs
 *    11        rm    	10/10/2017 	funcoes: GRA_IrVertice e GRA_DestruirGrafo
 *    10        ms       10/10/2017 	funcao: LiberarVertice; revisao na: GRA_ExcluirVertice
-*     9        gb       09/10/2017 	funcoes: GRA_RetornaIdentificador
+*     9      gb/ms      09/10/2017 	funcoes: GRA_RetornaIdentificador
 *     8        gb       08/10/2017 	funcoes: GRA_ExcluirAresta
 *     7        gb       06/10/2017 	funcoes: GRA_CriarAresta, GRA_ExisteAresta
-*     6        gb       06/10/2017 	alteracao nas funcoes: GRA_InserirVertice, GRA_ExcluirVertice
+*     6     gb/rm/ms    06/10/2017 	alteracao nas funcoes: GRA_InserirVertice, GRA_ExcluirVertice
 *     5        ms       05/10/2017 	alteracao nas funcoes: GRA_ObterValor, GRA_InserirVertice
 *     4        ms       05/10/2017 	funcoes: GRA_ExcluirVertice, CriarSubVertice
 *     3      rm/ms/gb   04/10/2017 	revisao nas structs; remocao: CriarElemento e LimparCabeca
