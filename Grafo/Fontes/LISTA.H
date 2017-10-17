@@ -16,7 +16,7 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações 
-*	  5		  gb	08/oct/2017 remocao funcao LIS_ProcurarValor
+*	  6		  gb	08/oct/2017 remocao funcao LIS_ProcurarValor
 *	  5		  ms	26/set/2017 alteração do retorno das funções e seus parâmetros e criação de novas funções
 *     4       avs   01/fev/2006 criar linguagem script simbólica
 *     3       avs   08/dez/2004 uniformização dos exemplos
