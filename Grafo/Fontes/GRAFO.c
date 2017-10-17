@@ -694,7 +694,7 @@ GRA_tpVertice *CriarVertice(void * pValor , int tam)
 
 	pVert->Ident = tam+1;
 	pVert->pValor = pValor;
-	if (LIS_CriarLista(NULL, &(pVert->pLisAresta)) != LIS_CondRetOK)  //REVER ESSE NULL
+	if (LIS_CriarLista(NULL, &(pVert->pLisAresta)) != LIS_CondRetOK)  
 		return NULL;
 
 	return pVert;
