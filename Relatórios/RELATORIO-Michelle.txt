@@ -15,12 +15,8 @@ Data			Horas Trabalhadas	Tipo de Tarefa				Descri玢o da Tarefa
 10/10/2017		01:15			Codificar modulo			Modificar excluir v閞tice
 13/10/2017		02:30			redigir script de test			Redigir o script de teste de grafo
 13/10/2017		02:45			redigir script de test			Redigir o script de teste de grafo
-<<<<<<< HEAD:Relat贸rios/Relat贸rio_Michelle.txt
 16/10/2017		05:00			revisar projeto				Revis鉶 geral do projeto
-=======
-16/102017		09:00			revisar projeto				Revis鉶 geral do projeto
->>>>>>> 9ce0f65e2896a09a74a48fe8dc81ba9ad40db729:Relat贸rios/Relat贸rio_modular_Michelle.txt
-
+16/102017		03:00			diagnosticar e corrigir os problemas encontrados/ Diversas pequenas falhas pelo programa
 
 - estudar
 - especificar os m骴ulos
