@@ -15,7 +15,7 @@ Data			Horas Trabalhadas	Tipo de Tarefa				Descrição da Tarefa
 10/10/2017		01:15			Codificar modulo			Modificar excluir vértice
 13/10/2017		01:30			redigir script de test			Redigir o script de teste de grafo
 13/10/2017		02:45			redigir script de test			Redigir o script de teste de grafo
-16/102017		02:00			revisar projeto				Revisão geral do projeto
+16/102017		09:00			revisar projeto				Revisão geral do projeto
 
 
 - estudar
