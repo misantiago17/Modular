@@ -214,25 +214,25 @@
 =obtervalorvert		grafo5	nome3	data3	cidade3	  email3	OK
 
 ==excluir o primeiro vertice e verificar se o identificador dos demais foi alterado
-=irvertice			grafo5	1	OK
+=irvertice		grafo5	1	OK
 =excluirvertice  	grafo5  OK
 =retornaident  	 	grafo5  1	OK
-=irvertice			grafo5	2	OK
+=irvertice		grafo5	2	OK
 =retornaident  		grafo5  2   OK
-=irvertice			grafo5	3	OK
+=irvertice		grafo5	3	OK
 =retornaident 		grafo5  3   OK
 
 == adicionar aresta com o vertice 3
 =criararesta		grafo5	1	3	OK
 
 == obter tamanho de arestas com o vertice 1 e a existencia da aresta com o vertice 3
-=irvertice			grafo5	1	OK
+=irvertice		grafo5	1	OK
 =obternumarestas	grafo5	1	OK
 =existearesta		grafo5	1	3	OK
 
 
 == ir para o vertice 3, obter tamanho de arestas e se existe aresta com o vertice 1
-=irvertice			grafo5	3	OK
+=irvertice		grafo5	3	OK
 =existearesta		grafo5	1	3	OK
 =obternumarestas	grafo5	1	OK
 
@@ -243,9 +243,9 @@
 =excluiraresta		grafo5	1	3	OK
 
 == verificar numero de aresta no vertice 1 e no vertice 3 e se a aresta 1 com 3 existe
-=irvertice			grafo5	1	OK
+=irvertice		grafo5	1	OK
 =obternumarestas	grafo5	0	OK
-=irvertice			grafo5	3	OK
+=irvertice		grafo5	3	OK
 =obternumarestas	grafo5	0	OK
 =existearesta		grafo5	1	3	NaoAchouAresta
 
@@ -259,6 +259,11 @@
 == criar aresta de um vertice com si mesmo
 =criararesta		grafo5	2	2	arestaParaSiMesmo
 =existearesta		grafo5	2	2	NaoAchouAresta
+
+==criar aresta e verificar se o corrente permaneceu o mesmo
+=irvertice		grafo5	3	OK
+=criararesta		grafo5	2	1	OK
+=retornaident		grafo5	3	OK
 
 == Destruir o grafo
 =destruirgrafo   	grafo5   OK

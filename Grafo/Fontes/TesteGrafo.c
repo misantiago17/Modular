@@ -272,7 +272,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 		return TST_CompararInt( CondRetEsp ,
 			GRA_CriarAresta( vtGrafos[ inxGrafo ],numVert1,numVert2) ,
-			"Condição de retorno errada ao excluir aresta."   ) ;
+			"Condição de retorno errada ao tentar criar aresta."   ) ;
 
 	} /* fim ativa: Testar criar aresta */
 

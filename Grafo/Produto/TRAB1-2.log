@@ -57,17 +57,18 @@
   252  == excluir aresta que nao existe
   255  == tentar criar aresta com um vetice que nao existe
   259  == criar aresta de um vertice com si mesmo
-  263  == Destruir o grafo
-  266  == criar grafo6 com tres vertices
-  275  == criar aresta 1 com 2 e aresta 1 com 3
-  281  == contar quantas arestas o vertice 1 possui e retornar seus indices
-  287  == excluir as duas arestas
-  293  == contar quantas arestas o vertice 1 possui e tentar retornar seus indices
-  299  == excluir grafo
+  263  ==criar aresta e verificar se o corrente permaneceu o mesmo
+  268  == Destruir o grafo
+  271  == criar grafo6 com tres vertices
+  280  == criar aresta 1 com 2 e aresta 1 com 3
+  286  == contar quantas arestas o vertice 1 possui e retornar seus indices
+  292  == excluir as duas arestas
+  298  == contar quantas arestas o vertice 1 possui e tentar retornar seus indices
+  304  == excluir grafo
 
-!!! Número de linhas lidas:         300
-!!! Número de casos de teste:        57
-!!! Número comandos corretos:       167
+!!! Número de linhas lidas:         305
+!!! Número de casos de teste:        58
+!!! Número comandos corretos:       170
 !!! Número de falhas encontradas:     0
 
 !!! Não foram encontrados problemas

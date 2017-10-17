@@ -32,10 +32,10 @@ Estatísticas do construto
       testegrafo.c
 
    Estatísticas do arquivo: grafo.c
-      Total linhas:             761
-      Linhas de código:         471
-      Linhas de comentário:     153
-      Linhas em branco:         151
+      Total linhas:             758
+      Linhas de código:         475
+      Linhas de comentário:     151
+      Linhas em branco:         146
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
@@ -58,9 +58,9 @@ Estatísticas do construto
       testegrafo.c
 
    Estatísticas do arquivo: lista.c
-      Total linhas:             544
+      Total linhas:             545
       Linhas de código:         269
-      Linhas de comentário:     138
+      Linhas de comentário:     139
       Linhas em branco:         154
    Arquivos de inclusão de que necessita
       lista.h
@@ -75,9 +75,9 @@ Estatísticas do construto
       lista.c
 
    Estatísticas do arquivo: testegrafo.c
-      Total linhas:             640
+      Total linhas:             643
       Linhas de código:         389
-      Linhas de comentário:      93
+      Linhas de comentário:      96
       Linhas em branco:         174
    Arquivos de inclusão de que necessita
       generico.h
@@ -125,17 +125,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      1945
-         Linhas de código:          1129
-         Linhas de comentário:       384
-         Linhas em branco:           479
+         Total linhas do tipo:      1946
+         Linhas de código:          1133
+         Linhas de comentário:       386
+         Linhas em branco:           474
          Arquivos deste tipo:          3
 
 Totais para todo o construto TesteGrafo
 
-   Total linhas:              3963
-   Linhas de código:          1319
-   Linhas de comentário:      1942
-   Linhas em branco:           749
+   Total linhas:              3964
+   Linhas de código:          1323
+   Linhas de comentário:      1944
+   Linhas em branco:           744
    Arquivos processados:         8
 
