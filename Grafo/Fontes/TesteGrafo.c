@@ -89,12 +89,16 @@ static int ValidarParmIndices(int tamVetor, int *indiceEsp);
 *     =criargrafo                   inxGrafo CondRetEsp
 *     =destruirgrafo                inxGrafo CondRetEsp
 *     =irvertice                    inxGrafo numVert CondRetEsp
-*     =inserirvertice               inxGrafo  Nome Data Cidade Email CondRetEsp
-*     =obtervalorvert               inxGrafo  Nome Data Cidade Email CondRetEsp
-*     =criararesta                  inxGrafo  numVert1 numVert2 CondRetEsp
-*     =excluirvertice               inxGrafo  CondRetEsp
-*     =excluiraresta                inxGrafo  numVert1 numVert2 CondRetEsp
-*	  =existearesta					inxGrafo  numVert1 numVert2 CondRetEsp
+*     =inserirvertice               inxGrafo Nome Data Cidade Email CondRetEsp
+*     =obtervalorvert               inxGrafo Nome Data Cidade Email CondRetEsp
+*     =criararesta                  inxGrafo numVert1 numVert2 CondRetEsp
+*     =excluirvertice               inxGrafo CondRetEsp 
+*     =excluiraresta                inxGrafo numVert1 numVert2 CondRetEsp
+*	  =existearesta					inxGrafo numVert1 numVert2 CondRetEsp
+*	  =obternumverts				inxGrafo numElem  CondRetEsp
+*	  =obternumarestas 				inxGrafo numElem CondRetEsp
+*	  =retornaident					inxGrafo numIdentEsp CondRetEsp
+*	  =indicesarestas				inxGrafo tamVetor indiceEsp[0] indiceEsp[1] indiceEsp[2] indiceEsp[3] indiceEsp[4] CondRetEsp
 *
 ***********************************************************************/
 
