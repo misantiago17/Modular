@@ -425,12 +425,11 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 	LIS_tpCondRet CondRetLis;
 	GRA_tpCondRet CondRetGra;
 
-	//Assertivas
 	if(numVert1==numVert2)
 		return GRA_CondRetArestaParaSiMesmo;
-	
+	IdAnterior=pGrafo->pElemCorr->Ident;
 	CondRetGra=GRA_ExisteAresta(pGrafo,numVert1,numVert2);
-
+	//ASSERTIVAS:
 	if(CondRetGra==GRA_CondRetParametroIncorreto)
 	{
 		return GRA_CondRetParametroIncorreto;
@@ -451,8 +450,7 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 	{
 		return GRA_CondRetArestaJaExiste;
 	}
-
-	IdAnterior=pGrafo->pElemCorr->Ident;
+	
 
 	CondRetGra=GRA_IrVertice(pGrafo,numVert1);
 
@@ -484,13 +482,11 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 	CondRetLis=LIS_IrInicioLista(pGrafo->pElemCorr->pLisAresta);
 	if(CondRetLis!=LIS_CondRetOK)
 		return GRA_CondRetRetornoLisIncorreto;
-
 	CondRetGra=GRA_IrVertice(pGrafo,IdAnterior);
 
 	return GRA_CondRetOK;
 
 } /* Fim função: GRA  &Criar Aresta */
-
 
 /***************************************************************************
 *
@@ -503,27 +499,30 @@ GRA_tpCondRet GRA_ExisteAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 	GRA_tpVertice* pVerts;
 	LIS_tpCondRet CondRetLIS,CondRetAv=LIS_CondRetOK;
 	GRA_tpCondRet CondRetGra;
-
-	//Assertivas
+	
+	//ASSERTIVAS
 	if(pGrafo==NULL)
 		return GRA_CondRetParametroIncorreto;
 	if(LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo,0)==LIS_CondRetListaVazia)
 		return GRA_CondRetGrafoVazio;
 	IdAnterior=pGrafo->pElemCorr->Ident;
-
 	CondRetGra=GRA_IrVertice(pGrafo,numVert1);
 	if(CondRetGra==GRA_CondRetNaoAchouVertice)
 		return GRA_CondRetNaoAchouVertice;
 
 	CondRetGra=GRA_IrVertice(pGrafo,numVert2);
 	if(CondRetGra==GRA_CondRetNaoAchouVertice)
+	{
+		GRA_IrVertice(pGrafo,IdAnterior);
 		return GRA_CondRetNaoAchouVertice;
+	}
 
 	CondRetLIS=LIS_ObterTamanho(pGrafo->pElemCorr->pLisAresta,&tam);
 	if(CondRetLIS!=LIS_CondRetOK)
 		return GRA_CondRetParametroIncorreto;
 	if(tam==0)
-	{
+	{	
+		GRA_IrVertice(pGrafo,IdAnterior);
 		return GRA_CondRetNaoAchouAresta;
 	}
 	while(CondRetAv!=LIS_CondRetFimLista)
@@ -544,8 +543,9 @@ GRA_tpCondRet GRA_ExisteAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 	CondRetLIS=LIS_IrInicioLista(pGrafo->pElemCorr->pLisAresta);
 	if(CondRetLIS!=LIS_CondRetOK)
 		return GRA_CondRetParametroIncorreto;
+	
 	CondRetGra=GRA_IrVertice(pGrafo,IdAnterior);
-
+	
 	return GRA_CondRetNaoAchouAresta;
 
 }  /*Fim função: GRA  &Existe Aresta */
