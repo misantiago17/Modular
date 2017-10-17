@@ -11,8 +11,15 @@
 *  Autores: Gabriel Busquim (gb), Michelle Santiago (ms), Renan Moreira (rm)
 *
 *  $HA Histórico de evolução:
-*     Versão  Autor    Data     Observações
-*     1       ms   16/abr/2003 início desenvolvimento
+*     Versão  Autor   	 Data     	Observações GRA_RetornaIdentificador
+*     8      rm/ms/gb   16/10/2017 	revisoes finais e pequenas correcoes
+*     7        rm       15/10/2017 	descricao das funcoes GRA_NumVertices, GRA_NumArestas, GRA_RetornaIndiceAresta
+*     6        gb       14/10/2017 	inclusao GRA_NumVertices, GRA_NumArestas, GRA_RetornaIndiceAresta
+*     5        gb       10/10/2017 	inclusao GRA_RetornaIdentificador
+*     4        gb       06/10/2017 	inclusao funcao GRA_ExisteAresta
+*     3        rm       05/10/2017 	alteracao nas funcoes referente a mudanca das structs
+*     2      rm/ms/gb   30/09/2017 	inclusao das funcoes
+*     1      rm/ms/gb   27/09/2017 	inicio desenvolvimento
 *
 *  $ED Descrição do módulo
 *

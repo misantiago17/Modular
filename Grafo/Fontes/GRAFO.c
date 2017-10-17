@@ -19,17 +19,17 @@
 *    14        gb    	11/10/2017 	alteracao GRA_InserirVertice
 *    13        rm    	11/10/2017 	alteracao GRA_IrVertice, GRA_DestruirGrafo
 *    12      rm/ms/gb   11/10/2017 	revisao nas structs
-*    11        rm    	10/10/2017 	funções GRA_IrVertice e GRA_DestruirGrafo
-*    10        ms       10/10/2017 	funcao LiberarVertice e revisao GRA_ExcluirVertice
+*    11        rm    	10/10/2017 	funcoes: GRA_IrVertice e GRA_DestruirGrafo
+*    10        ms       10/10/2017 	funcao: LiberarVertice; revisao na: GRA_ExcluirVertice
 *     9        gb       09/10/2017 	funcoes: GRA_RetornaIdentificador
 *     8        gb       08/10/2017 	funcoes: GRA_ExcluirAresta
 *     7        gb       06/10/2017 	funcoes: GRA_CriarAresta, GRA_ExisteAresta
 *     6        gb       06/10/2017 	alteracao nas funcoes: GRA_InserirVertice, GRA_ExcluirVertice
 *     5        ms       05/10/2017 	alteracao nas funcoes: GRA_ObterValor, GRA_InserirVertice
 *     4        ms       05/10/2017 	funcoes: GRA_ExcluirVertice, CriarSubVertice
-*     3      rm/ms/gb   04/10/2017 	revisao nas structs, remocao CriarElemento e LimparCabeca
+*     3      rm/ms/gb   04/10/2017 	revisao nas structs; remocao: CriarElemento e LimparCabeca
 *	  2        rm       30/09/2017  funcoes: GRA_CriarGrafo, GRA_IrVertice, GRA_ObterValor, GRA_InserirVertice, CriarElemento, LimparCabeca
-*     1      rm/ms/gb   27/09/2017 	início desenvolvimento
+*     1      rm/ms/gb   27/09/2017 	inicio desenvolvimento
 *
 ***************************************************************************/
 
