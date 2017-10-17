@@ -1,0 +1,32 @@
+Data			Horas Trabalhadas	Tipo de Tarefa				Descrição da Tarefa
+18/09/2017 		00:15			Especificar os módulos			Realização da construção dos requisitos funcionais e não-funcionais
+19/09/2017		00:30			Especificar os módulos			Projeção dos requisitos funcionais e não-funcionais
+23/09/2017		01:45			Estudo					Estudo sobre a implementação dos modulos no trabalho e as possíveis funções
+26/09/2017		01:30			Projetar				Colocar todo grupo em um projeto do git com nosso trabalho compartilhado
+26/09/2017		01:15			Estudo					Estudo sobre a implementação do modulo lista no trabalho e as possíveis novas funções
+26/09/2017		02:00			Especificar funções e modulos		Alterando estrutura das funções no LISTA.H e suas descrições além da descrição do módulo
+27/09/2017		00:30			Estudo					Estudo sobre a implementação do arquivo de testes
+27/09/2017		01:15			redigir script de teste			Alteração do script de teste do módulo Lista 
+30/09/2017		01:30			especificar módulos			Alterando a descrição do módulo Grafo
+30/09/2017		00:30			redigir script de teste			Alterando os dados que serão colocados no teste (de str para struct[4 strings])
+05/10/2017		02:00			Estudar					Estudo do modulo grafo, e possíveis alterações no modulo
+05/10/2017		01:15			Codificar modulo			Mudança nas funções de inserção de vertices no grafo e obter valor do grafo
+10/10/2017		02:30			Codificar modulo			Criação da função de excluir vértice
+10/10/2017		01:15			Codificar modulo			Modificar excluir vértice
+13/10/2017		01:30			redigir script de test			Redigir o script de teste de grafo
+13/10/2017		02:45			redigir script de test			Redigir o script de teste de grafo
+16/102017		02:00			revisar projeto				Revisão geral do projeto
+
+
+- estudar
+- especificar os módulos
+- especificar as funções
+- revisar especificações
+- projetar
+- revisar projetos
+- codificar módulo
+- revisar código do módulo
+- redigir script de teste
+- revisar script de teste
+- realizar os testes 
+- diagnosticar e corrigir os problemas encontrados
