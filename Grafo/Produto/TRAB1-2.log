@@ -63,12 +63,12 @@
   280  == criar aresta 1 com 2 e aresta 1 com 3
   286  == contar quantas arestas o vertice 1 possui e retornar seus indices
   292  == excluir as duas arestas
-  298  == contar quantas arestas o vertice 1 possui e tentar retornar seus indices
+  298  == contar quantas arestas o vertice 1 possui
   304  == excluir grafo
 
 !!! Número de linhas lidas:         305
 !!! Número de casos de teste:        58
-!!! Número comandos corretos:       170
+!!! Número comandos corretos:       169
 !!! Número de falhas encontradas:     0
 
 !!! Não foram encontrados problemas

@@ -1,7 +1,7 @@
 ##################################################
 ###
-### Diretivas de MAKE para o construto: TesteGrafo
-### Gerado a partir de: ..\Composicao\TesteGrafo.comp
+### Diretivas de MAKE para o construto: TesteLista
+### Gerado a partir de: ..\Composicao\TesteLista.comp
 ###
 ### ----- Arquivo gerado, NÃO EDITE!!! -----
 ###
@@ -9,7 +9,7 @@
 
 ### Nomes globais
 
-NOME            = TesteGrafo
+NOME            = TesteLista
 
 
 ### Nomes de paths
@@ -47,7 +47,7 @@ INCLUDE = $(INCLUDE);$(PDEFAULT)
 ### Regras de geração
 
 all : limpa \
-   $(Fobj)\testegrafo.obj   $(Fobj)\grafo.obj   $(Fobj)\lista.obj \
+   $(Fobj)\testelista.obj   $(Fobj)\lista.obj \
    Construto
 
 ### Limpar arquivos
@@ -58,13 +58,9 @@ limpa :
 
 ### Dependências de módulos objeto a compilar
 
-$(Fobj)\testegrafo.obj :  {$(Pc)}\testegrafo.c \
-    {$(Ph)}cespdin.h            {$(Ph)}generico.h           {$(Ph)}grafo.h              \
-    {$(Ph)}lerparm.h            {$(Ph)}tst_espc.h          
-   cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
-
-$(Fobj)\grafo.obj :  {$(Pc)}\grafo.c \
-    {$(Ph)}cespdin.h            {$(Ph)}grafo.h              {$(Ph)}lista.h             
+$(Fobj)\testelista.obj :  {$(Pc)}\testelista.c \
+    {$(Ph)}generico.h           {$(Ph)}lerparm.h            {$(Ph)}lista.h              \
+    {$(Ph)}tst_espc.h          
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
 $(Fobj)\lista.obj :  {$(Pc)}\lista.c \
@@ -75,13 +71,13 @@ $(Fobj)\lista.obj :  {$(Pc)}\lista.c \
 ### Terminação
 
 Construto : \
-   $(Fobj)\testegrafo.obj   $(Fobj)\grafo.obj   $(Fobj)\lista.obj
+   $(Fobj)\testelista.obj   $(Fobj)\lista.obj
     cd $(Fobj)
     LINK $(L) @$(NOME).build >> $(Ferr)\$(NOME).err
 
 ##################################################
 ###
-### Fim de diretivas MAKE para o construto: TesteGrafo
+### Fim de diretivas MAKE para o construto: TesteLista
 ###
 ##################################################
 

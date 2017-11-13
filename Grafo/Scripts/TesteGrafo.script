@@ -295,10 +295,10 @@
 =excluiraresta		grafo6	1	3	OK
 =existearesta		grafo6	1	2	NaoAchouAresta
 
-== contar quantas arestas o vertice 1 possui e tentar retornar seus indices
+== contar quantas arestas o vertice 1 possui
 
 =obternumarestas	grafo6	0 	OK
-=indicesarestas		grafo6	0	0	0	0	0	0	numArestasZero
+
 
 
 == excluir grafo

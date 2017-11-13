@@ -33,7 +33,7 @@
 
 #include    "Generico.h"
 #include    "LerParm.h"
-
+#include    "CESPDIN.H"
 #include    "Grafo.h"
 
 
@@ -75,6 +75,7 @@ GRA_tppGrafo   vtGrafos[ DIM_VT_GRAFO ] ;
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
+static void DestruirValor( void * pValor ) ;
 static int ValidarInxGrafo( int inxGrafo) ;
 static int ValidarParmIndices(int tamVetor, int *indiceEsp);
 
@@ -160,7 +161,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetParm ;
 		} /* if */
 
-		CondRet=GRA_CriarGrafo( NULL,&vtGrafos[inxGrafo]) ;
+		CondRet=GRA_CriarGrafo(DestruirValor,&vtGrafos[inxGrafo]) ;
 
 		return TST_CompararInt( CondRetEsp , CondRet ,
 			"Erro na condicao de retorno ao criar o Grafo"  ) ;
@@ -512,10 +513,14 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			"Condição de retorno errada ao retornar indices das arestas."   ) ;
 
 		if (CondRet != TST_CondRetOK) {
+				free(indice);
 				return CondRet;
 			}
 		if(tamVetor==0 && debugGRA==GRA_CondRetNumArestasZero)
+		{
+			free(indice);
 			return TST_CondRetOK;
+		}
 
 
 		for(i=0;i<tamVetor;i++)
@@ -523,10 +528,11 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			CondRet=TST_CompararInt( indiceEsp[i] ,indice[i]  ,
 			"Aresta do vetor nao e igual  a esperada" ) ;
 			if (CondRet != TST_CondRetOK) {
+				free(indice);
 				return CondRet;
 			}
 		}
-
+		free(indice);
 		return TST_CondRetOK;
 
 	} /* fim ativa: Retornar indice das arestas  */
@@ -539,7 +545,18 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 /*****  Código das funções encapsuladas no módulo  *****/
 
+/***********************************************************************
+*
+*  $FC Função: TGRA -Destruir valor
+*
+***********************************************************************/
 
+   void DestruirValor( void * pValor )
+   {
+
+      free( pValor ) ;
+
+   } /* Fim função: TGRA -Destruir valor */
 
 
 

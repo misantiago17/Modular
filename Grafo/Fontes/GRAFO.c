@@ -38,6 +38,7 @@
 #include   <memory.h>
 #include   <malloc.h>
 #include   <assert.h>
+#include   "CESPDIN.H"
 #include   "GRAFO.h"
 #include   "LISTA.h"
 
@@ -128,7 +129,7 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo)
 	LIS_tpCondRet CondRetLis;
 	LIS_tppLista verts;
 	GRA_tpVertice *vert;
-
+	
 	//Assertiva
 	if(pGrafo==NULL)
 		return GRA_CondRetParametroIncorreto;
@@ -144,12 +145,13 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo)
 
 			if (LIS_ObterValor(verts,(void**)&vert) != LIS_CondRetOK)
 				return GRA_CondRetRetornoLisIncorreto;
-			if (( pGrafo->ExcluirValor != NULL ) && ( vert->pValor != NULL ))
+			if (( pGrafo->ExcluirValor != NULL ))
 			 {
 				pGrafo->ExcluirValor(vert->pValor);
 			 } 
-			 free(vert->pValor);
+			 
 		
+	
 		}
 	    while(LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo,1)!=LIS_CondRetFimLista);
 	}
@@ -158,6 +160,7 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo)
 		return GRA_CondRetRetornoLisIncorreto;
 	pGrafo->pElemCorr=NULL;
 	pGrafo->pVerticesGrafo=NULL;
+	free(pGrafo);
 	return GRA_CondRetOK;
 	
 }/* Fim função: GRA  &Destruir grafo*/
@@ -370,18 +373,17 @@ GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo)
 		}
 		
 	}
-	if (( pGrafo->ExcluirValor != NULL ) && ( pVert->pValor != NULL )){
-			 {
-				pGrafo->ExcluirValor(pVert->pValor);
-			 } 
-			 free(pVert->pValor);
-		
-		}
+	if (( pGrafo->ExcluirValor != NULL ))
+	{
+		pGrafo->ExcluirValor(pVert->pValor);
+	}
+
 	GRA_IrVertice(pGrafo,identCorrente);
+
+	//decrescendo de 1 cada identificador maior do que o identificador do vertice a ser excluido
 	CondRetLis = LIS_ObterTamanho(pGrafo->pVerticesGrafo, &tam);
 	if (CondRetLis != LIS_CondRetOK)
-		return GRA_CondRetRetornoLisIncorreto;
-	//decrescendo de 1 cada identificador maior do que o identificador do vertice a ser excluido
+			return GRA_CondRetRetornoLisIncorreto;
 	for (i = 0; i<tam - identCorrente; i++)
 	{
 		LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo, 1);
@@ -393,6 +395,7 @@ GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo)
 		vertice->Ident = vertice->Ident - 1;
 	}
 	CondRetGra = GRA_IrVertice(pGrafo, identCorrente);
+
 	if (LIS_ExcluirElemento(pGrafo->pVerticesGrafo) != LIS_CondRetOK)
 		return GRA_CondRetRetornoLisIncorreto;
 	if (LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo, 0) == LIS_CondRetListaVazia)
@@ -757,5 +760,6 @@ void DestruirElemVertice(void *Elem)
 	LIS_tppLista Lis=(LIS_tppLista)Elem;
 	LIS_ObterValor(Lis,(void**)&vert);
 	LIS_DestruirLista(vert->pLisAresta);
+	free(vert);
 	LIS_DestruirLista(Lis);
 }

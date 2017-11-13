@@ -1,34 +1,24 @@
 GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
    LES / Informática / PUC-Rio    Versão 6.00 (c) 2005
 
-Composição do construto: ..\Composicao\TesteGrafo.comp
+Composição do construto: ..\Composicao\TesteLista.comp
 
-   Nome do Construto:           TesteGrafo
-   Diretório base:              C:\Users\Lorene Busquim\Documents\Modular\Grafo\Composicao
+   Nome do Construto:           TesteLista
+   Diretório base:              C:\Users\Lorene Busquim\Documents\Modular\Lista\Composicao
 
-   Arquivo composição:          ..\Composicao\TesteGrafo.comp
+   Arquivo composição:          ..\Composicao\TesteLista.comp
    Arquivo plataforma:          gmake.parm
 
-   Arquivo diretivas MAKE:      TesteGrafo.make
-   Arquivo diretivas LINK:      TesteGrafo.build
-   Arquivo listagem:            TesteGrafo.list
+   Arquivo diretivas MAKE:      TesteLista.make
+   Arquivo diretivas LINK:      TesteLista.build
+   Arquivo listagem:            TesteLista.list
 
-Módulos do construto: ..\Composicao\TesteGrafo.comp
+Módulos do construto: ..\Composicao\TesteLista.comp
 
-   testegrafo.c
-   grafo.c
+   testelista.c
    lista.c
 
 Estatísticas do construto
-
-   Estatísticas do arquivo: cespdin.h
-      Total linhas:             767
-      Linhas de código:          54
-      Linhas de comentário:     610
-      Linhas em branco:         103
-   Arquivos em que é incluído
-      grafo.c
-      testegrafo.c
 
    Estatísticas do arquivo: generico.h
       Total linhas:             713
@@ -38,26 +28,7 @@ Estatísticas do construto
    Arquivos de inclusão de que necessita
       tst_espc.h
    Arquivos em que é incluído
-      testegrafo.c
-
-   Estatísticas do arquivo: grafo.c
-      Total linhas:             765
-      Linhas de código:         475
-      Linhas de comentário:     153
-      Linhas em branco:         151
-   Arquivos de inclusão de que necessita
-      cespdin.h
-      grafo.h
-      lista.h
-
-   Estatísticas do arquivo: grafo.h
-      Total linhas:             410
-      Linhas de código:          37
-      Linhas de comentário:     323
-      Linhas em branco:          50
-   Arquivos em que é incluído
-      grafo.c
-      testegrafo.c
+      testelista.c
 
    Estatísticas do arquivo: lerparm.h
       Total linhas:             291
@@ -65,7 +36,7 @@ Estatísticas do construto
       Linhas de comentário:     188
       Linhas em branco:          67
    Arquivos em que é incluído
-      testegrafo.c
+      testelista.c
 
    Estatísticas do arquivo: lista.c
       Total linhas:             545
@@ -81,19 +52,18 @@ Estatísticas do construto
       Linhas de comentário:     268
       Linhas em branco:          51
    Arquivos em que é incluído
-      grafo.c
       lista.c
+      testelista.c
 
-   Estatísticas do arquivo: testegrafo.c
-      Total linhas:             660
-      Linhas de código:         401
-      Linhas de comentário:     102
-      Linhas em branco:         174
+   Estatísticas do arquivo: testelista.c
+      Total linhas:             499
+      Linhas de código:         273
+      Linhas de comentário:      91
+      Linhas em branco:         150
    Arquivos de inclusão de que necessita
-      cespdin.h
       generico.h
-      grafo.h
       lerparm.h
+      lista.h
       tst_espc.h
 
    Estatísticas do arquivo: tst_espc.h
@@ -103,16 +73,16 @@ Estatísticas do construto
       Linhas em branco:          20
    Arquivos em que é incluído
       generico.h
-      testegrafo.c
+      testelista.c
 
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      2763
-         Linhas de código:           244
-         Linhas de comentário:      2146
-         Linhas em branco:           373
-         Arquivos deste tipo:          6
+         Total linhas do tipo:      1586
+         Linhas de código:           153
+         Linhas de comentário:      1213
+         Linhas em branco:           220
+         Arquivos deste tipo:          4
 
   Tipo: obj      Path: ..\Objetos
          Total linhas do tipo:         0
@@ -136,17 +106,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      1970
-         Linhas de código:          1145
-         Linhas de comentário:       394
-         Linhas em branco:           479
-         Arquivos deste tipo:          3
+         Total linhas do tipo:      1044
+         Linhas de código:           542
+         Linhas de comentário:       230
+         Linhas em branco:           304
+         Arquivos deste tipo:          2
 
-Totais para todo o construto TesteGrafo
+Totais para todo o construto TesteLista
 
-   Total linhas:              4733
-   Linhas de código:          1389
-   Linhas de comentário:      2540
-   Linhas em branco:           852
-   Arquivos processados:         9
+   Total linhas:              2630
+   Linhas de código:           695
+   Linhas de comentário:      1443
+   Linhas em branco:           524
+   Arquivos processados:         6
 
