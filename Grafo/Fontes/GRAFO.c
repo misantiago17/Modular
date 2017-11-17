@@ -38,9 +38,13 @@
 #include   <memory.h>
 #include   <malloc.h>
 #include   <assert.h>
-#include   "CESPDIN.H"
 #include   "GRAFO.h"
 #include   "LISTA.h"
+
+#ifdef _DEBUG
+	#include   "CESPDIN.H"
+#endif
+
 
 /***********************************************************************
 *
@@ -58,7 +62,14 @@ typedef struct tagVertice {
 
 	LIS_tppLista pLisAresta;
 	/* Ponteiro para a lista de arestas */
-	
+
+	#ifdef _DEBUG
+
+		int NumArestas;
+		/* Numero de arestas que o vertice possui*/
+
+	#endif
+
 } GRA_tpVertice;
 
 
@@ -79,6 +90,13 @@ typedef struct GRA_tagGrafo {
 	void(*ExcluirValor) (void * pValor);
 	/* Ponteiro para a função de destruição do valor contido em um elemento */
 
+	#ifdef _DEBUG
+
+		int NumVertices;
+	/* Numero de vertices do grafo*/
+
+	#endif
+
 } GRA_tpGrafo;
 
 /***** Protótipos das funções encapuladas no módulo *****/
@@ -96,7 +114,7 @@ static void DestruirElemVertices(void *Elem);
 GRA_tpCondRet GRA_CriarGrafo(void   ( * ExcluirValor ) ( void * pDado ), GRA_tppGrafo* GrafoRet) {
 
 	GRA_tpGrafo *pGrafo;
-	
+
 	pGrafo = (GRA_tpGrafo *)malloc(sizeof(GRA_tpGrafo));
 	if (pGrafo == NULL)
 	{
@@ -114,22 +132,35 @@ GRA_tpCondRet GRA_CriarGrafo(void   ( * ExcluirValor ) ( void * pDado ), GRA_tpp
 	pGrafo->ExcluirValor = ExcluirValor;
 
 	*GrafoRet = pGrafo;
+
+	#ifdef _DEBUG
+
+         CED_DefinirTipoEspaco( pGrafo , GRA_TipoEspacoCabeca ) ;
+
+	#endif
+
+	#ifdef _DEBUG
+
+		pGrafo->NumVertices=0;
+
+	#endif
+
 	return GRA_CondRetOK;
-	
+
 } /* Fim função: GRA  &Criar grafo */
 
 
-  /***********************************************************************
-  *
-  *  $FC Função: GRA  &Destruir grafo
-  *  ****/
+/***********************************************************************
+*
+*  $FC Função: GRA  &Destruir grafo
+*  ****/
 
 GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo) 
 { 
 	LIS_tpCondRet CondRetLis;
 	LIS_tppLista verts;
 	GRA_tpVertice *vert;
-	
+
 	//Assertiva
 	if(pGrafo==NULL)
 		return GRA_CondRetParametroIncorreto;
@@ -146,14 +177,14 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo)
 			if (LIS_ObterValor(verts,(void**)&vert) != LIS_CondRetOK)
 				return GRA_CondRetRetornoLisIncorreto;
 			if (( pGrafo->ExcluirValor != NULL ))
-			 {
+			{
 				pGrafo->ExcluirValor(vert->pValor);
-			 } 
-			 
-		
-	
+			} 
+
+
+
 		}
-	    while(LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo,1)!=LIS_CondRetFimLista);
+		while(LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo,1)!=LIS_CondRetFimLista);
 	}
 	CondRetLis=LIS_DestruirLista(pGrafo->pVerticesGrafo);
 	if(CondRetLis!=LIS_CondRetOK)
@@ -162,17 +193,17 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo)
 	pGrafo->pVerticesGrafo=NULL;
 	free(pGrafo);
 	return GRA_CondRetOK;
-	
+
 }/* Fim função: GRA  &Destruir grafo*/
 
 
- /***************************************************************************
- *
- *  Função: Função: GRA  &Ir para o Vértice
- *  ****/
+/***************************************************************************
+*
+*  Função: Função: GRA  &Ir para o Vértice
+*  ****/
 
 GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert) {
-	
+
 	LIS_tppLista verts;
 	GRA_tpVertice* vert;
 	int tam,contador=0;
@@ -206,9 +237,9 @@ GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert) {
 			if(LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo, (tam-1-contador)*-1)!=LIS_CondRetOK)
 				return GRA_CondRetRetornoLisIncorreto;
 			if (LIS_ObterValor(pGrafo->pVerticesGrafo,(void**) &verts) != LIS_CondRetOK)
-					return GRA_CondRetRetornoLisIncorreto;
+				return GRA_CondRetRetornoLisIncorreto;
 			if(LIS_ObterValor(verts,(void**) &vert) != LIS_CondRetOK)
-					return GRA_CondRetRetornoLisIncorreto;
+				return GRA_CondRetRetornoLisIncorreto;
 			pGrafo->pElemCorr=vert;
 			return GRA_CondRetNaoAchouVertice;
 		}
@@ -225,14 +256,14 @@ GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert) {
 
 	pGrafo->pElemCorr = vert;
 	return GRA_CondRetOK;
-	
+
 }/* Fim função: GRA  &Ir para o Vértice*/
 
 
 /***************************************************************************
- *
- *  Função:  &Retorna Identificador
- *  ****/
+*
+*  Função:  &Retorna Identificador
+*  ****/
 
 GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent) 
 {
@@ -249,7 +280,7 @@ GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent)
 		return GRA_CondRetGrafoVazio;
 	*numIdent=pGrafo->pElemCorr->Ident;
 	return GRA_CondRetOK;
-	
+
 }/* Fim função: GRA  &Retorna Identificador*/
 
 
@@ -290,7 +321,7 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo, void * pValor)
 	GRA_tpVertice * pRet;
 	int tam;
 	LIS_tpCondRet CondRet;
-	
+
 	//Assertiva
 	if(pGrafo == NULL)
 		return GRA_CondRetParametroIncorreto;
@@ -309,7 +340,7 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo, void * pValor)
 	{
 		return GRA_CondRetFaltouMemoria;
 	} 
-	
+
 	//Cada elemento da lista vertices deve possuir exatamente uma referencia para um elemento da lista Vertice
 	pLIS_Verts=pLIS_Vert;
 
@@ -322,21 +353,27 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo, void * pValor)
 
 	if (LIS_InserirElementoApos(pLIS_Vert,(void*)pVert) == LIS_CondRetFaltouMemoria)
 		return GRA_CondRetFaltouMemoria;
-	
+
 	CondRet=LIS_ObterValor(pLIS_Vert,(void**)&pRet);
 	if(CondRet!=LIS_CondRetOK)
 		return GRA_CondRetRetornoLisIncorreto;
 	pGrafo->pElemCorr=pRet;
+	#ifdef _DEBUG
+
+		pGrafo->NumVertices+=1;
+
+	#endif
+
 	return GRA_CondRetOK;
-	
+
 }/* Fim função: GRA  &Inserir vértice */
 
 
- /***************************************************************************
- *
- *  Função: GRA  &Excluir Vertice
- *  ****/
- 
+/***************************************************************************
+*
+*  Função: GRA  &Excluir Vertice
+*  ****/
+
 GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo)
 {
 	GRA_tpCondRet CondRetGra;
@@ -371,7 +408,7 @@ GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo)
 			GRA_ExcluirAresta(pGrafo, pVert->Ident, Aresta->Ident);
 			LIS_AvancarElementoCorrente(pVert->pLisAresta, 1);
 		}
-		
+
 	}
 	if (( pGrafo->ExcluirValor != NULL ))
 	{
@@ -383,7 +420,7 @@ GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo)
 	//decrescendo de 1 cada identificador maior do que o identificador do vertice a ser excluido
 	CondRetLis = LIS_ObterTamanho(pGrafo->pVerticesGrafo, &tam);
 	if (CondRetLis != LIS_CondRetOK)
-			return GRA_CondRetRetornoLisIncorreto;
+		return GRA_CondRetRetornoLisIncorreto;
 	for (i = 0; i<tam - identCorrente; i++)
 	{
 		LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo, 1);
@@ -398,6 +435,11 @@ GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo)
 
 	if (LIS_ExcluirElemento(pGrafo->pVerticesGrafo) != LIS_CondRetOK)
 		return GRA_CondRetRetornoLisIncorreto;
+
+	#ifdef _DEBUG
+		pGrafo->NumVertices-=1;
+	#endif
+
 	if (LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo, 0) == LIS_CondRetListaVazia)
 	{
 		pGrafo->pElemCorr = NULL;
@@ -449,11 +491,11 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 		return GRA_CondRetNaoAchouVertice;	
 	}
 
-		else if(CondRetGra==GRA_CondRetOK)
+	else if(CondRetGra==GRA_CondRetOK)
 	{
 		return GRA_CondRetArestaJaExiste;
 	}
-	
+
 
 	CondRetGra=GRA_IrVertice(pGrafo,numVert1);
 
@@ -473,6 +515,13 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 	pVert2=pGrafo->pElemCorr;
 	if (LIS_InserirElementoApos(pGrafo->pElemCorr->pLisAresta,(void*)pVert1) == LIS_CondRetFaltouMemoria)
 		return GRA_CondRetFaltouMemoria;
+
+	#ifdef _DEBUG
+
+		pVert2->NumArestas+=1;
+
+	#endif
+
 	CondRetLis=LIS_IrInicioLista(pGrafo->pElemCorr->pLisAresta);
 	if(CondRetLis!=LIS_CondRetOK)
 
@@ -482,6 +531,12 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 
 	if (LIS_InserirElementoApos(pGrafo->pElemCorr->pLisAresta,(void*)pVert2) == LIS_CondRetFaltouMemoria)
 		return GRA_CondRetFaltouMemoria;
+
+	#ifdef _DEBUG
+
+		pVert1->NumArestas+=1;
+
+	#endif
 	CondRetLis=LIS_IrInicioLista(pGrafo->pElemCorr->pLisAresta);
 	if(CondRetLis!=LIS_CondRetOK)
 		return GRA_CondRetRetornoLisIncorreto;
@@ -502,7 +557,7 @@ GRA_tpCondRet GRA_ExisteAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 	GRA_tpVertice* pVerts;
 	LIS_tpCondRet CondRetLIS,CondRetAv=LIS_CondRetOK;
 	GRA_tpCondRet CondRetGra;
-	
+
 	//ASSERTIVAS
 	if(pGrafo==NULL)
 		return GRA_CondRetParametroIncorreto;
@@ -546,9 +601,9 @@ GRA_tpCondRet GRA_ExisteAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 	CondRetLIS=LIS_IrInicioLista(pGrafo->pElemCorr->pLisAresta);
 	if(CondRetLIS!=LIS_CondRetOK)
 		return GRA_CondRetParametroIncorreto;
-	
+
 	CondRetGra=GRA_IrVertice(pGrafo,IdAnterior);
-	
+
 	return GRA_CondRetNaoAchouAresta;
 
 }  /*Fim função: GRA  &Existe Aresta */
@@ -607,6 +662,12 @@ GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 			CondRetLis=LIS_IrInicioLista(pGrafo->pElemCorr->pLisAresta);
 			if(CondRetLis!=LIS_CondRetOK)
 				return GRA_CondRetRetornoLisIncorreto;
+
+			#ifdef _DEBUG
+
+				pVerts->NumArestas-=1;
+
+			#endif
 			break;
 		}
 		CondRetAv=LIS_AvancarElementoCorrente(pGrafo->pElemCorr->pLisAresta,1);
@@ -628,20 +689,26 @@ GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 			CondRetLis=LIS_IrInicioLista(pGrafo->pElemCorr->pLisAresta);
 			if(CondRetLis!=LIS_CondRetOK)
 				return GRA_CondRetRetornoLisIncorreto;
+
+			#ifdef _DEBUG
+
+				pVerts->NumArestas-=1;
+
+			#endif
 			break;
 		}
 		CondRetAv=LIS_AvancarElementoCorrente(pGrafo->pElemCorr->pLisAresta,1);
 	}
 	CondRetGra=GRA_IrVertice(pGrafo,IdAnterior);
 	return GRA_CondRetOK;
-	
+
 }/*  Fim função: GRA  &Excluir Aresta */
 
 
- /***************************************************************************
- *
- *  Função: GRA  &Retornar Numero de Arestas
- *  ****/
+/***************************************************************************
+*
+*  Função: GRA  &Retornar Numero de Arestas
+*  ****/
 
 GRA_tpCondRet GRA_NumArestas(GRA_tppGrafo pGrafo, int *pNumArestas)
 {
@@ -653,7 +720,7 @@ GRA_tpCondRet GRA_NumArestas(GRA_tppGrafo pGrafo, int *pNumArestas)
 	if (LIS_ObterTamanho(pGrafo->pElemCorr->pLisAresta, pNumArestas) != LIS_CondRetOK)
 		return GRA_CondRetRetornoLisIncorreto;
 	return GRA_CondRetOK;
-	
+
 }/* Fim função: GRA  &Retornar Numero de Arestas*/
 
 
@@ -705,10 +772,10 @@ GRA_tpCondRet GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo,int* pDado)
 	if(CondRetLis!=LIS_CondRetOK)
 		return GRA_CondRetRetornoLisIncorreto;
 	return GRA_CondRetOK;
-	
+
 }/* Fim função: GRA  &RetornarIndicesAresta*/
-		
-		
+
+
 /*****  Código das funções encapsuladas no módulo  *****/
 /***********************************************************************
 *
@@ -730,6 +797,18 @@ GRA_tpVertice *CriarVertice(void * pValor , int tam)
 	pVert->pValor = pValor;
 	if (LIS_CriarLista(NULL, &(pVert->pLisAresta)) != LIS_CondRetOK)  
 		return NULL;
+
+	#ifdef _DEBUG
+
+         CED_DefinirTipoEspaco( pVert , ARV_TipoEspacoVertice ) ;
+       
+	#else
+
+	#ifdef _DEBUG
+
+		pVert->NumArestas=0;
+
+	#endif
 
 	return pVert;
 

@@ -30,11 +30,16 @@
 #include    <malloc.h>
 
 #include    "TST_Espc.h"
-
+#include    "Grafo.h"
 #include    "Generico.h"
 #include    "LerParm.h"
-#include    "CESPDIN.H"
-#include    "Grafo.h"
+
+#ifdef _DEBUG
+
+	#include    "CESPDIN.H"
+
+#endif
+
 
 
 
@@ -52,6 +57,15 @@ static const char NUM_VERTS_CMD           [ ] = "=obternumverts" ;
 static const char NUM_ARESTAS_CMD         [ ] = "=obternumarestas" ;
 static const char INDICES_ARESTAS_CMD     [ ] = "=indicesarestas" ;
 static const char RET_IDENT_CMD           [ ] = "=retornaident" ;
+
+/* Os comandos a seguir somente operam em modo _DEBUG */
+
+#ifdef _DEBUG
+	static const char VER_CABECA_CMD		  [ ] = "=verificarcabeca" ;
+	static const char VER_VERTICE_CMD	      [ ] = "=verificarvertice"  ;
+	static const char VER_MEMORIA_CMD		  [ ] = "=verificarmemoria";
+	static const char DETURPAR_CMD			  [ ] = "=deturpargrafo"   ;
+#endif
 
 
 struct infs{
@@ -103,6 +117,14 @@ static int ValidarParmIndices(int tamVetor, int *indiceEsp);
 *	  =obternumarestas 				inxGrafo numElem CondRetEsp
 *	  =retornaident					inxGrafo numIdentEsp CondRetEsp
 *	  =indicesarestas				inxGrafo tamVetor indiceEsp[0] indiceEsp[1] indiceEsp[2] indiceEsp[3] indiceEsp[4] CondRetEsp
+*
+*	  Comandos que podem ser executados somente se o modulo tiver sido
+*     compilado com _DEBUG ligado
+*
+*     =verificarcabeca			    inxGrafo  CondRetEsp
+*     =verificarvertice			    inxGrafo  CondRetEsp
+*     =verificarmemoria
+*     =deturparlista	 		    inxGrafo  idModoDeturp
 *
 ***********************************************************************/
 
