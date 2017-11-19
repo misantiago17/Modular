@@ -291,7 +291,7 @@ PER_tpCondRet PER_ExcluirTodosPerfis(GRA_tppGrafo pGrafo);
 *
 ***********************************************************************/
 
-PER_tpCondRet PER_adicionaMensagem(GRA_tppGrafo pGrafo, char *email);
+PER_tpCondRet PER_adicionaMensagem(GRA_tppGrafo pGrafo, char *email, char *mensagem, int flag);
 
 /***********************************************************************
 *  $FC Função:
@@ -308,7 +308,7 @@ PER_tpCondRet PER_adicionaMensagem(GRA_tppGrafo pGrafo, char *email);
 *
 ***********************************************************************/
 
-PER_tpCondRet PER_RetornaMensagens(GRA_tppGrafo pGrafo);
+PER_tpCondRet PER_RetornaMensagens(GRA_tppGrafo pGrafo, char *email, char **mensagem);
 
 #undef PERFIL_EXT
 

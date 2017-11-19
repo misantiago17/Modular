@@ -437,7 +437,7 @@ PER_tpCondRet PER_ExcluirTodosPerfis(GRA_tppGrafo pGrafo) {
  *  Função: PER  &Adiciona mensagem a lista de mensagens
  *  ****/
 
-PER_tpCondRet PER_adicionaMensagem(GRA_tppGrafo pGrafo, char *email) {
+PER_tpCondRet PER_adicionaMensagem(GRA_tppGrafo pGrafo, char *email, char *mensagem, int flag) {
 	PER_tpCondRet retorno;
 
 
@@ -448,7 +448,7 @@ PER_tpCondRet PER_adicionaMensagem(GRA_tppGrafo pGrafo, char *email) {
  *  Função: PER  &Retorna lista de mensagens
  *  ****/
 
-PER_tpCondRet PER_RetornaMensagens(GRA_tppGrafo pGrafo) {
+PER_tpCondRet PER_RetornaMensagens(GRA_tppGrafo pGrafo, char *email, char **mensagem) {
 	PER_tpCondRet retorno;
 
 }/* Fim função: PER  &Retorna lista de mensagens */
