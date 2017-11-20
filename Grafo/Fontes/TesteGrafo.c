@@ -13,7 +13,7 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
-*     8      rm/ms/gb   16/10/2017 	revisoes finais e pequenas correcoes
+*     9      rm/ms/gb   16/10/2017 	revisoes finais e pequenas correcoes
 *     8       gb   15/out/2017 ALTERAÇÕES
 *     7       gb   14/out/2017 ALTERAÇÕES
 *     6       gb   01/out/2017 implementacao dos testes da funcao ObterTamanho e utilizando uma estrutura que guarde Nome, Data, Cidade e Email.

@@ -164,6 +164,41 @@ MEN_tpCondRet MEN_ExcluirMensagem(LIS_tppLista pMensagem,char Email[],MEN_tpCond
 	
 /* Fim função: MEN  &Excluir Mensagem*/
 
+ /***********************************************************************
+  *
+  *  $FC Função: MEN  &Excluir Mensagens de um Email
+  *  ****/
+
+MEN_tpCondRet MEN_ExcluirMensagensEmail(LIS_tppLista pMensagem,char Email[]);
+{ 
+	int numTotalMsgs;
+	LIS_tpCondRet CondRetLis=LIS_CondRetOK;
+	MEN_tppMensagem tpMsg;
+	if(MEN_ObterNumTodasMensagens(pMensagem,&numTotalMsgs)==MEN_CondRetRetornoLisIncorreto)
+		return MEN_CondRetRetornoLisIncorreto;
+	if(numTotalMsgs==0)
+	{
+		return MEN_CondRetOK;
+	}
+	if(LIS_IrInicioLista(pMensagem)!=LIS_CondRetOK)
+		return MEN_CondRetRetornoLisIncorreto;
+	while(CondRetLis!=LIS_CondRetFimLista)
+	{
+		if(LIS_ObterValor(pMensagem,(void**)&tpMsg) != LIS_CondRetOK)
+			return MEN_CondRetRetornoLisIncorreto;
+		if(strcmp(tpMsg->Email,Email)==0)
+		{
+			if(LIS_ExcluirElemento(pMensagem)!=LIS_CondRetOK)
+				return MEN_CondRetRetornoLisIncorreto;
+				continue;
+		}
+		CondRetLis=LIS_AvancarElementoCorrente(pMensagem,1);
+	}
+	return MEN_CondRetOK;
+}
+
+	
+/* Fim função: MEN  &Excluir Mensagem*/
 
  /***************************************************************************
  *

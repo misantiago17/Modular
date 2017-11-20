@@ -150,6 +150,30 @@ MEN_tpCondRet MEN_EscreverMensagem( char emailRem[],char emailDest [],LIS_tppLis
 
 MEN_tpCondRet MEN_ExcluirMensagem(LIS_tppLista pMensagem,char Email[],MEN_tpCondMsg flagMsg,char Mensagem[]);
 
+/***********************************************************************
+*  $FC Função: MEN  &Excluir Mensagens de um Email
+*
+*  $ED Descrição da função
+*	Exclui todas as mensagens de uma lista de mensagens cujo email é
+*	igual ao passado como parametro.As mensagens sao somente apagadas
+*	da lista de mensagens do perfil passado como parametro.
+*	  
+*		
+*
+*  $EP Parâmetros
+*	  Perfil  - perfil do usuário o qual deseja-se apagar as mensagens
+*	  Email - email do perfil relacionado a mensagem
+*	  
+*
+*  $FV Valor retornado
+*     MEN_CondRetOK
+*	  MEN_CondRetParametroIncorreto
+*	  MEN_CondRetRetornoLisIncorreto
+*
+***********************************************************************/
+
+MEN_tpCondRet MEN_ExcluirMensagensEmail(LIS_tppLista pMensagem,char Email[]);
+
 
 /***********************************************************************
 *  $FC Função: MEN  &Obter Numero de Mensagens
