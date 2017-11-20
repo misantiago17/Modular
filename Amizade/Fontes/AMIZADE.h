@@ -13,7 +13,7 @@
 *  $HA Histórico de evolução:
 *   Versão    Autor   	 Data     	Observações
 *     1        ms      14/11/2017 	criação do arquivo
-*
+*	  2		   ms	   20/11/2017	alteraÁ„o no retorno de funÁıes e tipo de alguns par‚metros
 *
 *  $ED Descrição do módulo
 *

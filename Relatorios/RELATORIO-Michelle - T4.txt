@@ -1,0 +1,17 @@
+Data			Horas Trabalhadas	Tipo de Tarefa				Descrição da Tarefa
+14/11/2017 		01:15			Especificar os módulos			Criação e especificação inicial do módulo Amizade.h
+20/11/2017		02:30			Especificar os módulos			Criação e especificação inicial do módulo Amizade.c
+20/11/2017		00:30			Revisar especificações			Revisão e alteração do módulo Amizade.h
+
+- estudar
+- especificar os módulos
+- especificar as funções
+- revisar especificações
+- projetar
+- revisar projetos
+- codificar módulo
+- revisar código do módulo
+- redigir script de teste
+- revisar script de teste
+- realizar os testes 
+- diagnosticar e corrigir os problemas encontrados
