@@ -11,7 +11,7 @@
 *  Autores: Renan Moreira (rm)
 *
 *  $HA Histórico de evolução:
-*     Versão  Autor   	 Data     	Observações GRA_RetornaIdentificador
+*     Versão  Autor   	 Data     	Observações
 *     1      rm       27/09/2017 	inicio desenvolvimento
 *
 *  $ED Descrição do módulo

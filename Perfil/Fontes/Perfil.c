@@ -159,6 +159,9 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email) {
 	else if (retorno != PER_CondRetEmailJaCadastrado)
 		return retorno;
 
+	retorno = deletaPerfil(pGrafo, id);
+	return retorno;
+	/*
 	free(perfil->email);
 	free(perfil->primeiroNome);
 	free(perfil->ultimoNome);
@@ -186,6 +189,7 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email) {
 		return retorno;
 
 	return PER_CondRetOK;
+	*/
 }/* Fim função: PER  &Excluir Perfil */
  
 /***************************************************************************
@@ -430,6 +434,9 @@ PER_tpCondRet PER_ModificaCidade(GRA_tppGrafo pGrafo, char *email, char *cidade)
 PER_tpCondRet PER_ExcluirTodosPerfis(GRA_tppGrafo pGrafo) {
 	PER_tpCondRet retorno;
 	
+	while (retorno != PER_CondRetRedeVazia) {
+		retorno = 
+	}
 }/* Fim função: PER  &Exclui todos os perfis existentes */
 
  /***************************************************************************
@@ -753,4 +760,49 @@ PER_tpCondRet restauraCorrenteGrafo(GRA_tppGrafo pGrafo, int id) {
 	GRA_tpCondRet retorno;
 	retorno = GRA_IrVertice(pGrafo, id);
 	return transformaRetGRA(retorno);
+}
+
+/***********************************************************************
+*
+*  $FC Função: PER - Excluir Perfil
+*
+***********************************************************************/
+/*
+*     PER_CondRetOK
+*/
+PER_tpCondRet deletaPerfil(GRA_tppGrafo pGrafo, int id) {
+	GRA_tpCondRet retorno;
+	int correnteGrafo;
+	PER_tpPerfil *perfil;
+
+	retorno = salvaCorrenteGrafo(pGrafo, &correnteGrafo);
+	if (retorno != GRA_CondRetOK)
+		return retorno;
+
+	retorno = GRA_IrVertice(pGrafo, id);
+	if (retorno != GRA_CondRetOK)
+		return transformaRetGRA(retorno;)
+
+	retorno = GRA_ObterValor(pGrafo, &perfil);
+	if (retorno != GRA_CondRetOK)
+		return transformaRetGRA(retorno);
+
+	free(perfil->email);
+	free(perfil->primeiroNome);
+	free(perfil->ultimoNome);
+	free(perfil->cidade);
+
+	if (LIS_DestruirLista(perfil->pLisMensagens) != LIS_CondRetOK)
+		return PER_CondRetRetornoLisIncorreto;
+
+	free(perfil);
+
+	retorno = GRA_ExcluirVertice(pGrafo);
+	if (retorno != GRA_CondRetOK)
+		return transformaRetGRA(retorno);
+
+	retorno = retornaCorrenteGrafo(pGrafo, &correnteGrafo);
+	if (retorno != PER_CondRetOK)
+		return retorno;
+	return PER_CondRetOK;
 }
