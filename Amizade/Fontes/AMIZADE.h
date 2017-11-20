@@ -195,10 +195,12 @@ AMI_tpCondRet AMI_VerificarNumAmigos(PER_tpPerfil Usuario, int* numAmizades);
 *  $FV Valor retornado
 *     AMI_CondRetOK
 *     AMI_NaoPossuiAmizades
+*	  AMI_UsuarioNaoExiste
+*	  AMI_CondRetRetornoPerIncorreto
+*	  AMI_CondRetRetornoGraIncorreto
 *
 ***********************************************************************/
 
-///////// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 AMI_tpCondRet AMI_ArmazenarAmizades(PER_tpPerfil Usuario);
 
@@ -213,11 +215,12 @@ AMI_tpCondRet AMI_ArmazenarAmizades(PER_tpPerfil Usuario);
 *
 *  $FV Valor retornado
 *     AMI_CondRetOK
+*	  AMI_UsuarioNaoExiste
 *     AMI_NaoPossuiAmizades
+*	  AMI_CondRetRetornoPerIncorreto
+*	  AMI_CondRetRetornoGraIncorreto
 *
 ***********************************************************************/
-
-///////////////////// BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 
 AMI_tpCondRet AMI_ExcluirTodasAmizades(PER_tpPerfil Usuario);
 

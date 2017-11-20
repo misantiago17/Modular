@@ -180,6 +180,9 @@ AMI_tpCondRet AMI_VerificarNumAmigos(PER_tpPerfil Usuario, int* numAmizades){
 *
 *     AMI_CondRetOK
 *     AMI_NaoPossuiAmizades
+*	  AMI_UsuarioNaoExiste
+*	  AMI_CondRetRetornoPerIncorreto
+*	  AMI_CondRetRetornoGraIncorreto
 *
 *****/
 // Usar a função GRA_NumArestas(GRA_tppGrafo pGrafo,int *pNumArestas); para criar um espaço 
@@ -190,8 +193,50 @@ AMI_tpCondRet AMI_VerificarNumAmigos(PER_tpPerfil Usuario, int* numAmizades){
 // GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet); para obter o perfil de cada um deles
 // armazenar cada valor do perfil em um array separado (um array pro nome, outro pro email, etc)
 
-AMI_tpCondRet AMI_ArmazenarAmizades(PER_tpPerfil Usuario){
+AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario, PER_tpPerfil **PerfilAmigos){
 	
+	GRA_tpCondRet GRA_RetornoIndiceAresta;
+	GRA_tpCondRet GRA_RetornoObterAmigo;
+	AMI_tpCondRet AMI_RetornoNumAmigos;
+	PER_tpCondRet PER_RetornoEmail;
+	//PER_tpCondRet PER_ObterPerfil;
+	int id;
+	int numAmigos;
+	int* IdAmigos;
+	
+	PER_RetornoEmail = buscaEmail(pGrafo, Usuario->email, &Usuario, &id);
+	if (PER_RetornoEmail == PER_CondRetEmailInexistente){
+		return AMI_UsuarioNaoExiste;
+	} else if (PER_RetornoEmail1 != PER_CondRetEmailJaCadastrado || PER_RetornoEmail2 != PER_CondRetEmailJaCadastrado){
+		return AMI_CondRetRetornoPerIncorreto;
+	}
+	
+	AMI_RetornoNumAmigos = AMI_VerificarNumAmigos(Usuario, numAmigos);
+	if (AMI_RetornoNumAmigos != AMI_CondRetOK){
+		return AMI_RetornoNumAmigos;
+	}
+	if (numAmigos == 0){
+		return AMI_NaoPossuiAmizades;
+	}
+	
+	GRA_RetornoIndiceAresta = GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo, IdAmigos);
+	if (GRA_RetornoIndiceAresta != GRA_CondRetOK){
+		return AMI_CondRetRetornoGraIncorreto;
+	}
+	
+	for(i=0;i<numAmigos;i++) {
+		PER_tpPerfil **perfil;
+		char *email;
+		
+		GRA_RetornoObterAmigo = GRA_ObterValor(pGrafo, perfil);
+		if (GRA_RetornoObterAmigo != GRA_CondRetOK){
+			return AMI_CondRetRetornoGraIncorreto;
+		}
+		PerfilAmigos[i] = *perfil
+		//strcpy((*perfil)->email, email);
+	}
+	
+	return AMI_CondRetOK;
 	
 }/* Fim função: AMI  &Armazenar Amizades */
 
@@ -200,16 +245,51 @@ AMI_tpCondRet AMI_ArmazenarAmizades(PER_tpPerfil Usuario){
 *  Função: AMI  &Excluir Todas as Amizades
 *
 *     AMI_CondRetOK
+*	  AMI_UsuarioNaoExiste
 *     AMI_NaoPossuiAmizades
+*	  AMI_CondRetRetornoPerIncorreto
+*	  AMI_CondRetRetornoGraIncorreto
 *
 *****/
 
-// Utilizar o GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo, int* pDado); pra pegar todos os indices
-// dos usuarios que O ususario tem amizade, chamar GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2);
-// pra cada um dos indices armazenados no vetor
-
-AMI_tpCondRet AMI_ExcluirTodasAmizades(PER_tpPerfil Usuario){
-		
+AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario){
+	
+	GRA_tpCondRet GRA_RetornoIndiceAresta;
+	GRA_tpCondRet GRA_RetornoExcluirAresta;
+	AMI_tpCondRet AMI_RetornoNumAmigos;
+	PER_tpCondRet PER_RetornoEmail;
+	int id;
+	int numAmigos;
+	int* IdAmigos;
+	
+	PER_RetornoEmail = buscaEmail(pGrafo, Usuario->email, &Usuario, &id);
+	if (PER_RetornoEmail == PER_CondRetEmailInexistente){
+		return AMI_UsuarioNaoExiste;
+	} else if (PER_RetornoEmail1 != PER_CondRetEmailJaCadastrado || PER_RetornoEmail2 != PER_CondRetEmailJaCadastrado){
+		return AMI_CondRetRetornoPerIncorreto;
+	}
+	
+	AMI_RetornoNumAmigos = AMI_VerificarNumAmigos(Usuario, numAmigos);
+	if (AMI_RetornoNumAmigos != AMI_CondRetOK){
+		return AMI_RetornoNumAmigos;
+	}
+	if (numAmigos == 0){
+		return AMI_NaoPossuiAmizades;
+	}
+	
+	GRA_RetornoIndiceAresta = GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo, IdAmigos);
+	if (GRA_RetornoIndiceAresta != GRA_CondRetOK){
+		return AMI_CondRetRetornoGraIncorreto;
+	}
+	
+	for(i=0;i<numAmigos;i++) {
+		GRA_RetornoExcluirAresta = GRA_ExcluirAresta(pGrafo, id, IdAmigos[i]);
+		if (GRA_RetornoExcluirAresta != GRA_CondRetOK){
+			return AMI_CondRetRetornoGraIncorreto;
+		}
+	}
+	
+	return AMI_CondRetOK;
 	
 }/* Fim função: AMI  &Excluir Todas as Amizades */
 
