@@ -211,7 +211,8 @@ GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet);
 *
 ***********************************************************************/
 
-GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent) ;
+GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent);
+
 /***********************************************************************
 *  $FC Função: GRA  &Inserir vértice
 *

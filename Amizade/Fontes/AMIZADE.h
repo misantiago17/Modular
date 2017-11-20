@@ -1,7 +1,7 @@
 #if ! defined( AMIZADE_ )
 #define AMIZADE_
 /***************************************************************************
-*  $MCD Módulo de definição: AMI  Módulo Amizade
+*  $MCD MÛdulo de definiçÁ„o: AMI  MÛdulo Amizade
 *
 *  Arquivo gerado:              AMIZADE.h
 *  Letras identificadoras:      AMI
@@ -10,15 +10,15 @@
 *  Gestor:  DI/PUC-Rio
 *  Autores: Michelle Santiago (ms)
 *
-*  $HA Histórico de evolução:
-*   Versão    Autor   	 Data     	Observações
-*     1        ms      14/11/2017 	criação do arquivo
+*  $HA HistÛrico de evoluçÁ„o:
+*   Vers„o    Autor   	 Data     	ObservaçÁıes
+*     1        ms      14/11/2017 	criaçÁ„o do arquivo
 *	  2		   ms	   20/11/2017	alteraÁ„o no retorno de funÁıes e tipo de alguns par‚metros
 *
-*  $ED Descrição do módulo
+*  $ED DescriçÁ„o do mÛdulo
 *
-*    O módulo Amizade utiliza as funções do módulo grafo para criar amizades entre usuários, ou seja,
-*    arestas entre vértices do grafo.
+*    O mÛdulo Amizade utiliza as funçÁıes do mÛdulo grafo para criar amizades entre usu·rios, ou seja,
+*    arestas entre vÈrtices do grafo.
 *	 
 *
 ***************************************************************************/
@@ -31,102 +31,104 @@
 
 /***** DeclaraÁıes exportadas pelo mÛdulo *****/
 
-/* Tipo referÍncia para um perfil */
+/* Tipo referÍncia para uma amizade */
 
-typedef struct AMI_tagAmizade AMI_tpAmizade;
+//typedef struct AMI_tagAmizade AMI_tpAmizade;
 
 /***********************************************************************
-*  $TC Tipo de dados: AMI Condições de retorno
+*  $TC Tipo de dados: AMI CondiçÁıes de retorno
 *
 *
-*  $ED Descrição do tipo
-*     Condições de retorno das funções de amizade
+*  $ED DescriçÁ„o do tipo
+*     CondiçÁıes de retorno das funçÁıes de amizade
 *
 ***********************************************************************/
-// AVALIAR ISSO AQUI DEPOIS
+
 typedef enum {
 
 	AMI_CondRetOK,
 	/* Concluiu corretamente */
 
 	AMI_NaoPossuiAmizades,
-	/* O usuário não possui amizades */
+	/* O usu·rio n„o possui amizades */
 
 	AMI_NaoAceitou,
-	/* O usuário não aceitou a solicitação de amizade de outro */
+	/* O usu·rio n„o aceitou a solicitaçÁ„o de amizade de outro */
 
 	AMI_AmizadeNaoExiste,
 	/* N„o encontrou amizade entre dois usu·rios */
 
 	AMI_CondRetFaltouMemoria,
-	/* Faltou memória ao tentar criar uma amizade */
+	/* Faltou memÛria ao tentar criar uma amizade */
 
 	AMI_CondRetRetornoGraIncorreto,
-	/* Condicao de retorno do modulo Grafo imprevista*/
+	/* Condicao de retorno do mÛdulo Grafo imprevista */
 	
 	AMI_CondRetRetornoPerIncorreto,
-	/* Condicao de retorno do modulo Perfil imprevista*/
+	/* Condicao de retorno do mÛdulo Perfil imprevista */
 
 	//GRA_CondRetArestaJaExiste,
-	/* Ja existe uma aresta entre os dois vertices passados*/
+	/* Ja existe uma aresta entre os dois vertices passados */
 
 	AMI_UsuarioNaoExiste,
-	/* Usuário fornecido não existe na rede*/
+	/* Usu·rio fornecido n„o existe na rede */
 	
 	//GRA_CondRetArestaParaSiMesmo
 	/* Aresta de vertice tentando apontar para p proprio vertice*/
 } AMI_tpCondRet;
 
 /***********************************************************************
- *  $TC Tipo de dados: AMI Solicitação
+ *  $TC Tipo de dados: AMI SolicitaçÁ„o
  *
  *
- *  $ED Descrição do tipo
- *     Retorna se um usúario aceitou ou não à solicitação de amizade de um usuário ou não
+ *  $ED DescriçÁ„o do tipo
+ *     Retorna se um usu·rio aceitou ou n„o a solicitaçÁ„o de amizade de um outro usu·rio
  *
  ***********************************************************************/
 
 typedef enum {
     
     AMI_SolicitacaoAceita,
-    /* O usuário aceitou a solicitação de amizade */
+    /* O usu·rio aceitou a solicitaçÁ„o de amizade */
     
     AMI_SolicitacaoRejeitada,
-    /* O usuário rejeitou a solicitação de amizade */
+    /* O usu·rio rejeitou a solicitaçÁ„o de amizade */
     
 } AMI_tpSolitacao;
 
 /***********************************************************************
- *  $TC Tipo de dados: AMI Verificação
+ *  $TC Tipo de dados: AMI VerificaçÁ„o
  *
  *
- *  $ED Descrição do tipo
- *     Retorna se o usuário possui amizade com um segundo usuário ou não
+ *  $ED DescriçÁ„o do tipo
+ *     Retorna se o usu·rio possui amizade com um segundo usu·rio ou n„o
  *
  ***********************************************************************/
 
- /*
+ 
 typedef enum {
     
     AMI_ExisteAmizade,
-    /* Foi verificado que a amizade entre dois usuários existe */
+    /* Foi verificado que a amizade entre dois usu·rios existe */
     
     AMI_NaoExisteAmizade,
-    /* Foi verificado que a amizade entre dois usuários não existe */
+    /* Foi verificado que a amizade entre dois usu·rios não existe */
     
 } AMI_tpVerificacao;
-*/
+
 
 /***********************************************************************
-*  $FC Função: AMI  &Criar Amizade
+*  $FC FunçÁ„o: AMI  &Criar Amizade
 *
-*  $ED Descrição da função
-*     Cria uma relação entre um usuário e outro.
+*  $ED DescriçÁ„o da funçÁ„o
+*     Cria uma relaçÁ„o entre um usu·rio e outro.
 *
-*  $EP Parâmetros
-*     Usuario1  - ponteiro para um usuário da rede (um vértice do grafo) que solicitou a amizade
-*	  Usuario2 	- ponteiro para outro usuário da rede (outro vértice diferente do grafo) na qual foi solicitada a amizade
-*     Aceitacao - variável booleana que contém a informação caso o segundo usuário aceitou ou não a solicitação de amizade
+*  $EP Par‚metros
+*     Usuario1  - ponteiro para um usu·rio da rede (um vÈrtice do grafo) que solicitou a amizade
+*	  Usuario2 	- ponteiro para outro usu·rio da rede (outro vÈrtice diferente do grafo) na 
+				  qual foi solicitada a amizade
+*     Aceitacao - vari·vel booleana que contÍm a informaçÁ„o caso o segundo usu·rio aceitou 
+				  ou n„o a solicitaçÁ„o de amizade
 *
 *  $FV Valor retornado
 *      AMI_CondRetOK
@@ -141,14 +143,14 @@ AMI_tpCondRet AMI_CriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario1, PER_t
 
 
 /***********************************************************************
-*  $FC Função: AMI  &Excluir Amizade
+*  $FC FunçÁ„o: AMI  &Excluir Amizade
 *
-*  $ED Descrição da função
-*     Exclui uma amizade entre dois usuários.
+*  $ED DescriçÁ„o da funçÁ„o
+*     Exclui uma amizade entre dois usu·rios.
 *
-*  $EP Parâmetros
-*	  Usuario1 		- ponteiro para o primeiro usuário que realizou a exclusão da amizade.
-*     Usuario2      - ponteiro para o segundo usuário que terá a amizade excluída.
+*  $EP Par‚metros
+*	  Usuario1 		- ponteiro para o primeiro usu·rio que realizou a exclus„o da amizade.
+*     Usuario2      - ponteiro para o segundo usu·rio que ter· a amizade excluÌda.
 *
 *  $FV Valor retornado
 *     AMI_CondRetOK
@@ -164,12 +166,12 @@ AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario1, PER
 /***********************************************************************
 *  $FC FunçÁ„o: AMI  &Verificar N˙mero de Amigos
 *
-*  $ED Descrição da função
+*  $ED DescriçÁ„o da funçÁ„o
 *     Retorna o número de amigos que um usuário possui.
 *
-*  $EP Parâmetros
-*     Usuario  - ponteiro para o usuario que solicitou o número de amizades.
-*     numAmizades - variável que irá armazenar o número de amizades encontradas.
+*  $EP Par‚metros
+*     Usuario  - ponteiro para o usu·rio que solicitou o n˙mero de amizades.
+*     numAmizades - vari·vel que ir· armazenar o n˙mero de amizades encontradas.
 *
 *  $FV Valor retornado
 *     AMI_CondRetOK
@@ -182,13 +184,13 @@ AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario1, PER
 AMI_tpCondRet AMI_VerificarNumAmigos(PER_tpPerfil Usuario, int* numAmizades);
 
 /***********************************************************************
-*  $FC Função: AMI  &Armazenar Amizades
+*  $FC FunçÁ„o: AMI  &Armazenar Amizades
 *
-*  $ED Descrição da função
-*     Exibe as informações do perfil de cada amigo do usuário.
+*  $ED DescriçÁ„o da funçÁ„o
+*     Exibe as informaçÁıes do perfil de cada amigo do usu·rio.
 *
-*  $EP Parâmetros
-*     Usuario  - ponteiro para o usuário que solicitou as informações das amizades
+*  $EP Par‚metros
+*     Usuario  - ponteiro para o usu·rio que solicitou as informaçÁıes das amizades
 *
 *  $FV Valor retornado
 *     AMI_CondRetOK
@@ -201,13 +203,13 @@ AMI_tpCondRet AMI_VerificarNumAmigos(PER_tpPerfil Usuario, int* numAmizades);
 AMI_tpCondRet AMI_ArmazenarAmizades(PER_tpPerfil Usuario);
 
 /***********************************************************************
-*  $FC Função: AMI  &Excluir Todas as Amizades
+*  $FC FunçÁ„o: AMI  &Excluir Todas as Amizades
 *
-*  $ED Descrição da função
-*     Exclui todas as amizades de um usuário.
+*  $ED DescriçÁ„o da funçÁ„o
+*     Exclui todas as amizades de um usu·rio.
 *
-*  $EP Parâmetros
-*     Usuario - ponteiro para o usuário que terá suas amizades apagadas
+*  $EP Par‚metros
+*     Usuario - ponteiro para o usuário que ter· suas amizades apagadas
 *
 *  $FV Valor retornado
 *     AMI_CondRetOK
@@ -220,15 +222,15 @@ AMI_tpCondRet AMI_ArmazenarAmizades(PER_tpPerfil Usuario);
 AMI_tpCondRet AMI_ExcluirTodasAmizades(PER_tpPerfil Usuario);
 
 /***********************************************************************
-*  $FC Função: AMI  &Verificar Amizade
+*  $FC FunçÁ„o: AMI  &Verificar Amizade
 *
-*  $ED Descrição da função
-*     Verifica se o Usuario1 é amigo do Usuario2
+*  $ED DescriçÁ„o da funçÁ„o
+*     Verifica se o Usuario1 È amigo do Usuario2
 *
-*  $EP Parâmetros
-*     Usuario1 - ponteiro para o primeiro usuário que solicitou a verificação
-*	  Usuario2 - ponteiro para o segundo usuário na quala  amizade será solicitada
-*     ExisteAmizade - variável booleana que afirma se existe amizade ou não entre os usuários
+*  $EP Par‚metros
+*     Usuario1 - ponteiro para o primeiro usu·rio que solicitou a verificaçÁ„o
+*	  Usuario2 - ponteiro para o segundo usu·rio na quala  amizade ser· solicitada
+*     ExisteAmizade - vari·vel booleana que afirma se existe amizade ou n„o entre os usu·rios
 *
 *  $FV Valor retornado
 *     AMI_CondRetOK
@@ -244,7 +246,7 @@ AMI_tpCondRet AMI_VerificarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario1, P
 
 #undef AMIZADE_EXT
 
-/********** Fim do módulo de definição: AMI  Módulo Amizade **********/
+/********** Fim do mÛdulo de definiçÁ„o: AMI  MÛdulo Amizade **********/
 
 #else
 #endif

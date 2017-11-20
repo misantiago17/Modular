@@ -2,6 +2,7 @@ Data			Horas Trabalhadas	Tipo de Tarefa				Descrição da Tarefa
 14/11/2017 		01:15			Especificar os módulos			Criação e especificação inicial do módulo Amizade.h
 20/11/2017		02:30			Especificar os módulos			Criação e especificação inicial do módulo Amizade.c
 20/11/2017		00:30			Revisar especificações			Revisão e alteração do módulo Amizade.h
+20/11/2017		00:30			Revisar especificações			Revisão do módulo amizade.h e detalhamento maior no amizade.c
 
 - estudar
 - especificar os módulos

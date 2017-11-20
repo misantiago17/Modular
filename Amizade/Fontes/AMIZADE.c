@@ -182,10 +182,15 @@ AMI_tpCondRet AMI_VerificarNumAmigos(PER_tpPerfil Usuario, int* numAmizades){
 *     AMI_NaoPossuiAmizades
 *
 *****/
+// Usar a função GRA_NumArestas(GRA_tppGrafo pGrafo,int *pNumArestas); para criar um espaço 
+// pra cada vetor que vai a	armazenar as informações do cara e depois utilizar 
+// GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo, int* pDado); pra pegar o vetor 
+// com os indices de cada aresta de um cara, com isso fazer um for pra cada valor desse vetor
+// e usar a função GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert); e 
+// GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet); para obter o perfil de cada um deles
+// armazenar cada valor do perfil em um array separado (um array pro nome, outro pro email, etc)
 
 AMI_tpCondRet AMI_ArmazenarAmizades(PER_tpPerfil Usuario){
-
-//////////// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA	
 	
 	
 }/* Fim função: AMI  &Armazenar Amizades */
@@ -199,10 +204,12 @@ AMI_tpCondRet AMI_ArmazenarAmizades(PER_tpPerfil Usuario){
 *
 *****/
 
+// Utilizar o GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo, int* pDado); pra pegar todos os indices
+// dos usuarios que O ususario tem amizade, chamar GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2);
+// pra cada um dos indices armazenados no vetor
+
 AMI_tpCondRet AMI_ExcluirTodasAmizades(PER_tpPerfil Usuario){
-	
-///////////////////// BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-	
+		
 	
 }/* Fim função: AMI  &Excluir Todas as Amizades */
 
