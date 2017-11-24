@@ -45,15 +45,11 @@ typedef struct PER_tagPerfil PER_tpPerfil;
 typedef enum {
 	PER_CondRetOK,
 
-	PER_CondRetPonteiroParaRetornoInvalido,
-
 	PER_CondRetEmailInvalido,
 
 	PER_CondRetEmailJaCadastrado,
 
 	PER_CondRetDataInvalida,
-
-	PER_CondRetParametroNulo,
 
 	PER_CondRetNomeInvalido,
 
@@ -68,15 +64,7 @@ typedef enum {
 	PER_CondRetRedeVazia,
 
 	PER_CondRetPerfilInexistente,
-
-	PER_CondRetNaoHaAmizade,
-
-	PER_CondRetParametroIncorreto,
-
-	PER_CondRetAmizadeJaCriada,
-
-	PER_CondRetGrafoInvalido,
-
+	
 	PER_CondRetParametroGRAIncorreto
 
 } PER_tpCondRet;
@@ -270,7 +258,30 @@ PER_tpCondRet PER_ModificaCidade(GRA_tppGrafo pGrafo, char *email, char *cidade)
 *
 *
 *  $FV Valor retornado
+*     PER_CondRetEmailInexistente
+*     PER_CondRetParametroGRAIncorreto
+*     PER_CondRetRetornoLisIncorreto
+*     PER_CondRetRedeVazia
+*     PER_CondRetEmailJaCadastrado
 *
+***********************************************************************/
+
+PER_tpCondRet buscaEmail(GRA_tppGrafo pGrafo, char *email, PER_tpPerfil **perfil, int *id);
+
+/***********************************************************************
+*  $FC Função:
+*
+*  $ED Descrição da função
+*
+*
+*
+*  $EP Parâmetros
+*
+*
+*  $FV Valor retornado
+*     PER_CondRetOK
+*     PER_CondRetParametroGRAIncorreto
+*     PER_CondRetRetornoLisIncorreto
 *
 ***********************************************************************/
 
@@ -287,28 +298,15 @@ PER_tpCondRet PER_ExcluirTodosPerfis(GRA_tppGrafo pGrafo);
 *
 *
 *  $FV Valor retornado
-*
-*
-***********************************************************************/
-
-PER_tpCondRet PER_adicionaMensagem(GRA_tppGrafo pGrafo, char *email, char *mensagem, int flag);
-
-/***********************************************************************
-*  $FC Função:
-*
-*  $ED Descrição da função
-*
-*
-*
-*  $EP Parâmetros
-*
-*
-*  $FV Valor retornado
-*
+*     PER_CondRetEmailInexistente
+*     PER_CondRetParametroGRAIncorreto
+*     PER_CondRetRetornoLisIncorreto
+*     PER_CondRetRedeVazia
+*     PER_CondRetEmailJaCadastrado
 *
 ***********************************************************************/
 
-PER_tpCondRet PER_RetornaMensagens(GRA_tppGrafo pGrafo, char *email, char **mensagem);
+PER_tpCondRet PER_retornaLisMensagens(GRA_tppGrafo pGrafo, char *email, LIS_tppLista *mensagens);
 
 #undef PERFIL_EXT
 
