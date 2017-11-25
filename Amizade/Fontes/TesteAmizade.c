@@ -1,27 +1,19 @@
 /***************************************************************************
-*  $MCI Módulo de implementação: TGRA Teste grafo com cabeça
+*  $MCI Módulo de implementação: TAMI Teste módulo amizade
 *
-*  Arquivo gerado:              TesteGrafo.c
-*  Letras identificadoras:      TGRA
+*  Arquivo gerado:              TesteAmizade.c
+*  Letras identificadoras:      TAMI
 *
 *  Nome da base de software:    Arcabouço para a automação de testes de programas redigidos em C
-*  Arquivo da base de software: D:\AUTOTEST\PROJETOS\Grafo.BSW
+*  Arquivo da base de software: D:\AUTOTEST\PROJETOS\Amizade.BSW
 *
 *  Projeto: INF 1301 / 1628 Automatização dos testes de módulos C
 *  Gestor:  LES/DI/PUC-Rio
-*  Autores: gb, ms, rm
+*  Autores: ms
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
-*     8      rm/ms/gb   16/10/2017 	revisoes finais e pequenas correcoes
-*     8       gb   15/out/2017 ALTERAÇÕES
-*     7       gb   14/out/2017 ALTERAÇÕES
-*     6       gb   01/out/2017 implementacao dos testes da funcao ObterTamanho e utilizando uma estrutura que guarde Nome, Data, Cidade e Email.
-*     5       gb   01/out/2017 modificacao no módulo de teste para que as funções do módulo Grafo retornem uma condição de retorno
-*     4       avs   01/fev/2006 criar linguagem script simbólica
-*     3       avs   08/dez/2004 uniformização dos exemplos
-*     2       avs   07/jul/2003 unificação de todos os módulos em um só projeto
-*     1       avs   16/abr/2003 início desenvolvimento
+*     1       ms   16/abr/2003 início desenvolvimento
 *
 ***************************************************************************/
 
@@ -34,520 +26,266 @@
 #include    "Generico.h"
 #include    "LerParm.h"
 #include    "CESPDIN.H"
-#include    "Grafo.h"
+#include    "AMIZADE.h"
+#include	"PERFIL.h"
+#include	"GRAFO.h"
 
-
-
-static const char RESET_GRAFO_CMD         [ ] = "=resetteste"     ;
-static const char CRIAR_GRAFO_CMD         [ ] = "=criargrafo"     ;
-static const char DESTRUIR_GRAFO_CMD      [ ] = "=destruirgrafo"  ;
-static const char IR_VERT_CMD             [ ] = "=irvertice"  ;
-static const char INS_VERT_CMD            [ ] = "=inserirvertice"   ;
-static const char OBTER_VALOR_CMD         [ ] = "=obtervalorvert" ;
-static const char CRIAR_ARESTA_CMD        [ ] = "=criararesta"     ;
-static const char EXISTE_ARESTA_CMD       [ ] = "=existearesta"     ;
-static const char EXC_VERT_CMD            [ ] = "=excluirvertice"    ;
-static const char EXC_ARESTA_CMD          [ ] = "=excluiraresta"     ;
-static const char NUM_VERTS_CMD           [ ] = "=obternumverts" ;
-static const char NUM_ARESTAS_CMD         [ ] = "=obternumarestas" ;
-static const char INDICES_ARESTAS_CMD     [ ] = "=indicesarestas" ;
-static const char RET_IDENT_CMD           [ ] = "=retornaident" ;
-
-
-struct infs{
-	char Nome[100];
-	char Cidade[50];
-	char Email[100];
-	char Data[12];
-
-};
-typedef struct infs Teste_Infs;
+static const char RESET_AMIZADE_CMD				[ ] = "=resetteste"
+static const char CRIAR_AMIZADE_CMD       		[ ] = "=criaramizade";
+static const char EXCLUIR_AMIZADE_CMD     		[ ] = "=excluiramizade";
+static const char VERIFICAR_NUM_AMIGOS_CMD      [ ] = "=verificarnumamigos";
+static const char ARMAZENAR_AMIZADES_CMD        [ ] = "=armazenaramizades";
+static const char EXCLUIR_TODAS_AMIZADES_CMD    [ ] = "=excluirtodasamizades";
+static const char VERIFICAR_AMIZADES_CMD        [ ] = "=verificaramizades";
 
 #define TRUE  1
 #define FALSE 0
 
-#define DIM_VT_GRAFO   10
+#define DIM_VT_PERFIL  	10
+#define DIM_VT_EMAIL  	10
+#define DIM_VT_PRIMNOME 10
+#define DIM_VT_CIDADE  	10
+#define DIM_VT_DIA  	10
+#define DIM_VT_MES  	10
+#define DIM_VT_ANO  	10
 
-
-
-
-GRA_tppGrafo   vtGrafos[ DIM_VT_GRAFO ] ;
+PER_tpPerfil   vtPerfil[ DIM_VT_PERFIL ];
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
-static void DestruirValor( void * pValor ) ;
-static int ValidarInxGrafo( int inxGrafo) ;
-static int ValidarParmIndices(int tamVetor, int *indiceEsp);
+static void DestruirValor( void * pValor );
+static int ValidarInxPerfil( int inxPerfil);
+
+//static int ValidarParmIndices(int tamVetor, int *indiceEsp);
 
 /*****  Código das funções exportadas pelo módulo  *****/
 /***********************************************************************
 *
-*  $FC Função: TGRA &Testar grafo
+*  $FC Função: TAMI &Testar amizade
 *
 *  $ED Descrição da função
-*     Podem ser criadas até 10 grafos, identificadas pelos índices 0 a 10
+*	  Podem ser criadas até 10 perfis, identificados pelos índices 0 a 10
 *
 *     Comandos disponíveis:
 *
-*     =resetteste - anula o vetor de grafos. Provoca vazamento de memória
-*     =criargrafo                   inxGrafo CondRetEsp
-*     =destruirgrafo                inxGrafo CondRetEsp
-*     =irvertice                    inxGrafo numVert CondRetEsp
-*     =inserirvertice               inxGrafo Nome Data Cidade Email CondRetEsp
-*     =obtervalorvert               inxGrafo Nome Data Cidade Email CondRetEsp
-*     =criararesta                  inxGrafo numVert1 numVert2 CondRetEsp
-*     =excluirvertice               inxGrafo CondRetEsp 
-*     =excluiraresta                inxGrafo numVert1 numVert2 CondRetEsp
-*	  =existearesta					inxGrafo numVert1 numVert2 CondRetEsp
-*	  =obternumverts				inxGrafo numElem  CondRetEsp
-*	  =obternumarestas 				inxGrafo numElem CondRetEsp
-*	  =retornaident					inxGrafo numIdentEsp CondRetEsp
-*	  =indicesarestas				inxGrafo tamVetor indiceEsp[0] indiceEsp[1] indiceEsp[2] indiceEsp[3] indiceEsp[4] CondRetEsp
+*     =resetteste - anula o vetor de grafos e perfiis. Provoca vazamento de memória.
+*     =criaramizade                   	inxPerfil1 	inxPerfil2 	Solicitacao   CondRetEsp
+*     =excluiramizade                	inxPerfil1 	inxPerfil2 	CondRetEsp
+*     =verificarnumamigos               inxPerfil 	numAmizades CondRetEsp
+*     =armazenaramizades               	inxPerfil	vetPerfil	CondRetEsp 					
+*		- a função armazenar amizades compara apenas 3 perfis
+*     =excluirtodasamizades             inxPerfil	CondRetEsp
+*     =verificaramizades                inxPerfil1 	inxPerfil2 	existeAmizade CondRetEsp
 *
 ***********************************************************************/
 
 TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 {
 
-	int inxGrafo  = -1 ,
+	int inxPerfil = -1 ,
+		inxPerfil1 = -1 ,
+		inxPerfil2 = -1 ,
 		numLidos   = -1 ,
 		CondRetEsp = -1  ;
-	Teste_Infs* pDado;
 	TST_tpCondRet CondRet ;
 
-	char NomeRet[100];
-	char CidadeRet[50];
-	char EmailRet[100];
-	char DataRet[12];
-
-	char NomeEsp[100];
-	char CidadeEsp[50];
-	char EmailEsp[100];
-	char DataEsp[12];
-
-
-
 	int i ;
+	AMI_tpSolitacao Solicitacao;
+	int numElem = -1 ,
+		numAmigos = -1;
+	
+	GRA_tppGrafo tpGrafo = NULL;
+	GRA_tpCondRet GRA_CondRetCriarGrafo;
+	PER_tpCondRet PER_CondRetCriarPerfil;
+	
+	char email1;
+	char primNome1;
+	char ultNome1;
+	char cidade1;
+	int dia1;
+	int mes1;
+	int ano1;
+	
+	char email2;
+	char primNome2;
+	char ultNome2;
+	char cidade2;
+	int dia2;
+	int mes2;
+	int ano2;
+	
+	char email3;
+	char primNome3;
+	char ultNome3;
+	char cidade3;
+	int dia3;
+	int mes3;
+	int ano3;
+	
+	char vtEmail 	[DIM_VT_EMAIL] = {"usuario1@gmail.com", "usuario2@gmail.com", "usuario3@gmail.com", "usuario4@gmail.com", "usuario5@gmail.com",
+									  "usuario6@gmail.com", "usuario7@gmail.com", "usuario8@gmail.com", "usuario9@gmail.com", "usuario10@gmail.com"};
+	char vtPrimNome [DIM_VT_PRIMNOME] = {"Usuario1", "Usuario2", "Usuario3", "Usuario4", "Usuario5", "Usuario6", "Usuario7", "Usuario8", "Usuario9", "Usuario10"};
+	char vtUltNome 	[DIM_VT_ULTNOME] = {"Sobrenome1", "Sobrenome2", "Sobrenome3", "Sobrenome4", "Sobrenome5", "Sobrenome6", "Sobrenome7", "Sobrenome8", "Sobrenome9", "Sobrenome10"};
+	char vtCidade 	[DIM_VT_CIDADE] = {"Cidade1", "Cidade2", "Cidade3", "Cidade4", "Cidade5", "Cidade6", "Cidade7", "Cidade8", "Cidade9", "Cidade10"};
+	int  vtDia 		[DIM_VT_DIA] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+	int  vtMes 		[DIM_VT_MES] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+	int  vtAno 		[DIM_VT_ANO] = {2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010};
+	
+	/* Efetuar reset de teste de Amizade */
 
-	int numElem = -1 ;
-
-
-
-	/* Efetuar reset de teste de GRAFO */
-
-	if ( strcmp( ComandoTeste , RESET_GRAFO_CMD ) == 0 )
+	if ( strcmp( ComandoTeste , RESET_AMIZADE_CMD ) == 0 )
 	{
-
-		for( i = 0 ; i < DIM_VT_GRAFO ; i++ )
-		{
-			vtGrafos[ i ] = NULL ;
-		} /* for */
+		if (tpGrafo == NULL){
+			GRA_CondRetCriarGrafo = GRA_CriarGrafo(DestruirValor, &tpGrafo);
+			if (GRA_CondRetCriarGrafo == GRA_CondRetFaltouMemoria){
+				return TST_CondRetMemoria;
+			}
+		} else {
+			GRA_DestruirGrafo(&tpGrafo);
+			GRA_CondRetCriarGrafo = GRA_CriarGrafo(DestruirValor, &tpGrafo);
+			if (GRA_CondRetCriarGrafo == GRA_CondRetFaltouMemoria){
+				return TST_CondRetMemoria;
+			}
+		}
+		
+		
+		for (i = 0; i < DIM_VT_PERFIL ; i++ ){
+			PER_CondRetCriarPerfil = PER_CriarPerfil(tpGrafo, vtPerfil[i], vtEmail[i], vtPrimNome[i], vtUltNome[i],
+							  vtDia[i], vtMes[i], vtAno[i], vtCidade[i]);
+			if (PER_CondRetCriarPerfil == PER_CondRetFaltouMemoria){
+				return TST_CondRetMemoria;
+			}
+		}/* for */
 
 		return TST_CondRetOK ;
 
-	} /* fim ativa: Efetuar reset de teste de Grafo */
+	} /* fim ativa: Efetuar reset de teste de Amizade */
+	
+	/* Testar Criar Amizade */
 
-	/* Testar Criar Grafo */
-
-	else if ( strcmp( ComandoTeste , CRIAR_GRAFO_CMD ) == 0 )
+	else if ( strcmp( ComandoTeste , CRIAR_AMIZADE_CMD ) == 0 )
 	{
+		numLidos = LER_LerParametros( "iiii" ,&inxPerfil1, &inxPerfil2, &Solicitacao, &CondRetEsp ) ;
 
-		numLidos = LER_LerParametros( "ii" ,
-			&inxGrafo, &CondRetEsp ) ;
-
-		if ( ( numLidos != 2 )
-			|| ( ! ValidarInxGrafo( inxGrafo)))
-		{
+		if ( ( numLidos != 4 ) || ( ! ValidarInxPerfil( inxPerfil1)) || ( ! ValidarInxPerfil( inxPerfil2))){
 			return TST_CondRetParm ;
 		} /* if */
 
-		CondRet=GRA_CriarGrafo(DestruirValor,&vtGrafos[inxGrafo]) ;
+		CondRet = AMI_CriarAmizade(tpGrafo, inxPerfil1, inxPerfil2, Solicitacao);
 
 		return TST_CompararInt( CondRetEsp , CondRet ,
-			"Erro na condicao de retorno ao criar o Grafo"  ) ;
+			"Erro na condicao de retorno ao criar o Amizade"  ) ;
 
-	} /* fim ativa: Testar CriarGrafo */
+	} /* fim ativa: Testar Criar Amizade */
 
 
-	/* Testar Destruir Grafo */
+	/* Testar Excluir Amizade */
 
-	else if ( strcmp( ComandoTeste , DESTRUIR_GRAFO_CMD ) == 0 )
+	else if ( strcmp( ComandoTeste , EXCLUIR_AMIZADE_CMD ) == 0 )
 	{
-
-		GRA_tpCondRet debug;
-            numLidos = LER_LerParametros( "ii" ,
-                               &inxGrafo,&CondRetEsp ) ;
-            if ( ( numLidos != 2 )
-              || ( ! ValidarInxGrafo( inxGrafo)))
-            {
-               return TST_CondRetParm ;
-            } /* if */
-
-
-            debug=GRA_DestruirGrafo( vtGrafos[ inxGrafo ] ) ;
-			CondRet= TST_CompararInt( CondRetEsp , debug ,
-                     "Condicao de retorno errada ao destruir o grafo.") ;
-			if(CondRet!=TST_CondRetOK)
-					return CondRet;
-
-			if(debug==GRA_CondRetOK)
-				vtGrafos[ inxGrafo ] = NULL ;
-
-			 return TST_CondRetOK ;
-           
-
-         }  /* fim ativa: Testar Destruir Grafo */
-
-	/* Testar inserir vertice*/
-
-	else if ( strcmp( ComandoTeste , INS_VERT_CMD ) == 0 )
-	{
-
-		numLidos = LER_LerParametros( "issssi" ,
-			&inxGrafo  ,NomeRet,DataRet,CidadeRet,EmailRet,&CondRetEsp ) ;
-
-		if ( ( numLidos != 6 )
-			|| ( ! ValidarInxGrafo( inxGrafo)) )
-		{
+		
+        numLidos = LER_LerParametros("iii" , &inxPerfil1, &inxPerfil2, &CondRetEsp) ;
+		if (( numLidos != 3 ) || ( ! ValidarInxPerfil( inxPerfil1)) || ( ! ValidarInxPerfil( inxPerfil2))){
 			return TST_CondRetParm ;
 		} /* if */
 
-		pDado = ( Teste_Infs * ) malloc( sizeof(Teste_Infs )) ;
-		if ( pDado == NULL )
-		{
-			return TST_CondRetMemoria ;
+		CondRet = AMI_ExcluirAmizade(tpGrafo, inxPerfil1, inxPerfil2);
+		
+		return TST_CompararInt( CondRetEsp , CondRet ,
+            "Condicao de retorno errada ao excluir amizade.") ;
+
+    }  /* fim ativa: Testar Excluir Amizade */
+
+	
+	/* Testar Verificar Número de Amigos*/
+
+	else if ( strcmp( ComandoTeste , VERIFICAR_NUM_AMIGOS_CMD ) == 0 )
+	{	
+		numLidos = LER_LerParametros( "iii" , &inxPerfil1, &numAmigos, &CondRetEsp ) ;
+		if ( ( numLidos != 2 )|| (!ValidarInxPerfil( inxPerfil1))){
+			return TST_CondRetParm ;
 		} /* if */
 
-		strcpy(pDado->Nome,NomeRet);
-		strcpy(pDado->Cidade,CidadeRet);
-		strcpy(pDado->Data,DataRet);
-		strcpy(pDado->Email,EmailRet);
-
-		CondRet = GRA_InserirVertice( vtGrafos[ inxGrafo ] , pDado ) ;
-
-		if ( CondRet != GRA_CondRetOK )
-		{
-			free( pDado ) ;
-		} /* if */
+		CondRet = AMI_VerificarNumAmigos(tpGrafo, inxPerfil1, numAmigos);
 
 		return TST_CompararInt( CondRetEsp , CondRet ,
-			"Condicao de retorno errada ao inserir vertice." ) ;
+			"Condicao de retorno errada ao verificar número de amigos." ) ;
 
-	} /* fim ativa: Testar inserir vertice */
+	} /* fim ativa: Testar Verificar Número de Amigos */
 
-
-	/* Testar excluir vertice */
-
-	else if ( strcmp( ComandoTeste , EXC_VERT_CMD ) == 0 )
+	
+	/* Testar armazenar amizades */
+	// Verificar essa bosta
+	else if ( strcmp( ComandoTeste , ARMAZENAR_AMIZADES_CMD ) == 0 )
 	{
+		numLidos = LER_LerParametros( "issssiiissssiiissssiiii" ,
+			&inxPerfil1, &email1, &primNome1, &ultNome1, &cidade1, &dia1, &mes1, &ano1,
+						 &email2, &primNome2, &ultNome2, &cidade2, &dia2, &mes2, &ano2,
+						 &email3, &primNome3, &ultNome3, &cidade3, &dia3, &mes3, &ano3, &CondRetEsp );
+						 
 
-		numLidos = LER_LerParametros( "ii" ,
-			&inxGrafo , &CondRetEsp ) ;
-
-		if ( ( numLidos != 2 )
-			|| ( ! ValidarInxGrafo( inxGrafo)) )
+		if (( numLidos != 23 ) || (!ValidarInxPerfil( inxPerfil1)))
 		{
 			return TST_CondRetParm ;
 		} /* if */
+		
+		CondRet = AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario, PER_tpPerfil **PerfilAmigos);
 
 		return TST_CompararInt( CondRetEsp ,
 			GRA_ExcluirVertice( vtGrafos[ inxGrafo ]) ,
 			"Condição de retorno errada ao excluir vertice."   ) ;
 
-	} /* fim ativa: Testar excluir vertice */
+	} /* fim ativa: Testar armazenar amizades */
 
-	/* Testar Criar Aresta */
-
-	else if ( strcmp( ComandoTeste , CRIAR_ARESTA_CMD ) == 0 )
+	
+	/* Testar excluir Todas as Amizades */
+	else if ( strcmp( ComandoTeste , EXCLUIR_TODAS_AMIZADES_CMD ) == 0 )
 	{
-		int numVert1,numVert2;
+		numLidos = LER_LerParametros( "ii" ,
+			&inxPerfil1, &CondRetEsp ) ;
 
-		numLidos = LER_LerParametros( "iiii" ,
-			&inxGrafo ,&numVert1,&numVert2, &CondRetEsp ) ;
-
-		if ( ( numLidos != 4 )
-			|| ( ! ValidarInxGrafo( inxGrafo)) )
+		if (( numLidos != 2 )|| (!ValidarInxPerfil( inxPerfil1)))
 		{
 			return TST_CondRetParm ;
 		} /* if */
+		
+		CondRet = AMI_ExcluirTodasAmizades(tpGrafo, inxPerfil1);
 
-		return TST_CompararInt( CondRetEsp ,
-			GRA_CriarAresta( vtGrafos[ inxGrafo ],numVert1,numVert2) ,
-			"Condição de retorno errada ao tentar criar aresta."   ) ;
+		return TST_CompararInt( CondRetEsp , CondRet ,
+			"Condicao de retorno errada ao excluir todas as amizades." ) ;
 
-	} /* fim ativa: Testar criar aresta */
+	} /* fim ativa: Testar excluir Todas as Amizades */
 
 
-	/* Testar excluir aresta */
-
+	/* Testar verificar amizade */
 	else if ( strcmp( ComandoTeste , EXC_ARESTA_CMD ) == 0 )
 	{
 		int numVert1,numVert2;
 
 		numLidos = LER_LerParametros( "iiii" ,
-			&inxGrafo ,&numVert1,&numVert2, &CondRetEsp ) ;
+			&inxPerfil1,&inxPerfil2, &existeAmizade, &CondRetEsp ) ;
 
-		if ( ( numLidos != 4 )
-			|| ( ! ValidarInxGrafo( inxGrafo)) )
+		if (( numLidos != 4 ) || (!ValidarInxPerfil( inxPerfil1))|| (!ValidarInxPerfil( inxPerfil2)))
 		{
 			return TST_CondRetParm ;
 		} /* if */
 
-		return TST_CompararInt( CondRetEsp ,
-			GRA_ExcluirAresta( vtGrafos[ inxGrafo ],numVert1,numVert2) ,
-			"Condição de retorno errada ao excluir aresta."   ) ;
+		CondRet = AMI_VerificarAmizade(tpGrafo, inxPerfil1, inxPerfil2, existeAmizade);
+		
+		return TST_CompararInt( CondRetEsp , CondRet ,
+			"Condicao de retorno errada ao verificar amizade." ) ;
 
-	} /* fim ativa: Testar excluir aresta */
+	} /* fim ativa: Testar verificar amizade */
 
-		/* Testar existe aresta */
 
-	else if ( strcmp( ComandoTeste , EXISTE_ARESTA_CMD ) == 0 )
-	{
-		int numVert1,numVert2;
-
-		numLidos = LER_LerParametros( "iiii" ,
-			&inxGrafo ,&numVert1,&numVert2, &CondRetEsp ) ;
-
-		if ( ( numLidos != 4 )
-			|| ( ! ValidarInxGrafo( inxGrafo)) )
-		{
-			return TST_CondRetParm ;
-		} /* if */
-
-		return TST_CompararInt( CondRetEsp ,
-			GRA_ExisteAresta( vtGrafos[ inxGrafo ],numVert1,numVert2) ,
-			"Condição de retorno errada ao verificar existencia da aresta."   ) ;
-
-	} /* fim ativa: Testar existe aresta */
-
-	/* Testar obter valor do elemento corrente */
-
-	else if ( strcmp( ComandoTeste , OBTER_VALOR_CMD ) == 0 )
-	{
-		Teste_Infs* Ret;
-		TST_tpCondRet debug;
-		numLidos = LER_LerParametros( "issssi" ,
-			&inxGrafo  ,NomeEsp,DataEsp,CidadeEsp,EmailEsp,&CondRetEsp ) ;
-
-		if ( ( numLidos != 6 )
-			|| ( ! ValidarInxGrafo( inxGrafo)) )
-		{
-			return TST_CondRetParm ;
-		} /* if */
-
-		CondRet=GRA_ObterValor( vtGrafos[ inxGrafo ],(void**)&Ret) ;
-
-
-		debug=TST_CompararInt(CondRet , CondRetEsp ,
-			"Retorno de obter valor diferente do esperado" ) ;
-
-		if(debug!=TST_CondRetOK)
-			return debug;
-
-		if(CondRet==GRA_CondRetGrafoVazio)
-			return TST_CondRetOK;
-
-		debug=TST_CompararPonteiroNulo( 1 , Ret ,
-			"Dado deveria existir." );
-
-		if(debug!=TST_CondRetOK)
-			return debug;
-
-		debug=TST_CompararString( NomeEsp , Ret->Nome ,
-			"Campo Nome nao e igual ao esperado");
-		if(debug!=TST_CondRetOK)
-			return debug; 
-
-		debug=TST_CompararString( CidadeEsp , Ret->Cidade ,
-			"Campo Cidade nao e igual ao esperado" );
-		if(debug!=TST_CondRetOK)
-			return debug; 
-
-		debug=TST_CompararString( EmailEsp ,Ret->Email,
-			"Campo Email nao e igual ao esperado" );
-		if(debug!=TST_CondRetOK)
-			return debug; 
-
-		return TST_CompararString(DataEsp ,  Ret->Data,
-			"Campo Data nao e igual ao esperado" );
-
-
-	} /* fim ativa: Testar obter valor do elemento corrente */
-
-	/* Testar ir Vertice */
-
-	else if ( strcmp( ComandoTeste , IR_VERT_CMD ) == 0 )
-	{
-		int numVert;
-
-
-			numLidos = LER_LerParametros( "iii" , &inxGrafo,&numVert,&CondRetEsp ) ;
-
-		if ( ( numLidos != 3 )
-			|| ( ! ValidarInxGrafo( inxGrafo)) )
-		{
-			return TST_CondRetParm ;
-		} /* if */
-
-		return TST_CompararInt( CondRetEsp ,GRA_IrVertice( vtGrafos[ inxGrafo ],numVert ) ,
-			"Condição de retorno errada ao ir para o vertice."   ) ;
-
-
-	} /* fim ativa: Testar ir Vertice  */
-
-
-		/* Testar Retornar Identificador */
-
-	else if ( strcmp( ComandoTeste , RET_IDENT_CMD ) == 0 )
-	{
-		GRA_tpCondRet debugGRA;
-		int numIdent;
-		int numIdentEsp;
-
-		numLidos = LER_LerParametros( "iii" , &inxGrafo,&numIdentEsp,&CondRetEsp ) ;
-
-		if ( ( numLidos != 3 )
-			|| ( ! ValidarInxGrafo( inxGrafo)) )
-		{
-			return TST_CondRetParm ;
-		} /* if */
-
-		debugGRA=GRA_RetornaIdentificador(vtGrafos[ inxGrafo ],&numIdent);
-		CondRet= TST_CompararInt( CondRetEsp , debugGRA,"Condicao de retorno errada ao retornar identificador do vertice corrente" ) ;
-		if (CondRet != TST_CondRetOK) {
-				return CondRet;
-		}
-
-		return TST_CompararInt( numIdentEsp , numIdent
-                       , "Identificador retornado inesperado" ) ;
-
-
-	} /* fim ativa: Retornar Identificador  */
-
-	/* Testar Retornar numVertices */
-
-	else if ( strcmp( ComandoTeste , NUM_VERTS_CMD ) == 0 )
-	{
-
-			 GRA_tpCondRet debugGRA;
-			 int numRet;
-
-            numLidos = LER_LerParametros( "iii" , &inxGrafo , &numElem ,
-                                &CondRetEsp ) ;
-
-            if ( ( numLidos != 3 )
-              || ( ! ValidarInxGrafo( inxGrafo )) )
-            {
-               return TST_CondRetParm ;
-            } /* if */
-
-			debugGRA=GRA_NumVertices(vtGrafos[ inxGrafo ], &numRet);
-			CondRet= TST_CompararInt( CondRetEsp , debugGRA,
-            "Condicao de retorno errada ao obter numero de vertices" ) ;
-
-			if (CondRet != TST_CondRetOK) {
-				return CondRet;
-			}
-
-			return TST_CompararInt( numElem , numRet
-                       , "Numero de elementos retornado inesperado" ) ;
-
-
-	} /* fim ativa: Testar Retornar numVertices  */
-
-	/* Testar Retornar numArestas */
-
-	else if ( strcmp( ComandoTeste , NUM_ARESTAS_CMD ) == 0 )
-	{
-			 GRA_tpCondRet debugGRA;
-			 int numRet;
-
-            numLidos = LER_LerParametros( "iii" , &inxGrafo , &numElem ,
-                                &CondRetEsp ) ;
-
-            if ( ( numLidos != 3 )
-              || ( ! ValidarInxGrafo( inxGrafo )) )
-            {
-               return TST_CondRetParm ;
-            } /* if */
-
-			debugGRA=GRA_NumArestas(vtGrafos[ inxGrafo ], &numRet);
-			CondRet= TST_CompararInt( CondRetEsp , debugGRA,
-            "Condicao de retorno errada ao obter numero de arestas" ) ;
-
-			if (CondRet != TST_CondRetOK) {
-				return CondRet;
-			}
-
-			return TST_CompararInt( numRet , numElem
-                       , "Numero de elementos retornado inesperado" ) ;
-
-	} /* fim ativa: Testar Retornar numArestas */
-
-	/* Testar Retornar indice das arestas */
-
-	else if ( strcmp( ComandoTeste , INDICES_ARESTAS_CMD  ) == 0 )
-	{
-		int tamVetor,i;
-		int indiceEsp[5];
-		int* indice;
-		GRA_tpCondRet debugGRA;
-
-		numLidos = LER_LerParametros( "iiiiiiii" , &inxGrafo,&tamVetor,&indiceEsp[0],&indiceEsp[1],&indiceEsp[2],&indiceEsp[3],
-			&indiceEsp[4],&CondRetEsp) ;
-
-		if ( ( numLidos != 8 )
-			|| ( ! ValidarInxGrafo( inxGrafo )) || (!ValidarParmIndices(tamVetor,indiceEsp) ))
-		{
-			return TST_CondRetParm ;
-		} /* if */
-		indice=(int*)malloc(tamVetor*sizeof(int));
-		if ( indice == NULL )
-		{
-			return TST_CondRetMemoria ;
-		} /* if */
-
-		debugGRA=GRA_RetornaIndiceAresta(vtGrafos[ inxGrafo ],indice);
-
-		CondRet=TST_CompararInt( CondRetEsp ,debugGRA  ,
-			"Condição de retorno errada ao retornar indices das arestas."   ) ;
-
-		if (CondRet != TST_CondRetOK) {
-				free(indice);
-				return CondRet;
-			}
-		if(tamVetor==0 && debugGRA==GRA_CondRetNumArestasZero)
-		{
-			free(indice);
-			return TST_CondRetOK;
-		}
-
-
-		for(i=0;i<tamVetor;i++)
-		{
-			CondRet=TST_CompararInt( indiceEsp[i] ,indice[i]  ,
-			"Aresta do vetor nao e igual  a esperada" ) ;
-			if (CondRet != TST_CondRetOK) {
-				free(indice);
-				return CondRet;
-			}
-		}
-		free(indice);
-		return TST_CondRetOK;
-
-	} /* fim ativa: Retornar indice das arestas  */
-	
-	return TST_CondRetNaoConhec;
-}
-
- /* Fim função: TGRA &Testar Grafo */
+ /* Fim função: TAMI &Testar Amizade */
 
 
 /*****  Código das funções encapsuladas no módulo  *****/
 
 /***********************************************************************
 *
-*  $FC Função: TGRA -Destruir valor
+*  $FC Função: TAMI -Destruir valor
 *
 ***********************************************************************/
 
@@ -556,105 +294,29 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
       free( pValor ) ;
 
-   } /* Fim função: TGRA -Destruir valor */
+   } /* Fim função: TAMI -Destruir valor */
 
 
 
 /***********************************************************************
 *
-*  $FC Função: TGRA -Validar indice de Grafo
+*  $FC Função: TAMI -Validar indice de Perfil
 *
 ***********************************************************************/
 
-int ValidarInxGrafo( int inxGrafo)
+int ValidarInxPerfil( int inxPerfil)
 {
 
-	if ( ( inxGrafo <  0 )
-		|| ( inxGrafo >= DIM_VT_GRAFO ))
+	if ( ( inxPerfil <  0 )
+		|| ( inxPerfil >= DIM_VT_PERFIL ))
 	{
 		return FALSE ;
 	} /* if */
 
 	return TRUE ;
 
-} /* Fim função: TGRA -Validar indice de Grafo */
-
-/***********************************************************************
-*
-*  $FC Função: TGRA -Validar parametros do teste de Retornar Indices de Aresta
-*
-***********************************************************************/
-
-int ValidarParmIndices( int tamVetor , int *indiceEsp )
-{
-	switch(tamVetor)
-	{
-	case 0:
-		if (indiceEsp[0] == 0 && indiceEsp[1] == 0 && indiceEsp[2] == 0 && indiceEsp[3] == 0 && indiceEsp[4] == 0) {
-			return TRUE;
-			break;
-		}
-		else {
-			return FALSE;
-			break;
-		}
-
-	case 1:
-		if (indiceEsp[0] != 0 && indiceEsp[1] == 0 && indiceEsp[2] == 0 && indiceEsp[3] == 0 && indiceEsp[4] == 0) {
-			return TRUE;
-			break;
-		}
-		else {
-			return FALSE;
-			break;
-		}
-
-	case 2:
-		if (indiceEsp[0] != 0 && indiceEsp[1] != 0 && indiceEsp[2] == 0 && indiceEsp[3] == 0 && indiceEsp[4] == 0) {
-			return TRUE;
-			break;
-		}
-		else {
-			return FALSE;
-			break;
-		}
-
-	case 3:
-		if (indiceEsp[0] != 0 && indiceEsp[1] != 0 && indiceEsp[2] != 0 && indiceEsp[3] == 0 && indiceEsp[4] == 0) {
-			return TRUE;
-			break;
-		}
-		else {
-			return FALSE;
-			break;
-		}
-
-	case 4:
-		if (indiceEsp[0] != 0 && indiceEsp[1] != 0 && indiceEsp[2] != 0 && indiceEsp[3] != 0 && indiceEsp[4] == 0) {
-			return TRUE;
-			break;
-		}
-		else {
-			return FALSE;
-			break;
-		}
-	case 5:
-		if (indiceEsp[0] != 0 && indiceEsp[1] != 0 && indiceEsp[2] != 0 && indiceEsp[3] != 0 && indiceEsp[4] != 0) {
-			return TRUE;
-			break;
-		}
-		else {
-			return FALSE;
-			break;
-		}
-	default:
-			return FALSE;
-
-	}
-} /* Fim função: TGRA -Validar indice de Grafo */
+} /* Fim função: TAMI -Validar indice de Perfil */
 
 
-
-
-/********** Fim do módulo de implementação: TGRA Teste Grafo com cabeca **********/
+/********** Fim do módulo de implementação: TAMI Teste módulo Amizade **********/
 

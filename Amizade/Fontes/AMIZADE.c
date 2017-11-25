@@ -143,7 +143,7 @@ AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario1, PER
 *	  AMI_CondRetRetornoGraIncorreto
 *
 *****/
-AMI_tpCondRet AMI_VerificarNumAmigos(PER_tpPerfil Usuario, int* numAmizades){
+AMI_tpCondRet AMI_VerificarNumAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario, int* numAmizades){
 	
 	GRA_tpCondRet GRA_RetornoNumAmigos;
 	GRA_tpCondRet GRA_RetornoMoverCorrente;

@@ -167,7 +167,7 @@ AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario1, PER
 *  $FC FunçÁ„o: AMI  &Verificar N˙mero de Amigos
 *
 *  $ED DescriçÁ„o da funçÁ„o
-*     Retorna o número de amigos que um usuário possui.
+*     Retorna o número de amigos que um usu·rio possui.
 *
 *  $EP Par‚metros
 *     Usuario  - ponteiro para o usu·rio que solicitou o n˙mero de amizades.
@@ -181,7 +181,7 @@ AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario1, PER
 *
 ***********************************************************************/
 
-AMI_tpCondRet AMI_VerificarNumAmigos(PER_tpPerfil Usuario, int* numAmizades);
+AMI_tpCondRet AMI_VerificarNumAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario, int* numAmizades);
 
 /***********************************************************************
 *  $FC FunçÁ„o: AMI  &Armazenar Amizades
@@ -202,7 +202,7 @@ AMI_tpCondRet AMI_VerificarNumAmigos(PER_tpPerfil Usuario, int* numAmizades);
 ***********************************************************************/
 
 
-AMI_tpCondRet AMI_ArmazenarAmizades(PER_tpPerfil Usuario);
+AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario, PER_tpPerfil **PerfilAmigos);
 
 /***********************************************************************
 *  $FC FunçÁ„o: AMI  &Excluir Todas as Amizades
@@ -222,7 +222,7 @@ AMI_tpCondRet AMI_ArmazenarAmizades(PER_tpPerfil Usuario);
 *
 ***********************************************************************/
 
-AMI_tpCondRet AMI_ExcluirTodasAmizades(PER_tpPerfil Usuario);
+AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario);
 
 /***********************************************************************
 *  $FC FunçÁ„o: AMI  &Verificar Amizade
