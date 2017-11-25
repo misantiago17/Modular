@@ -266,7 +266,7 @@ PER_tpCondRet PER_ModificaCidade(GRA_tppGrafo pGrafo, char *email, char *cidade)
 *
 ***********************************************************************/
 
-PER_tpCondRet buscaEmail(GRA_tppGrafo pGrafo, char *email, PER_tpPerfil **perfil, int *id);
+PER_tpCondRet PER_BuscaEmail(GRA_tppGrafo pGrafo, char *email, PER_tpPerfil **perfil, int *id);
 
 /***********************************************************************
 *  $FC Função:

@@ -70,7 +70,6 @@ PER_tpCondRet confereDataNasc(int diaNasc, int mesNasc, int anoNasc);
 PER_tpCondRet confereCidade(char *cidade);
 PER_tpCondRet confereTudo(GRA_tppGrafo pGrafo, PER_tpPerfil *perfil, char *email, char *primeiroNome, char *ultimoNome, int diaNasc, int mesNasc,
 						  int anoNasc, char *cidade);
-PER_tpCondRet buscaEmail(GRA_tppGrafo pGrafo, char *email, PER_tpPerfil **perfil, int *id);
 PER_tpCondRet transformaRetGRA(GRA_tpCondRet retornoGRA);
 PER_tpCondRet salvaCorrenteGrafo(GRA_tppGrafo pGrafo, int *id);
 PER_tpCondRet restauraCorrenteGrafo(GRA_tppGrafo pGrafo, int id);
@@ -153,7 +152,7 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email) {
 	PER_tpPerfil *perfil;
 	PER_tpCondRet retorno;
 
-	retorno = buscaEmail(pGrafo, email, &perfil, &id);
+	retorno = PER_BuscaEmail(pGrafo, email, &perfil, &id);
 	if (retorno == PER_CondRetRedeVazia)
 		return PER_CondRetEmailInexistente;
 	else if (retorno != PER_CondRetEmailJaCadastrado)
@@ -211,7 +210,7 @@ PER_tpCondRet PER_ObterPerfil(GRA_tppGrafo pGrafo, char *email, char **primeiroN
 	PER_tpPerfil *perfil;
 	PER_tpCondRet retorno;
 
-	retorno = buscaEmail(pGrafo, email, &perfil, &id);
+	retorno = PER_BuscaEmail(pGrafo, email, &perfil, &id);
 	if (retorno == PER_CondRetRedeVazia)
 		return PER_CondRetEmailInexistente;
 	else if (retorno != PER_CondRetEmailJaCadastrado)
@@ -299,7 +298,7 @@ PER_tpCondRet PER_ModificaEmail(GRA_tppGrafo pGrafo, char *emailAtual, char *ema
 	if (retorno != GRA_CondRetOK)
 		return retorno;
 
-	retorno = buscaEmail(pGrafo, emailAtual, &perfil, &id);
+	retorno = PER_BuscaEmail(pGrafo, emailAtual, &perfil, &id);
 	if (retorno == PER_CondRetRedeVazia)
 		return PER_CondRetEmailInexistente;
 	else if (retorno != PER_CondRetEmailJaCadastrado)
@@ -338,7 +337,7 @@ PER_tpCondRet PER_ModificaNome(GRA_tppGrafo pGrafo, char *email, char *primeiroN
 	if (retorno != GRA_CondRetOK)
 		return retorno;
 
-	retorno = buscaEmail(pGrafo, email, &perfil, &id);
+	retorno = PER_BuscaEmail(pGrafo, email, &perfil, &id);
 	if (retorno == PER_CondRetRedeVazia)
 		return PER_CondRetEmailInexistente;
 	else if (retorno != PER_CondRetEmailJaCadastrado)
@@ -378,7 +377,7 @@ PER_tpCondRet PER_ModificaDataNasc(GRA_tppGrafo pGrafo, char *email, int diaNasc
 	if (retorno != GRA_CondRetOK)
 		return retorno;
 
-	retorno = buscaEmail(pGrafo, email, &perfil, &id);
+	retorno = PER_BuscaEmail(pGrafo, email, &perfil, &id);
 	if (retorno == PER_CondRetRedeVazia)
 		return PER_CondRetEmailInexistente;
 	else if (retorno != PER_CondRetEmailJaCadastrado)
@@ -412,7 +411,7 @@ PER_tpCondRet PER_ModificaCidade(GRA_tppGrafo pGrafo, char *email, char *cidade)
 	if (retorno != GRA_CondRetOK)
 		return retorno;
 
-	retorno = buscaEmail(pGrafo, email, &perfil, &id);
+	retorno = PER_BuscaEmail(pGrafo, email, &perfil, &id);
 	if (retorno == PER_CondRetRedeVazia)
 		return PER_CondRetEmailInexistente;
 	else if (retorno != PER_CondRetEmailJaCadastrado)
@@ -438,7 +437,7 @@ PER_tpCondRet PER_ModificaCidade(GRA_tppGrafo pGrafo, char *email, char *cidade)
  *     PER_CondRetRedeVazia
  *     PER_CondRetEmailJaCadastrado
  */
-PER_tpCondRet buscaEmail(GRA_tppGrafo pGrafo, char *email, PER_tpPerfil **perfil, int *id) {
+PER_tpCondRet PER_BuscaEmail(GRA_tppGrafo pGrafo, char *email, PER_tpPerfil **perfil, int *id) {
 
 	GRA_tpCondRet retornoBusca, retornoDados;
 	int idCorrente, i = 0;
@@ -532,7 +531,7 @@ PER_tpCondRet PER_retornaLisMensagens(GRA_tppGrafo pGrafo, char *email, LIS_tppL
 	PER_tpPerfil *perfil;
 	int id;
 	
-	retorno = buscaEmail(pGrafo, email, &perfil, &id);
+	retorno = PER_BuscaEmail(pGrafo, email, &perfil, &id);
 	if (retorno != PER_CondRetEmailJaCadastrado)
 		return retorno;
 	*mensagens = perfil->pLisMensagens;
@@ -573,7 +572,7 @@ PER_tpCondRet confereEmail(GRA_tppGrafo pGrafo, char *email) {
 		test = email[i];
 	}
 
-	retorno = buscaEmail(pGrafo, email, &perfil, &id);
+	retorno = PER_BuscaEmail(pGrafo, email, &perfil, &id);
 	if (retorno != PER_CondRetEmailInexistente && retorno != PER_CondRetRedeVazia)
 		return retorno;
 
@@ -620,7 +619,7 @@ PER_tpCondRet confereDataNasc(int diaNasc, int mesNasc, int anoNasc) {
 	if (mesNasc <= 0 || mesNasc > 12)
 		return PER_CondRetDataInvalida;
 
-	if (anoNasc < 0)
+	if (anoNasc < 1900 || anoNasc > 2017)
 		return PER_CondRetDataInvalida;
 
 	if ((mesNasc <= 7 && mesNasc % 2 == 1) || (mesNasc > 7 && mesNasc % 2 == 0))
