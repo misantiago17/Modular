@@ -5,6 +5,7 @@ pushd  .
 
 cd ..\..\Tools
 gmake /b..\Grafo\Composicao /c..\Composicao\TesteGrafo
+gmake /b..\Grafo\Composicao /c..\Composicao\TesteGrafoDebug
 
 
 popd

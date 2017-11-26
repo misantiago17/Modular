@@ -1,7 +1,7 @@
 ##################################################
 ###
-### Diretivas de MAKE para o construto: TesteGrafo
-### Gerado a partir de: ..\Composicao\TesteGrafo.comp
+### Diretivas de MAKE para o construto: TesteGrafoDebug
+### Gerado a partir de: ..\Composicao\TesteGrafoDebug.comp
 ###
 ### ----- Arquivo gerado, NÃO EDITE!!! -----
 ###
@@ -9,7 +9,7 @@
 
 ### Nomes globais
 
-NOME            = TesteGrafo
+NOME            = TesteGrafoDebug
 
 
 ### Nomes de paths
@@ -61,12 +61,12 @@ limpa :
 $(Fobj)\testegrafo.obj :  {$(Pc)}\testegrafo.c \
     {$(Ph)}cespdin.h            {$(Ph)}generico.h           {$(Ph)}grafo.h              \
     {$(Ph)}lerparm.h            {$(Ph)}tst_espc.h          
-   cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
+   cl /D_DEBUG $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
 $(Fobj)\grafo.obj :  {$(Pc)}\grafo.c \
     {$(Ph)}cespdin.h            {$(Ph)}conta.h              {$(Ph)}generico.h           \
     {$(Ph)}grafo.h              {$(Ph)}lista.h              {$(Ph)}tst_espc.h          
-   cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
+   cl /D_DEBUG $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
 $(Fobj)\lista.obj :  {$(Pc)}\lista.c \
     {$(Ph)}lista.h             
@@ -82,7 +82,7 @@ Construto : \
 
 ##################################################
 ###
-### Fim de diretivas MAKE para o construto: TesteGrafo
+### Fim de diretivas MAKE para o construto: TesteGrafoDebug
 ###
 ##################################################
 

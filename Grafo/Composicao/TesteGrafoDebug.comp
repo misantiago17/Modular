@@ -1,22 +1,21 @@
-# Composicao do programa de teste de um grafo generico com cabeca
+# Composicao do programa de teste de um grafo generico com cabeca com debug
 
 [Diretorios]
 
-Nome        =	TesteGrafo
+Nome        =	TesteGrafoDebug
 PathDefault =	..\Fontes
 err         =	..\Produto
 obj			=	..\Objetos
 c			=	..\Fontes
 h			=	..\Fontes
 
-
 [Modulos]
-TesteGrafo	
-Grafo
+TesteGrafo	/D_DEBUG
+Grafo		/D_DEBUG
 Lista
 
 [BuildInicio]
-/OUT:..\Produto\Trab4-7.exe
+/OUT:..\Produto\Trab4-8.exe
 /INCREMENTAL:NO
 /MACHINE:IX86
 

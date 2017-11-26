@@ -363,9 +363,10 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		debug=TST_CompararInt(CondRet , CondRetEsp ,
 			"Retorno de obter valor diferente do esperado" ) ;
 
-		if(debug!=TST_CondRetOK)
+		if(CondRet!=TST_CondRetOK){
 			return debug;
-
+		}
+		
 		if(CondRet==GRA_CondRetGrafoVazio)
 			return TST_CondRetOK;
 
@@ -436,7 +437,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 		debugGRA=GRA_RetornaIdentificador(vtGrafos[ inxGrafo ],&numIdent);
 		CondRet= TST_CompararInt( CondRetEsp , debugGRA,"Condicao de retorno errada ao retornar identificador do vertice corrente" ) ;
-		if (CondRet != TST_CondRetOK) {
+		if (debugGRA != TST_CondRetOK) {
 				return CondRet;
 		}
 
@@ -467,7 +468,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			CondRet= TST_CompararInt( CondRetEsp , debugGRA,
             "Condicao de retorno errada ao obter numero de vertices" ) ;
 
-			if (CondRet != TST_CondRetOK) {
+			if (debugGRA != TST_CondRetOK) {
 				return CondRet;
 			}
 
@@ -497,7 +498,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			CondRet= TST_CompararInt( CondRetEsp , debugGRA,
             "Condicao de retorno errada ao obter numero de arestas" ) ;
 
-			if (CondRet != TST_CondRetOK) {
+			if (debugGRA != TST_CondRetOK) {
 				return CondRet;
 			}
 
@@ -534,7 +535,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		CondRet=TST_CompararInt( CondRetEsp ,debugGRA  ,
 			"Condição de retorno errada ao retornar indices das arestas."   ) ;
 
-		if (CondRet != TST_CondRetOK) {
+		if (debugGRA != TST_CondRetOK) {
 				free(indice);
 				return CondRet;
 			}

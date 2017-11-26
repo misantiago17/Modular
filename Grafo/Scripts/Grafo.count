@@ -1,0 +1,131 @@
+////////////////////////////////////////////////
+//
+// Arquivo de declaracao de contadores
+// Conta modulo GRAFO
+//
+///////////////////////////////////////////////
+    
+	GRA_CriarGrafo
+	GRA_CriarGrafo: Faltou memoria para criar a cabeca do grafo
+	GRA_CriarGrafo: Faltou memoria para criar a lista de vertices
+	GRA_CriarGrafo: O grafo foi criado
+	GRA_DestruirGrafo
+	GRA_DestruirGrafo: Grafo e NULL
+	GRA_DestruirGrafo: Chamando funcao de exclusao para cada vertice 
+	GRA_DestruirGrafo: Grafo foi destruido
+	GRA_IrVertice
+	GRA_IrVertice: Grafo e NULL
+	GRA_IrVertice: Grafo esta vazio
+	GRA_IrVertice: Vertice nao foi encontrado 
+	GRA_IrVertice: Colocando vertice como corrente
+	GRA_RetornaIdentificador
+	GRA_RetornaIdentificador: Grafo e NULL
+	GRA_RetornaIdentificador: Grafo esta vazio
+	GRA_RetornaIdentificador: Obtendo identificador
+	GRA_ObterValor
+	GRA_ObterValor: Grafo e NULL
+	GRA_ObterValor: Grafo esta vazio
+	GRA_ObterValor: Obtendo valor do elemento
+	GRA_InserirVertice
+	GRA_InserirVertice: Grafo e NULL
+	GRA_InserirVertice: Faltou memoria ao criar lista de um no so
+	GRA_InserirVertice: Faltou memoria ao criar vertice
+	GRA_InserirVertice: Faltou memoria ao inserir elemento na lista Vertices
+	GRA_InserirVertice: Faltou memoria ao inserir elemento na lista Vertice
+	GRA_InserirVertice: Atualizando elemento corrente
+	GRA_ExcluirVertice
+	GRA_ExcluirVertice: Grafo e NULL
+	GRA_ExcluirVertice: Grafo e vazio
+	GRA_ExcluirVertice: Apagando elementos da lista de Arestas
+	GRA_ExcluirVertice: Chamando funcao de exclusao para o vertice 
+	GRA_ExcluirVertice: Grafo e vazio apos a exclusao 
+	GRA_ExcluirVertice: Atualizando elemento corrente
+	GRA_CriarAresta
+	GRA_CriarAresta: Falha ao criar aresta de um vertice para ele mesmo
+	GRA_CriarAresta: Grafo e NULL
+	GRA_CriarAresta: Grafo e vazio
+	GRA_CriarAresta: Vertice nao foi encontrado
+	GRA_CriarAresta: Aresta ja existe
+	GRA_CriarAresta:Faltou memoria ao inserir elemento na lista de arestas do segundo vertice
+	GRA_CriarAresta:Faltou memoria ao inserir elemento na lista de arestas do primeiro vertice
+	GRA_CriarAresta:Restaurando corrente anterior
+	GRA_ExisteAresta
+	GRA_ExisteAresta: Grafo e NULL
+	GRA_ExisteAresta: Grafo e vazio
+	GRA_ExisteAresta: Nao achou o primeiro vertice
+	GRA_ExisteAresta: Nao achou o segundo vertice
+	GRA_ExisteAresta: Vertice nao possui aresta
+	GRA_ExisteAresta: Aresta foi encontrada
+	GRA_ExisteAresta: Aresta nao foi encontrada
+	GRA_ExcluirAresta
+	GRA_ExcluirAresta : Grafo e NULL
+	GRA_ExcluirAresta : Grafo e vazio
+	GRA_ExcluirAresta : Aresta nao foi encontrada
+	GRA_ExcluirAresta : Vertice nao foi encontrado
+	GRA_ExcluirAresta : Aresta foi removida da lista do primeiro vertice
+	GRA_ExcluirAresta : Aresta foi removida da lista do segundo vertice
+	GRA_ExcluirAresta:Restaurando corrente anterior
+	GRA_NumArestas
+	GRA_NumArestas: Grafo e NULL
+	GRA_NumArestas: Grafo e vazio
+	GRA_NumArestas: Obtendo numero de arestas
+	GRA_NumVertices
+	GRA_NumVertices: Grafo e NULL
+	GRA_NumVertices: Obtendo numero de vertices
+	GRA_RetornaIndiceAresta
+	GRA_RetornaIndiceAresta: Grafo e NULL
+	GRA_RetornaIndiceAresta: Grafo e vazio
+	GRA_RetornaIndiceAresta: Vertice nao possui aresta
+	GRA_RetornaIndiceAresta: Movendo corrente da lista de arestas para posicao inicial
+	GRA_CriarVertice
+	GRA_CriarVertice: Faltou memoria ao criar o vertice
+	GRA_CriarVertice: Faltou memoria ao criar lista de arestas
+	GRA_CriarVertice: Vertice criado com sucesso
+	GRA_DestruirElemVertices
+	GRA_DestruirElemVertice
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

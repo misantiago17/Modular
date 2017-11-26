@@ -47,11 +47,10 @@
 =declararparm   NaoAchouVertice   	int  2
 =declararparm   NaoAchouAresta   	int  3
 =declararparm   FaltouMemoria  		int  4
-=declararparm	RetListaIncorreto	int	 5
-=declararparm	parametroIncorreto  int  6
-=declararparm	jaExisteAresta		int	 7
-=declararparm	numArestasZero		int	 8
-=declararparm	arestaParaSiMesmo	int	 9
+=declararparm	parametroIncorreto      int  5
+=declararparm	jaExisteAresta		int  6
+=declararparm	numArestasZero		int  7
+=declararparm	arestaParaSiMesmo	int  8
 
 
 == Criar o grafo 0

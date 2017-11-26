@@ -1,0 +1,77 @@
+
+!!! Inicio dos testes
+!!!      Construto sob teste: ..\Produto\Trab4-7
+!!!      Script de teste:     ..\Scripts\TesteGrafo.script
+
+!!!    0  Linha:     1  // Script:    TesteGrafo.script 
+!!!    0  Linha:     2  // Autor:     Gabriel, Michelle, Renan 
+!!!    0  Linha:     3  // Data:      15/10/2017 
+!!!    0  Linha:     4  // Proposito: Testar o modulo grafo generico com cabeca 
+    7  == Inicializar valores
+   17  == struct 0
+   23  == struct 1
+   30  == struct 2
+   37  == struct 3
+   56  == Criar o grafo 0
+   60  == Verificar ObterValor relativo ao grafo vazio
+   63  == Inserir vertice em grafo vazio
+   67  == Inserir mais de um vertice no grafo
+   76  == Excluir segundo vertice do grafo
+   81  == Excluir vertice do inicio
+   86  == Excluir vertice final
+   91  == Excluir vertice final, o ultimo
+   97  == Ver se o grafo ficou vazio
+  100  == Inserir vertices no grafo vazio e percorrer o grafo
+  112  == Destruir a grafo
+  115  == Inserir vertice em grafo destruido
+  118  == criar grafo1
+  121  == adicionar um vertice
+  125  == excluir esse vertice e adicionar outro vertice
+  130  == ir para um vertice que nao existe e verificar se o corrente continua no unico vertice presente
+  134  == excluir o unico vertice do grafo, excluir ele novamente
+  138  == Destruir a grafo
+  141  == criar grafo2
+  144  == verificar se esta vazio
+  147  == destruir grafo
+  151  == criar grafo3
+  154  == criar tres vertices e obter tamanho do grafo
+  163  == apagar o vertice do meio
+  167  == pegar o valor do vertice 2 que e o ultimo agora
+  171  ==inserir novo vertice
+  175  == apagar o ultimo e o primeiro vertice
+  181  == pegar o valor do vertice 1
+  184  == apagar o ultimo vertice e verificar se ele esta vazio
+  188  == Destruir a grafo
+  191  == criar grafo
+  194  == verificar se o grafo esta vazio
+  197  == obter tamanho do grafo
+  200  == Destruir o grafo
+  204  == criar grafo5 com quatro vertices
+  215  ==excluir o primeiro vertice e verificar se o identificador dos demais foi alterado
+  224  == adicionar aresta com o vertice 3
+  227  == obter tamanho de arestas com o vertice 1 e a existencia da aresta com o vertice 3
+  233  == ir para o vertice 3, obter tamanho de arestas e se existe aresta com o vertice 1
+  238  == tentar criar aresta a aresta 1 com 3 novamente
+  241  == excluir aresta 1 com 3
+  244  == verificar numero de aresta no vertice 1 e no vertice 3 e se a aresta 1 com 3 existe
+  251  == excluir aresta que nao existe
+  254  == tentar criar aresta com um vetice que nao existe
+  258  == criar aresta de um vertice com si mesmo
+  262  ==criar aresta e verificar se o corrente permaneceu o mesmo
+  267  == Destruir o grafo
+  270  == criar grafo6 com tres vertices
+  279  == criar aresta 1 com 2 e aresta 1 com 3
+  285  == contar quantas arestas o vertice 1 possui e retornar seus indices
+  291  == excluir as duas arestas
+  297  == contar quantas arestas o vertice 1 possui
+  303  == excluir grafo
+
+!!! Número de linhas lidas:         304
+!!! Número de casos de teste:        58
+!!! Número comandos corretos:       168
+!!! Número de falhas encontradas:     0
+
+!!! Não foram encontrados problemas
+
+
+!!! Numero de espacos ainda alocados: 0

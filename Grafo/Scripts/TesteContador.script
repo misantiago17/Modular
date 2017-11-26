@@ -1,0 +1,323 @@
+// Script:    TesteContador.script
+// Autor:     gab - Gabriel de Andrade Busquim
+// Data:      24/11/2017
+// Proposito: Ilustrar arquivo de script para controle de cobertura
+
+== Inicializar valores
+=declararparm   grafo0  int 0
+=declararparm   grafo1  int 1
+
+
+
+== struct 0
+=declararparm   nome0    string  "Michelle"
+=declararparm   data0    string  "17/09/1996"
+=declararparm   cidade0  string  "Rio de Janeiro"
+=declararparm   email0   string  "michelle@gmail.com"
+
+== struct 1
+
+=declararparm   nome1    string  "Renan"
+=declararparm   data1    string  "01/01/2001"
+=declararparm   cidade1  string  "Sao Paulo"
+=declararparm   email1   string  "renan@gmail.com"
+
+== struct 2
+
+=declararparm   nome2    string  "Gabriel"
+=declararparm   data2    string  "10/10/1910"
+=declararparm   cidade2  string  "Maranhao"
+=declararparm   email2   string  "gabriel@gmail.com"
+
+
+=declararparm   OK             		int  0
+=declararparm   GrafoVazio     		int  1
+=declararparm   NaoAchouVertice   	int  2
+=declararparm   NaoAchouAresta   	int  3
+=declararparm   FaltouMemoria  		int  4
+=declararparm	parametroIncorreto      int  5
+=declararparm	jaExisteAresta		int  6
+=declararparm	numArestasZero		int  7
+=declararparm	arestaParaSiMesmo	int  8
+
+== Iniciar contagem
+=inicializarcontadores  ""
+=lercontadores          "..\\Scripts\\Grafo"
+=iniciarcontagem
+
+==Testando funcoes passando um grafo igual a NULL
+=resetteste
+=zerartodoscontadores
+=destruirgrafo   	grafo0 parametroIncorreto
+=contagemcontador   "GRA_DestruirGrafo"  1
+=contagemcontador   "GRA_DestruirGrafo: Grafo e NULL"  1
+
+=irvertice   	grafo0 1 parametroIncorreto
+=contagemcontador   "GRA_IrVertice"  1
+=contagemcontador   "GRA_IrVertice: Grafo e NULL"  1
+
+=inserirvertice  	grafo0 "???" "???" "???" "???" parametroIncorreto
+=contagemcontador   "GRA_InserirVertice"  1
+=contagemcontador   "GRA_InserirVertice: Grafo e NULL"  1
+
+=obtervalorvert  	grafo0 "???" "???" "???" "???" parametroIncorreto
+=contagemcontador   "GRA_ObterValor"  1
+=contagemcontador   "GRA_ObterValor: Grafo e NULL"  1
+
+=obternumverts   	grafo0 0  parametroIncorreto
+=contagemcontador   "GRA_NumVertices"  1
+=contagemcontador   "GRA_NumVertices: Grafo e NULL"  1
+
+=obternumarestas	grafo0 0  parametroIncorreto
+=contagemcontador   "GRA_NumArestas"  1
+=contagemcontador   "GRA_NumArestas: Grafo e NULL"  1
+
+=indicesarestas	grafo0 4 4 3 2 1 0 parametroIncorreto
+=contagemcontador   "GRA_RetornaIndiceAresta"  1
+=contagemcontador   "GRA_RetornaIndiceAresta: Grafo e NULL"  1
+
+=retornaident	grafo0 0  parametroIncorreto
+=contagemcontador   "GRA_RetornaIdentificador"  1
+=contagemcontador   "GRA_RetornaIdentificador: Grafo e NULL"  1
+
+=criararesta	grafo0 0 1  parametroIncorreto
+=contagemcontador   "GRA_CriarAresta"  1
+=contagemcontador   "GRA_ExisteAresta"  1
+=contagemcontador   "GRA_ExisteAresta: Grafo e NULL"  1
+=contagemcontador   "GRA_CriarAresta: Grafo e NULL" 1
+
+=excluiraresta	grafo0 0 1 parametroIncorreto
+=contagemcontador   "GRA_ExcluirAresta" 1
+=contagemcontador   "GRA_ExisteAresta"  2
+=contagemcontador   "GRA_ExisteAresta: Grafo e NULL"  2
+=contagemcontador   "GRA_ExcluirAresta : Grafo e NULL" 1
+
+
+=excluirvertice 	grafo0   parametroIncorreto
+=contagemcontador   "GRA_ExcluirVertice"   1
+=contagemcontador   "GRA_ExcluirVertice: Grafo e NULL"  1
+
+
+
+==Testando funcoes passando um grafo vazio
+=criargrafo grafo0 OK
+=contagemcontador   "GRA_CriarGrafo"  1
+=contagemcontador   "GRA_CriarGrafo: O grafo foi criado"  1
+
+=irvertice   	grafo0 1 GrafoVazio
+=contagemcontador   "GRA_IrVertice"  2
+=contagemcontador   "GRA_IrVertice: Grafo esta vazio"  1
+
+=retornaident	grafo0 0  GrafoVazio
+=contagemcontador   "GRA_RetornaIdentificador"  2
+=contagemcontador   "GRA_RetornaIdentificador: Grafo esta vazio"  1
+
+=obtervalorvert  	grafo0 "???" "???" "???" "???" GrafoVazio
+=contagemcontador   "GRA_ObterValor"  2
+=contagemcontador   "GRA_ObterValor: Grafo esta vazio" 1 
+
+=excluirvertice 	grafo0   GrafoVazio
+=contagemcontador   "GRA_ExcluirVertice"   2
+=contagemcontador   "GRA_ExcluirVertice: Grafo e vazio"  1
+
+=obternumarestas	grafo0 0  GrafoVazio
+=contagemcontador   "GRA_NumArestas"  2
+=contagemcontador   "GRA_NumArestas: Grafo e vazio"  1
+
+=indicesarestas	grafo0 4 4 3 2 1 0 GrafoVazio
+=contagemcontador   "GRA_RetornaIndiceAresta"  2
+=contagemcontador   "GRA_RetornaIndiceAresta: Grafo e vazio"  1
+
+=criararesta	grafo0 0 1  GrafoVazio
+=contagemcontador   "GRA_CriarAresta"  2
+=contagemcontador   "GRA_ExisteAresta"  3
+=contagemcontador   "GRA_ExisteAresta: Grafo e vazio"  1
+=contagemcontador   "GRA_CriarAresta: Grafo e vazio" 1
+
+=excluiraresta	grafo0 0 1 GrafoVazio
+=contagemcontador   "GRA_ExcluirAresta" 2
+=contagemcontador   "GRA_ExisteAresta"  4
+=contagemcontador   "GRA_ExisteAresta: Grafo e vazio"  2
+=contagemcontador   "GRA_ExcluirAresta : Grafo e vazio" 1
+
+==Inserindo dois vertices
+
+=inserirvertice grafo0 nome0  data0  cidade0  email0 OK
+=contagemcontador   "GRA_InserirVertice" 2
+=contagemcontador   "GRA_CriarVertice" 1
+=contagemcontador   "GRA_CriarVertice: Vertice criado com sucesso" 1
+=contagemcontador   "GRA_InserirVertice: Atualizando elemento corrente" 1
+
+=inserirvertice grafo0 nome1  data1  cidade1 email1 OK
+=contagemcontador   "GRA_InserirVertice" 3
+=contagemcontador   "GRA_CriarVertice" 2
+=contagemcontador   "GRA_CriarVertice: Vertice criado com sucesso" 2
+=contagemcontador   "GRA_InserirVertice: Atualizando elemento corrente" 2
+
+==Indo para o vertice anterior
+=irvertice   	grafo0 1 OK
+=contagemcontador   "GRA_IrVertice"  3
+=contagemcontador   "GRA_IrVertice: Colocando vertice como corrente"  1
+
+==Pegando seu identificador e obtendo seu valor
+=retornaident	grafo0 1 OK
+=contagemcontador   "GRA_RetornaIdentificador"  3
+=contagemcontador   "GRA_RetornaIdentificador: Obtendo identificador"  1
+
+=obtervalorvert  	grafo0 nome0  data0  cidade0  email0 OK
+=contagemcontador   "GRA_ObterValor"  3
+=contagemcontador   "GRA_ObterValor: Obtendo valor do elemento" 1
+
+==Tentando ir para vertice inexistente
+=irvertice   	grafo0 3 NaoAchouVertice
+=contagemcontador   "GRA_IrVertice"  4
+=contagemcontador   "GRA_IrVertice: Vertice nao foi encontrado"  1
+
+==Obtendo o numero de vertices do grafo e de arestas do vertice 1
+=obternumverts   	grafo0 2  OK
+=contagemcontador   "GRA_NumVertices"  2
+=contagemcontador   "GRA_NumVertices: Obtendo numero de vertices"  1
+
+=obternumarestas	grafo0 0  OK
+=contagemcontador   "GRA_NumArestas"  3
+=contagemcontador   "GRA_NumArestas: Obtendo numero de arestas"  1
+
+==Tentando obter indice das suas arestas
+=indicesarestas	grafo0 1 1 0 0 0 0 numArestasZero
+=contagemcontador   "GRA_RetornaIndiceAresta"  3
+=contagemcontador   "GRA_RetornaIndiceAresta: Vertice nao possui aresta"  1
+
+==Tentando criar aresta do vertice para ele mesmo 
+=criararesta	grafo0 1 1  arestaParaSiMesmo
+=contagemcontador   "GRA_CriarAresta"  3
+=contagemcontador   "GRA_CriarAresta: Falha ao criar aresta de um vertice para ele mesmo" 1
+
+==Tentando criar aresta do vertice para um vertice inexistente
+=criararesta	grafo0 1 3  NaoAchouVertice
+=contagemcontador   "GRA_CriarAresta"  4
+=contagemcontador   "GRA_ExisteAresta"  5
+=contagemcontador   "GRA_ExisteAresta: Nao achou o segundo vertice"  1
+=contagemcontador   "GRA_CriarAresta: Vertice nao foi encontrado" 1
+
+==Tentando criar aresta de um vertice inexistente para o vertice
+=criararesta	grafo0 3 1  NaoAchouVertice
+=contagemcontador   "GRA_CriarAresta"  5
+=contagemcontador   "GRA_ExisteAresta"  6
+=contagemcontador   "GRA_ExisteAresta: Nao achou o primeiro vertice"  1
+=contagemcontador   "GRA_CriarAresta: Vertice nao foi encontrado" 2
+
+==Criando uma aresta entre os vertices 1 e 2
+=criararesta grafo0 1 2 OK
+=contagemcontador   "GRA_CriarAresta"  6
+=contagemcontador   "GRA_ExisteAresta" 7
+=contagemcontador   "GRA_ExisteAresta: Vertice nao possui aresta" 1
+=contagemcontador   "GRA_CriarAresta:Restaurando corrente anterior" 1
+
+==Tentando criar aresta ja existente
+=criararesta grafo0 1 2 jaExisteAresta
+=contagemcontador   "GRA_CriarAresta"  7
+=contagemcontador   "GRA_ExisteAresta" 8
+=contagemcontador   "GRA_ExisteAresta: Aresta foi encontrada"  1
+=contagemcontador   "GRA_CriarAresta: Aresta ja existe" 1
+
+==Tentando excluir aresta entre o vertice 1 e outro inexistente
+=excluiraresta	grafo0 1 3 NaoAchouVertice
+=contagemcontador   "GRA_ExcluirAresta" 3
+=contagemcontador   "GRA_ExisteAresta"  9
+=contagemcontador   "GRA_ExisteAresta: Nao achou o segundo vertice"  2
+=contagemcontador   "GRA_ExcluirAresta : Vertice nao foi encontrado" 1
+
+==Retornando as arestas do vertice 1
+=indicesarestas grafo0 1 2 0 0 0 0 OK
+=contagemcontador   "GRA_RetornaIndiceAresta"  4
+=contagemcontador   "GRA_RetornaIndiceAresta: Movendo corrente da lista de arestas para posicao inicial"  1
+
+==Excluindo a aresta entre os vertices 1 e 2
+=excluiraresta	grafo0 1 2 OK
+=contagemcontador   "GRA_ExcluirAresta" 4
+=contagemcontador   "GRA_ExisteAresta"  10
+=contagemcontador   "GRA_ExisteAresta: Aresta foi encontrada"  2
+=contagemcontador   "GRA_ExcluirAresta : Aresta foi removida da lista do primeiro vertice" 1
+=contagemcontador   "GRA_ExcluirAresta : Aresta foi removida da lista do segundo vertice" 1
+=contagemcontador   "GRA_ExcluirAresta:Restaurando corrente anterior" 1
+
+==Inserindo um novo vertice
+=inserirvertice grafo0 nome2  data2  cidade2 email2 OK
+=contagemcontador   "GRA_InserirVertice" 4
+=contagemcontador   "GRA_CriarVertice" 3
+=contagemcontador   "GRA_CriarVertice: Vertice criado com sucesso" 3
+=contagemcontador   "GRA_InserirVertice: Atualizando elemento corrente" 3
+
+
+==Criando uma aresta entre os vertices 3 e 1
+=criararesta grafo0 3 1 OK
+=contagemcontador   "GRA_CriarAresta"  8
+=contagemcontador   "GRA_ExisteAresta" 11
+=contagemcontador   "GRA_ExisteAresta: Vertice nao possui aresta" 2
+=contagemcontador   "GRA_CriarAresta:Restaurando corrente anterior" 2
+
+==Tentando excluir a novamente a aresta entre os vertices 2 e 1
+=excluiraresta	grafo0 2 1 NaoAchouAresta  
+=contagemcontador   "GRA_ExcluirAresta" 5
+=contagemcontador   "GRA_ExisteAresta"  12
+=contagemcontador   "GRA_ExisteAresta: Aresta nao foi encontrada"  1
+=contagemcontador   "GRA_ExcluirAresta : Aresta nao foi encontrada" 1
+
+
+==Excluindo o vertice 3
+=excluirvertice grafo0 OK
+=contagemcontador   "GRA_ExcluirVertice"  3
+=contagemcontador   "GRA_ExcluirVertice: Apagando elementos da lista de Arestas" 1
+=contagemcontador   "GRA_ExcluirVertice: Chamando funcao de exclusao para o vertice" 1
+=contagemcontador   "GRA_DestruirElemVertices" 1
+=contagemcontador   "GRA_DestruirElemVertice" 1
+=contagemcontador   "GRA_ExcluirVertice: Atualizando elemento corrente" 1
+
+==Excluindo os demais vertices do grafo
+=excluirvertice grafo0 OK
+=contagemcontador   "GRA_ExcluirVertice"  4
+=contagemcontador   "GRA_ExcluirVertice: Chamando funcao de exclusao para o vertice" 2
+=contagemcontador   "GRA_DestruirElemVertices" 2
+=contagemcontador   "GRA_DestruirElemVertice" 2
+=contagemcontador   "GRA_ExcluirVertice: Atualizando elemento corrente" 2
+
+=excluirvertice grafo0 OK
+=contagemcontador   "GRA_ExcluirVertice"  5
+=contagemcontador   "GRA_ExcluirVertice: Chamando funcao de exclusao para o vertice" 3
+=contagemcontador   "GRA_DestruirElemVertices" 3
+=contagemcontador   "GRA_DestruirElemVertice" 3
+=contagemcontador   "GRA_ExcluirVertice: Grafo e vazio apos a exclusao" 1 
+
+==Inserindo novamente um vertice
+=inserirvertice grafo0 nome0  data0  cidade0 email0 OK
+=contagemcontador   "GRA_InserirVertice" 5
+=contagemcontador   "GRA_CriarVertice" 4
+=contagemcontador   "GRA_CriarVertice: Vertice criado com sucesso" 4
+=contagemcontador   "GRA_InserirVertice: Atualizando elemento corrente" 4
+
+==Destruindo o grafo
+=destruirgrafo grafo0 OK
+=contagemcontador   "GRA_DestruirGrafo"  2
+=contagemcontador   "GRA_DestruirGrafo: Chamando funcao de exclusao para cada vertice" 1
+=contagemcontador   "GRA_DestruirElemVertices" 4
+=contagemcontador   "GRA_DestruirElemVertice" 4
+=contagemcontador   "GRA_DestruirGrafo: Grafo foi destruido" 1
+
+==Testando falta de memoria
+=limitarmemoriadisponivel 0
+=criargrafo grafo1 FaltouMemoria 
+=contagemcontador   "GRA_CriarGrafo"  4
+=contagemcontador   "GRA_CriarGrafo: Faltou memoria para criar a cabeca do grafo"  1
+
+
+
+
+== Terminar contagem
+=pararcontagem
+=verificarcontagens    0
+
+
+== Finalizando contagem
+=terminarcontadores
+
+// Fim

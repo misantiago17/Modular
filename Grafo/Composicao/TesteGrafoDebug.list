@@ -1,19 +1,19 @@
 GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
    LES / Informática / PUC-Rio    Versão 6.00 (c) 2005
 
-Composição do construto: ..\Composicao\TesteGrafo.comp
+Composição do construto: ..\Composicao\TesteGrafoDebug.comp
 
-   Nome do Construto:           TesteGrafo
+   Nome do Construto:           TesteGrafoDebug
    Diretório base:              C:\Users\Lorene Busquim\Documents\Modular\Grafo\Composicao
 
-   Arquivo composição:          ..\Composicao\TesteGrafo.comp
+   Arquivo composição:          ..\Composicao\TesteGrafoDebug.comp
    Arquivo plataforma:          gmake.parm
 
-   Arquivo diretivas MAKE:      TesteGrafo.make
-   Arquivo diretivas LINK:      TesteGrafo.build
-   Arquivo listagem:            TesteGrafo.list
+   Arquivo diretivas MAKE:      TesteGrafoDebug.make
+   Arquivo diretivas LINK:      TesteGrafoDebug.build
+   Arquivo listagem:            TesteGrafoDebug.list
 
-Módulos do construto: ..\Composicao\TesteGrafo.comp
+Módulos do construto: ..\Composicao\TesteGrafoDebug.comp
 
    testegrafo.c
    grafo.c
@@ -155,7 +155,7 @@ Totais por tipo de arquivo
          Linhas em branco:           508
          Arquivos deste tipo:          3
 
-Totais para todo o construto TesteGrafo
+Totais para todo o construto TesteGrafoDebug
 
    Total linhas:              5480
    Linhas de código:          1681
