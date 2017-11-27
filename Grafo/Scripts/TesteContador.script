@@ -323,6 +323,7 @@
 =contagemcontador   "GRA_CriarVertice: Faltou memoria ao criar o vertice" 1
 =contagemcontador   "GRA_InserirVertice: Faltou memoria ao criar vertice" 1
 =destruirgrafo grafo1 OK
+=eliminarlimitesespaco
 
 
 
