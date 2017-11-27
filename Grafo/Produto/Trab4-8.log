@@ -12,54 +12,43 @@
    18  == struct 1
    25  == struct 2
    43  == Iniciar contagem
-   48  ==Testando falta de memoria
->>>    1  Linha:    50  Erro na condicao de retorno ao criar o Grafo Deveria ser: 4  É: 0
->>>    2  Linha:    51  Não é comando recuperar:  =contagemcontador   "GRA_CriarGrafo"  4
->>>    3  Linha:    52  Comando de teste ignorado:  =contagemcontador   "GRA_CriarGrafo: Faltou memoria para criar a cabeca do grafo"  1
-   54  ==Testando funcoes passando um grafo igual a NULL
-  108  ==Testando funcoes passando um grafo vazio
-  149  ==Inserindo dois vertices
-  163  ==Indo para o vertice anterior
-  168  ==Pegando seu identificador e obtendo seu valor
-  177  ==Tentando ir para vertice inexistente
-  182  ==Obtendo o numero de vertices do grafo e de arestas do vertice 1
-  191  ==Tentando obter indice das suas arestas
-  196  ==Tentando criar aresta do vertice para ele mesmo
-  201  ==Tentando criar aresta do vertice para um vertice inexistente
-  208  ==Tentando criar aresta de um vertice inexistente para o vertice
-  215  ==Criando uma aresta entre os vertices 1 e 2
-  222  ==Tentando criar aresta ja existente
-  229  ==Tentando excluir aresta entre o vertice 1 e outro inexistente
-  236  ==Retornando as arestas do vertice 1
-  241  ==Excluindo a aresta entre os vertices 1 e 2
-  250  ==Inserindo um novo vertice
-  258  ==Criando uma aresta entre os vertices 3 e 1
-  265  ==Tentando excluir a novamente a aresta entre os vertices 2 e 1
-  273  ==Excluindo o vertice 3
-  282  ==Excluindo os demais vertices do grafo
-  297  ==Inserindo novamente um vertice
-  304  ==Destruindo o grafo
-  317  == Terminar contagem
-cc>    4  Linha:   319   Contagem em "GRA_CriarAresta:Faltou memoria ao inserir elemento na lista de arestas do primeiro vertice" é zero.
-cc>    5  Linha:   319   Contagem em "GRA_CriarAresta:Faltou memoria ao inserir elemento na lista de arestas do segundo vertice" é zero.
-cc>    6  Linha:   319   Contagem em "GRA_CriarGrafo: Faltou memoria para criar a cabeca do grafo" é zero.
-cc>    7  Linha:   319   Contagem em "GRA_CriarGrafo: Faltou memoria para criar a lista de vertices" é zero.
-cc>    8  Linha:   319   Contagem em "GRA_CriarVertice: Faltou memoria ao criar lista de arestas" é zero.
-cc>    9  Linha:   319   Contagem em "GRA_CriarVertice: Faltou memoria ao criar o vertice" é zero.
-cc>   10  Linha:   319   Contagem em "GRA_InserirVertice: Faltou memoria ao criar lista de um no so" é zero.
-cc>   11  Linha:   319   Contagem em "GRA_InserirVertice: Faltou memoria ao criar vertice" é zero.
-cc>   12  Linha:   319   Contagem em "GRA_InserirVertice: Faltou memoria ao inserir elemento na lista Vertice" é zero.
-cc>   13  Linha:   319   Contagem em "GRA_InserirVertice: Faltou memoria ao inserir elemento na lista Vertices" é zero.
->>>   14  Linha:   319  Número de contadores zero errado. Deveria ser: 0  É: 10
-  322  == Finalizando contagem
-!!!   14  Linha:   325  // Fim 
+   48  ==Testando funcoes passando um grafo igual a NULL
+  102  ==Testando funcoes passando um grafo vazio
+  143  ==Inserindo dois vertices
+  157  ==Indo para o vertice anterior
+  162  ==Pegando seu identificador e obtendo seu valor
+  171  ==Tentando ir para vertice inexistente
+  176  ==Obtendo o numero de vertices do grafo e de arestas do vertice 1
+  185  ==Tentando obter indice das suas arestas
+  190  ==Tentando criar aresta do vertice para ele mesmo
+  195  ==Tentando criar aresta do vertice para um vertice inexistente
+  202  ==Tentando criar aresta de um vertice inexistente para o vertice
+  209  ==Criando uma aresta entre os vertices 1 e 2
+  216  ==Tentando criar aresta ja existente
+  223  ==Tentando excluir aresta entre o vertice 1 e outro inexistente
+  230  ==Retornando as arestas do vertice 1
+  235  ==Excluindo a aresta entre os vertices 1 e 2
+  244  ==Inserindo um novo vertice
+  252  ==Criando uma aresta entre os vertices 3 e 1
+  259  ==Tentando excluir a novamente a aresta entre os vertices 2 e 1
+  267  ==Excluindo o vertice 3
+  276  ==Excluindo os demais vertices do grafo
+  291  ==Inserindo novamente um vertice
+  298  ==Destruindo o grafo
+  306  ==Testando falta de memoria ao criar o grafo
+!!!    0  Linha:   308  Simula falta de memoria. 
+  313  ==Testando falta de memoria ao inserir vertice
+!!!    0  Linha:   320  Limita numero de espacos alocados. 
+  329  == Terminar contagem
+  334  == Finalizando contagem
+!!!    0  Linha:   337  // Fim 
 
-!!! Número de linhas lidas:         325
-!!! Número de casos de teste:        31
-!!! Número comandos corretos:       213
-!!! Número de falhas encontradas:    14
+!!! Número de linhas lidas:         337
+!!! Número de casos de teste:        32
+!!! Número comandos corretos:       228
+!!! Número de falhas encontradas:     0
 
-!!! Foram encontrados problemas
+!!! Não foram encontrados problemas
 
 
-!!! Numero de espacos ainda alocados: 1
+!!! Numero de espacos ainda alocados: 0

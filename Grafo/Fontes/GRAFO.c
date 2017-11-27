@@ -142,9 +142,7 @@ GRA_tpCondRet GRA_CriarGrafo(void   ( * ExcluirValor ) ( void * pDado ), GRA_tpp
 	}
 	if (LIS_CriarLista(DestruirElemVertices, &(pGrafo->pVerticesGrafo)) == LIS_CondRetFaltouMemoria) {   
 		*GrafoRet = NULL;
-		#ifdef _DEBUG
-			CNT_CONTAR( "GRA_CriarGrafo: Faltou memoria para criar a lista de vertices" ) ;
-        #endif
+		free(pGrafo);
 		return GRA_CondRetFaltouMemoria;
 	}
 
@@ -389,9 +387,6 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo, void * pValor)
 
 	if (LIS_CriarLista(NULL, &(pLIS_Vert)) == LIS_CondRetFaltouMemoria) 
 	{
-		#ifdef _DEBUG
-			CNT_CONTAR( "GRA_InserirVertice: Faltou memoria ao criar lista de um no so" ) ;
-		#endif
 		return GRA_CondRetFaltouMemoria;
 	}
 
@@ -411,16 +406,10 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo, void * pValor)
 
 	if (LIS_InserirElementoApos(pGrafo->pVerticesGrafo,(void*)pLIS_Verts) == LIS_CondRetFaltouMemoria)
 	{
-		#ifdef _DEBUG
-			CNT_CONTAR( "GRA_InserirVertice: Faltou memoria ao inserir elemento na lista Vertices" ) ;
-		#endif
 		return GRA_CondRetFaltouMemoria;
 	}
 	if (LIS_InserirElementoApos(pLIS_Vert,(void*)pVert) == LIS_CondRetFaltouMemoria)
 	{
-		#ifdef _DEBUG
-			CNT_CONTAR( "GRA_InserirVertice: Faltou memoria ao inserir elemento na lista Vertice" ) ;
-		#endif
 		return GRA_CondRetFaltouMemoria;
 	}
 
@@ -611,9 +600,6 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 	pVert2=pGrafo->pElemCorr;
 	if (LIS_InserirElementoApos(pGrafo->pElemCorr->pLisAresta,(void*)pVert1) == LIS_CondRetFaltouMemoria)
 	{
-		#ifdef _DEBUG
-			CNT_CONTAR("GRA_CriarAresta:Faltou memoria ao inserir elemento na lista de arestas do segundo vertice" ) ;
-		#endif
 		return GRA_CondRetFaltouMemoria;
 	}
 
@@ -629,9 +615,6 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 
 	if (LIS_InserirElementoApos(pGrafo->pElemCorr->pLisAresta,(void*)pVert2) == LIS_CondRetFaltouMemoria)
 	{
-		#ifdef _DEBUG
-			CNT_CONTAR("GRA_CriarAresta:Faltou memoria ao inserir elemento na lista de arestas do primeiro vertice" ) ;
-		#endif
 		return GRA_CondRetFaltouMemoria;
 	}
 
@@ -978,9 +961,7 @@ GRA_tpVertice *CriarVertice(void * pValor , int tam)
 	pVert->pValor = pValor;
 	if (LIS_CriarLista(NULL, &(pVert->pLisAresta)) != LIS_CondRetOK)
 	{
-		#ifdef _DEBUG
-			 CNT_CONTAR( "GRA_CriarVertice: Faltou memoria ao criar lista de arestas" ) ;
-		#endif
+		free(pVert);
 		return NULL;
 	}
 

@@ -7,7 +7,6 @@
     
 	GRA_CriarGrafo
 	GRA_CriarGrafo: Faltou memoria para criar a cabeca do grafo
-	GRA_CriarGrafo: Faltou memoria para criar a lista de vertices
 	GRA_CriarGrafo: O grafo foi criado
 	GRA_DestruirGrafo
 	GRA_DestruirGrafo: Grafo e NULL
@@ -28,10 +27,7 @@
 	GRA_ObterValor: Obtendo valor do elemento
 	GRA_InserirVertice
 	GRA_InserirVertice: Grafo e NULL
-	GRA_InserirVertice: Faltou memoria ao criar lista de um no so
 	GRA_InserirVertice: Faltou memoria ao criar vertice
-	GRA_InserirVertice: Faltou memoria ao inserir elemento na lista Vertices
-	GRA_InserirVertice: Faltou memoria ao inserir elemento na lista Vertice
 	GRA_InserirVertice: Atualizando elemento corrente
 	GRA_ExcluirVertice
 	GRA_ExcluirVertice: Grafo e NULL
@@ -46,8 +42,6 @@
 	GRA_CriarAresta: Grafo e vazio
 	GRA_CriarAresta: Vertice nao foi encontrado
 	GRA_CriarAresta: Aresta ja existe
-	GRA_CriarAresta:Faltou memoria ao inserir elemento na lista de arestas do segundo vertice
-	GRA_CriarAresta:Faltou memoria ao inserir elemento na lista de arestas do primeiro vertice
 	GRA_CriarAresta:Restaurando corrente anterior
 	GRA_ExisteAresta
 	GRA_ExisteAresta: Grafo e NULL
@@ -79,7 +73,6 @@
 	GRA_RetornaIndiceAresta: Movendo corrente da lista de arestas para posicao inicial
 	GRA_CriarVertice
 	GRA_CriarVertice: Faltou memoria ao criar o vertice
-	GRA_CriarVertice: Faltou memoria ao criar lista de arestas
 	GRA_CriarVertice: Vertice criado com sucesso
 	GRA_DestruirElemVertices
 	GRA_DestruirElemVertice

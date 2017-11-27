@@ -50,8 +50,8 @@ Estatísticas do construto
       testegrafo.c
 
    Estatísticas do arquivo: grafo.c
-      Total linhas:            1033
-      Linhas de código:         716
+      Total linhas:            1014
+      Linhas de código:         697
       Linhas de comentário:     156
       Linhas em branco:         175
    Arquivos de inclusão de que necessita
@@ -149,16 +149,16 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      2261
-         Linhas de código:          1395
+         Total linhas do tipo:      2242
+         Linhas de código:          1376
          Linhas de comentário:       406
          Linhas em branco:           508
          Arquivos deste tipo:          3
 
 Totais para todo o construto TesteGrafoDebug
 
-   Total linhas:              5480
-   Linhas de código:          1681
+   Total linhas:              5461
+   Linhas de código:          1662
    Linhas de comentário:      2890
    Linhas em branco:           957
    Arquivos processados:        10

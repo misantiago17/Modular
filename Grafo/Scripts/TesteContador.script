@@ -303,12 +303,26 @@
 =contagemcontador   "GRA_DestruirElemVertice" 4
 =contagemcontador   "GRA_DestruirGrafo: Grafo foi destruido" 1
 
-==Testando falta de memoria
-=limitarmemoriadisponivel 0
+==Testando falta de memoria ao criar o grafo
+=limitarmemoriadisponivel 1
 =criargrafo grafo1 FaltouMemoria 
-=contagemcontador   "GRA_CriarGrafo"  4
+=contagemcontador   "GRA_CriarGrafo"  2
 =contagemcontador   "GRA_CriarGrafo: Faltou memoria para criar a cabeca do grafo"  1
+=eliminarlimitesespaco
 
+==Testando falta de memoria ao inserir vertice
+=limitarnumeroespacos 2
+=criargrafo grafo1 OK
+=contagemcontador   "GRA_CriarGrafo"  3
+=contagemcontador   "GRA_CriarGrafo: O grafo foi criado"  2
+
+
+=inserirvertice grafo1 nome0  data0  cidade0 email0 FaltouMemoria
+=contagemcontador   "GRA_InserirVertice" 6
+=contagemcontador   "GRA_CriarVertice" 5
+=contagemcontador   "GRA_CriarVertice: Faltou memoria ao criar o vertice" 1
+=contagemcontador   "GRA_InserirVertice: Faltou memoria ao criar vertice" 1
+=destruirgrafo grafo1 OK
 
 
 
