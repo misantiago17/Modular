@@ -1,5 +1,6 @@
 #if ! defined(PERFIL_ )
 #define PERFIL_
+#include "grafo.h"
 /***************************************************************************
 *  $MCD Módulo de definição: GRA  Grafo Generico com Cabeça
 *

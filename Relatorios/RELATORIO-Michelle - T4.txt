@@ -6,6 +6,10 @@ Data			Horas Trabalhadas	Tipo de Tarefa				Descrição da Tarefa
 20/11/2017		00:30			Revisar especificações			Revisão do módulo amizade.h e detalhamento maior no amizade.c
 20/11/2017		01:00			Codificar módulo			Termino das funções de Amizade.c
 25/11/2017		03:15			Codificar módulo			Inicio da codificação do módulo de teste para amizade
+26/11/2017		02:30			Diagnosticar e corrigir			Após teste, correção de diversos problemas encontrados no código
+27/11/2017		03:00			Redigir script de teste			criação do script de tesrte do módulo amizade e elaboracao dos testes
+28/11/2017		02:45			Redigir script de teste			Finalizacao do script de teste
+28/11/2017		01:30			Realizar testes				Testes do script de teste
 
 - estudar
 - especificar os módulos

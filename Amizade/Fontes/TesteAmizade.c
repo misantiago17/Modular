@@ -30,7 +30,7 @@
 #include	"PERFIL.h"
 #include	"GRAFO.h"
 
-static const char RESET_AMIZADE_CMD				[ ] = "=resetteste"
+static const char RESET_AMIZADE_CMD				[ ] = "=resetteste";
 static const char CRIAR_AMIZADE_CMD       		[ ] = "=criaramizade";
 static const char EXCLUIR_AMIZADE_CMD     		[ ] = "=excluiramizade";
 static const char VERIFICAR_NUM_AMIGOS_CMD      [ ] = "=verificarnumamigos";
@@ -41,15 +41,16 @@ static const char VERIFICAR_AMIZADES_CMD        [ ] = "=verificaramizades";
 #define TRUE  1
 #define FALSE 0
 
-#define DIM_VT_PERFIL  	10
-#define DIM_VT_EMAIL  	10
-#define DIM_VT_PRIMNOME 10
-#define DIM_VT_CIDADE  	10
-#define DIM_VT_DIA  	10
-#define DIM_VT_MES  	10
-#define DIM_VT_ANO  	10
+#define DIM_VT_PERFIL  	8
+#define DIM_VT_EMAIL  	8
+#define DIM_VT_PRIMNOME 8
+#define DIM_VT_ULTNOME 	8
+#define DIM_VT_CIDADE  	8
+#define DIM_VT_DIA  	8
+#define DIM_VT_MES  	8
+#define DIM_VT_ANO  	8
 
-PER_tpPerfil   vtPerfil[ DIM_VT_PERFIL ];
+PER_tpPerfil *  vtPerfil[ DIM_VT_PERFIL ];
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
@@ -64,7 +65,7 @@ static int ValidarInxPerfil( int inxPerfil);
 *  $FC Função: TAMI &Testar amizade
 *
 *  $ED Descrição da função
-*	  Podem ser criadas até 10 perfis, identificados pelos índices 0 a 10
+*	  Podem ser criadas até 8 perfis, identificados pelos índices 0 a 8
 *
 *     Comandos disponíveis:
 *
@@ -86,8 +87,9 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		inxPerfil1 = -1 ,
 		inxPerfil2 = -1 ,
 		numLidos   = -1 ,
+		existeAmizade = -1,
 		CondRetEsp = -1  ;
-	TST_tpCondRet CondRet ;
+	AMI_tpCondRet CondRet ;
 
 	int i ;
 	AMI_tpSolitacao Solicitacao;
@@ -98,38 +100,38 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 	GRA_tpCondRet GRA_CondRetCriarGrafo;
 	PER_tpCondRet PER_CondRetCriarPerfil;
 	
-	char email1;
-	char primNome1;
-	char ultNome1;
-	char cidade1;
+	char email1[50];
+	char primNome1[50];
+	char ultNome1[50];
+	char cidade1[50];
 	int dia1;
 	int mes1;
 	int ano1;
 	
-	char email2;
-	char primNome2;
-	char ultNome2;
-	char cidade2;
+	char email2[50];
+	char primNome2[50];
+	char ultNome2[50];
+	char cidade2[50];
 	int dia2;
 	int mes2;
 	int ano2;
 	
-	char email3;
-	char primNome3;
-	char ultNome3;
-	char cidade3;
+	char email3[50];
+	char primNome3[50];
+	char ultNome3[50];
+	char cidade3[50];
 	int dia3;
 	int mes3;
 	int ano3;
 	
-	char vtEmail 	[DIM_VT_EMAIL] = {"usuario1@gmail.com", "usuario2@gmail.com", "usuario3@gmail.com", "usuario4@gmail.com", "usuario5@gmail.com",
-									  "usuario6@gmail.com", "usuario7@gmail.com", "usuario8@gmail.com", "usuario9@gmail.com", "usuario10@gmail.com"};
-	char vtPrimNome [DIM_VT_PRIMNOME] = {"Usuario1", "Usuario2", "Usuario3", "Usuario4", "Usuario5", "Usuario6", "Usuario7", "Usuario8", "Usuario9", "Usuario10"};
-	char vtUltNome 	[DIM_VT_ULTNOME] = {"Sobrenome1", "Sobrenome2", "Sobrenome3", "Sobrenome4", "Sobrenome5", "Sobrenome6", "Sobrenome7", "Sobrenome8", "Sobrenome9", "Sobrenome10"};
-	char vtCidade 	[DIM_VT_CIDADE] = {"Cidade1", "Cidade2", "Cidade3", "Cidade4", "Cidade5", "Cidade6", "Cidade7", "Cidade8", "Cidade9", "Cidade10"};
-	int  vtDia 		[DIM_VT_DIA] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-	int  vtMes 		[DIM_VT_MES] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-	int  vtAno 		[DIM_VT_ANO] = {2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010};
+	char * vtEmail  	[DIM_VT_EMAIL] = {"usuario1@gmail.com", "usuario2@gmail.com", "usuario3@gmail.com", "usuario4@gmail.com", "usuario5@gmail.com",
+									  "usuario6@gmail.com", "usuario7@gmail.com", "usuario8@gmail.com"};
+	char * vtPrimNome 	[DIM_VT_PRIMNOME] = {"Usuario1", "Usuario2", "Usuario3", "Usuario4", "Usuario5", "Usuario6", "Usuario7", "Usuario8"};
+	char * vtUltNome 	[DIM_VT_ULTNOME] = {"Sobrenome1", "Sobrenome2", "Sobrenome3", "Sobrenome4", "Sobrenome5", "Sobrenome6", "Sobrenome7", "Sobrenome8"};
+	char * vtCidade 	[DIM_VT_CIDADE] = {"Cidade1", "Cidade2", "Cidade3", "Cidade4", "Cidade5", "Cidade6", "Cidade7", "Cidade8"};
+	int  vtDia 			[DIM_VT_DIA] = {1, 2, 3, 4, 5, 6, 7, 8};
+	int  vtMes 			[DIM_VT_MES] = {1, 2, 3, 4, 5, 6, 7, 8};
+	int  vtAno 			[DIM_VT_ANO] = {2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008};
 	
 	/* Efetuar reset de teste de Amizade */
 
@@ -141,7 +143,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 				return TST_CondRetMemoria;
 			}
 		} else {
-			GRA_DestruirGrafo(&tpGrafo);
+			GRA_DestruirGrafo(tpGrafo);
 			GRA_CondRetCriarGrafo = GRA_CriarGrafo(DestruirValor, &tpGrafo);
 			if (GRA_CondRetCriarGrafo == GRA_CondRetFaltouMemoria){
 				return TST_CondRetMemoria;
@@ -165,17 +167,31 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 	else if ( strcmp( ComandoTeste , CRIAR_AMIZADE_CMD ) == 0 )
 	{
+		TST_tpCondRet SolicitacaoCondRet; 
+		TST_tpCondRet debug;
+		int SolicitacaoFuncao;
+		
 		numLidos = LER_LerParametros( "iiii" ,&inxPerfil1, &inxPerfil2, &Solicitacao, &CondRetEsp ) ;
-
+		
 		if ( ( numLidos != 4 ) || ( ! ValidarInxPerfil( inxPerfil1)) || ( ! ValidarInxPerfil( inxPerfil2))){
 			return TST_CondRetParm ;
 		} /* if */
 
-		CondRet = AMI_CriarAmizade(tpGrafo, inxPerfil1, inxPerfil2, Solicitacao);
+		CondRet = AMI_CriarAmizade(tpGrafo, vtPerfil[inxPerfil1], vtPerfil[inxPerfil2], SolicitacaoFuncao);
 
-		return TST_CompararInt( CondRetEsp , CondRet ,
-			"Erro na condicao de retorno ao criar o Amizade"  ) ;
-
+		debug =  TST_CompararInt( CondRetEsp , CondRet ,
+			"Erro na condicao de retorno ao criar o Amizade" ) ;
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		
+		SolicitacaoCondRet = TST_CompararInt(SolicitacaoFuncao, Solicitacao, "Solicitacao nao e igual ao esperado");
+		if (SolicitacaoCondRet != TST_CondRetOK){
+			return SolicitacaoCondRet;
+		}
+		
+		return TST_CondRetOK;
+		
 	} /* fim ativa: Testar Criar Amizade */
 
 
@@ -189,7 +205,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetParm ;
 		} /* if */
 
-		CondRet = AMI_ExcluirAmizade(tpGrafo, inxPerfil1, inxPerfil2);
+		CondRet = AMI_ExcluirAmizade(tpGrafo, vtPerfil[inxPerfil1], vtPerfil[inxPerfil2]);
 		
 		return TST_CompararInt( CondRetEsp , CondRet ,
             "Condicao de retorno errada ao excluir amizade.") ;
@@ -201,23 +217,66 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 	else if ( strcmp( ComandoTeste , VERIFICAR_NUM_AMIGOS_CMD ) == 0 )
 	{	
+		TST_tpCondRet NumAmigosCondRet; 
+		TST_tpCondRet debug;
+		int numAmigosFuncao;
+		
 		numLidos = LER_LerParametros( "iii" , &inxPerfil1, &numAmigos, &CondRetEsp ) ;
 		if ( ( numLidos != 2 )|| (!ValidarInxPerfil( inxPerfil1))){
 			return TST_CondRetParm ;
 		} /* if */
 
-		CondRet = AMI_VerificarNumAmigos(tpGrafo, inxPerfil1, numAmigos);
+		CondRet = AMI_VerificarNumAmigos(tpGrafo, vtPerfil[inxPerfil1], &numAmigosFuncao);
 
-		return TST_CompararInt( CondRetEsp , CondRet ,
+		NumAmigosCondRet = TST_CompararInt( CondRetEsp , CondRet ,
 			"Condicao de retorno errada ao verificar número de amigos." ) ;
+			
+		if (NumAmigosCondRet != TST_CondRetOK){
+			return NumAmigosCondRet;
+		}
+		
+		debug = TST_CompararInt(numAmigos, numAmigosFuncao, "Condicao de retorno errada ao verficar número de amigos.");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		
+		return TST_CondRetOK;
 
 	} /* fim ativa: Testar Verificar Número de Amigos */
 
 	
 	/* Testar armazenar amizades */
-	// Verificar essa bosta
+
 	else if ( strcmp( ComandoTeste , ARMAZENAR_AMIZADES_CMD ) == 0 )
 	{
+		PER_tpPerfil ** perfis;
+		TST_tpCondRet TST_CondRetVerifica;
+		TST_tpCondRet debug;
+		
+		char emailRetornado1[50];
+		char primNomeRetornado1[50];
+		char ultNomeRetornado1[50];
+		char cidadeRetornado1[50];
+		int diaRetornado1;
+		int mesRetornado1;
+		int anoRetornado1;
+	
+		char emailRetornado2[50];
+		char primNomeRetornado2[50];
+		char ultNomeRetornado2[50];
+		char cidadeRetornado2[50];
+		int diaRetornado2;
+		int mesRetornado2;
+		int anoRetornado2;
+	
+		char emailRetornado3[50];
+		char primNomeRetornado3[50];
+		char ultNomeRetornado3[50];
+		char cidadeRetornado3[50];
+		int diaRetornado3;
+		int mesRetornado3;
+		int anoRetornado3;
+		
 		numLidos = LER_LerParametros( "issssiiissssiiissssiiii" ,
 			&inxPerfil1, &email1, &primNome1, &ultNome1, &cidade1, &dia1, &mes1, &ano1,
 						 &email2, &primNome2, &ultNome2, &cidade2, &dia2, &mes2, &ano2,
@@ -229,12 +288,41 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetParm ;
 		} /* if */
 		
-		CondRet = AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario, PER_tpPerfil **PerfilAmigos);
-
-		return TST_CompararInt( CondRetEsp ,
-			GRA_ExcluirVertice( vtGrafos[ inxGrafo ]) ,
-			"Condição de retorno errada ao excluir vertice."   ) ;
-
+		if ((perfis = (PER_tpPerfil **)malloc(3*sizeof(PER_tpPerfil *))) == NULL){
+			return TST_CondRetMemoria;
+		}
+		
+		for (i =0; i < 3; i++){
+			if ((perfis[i] = (PER_tpPerfil *)malloc(sizeof(PER_tpPerfil))) == NULL){
+				return TST_CondRetMemoria;
+			}
+		}
+		
+		CondRet = AMI_ArmazenarAmizades(tpGrafo, vtPerfil[inxPerfil1], perfis);
+		
+		TST_CondRetVerifica = TST_CompararInt( CondRetEsp, CondRet,
+			"Condição de retorno errada ao armazenar amizades."   );
+			
+		if (TST_CondRetVerifica != TST_CondRetOK){
+			return TST_CondRetVerifica;
+		}
+	/*	
+		if (CondRetEsp == AMI_CondRetOK && CondRet == AMI_CondRetOK){
+			
+			retornaEmailPerfil(emailRetornado1);
+		
+			debug = TST_CompararString(email1, emailRetornado1, "Campo email nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			
+			// Continuar depois
+			
+		}
+	*/
+	
+		return TST_CondRetOK;
+	
 	} /* fim ativa: Testar armazenar amizades */
 
 	
@@ -249,7 +337,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetParm ;
 		} /* if */
 		
-		CondRet = AMI_ExcluirTodasAmizades(tpGrafo, inxPerfil1);
+		CondRet = AMI_ExcluirTodasAmizades(tpGrafo, vtPerfil[inxPerfil1]);
 
 		return TST_CompararInt( CondRetEsp , CondRet ,
 			"Condicao de retorno errada ao excluir todas as amizades." ) ;
@@ -258,10 +346,12 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 
 	/* Testar verificar amizade */
-	else if ( strcmp( ComandoTeste , EXC_ARESTA_CMD ) == 0 )
+	else if ( strcmp( ComandoTeste , VERIFICAR_AMIZADES_CMD ) == 0 )
 	{
-		int numVert1,numVert2;
-
+		int numVert1,numVert2, existeAmizadefuncao;
+		TST_tpCondRet debug;
+		TST_tpCondRet VerificaExistencia;
+		
 		numLidos = LER_LerParametros( "iiii" ,
 			&inxPerfil1,&inxPerfil2, &existeAmizade, &CondRetEsp ) ;
 
@@ -270,14 +360,24 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetParm ;
 		} /* if */
 
-		CondRet = AMI_VerificarAmizade(tpGrafo, inxPerfil1, inxPerfil2, existeAmizade);
+		CondRet = AMI_VerificarAmizade(tpGrafo, vtPerfil[inxPerfil1], vtPerfil[inxPerfil2], existeAmizadefuncao);
 		
-		return TST_CompararInt( CondRetEsp , CondRet ,
+		debug =  TST_CompararInt( CondRetEsp , CondRet ,
 			"Condicao de retorno errada ao verificar amizade." ) ;
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		
+		VerificaExistencia = TST_CompararInt(existeAmizadefuncao, existeAmizade, "Existencia nao e igual ao esperado");
+		if (VerificaExistencia != TST_CondRetOK){
+			return VerificaExistencia;
+		}
+		
+		return TST_CondRetOK;
 
 	} /* fim ativa: Testar verificar amizade */
 
-
+}
  /* Fim função: TAMI &Testar Amizade */
 
 
