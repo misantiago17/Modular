@@ -249,33 +249,70 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 	else if ( strcmp( ComandoTeste , ARMAZENAR_AMIZADES_CMD ) == 0 )
 	{
-		PER_tpPerfil ** perfis;
+		PER_tpPerfil * perfis[3];
 		TST_tpCondRet TST_CondRetVerifica;
 		TST_tpCondRet debug;
 		
-		char emailRetornado1[50];
-		char primNomeRetornado1[50];
-		char ultNomeRetornado1[50];
-		char cidadeRetornado1[50];
+		char * emailRetornado1;
+		char * primNomeRetornado1;
+		char * ultNomeRetornado1;
+		char * cidadeRetornado1;
 		int diaRetornado1;
 		int mesRetornado1;
 		int anoRetornado1;
-	
-		char emailRetornado2[50];
-		char primNomeRetornado2[50];
-		char ultNomeRetornado2[50];
-		char cidadeRetornado2[50];
+		
+		char * emailRetornado2;
+		char * primNomeRetornado2;
+		char * ultNomeRetornado2;
+		char * cidadeRetornado2;
 		int diaRetornado2;
 		int mesRetornado2;
 		int anoRetornado2;
-	
-		char emailRetornado3[50];
-		char primNomeRetornado3[50];
-		char ultNomeRetornado3[50];
-		char cidadeRetornado3[50];
+		
+		char * emailRetornado3;
+		char * primNomeRetornado3;
+		char * ultNomeRetornado3;
+		char * cidadeRetornado3;
 		int diaRetornado3;
 		int mesRetornado3;
 		int anoRetornado3;
+		
+		if ((emailRetornado1 = (char *)malloc(sizeof(char)*50)) == NULL){
+			return TST_CondRetMemoria;
+		}
+		if ((primNomeRetornado1 = (char *)malloc(sizeof(char)*50)) == NULL){
+			return TST_CondRetMemoria;
+		}
+		if ((ultNomeRetornado1 = (char *)malloc(sizeof(char)*50)) == NULL){
+			return TST_CondRetMemoria;
+		}
+		if ((cidadeRetornado1 = (char *)malloc(sizeof(char)*50)) == NULL){
+			return TST_CondRetMemoria;
+		}
+		if ((emailRetornado2 = (char *)malloc(sizeof(char)*50)) == NULL){
+			return TST_CondRetMemoria;
+		}
+		if ((primNomeRetornado2 = (char *)malloc(sizeof(char)*50)) == NULL){
+			return TST_CondRetMemoria;
+		}
+		if ((ultNomeRetornado2 = (char *)malloc(sizeof(char)*50)) == NULL){
+			return TST_CondRetMemoria;
+		}
+		if ((cidadeRetornado2 = (char *)malloc(sizeof(char)*50)) == NULL){
+			return TST_CondRetMemoria;
+		}
+		if ((emailRetornado3 = (char *)malloc(sizeof(char)*50)) == NULL){
+			return TST_CondRetMemoria;
+		}
+		if ((primNomeRetornado3 = (char *)malloc(sizeof(char)*50)) == NULL){
+			return TST_CondRetMemoria;
+		}
+		if ((ultNomeRetornado3 = (char *)malloc(sizeof(char)*50)) == NULL){
+			return TST_CondRetMemoria;
+		}
+		if ((cidadeRetornado3 = (char *)malloc(sizeof(char)*50)) == NULL){
+			return TST_CondRetMemoria;
+		}
 		
 		numLidos = LER_LerParametros( "issssiiissssiiissssiiii" ,
 			&inxPerfil1, &email1, &primNome1, &ultNome1, &cidade1, &dia1, &mes1, &ano1,
@@ -292,6 +329,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetMemoria;
 		}
 		
+		
 		for (i =0; i < 3; i++){
 			if ((perfis[i] = (PER_tpPerfil *)malloc(sizeof(PER_tpPerfil))) == NULL){
 				return TST_CondRetMemoria;
@@ -306,20 +344,107 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		if (TST_CondRetVerifica != TST_CondRetOK){
 			return TST_CondRetVerifica;
 		}
-	/*	
+		
 		if (CondRetEsp == AMI_CondRetOK && CondRet == AMI_CondRetOK){
 			
-			retornaEmailPerfil(emailRetornado1);
+			PER_ObterPerfil(tpGrafo, emailRetornado1, &primNomeRetornado1, &ultNomeRetornado1,
+							  &diaRetornado1, &mesRetornado1, &anoRetornado1, &cidadeRetornado1);
 		
 			debug = TST_CompararString(email1, emailRetornado1, "Campo email nao e igual ao esperado");
 			if (debug != TST_CondRetOK){
 				return debug;
 			}
+			debug = TST_CompararString(primNome1, primNomeRetornado1, "Campo primeiro nome nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			debug = TST_CompararString(ultNome1, ultNomeRetornado1, "Campo ultimo nome nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			debug = TST_CompararString(cidade1, cidadeRetornado1, "Campo cidade nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			debug = TST_CompararInt( dia1, diaRetornado1, "Campo dia nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			debug = TST_CompararInt( mes1, mesRetornado1, "Campo mes nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			debug = TST_CompararInt( ano1, anoRetornado1, "Campo ano nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
 			
-			// Continuar depois
+			PER_ObterPerfil(tpGrafo, emailRetornado2, &primNomeRetornado2, &ultNomeRetornado2,
+							  &diaRetornado2, &mesRetornado2, &anoRetornado2, &cidadeRetornado2);
+		
+			debug = TST_CompararString(email2, emailRetornado2, "Campo email nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			debug = TST_CompararString(primNome2, primNomeRetornado2, "Campo primeiro nome nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			debug = TST_CompararString(ultNome2, ultNomeRetornado2, "Campo ultimo nome nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			debug = TST_CompararString(cidade2, cidadeRetornado2, "Campo cidade nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			debug = TST_CompararInt( dia2, diaRetornado2, "Campo dia nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			debug = TST_CompararInt( mes2, mesRetornado2, "Campo mes nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			debug = TST_CompararInt( ano2, anoRetornado2, "Campo ano nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			
+			PER_ObterPerfil(tpGrafo, emailRetornado3, &primNomeRetornado3, &ultNomeRetornado3,
+							  &diaRetornado3, &mesRetornado3, &anoRetornado3, &cidadeRetornado3);
+		
+			debug = TST_CompararString(email3, emailRetornado3, "Campo email nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			debug = TST_CompararString(primNome3, primNomeRetornado3, "Campo primeiro nome nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			debug = TST_CompararString(ultNome3, ultNomeRetornado3, "Campo ultimo nome nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			debug = TST_CompararString(cidade3, cidadeRetornado3, "Campo cidade nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			debug = TST_CompararInt( dia3, diaRetornado3, "Campo dia nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			debug = TST_CompararInt( mes3, mesRetornado3, "Campo mes nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
+			debug = TST_CompararInt( ano3, anoRetornado3, "Campo ano nao e igual ao esperado");
+			if (debug != TST_CondRetOK){
+				return debug;
+			}
 			
 		}
-	*/
+
 	
 		return TST_CondRetOK;
 	

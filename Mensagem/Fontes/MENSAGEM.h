@@ -216,7 +216,6 @@ MEN_tpCondRet MEN_ObterNumMensagens(LIS_tppLista pMensagem,MEN_tpCondMsg flagMsg
 MEN_tpCondRet MEN_ObterNumTodasMensagens(LIS_tppLista pMensagem, int* numTotalMsgs);
 
 
-
 /***********************************************************************
 *  $FC Função: MEN  &Obter Todas Mensagens
 *

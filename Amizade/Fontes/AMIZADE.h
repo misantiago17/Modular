@@ -112,7 +112,7 @@ typedef enum {
     /* Foi verificado que a amizade entre dois usuários existe */
     
     AMI_NaoExisteAmizade
-    /* Foi verificado que a amizade entre dois usuários n‹o existe */
+    /* Foi verificado que a amizade entre dois usuários não existe */
     
 } AMI_tpVerificacao;
 

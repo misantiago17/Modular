@@ -1,4 +1,4 @@
 testeamizade.c
-..\Fontes\testeamizade.c(296) : error C2027: use of undefined type 'PER_tagPerfil'
+..\Fontes\testeamizade.c(334) : error C2027: use of undefined type 'PER_tagPerfil'
         d:\projetos\puc\modular\projeto git\amizade\fontes\PERFIL.h(35) : see declaration of 'PER_tagPerfil'
 
