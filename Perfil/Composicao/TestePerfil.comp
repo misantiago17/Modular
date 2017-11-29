@@ -1,8 +1,8 @@
-# Composicao do programa de teste de uma lista generica duplamente encadeada
+# Composicao do programa de teste de um perfil
 
 [Diretorios]
 
-Nome        =	TesteLista
+Nome        =	TestePerfil
 PathDefault =	..\Fontes
 err         =	..\Produto
 obj         =	..\Objetos
@@ -10,11 +10,13 @@ c           =	..\Fontes
 h           =	..\Fontes
 
 [Modulos]
-TesteLista
+TestePerfil
 Lista
+Perfil
+Grafo
 
 [BuildInicio]
-/OUT:..\Produto\TRAB1-1.EXE
+/OUT:..\Produto\TRAB4-1.EXE
 /INCREMENTAL:NO
 /MACHINE:IX86
 

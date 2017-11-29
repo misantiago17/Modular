@@ -27,6 +27,8 @@
 #define PERFIL_EXT extern
 #endif
 
+#include   "GRAFO.h"
+#include   "LISTA.h"
 /***** Declarações exportadas pelo módulo *****/
 
 /* Tipo referência para um perfil */
@@ -65,10 +67,11 @@ typedef enum {
 
 	PER_CondRetPerfilInexistente,
 	
-	PER_CondRetParametroGRAIncorreto
+	PER_CondRetParametroGRAIncorreto,
+
+	PER_CondRetPonteiroParaRetornoInvalido
 
 } PER_tpCondRet;
-
 
 /***********************************************************************
 *  $FC Função:
@@ -306,7 +309,23 @@ PER_tpCondRet PER_ExcluirTodosPerfis(GRA_tppGrafo pGrafo);
 *
 ***********************************************************************/
 
-PER_tpCondRet PER_retornaLisMensagens(GRA_tppGrafo pGrafo, char *email, LIS_tppLista *mensagens);
+PER_tpCondRet PER_retornaLisMensagens(PER_tpPerfil *perfil, LIS_tppLista *mensagens);
+
+/***
+*  $FC Função:
+*
+*  $ED Descrição da função
+*
+*
+*
+*  $EP Parâmetros
+*
+*
+*  $FV Valor retornado
+*
+*
+***/
+PER_tpCondRet PER_retornaIdPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil *perfil, int *id);
 
 #undef PERFIL_EXT
 

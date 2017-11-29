@@ -1,6 +1,0 @@
-/OUT:..\Produto\TRAB1-1.EXE
-/INCREMENTAL:NO
-/MACHINE:IX86
-testelista.obj  lista.obj  
-ArcaboucoTeste.lib
-

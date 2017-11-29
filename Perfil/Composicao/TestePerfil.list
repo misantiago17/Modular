@@ -1,0 +1,171 @@
+GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
+   LES / Informática / PUC-Rio    Versão 6.00 (c) 2005
+
+Composição do construto: ..\Composicao\TestePerfil.comp
+
+   Nome do Construto:           TestePerfil
+   Diretório base:              C:\Users\Usuario\Documents\GitHub\Modular\Perfil\Composicao
+
+   Arquivo composição:          ..\Composicao\TestePerfil.comp
+   Arquivo plataforma:          gmake.parm
+
+   Arquivo diretivas MAKE:      TestePerfil.make
+   Arquivo diretivas LINK:      TestePerfil.build
+   Arquivo listagem:            TestePerfil.list
+
+Módulos do construto: ..\Composicao\TestePerfil.comp
+
+   testeperfil.c
+   lista.c
+   perfil.c
+   grafo.c
+
+Estatísticas do construto
+
+   Estatísticas do arquivo: generico.h
+      Total linhas:             713
+      Linhas de código:          59
+      Linhas de comentário:     572
+      Linhas em branco:          82
+   Arquivos de inclusão de que necessita
+      tst_espc.h
+   Arquivos em que é incluído
+      testeperfil.c
+
+   Estatísticas do arquivo: grafo.c
+      Total linhas:             761
+      Linhas de código:         475
+      Linhas de comentário:     153
+      Linhas em branco:         147
+   Arquivos de inclusão de que necessita
+      grafo.h
+      lista.h
+
+   Estatísticas do arquivo: grafo.h
+      Total linhas:             410
+      Linhas de código:          37
+      Linhas de comentário:     323
+      Linhas em branco:          50
+   Arquivos em que é incluído
+      grafo.c
+      perfil.c
+      perfil.h
+      testeperfil.c
+
+   Estatísticas do arquivo: lerparm.h
+      Total linhas:             291
+      Linhas de código:          36
+      Linhas de comentário:     188
+      Linhas em branco:          67
+   Arquivos em que é incluído
+      testeperfil.c
+
+   Estatísticas do arquivo: lista.c
+      Total linhas:             545
+      Linhas de código:         269
+      Linhas de comentário:     139
+      Linhas em branco:         154
+   Arquivos de inclusão de que necessita
+      lista.h
+
+   Estatísticas do arquivo: lista.h
+      Total linhas:             354
+      Linhas de código:          35
+      Linhas de comentário:     268
+      Linhas em branco:          51
+   Arquivos em que é incluído
+      grafo.c
+      lista.c
+      perfil.c
+      perfil.h
+      testeperfil.c
+
+   Estatísticas do arquivo: perfil.c
+      Total linhas:             743
+      Linhas de código:         368
+      Linhas de comentário:     257
+      Linhas em branco:         122
+   Arquivos de inclusão de que necessita
+      grafo.h
+      lista.h
+      perfil.h
+
+   Estatísticas do arquivo: perfil.h
+      Total linhas:             335
+      Linhas de código:          42
+      Linhas de comentário:     247
+      Linhas em branco:          46
+   Arquivos de inclusão de que necessita
+      grafo.h
+      lista.h
+   Arquivos em que é incluído
+      perfil.c
+      testeperfil.c
+
+   Estatísticas do arquivo: testeperfil.c
+      Total linhas:             392
+      Linhas de código:         219
+      Linhas de comentário:      81
+      Linhas em branco:         105
+   Arquivos de inclusão de que necessita
+      generico.h
+      grafo.h
+      lerparm.h
+      lista.h
+      perfil.h
+      tst_espc.h
+
+   Estatísticas do arquivo: tst_espc.h
+      Total linhas:             228
+      Linhas de código:          23
+      Linhas de comentário:     185
+      Linhas em branco:          20
+   Arquivos em que é incluído
+      generico.h
+      testeperfil.c
+
+Totais por tipo de arquivo
+
+  Tipo: h        Path: ..\Fontes
+         Total linhas do tipo:      2331
+         Linhas de código:           232
+         Linhas de comentário:      1783
+         Linhas em branco:           316
+         Arquivos deste tipo:          6
+
+  Tipo: obj      Path: ..\Objetos
+         Total linhas do tipo:         0
+         Linhas de código:             0
+         Linhas de comentário:         0
+         Linhas em branco:             0
+         Arquivos deste tipo:          0
+
+  Tipo: err      Path: ..\Produto
+         Total linhas do tipo:         0
+         Linhas de código:             0
+         Linhas de comentário:         0
+         Linhas em branco:             0
+         Arquivos deste tipo:          0
+
+  Tipo: DEFAULT  Path: ..\Fontes
+         Total linhas do tipo:         0
+         Linhas de código:             0
+         Linhas de comentário:         0
+         Linhas em branco:             0
+         Arquivos deste tipo:          0
+
+  Tipo: c        Path: ..\Fontes
+         Total linhas do tipo:      2441
+         Linhas de código:          1331
+         Linhas de comentário:       630
+         Linhas em branco:           528
+         Arquivos deste tipo:          4
+
+Totais para todo o construto TestePerfil
+
+   Total linhas:              4772
+   Linhas de código:          1563
+   Linhas de comentário:      2413
+   Linhas em branco:           844
+   Arquivos processados:        10
+

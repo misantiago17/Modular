@@ -1,7 +1,7 @@
 ##################################################
 ###
-### Diretivas de MAKE para o construto: TesteLista
-### Gerado a partir de: ..\Composicao\TesteLista.comp
+### Diretivas de MAKE para o construto: TestePerfil
+### Gerado a partir de: ..\Composicao\TestePerfil.comp
 ###
 ### ----- Arquivo gerado, NÃO EDITE!!! -----
 ###
@@ -9,7 +9,7 @@
 
 ### Nomes globais
 
-NOME            = TesteLista
+NOME            = TestePerfil
 
 
 ### Nomes de paths
@@ -47,7 +47,8 @@ INCLUDE = $(INCLUDE);$(PDEFAULT)
 ### Regras de geração
 
 all : limpa \
-   $(Fobj)\testelista.obj   $(Fobj)\lista.obj \
+   $(Fobj)\testeperfil.obj   $(Fobj)\lista.obj   $(Fobj)\perfil.obj \
+   $(Fobj)\grafo.obj \
    Construto
 
 ### Limpar arquivos
@@ -58,26 +59,35 @@ limpa :
 
 ### Dependências de módulos objeto a compilar
 
-$(Fobj)\testelista.obj :  {$(Pc)}\testelista.c \
-    {$(Ph)}generico.h           {$(Ph)}lerparm.h            {$(Ph)}lista.h              \
-    {$(Ph)}tst_espc.h          
+$(Fobj)\testeperfil.obj :  {$(Pc)}\testeperfil.c \
+    {$(Ph)}generico.h           {$(Ph)}grafo.h              {$(Ph)}lerparm.h            \
+    {$(Ph)}lista.h              {$(Ph)}perfil.h             {$(Ph)}tst_espc.h          
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
 $(Fobj)\lista.obj :  {$(Pc)}\lista.c \
     {$(Ph)}lista.h             
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
+$(Fobj)\perfil.obj :  {$(Pc)}\perfil.c \
+    {$(Ph)}grafo.h              {$(Ph)}lista.h              {$(Ph)}perfil.h            
+   cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
+
+$(Fobj)\grafo.obj :  {$(Pc)}\grafo.c \
+    {$(Ph)}grafo.h              {$(Ph)}lista.h             
+   cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
+
 
 ### Terminação
 
 Construto : \
-   $(Fobj)\testelista.obj   $(Fobj)\lista.obj
+   $(Fobj)\testeperfil.obj   $(Fobj)\lista.obj   $(Fobj)\perfil.obj \
+   $(Fobj)\grafo.obj
     cd $(Fobj)
     LINK $(L) @$(NOME).build >> $(Ferr)\$(NOME).err
 
 ##################################################
 ###
-### Fim de diretivas MAKE para o construto: TesteLista
+### Fim de diretivas MAKE para o construto: TestePerfil
 ###
 ##################################################
 

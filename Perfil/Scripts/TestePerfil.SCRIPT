@@ -1,0 +1,95 @@
+// Script:    TesteGrafo.script
+// Autor:     Gabriel, Michelle, Renan
+// Data:      15/10/2017
+// Proposito: Testar o modulo perfil
+
+
+== Inicializar valores
+=declararparm   grafo  int 0
+
+=declararparm   perfil0  int 0
+=declararparm   perfil1  int 1
+=declararparm   perfil2  int 2
+=declararparm   perfil3  int 3
+
+== struct 0
+=declararparm   email0			string  "Renan@gmail.com"
+=declararparm   primeiroNome0	string  "Renan"
+=declararparm   ultimoNome0		string  "Moreira"
+=declararparm   diaNasc0		int		25
+=declararparm   mesNasc0		int		01
+=declararparm   anoNasc0		int		1998
+=declararparm   cidade0			string  "Rio de Janeiro"
+
+== struct 1
+=declararparm   email1			string  "Gabriel@gmail.com"
+=declararparm   primeiroNome1	string  "Gabriel"
+=declararparm   ultimoNome1		string  "Busquin"
+=declararparm   diaNasc1		int		12
+=declararparm   mesNasc1		int		03
+=declararparm   anoNasc1		int		1996
+=declararparm   cidade1			string  "Rio de Janeiro"
+
+== struct 2
+=declararparm   email2			string  "Michelle@gmail.com"
+=declararparm   primeiroNome2	string  "Michelle"
+=declararparm   ultimoNome2		string  "Santiago"
+=declararparm   diaNasc2		int		15
+=declararparm   mesNasc2		int		08
+=declararparm   anoNasc2		int		1997
+=declararparm   cidade2			string  "Rio de Janeiro"
+
+== Parametros invalidos
+=declararparm   email3			string  "Alessandro"
+=declararparm   primeiroNome3	string  "Alessandro"
+=declararparm   ultimoNome3		string  "Gar321cia"
+=declararparm   diaNasc3		int		28
+=declararparm   mesNasc3		int		09
+=declararparm   anoNasc3		int		100
+=declararparm   cidade3			string  "Rio de Janeiro"
+
+
+=declararparm   OK							int  0
+=declararparm   EmailInvalido				int  1
+=declararparm   EmailJaCadastrado			int  2
+=declararparm   DataInvalida				int  3
+=declararparm   NomeInvalido				int  4
+=declararparm	CidadeInvalida				int  5
+=declararparm	EmailInexistente			int  6
+=declararparm	FaltouMemoria				int  7
+=declararparm	RetornoLisIncorreto			int  8
+=declararparm	RedeVazia					int  9
+=declararparm	PerfilInexistente			int  10
+=declararparm	ParametroGRAIncorreto		int  11
+=declararparm	PonteiroParaRetornoInvalido	int  12
+
+
+== Criar o grafo
+=resetteste
+
+== Obter Numero de perfis existentes
+=numeroperfis	0 OK
+
+== Criar Perfil
+=criarperfil perfil0 email0 primeiroNome0 ultimoNome0 diaNasc0 mesNasc0 anoNasc0 cidade0 OK
+
+== Obter Numero de perfis existentes
+=numeroperfis	1 OK
+
+== Obter Dados do perfil
+=obterperfil	email0 primeiroNome0 ultimoNome0 diaNasc0 mesNasc0 anoNasc0 cidade0 OK
+
+== Criar Perfil
+=criarperfil perfil1 email1 primeiroNome1 ultimoNome1 diaNasc1 mesNasc1 anoNasc1 cidade1 OK
+
+== Obter Numero de perfis existentes
+=numeroperfis	2 OK
+
+== Obter Dados do perfil
+=obterperfil	email1 primeiroNome1 ultimoNome1 diaNasc1 mesNasc1 anoNasc1 cidade1 OK
+
+== Criar Perfil
+=criarperfil perfil2 email2 primeiroNome2 ultimoNome2 diaNasc2 mesNasc2 anoNasc2 cidade2 OK
+
+== Obter Numero de perfis existentes
+=numeroperfis	3 OK
