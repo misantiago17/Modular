@@ -24,7 +24,7 @@
 == struct 1
 =declararparm   email1			string  "Gabriel@gmail.com"
 =declararparm   primeiroNome1	string  "Gabriel"
-=declararparm   ultimoNome1		string  "Busquin"
+=declararparm   ultimoNome1		string  "Busquim"
 =declararparm   diaNasc1		int		12
 =declararparm   mesNasc1		int		03
 =declararparm   anoNasc1		int		1996
@@ -41,12 +41,11 @@
 
 == Parametros invalidos
 =declararparm   email3			string  "Alessandro"
-=declararparm   primeiroNome3	string  "Alessandro"
-=declararparm   ultimoNome3		string  "Gar321cia"
-=declararparm   diaNasc3		int		28
-=declararparm   mesNasc3		int		09
+=declararparm   primeiroNome3	string  "Alessandro123"
+=declararparm   ultimoNome3		string  "Garcia321"
+=declararparm   diaNasc3		int		32
+=declararparm   mesNasc3		int		13
 =declararparm   anoNasc3		int		100
-=declararparm   cidade3			string  "Rio de Janeiro"
 
 
 =declararparm   OK							int  0
@@ -88,8 +87,32 @@
 == Obter Dados do perfil
 =obterperfil	email1 primeiroNome1 ultimoNome1 diaNasc1 mesNasc1 anoNasc1 cidade1 OK
 
+== Criar Perfil email ja cadastrado
+=obterperfil	email1 primeiroNome1 ultimoNome1 diaNasc1 mesNasc1 anoNasc1 cidade1 OK
+
+== Criar Perfil email invalido
+=criarperfil perfil2 email3 primeiroNome2 ultimoNome2 diaNasc2 mesNasc2 anoNasc2 cidade2 EmailInvalido
+
+== Criar Perfil nome invalido
+=criarperfil perfil2 email2 primeiroNome3 ultimoNome2 diaNasc2 mesNasc2 anoNasc2 cidade2 NomeInvalido
+
+== Criar Perfil nome invalido
+=criarperfil perfil2 email2 primeiroNome2 ultimoNome3 diaNasc2 mesNasc2 anoNasc2 cidade2 NomeInvalido
+
+== Criar Perfil data invalida
+=criarperfil perfil2 email2 primeiroNome2 ultimoNome2 diaNasc3 mesNasc2 anoNasc2 cidade2 DataInvalida
+
+== Criar Perfil data invalida
+=criarperfil perfil2 email2 primeiroNome2 ultimoNome2 diaNasc2 mesNasc3 anoNasc2 cidade2 DataInvalida
+
+== Criar Perfil data invalida
+=criarperfil perfil2 email2 primeiroNome2 ultimoNome2 diaNasc2 mesNasc2 anoNasc3 cidade2 DataInvalida
+
 == Criar Perfil
 =criarperfil perfil2 email2 primeiroNome2 ultimoNome2 diaNasc2 mesNasc2 anoNasc2 cidade2 OK
 
 == Obter Numero de perfis existentes
 =numeroperfis	3 OK
+
+== Obter Dados do perfil
+=obterperfil	email2 primeiroNome2 ultimoNome2 diaNasc2 mesNasc2 anoNasc2 cidade2 OK

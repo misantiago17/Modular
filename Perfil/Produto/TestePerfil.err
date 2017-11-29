@@ -1,4 +1,10 @@
 testeperfil.c
+..\Fontes\testeperfil.c(165) : warning C4047: 'function' : 'unsigned char **' differs in levels of indirection from 'unsigned char (*)[50]'
+..\Fontes\testeperfil.c(165) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 3
+..\Fontes\testeperfil.c(165) : warning C4047: 'function' : 'unsigned char **' differs in levels of indirection from 'unsigned char (*)[50]'
+..\Fontes\testeperfil.c(165) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 4
+..\Fontes\testeperfil.c(165) : warning C4047: 'function' : 'unsigned char **' differs in levels of indirection from 'unsigned char (*)[50]'
+..\Fontes\testeperfil.c(165) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 8
 lista.c
 perfil.c
 grafo.c

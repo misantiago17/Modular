@@ -144,9 +144,14 @@ TST_tpCondRet TST_EfetuarComando(char * ComandoTeste) {
 		PER_tpCondRet debug;
 		char *primeiroNome2, *ultimoNome2, *cidade2;
 		/*MUDAR DPS*/
-		primeiroNome2 = (char *)malloc(sizeof(char) * 50);
-		ultimoNome2 = (char *)malloc(sizeof(char) * 50);
-		cidade2 = (char *)malloc(sizeof(char) * 50);
+		if ((primeiroNome2 = (char *)malloc(sizeof(char) * 50)) == NULL)
+			return TST_CondRetMemoria;
+
+		if ((ultimoNome2 = (char *)malloc(sizeof(char) * 50)) == NULL)
+			return TST_CondRetMemoria;
+
+		if((cidade2 = (char *)malloc(sizeof(char) * 50)) == NULL)
+			return TST_CondRetMemoria;
 
 		numLidos = LER_LerParametros("sssiiisi", email, primeiroNomeEsp, ultimoNomeEsp, &diaNascEsp, &mesNascEsp, 
 								     &anoNascEsp, cidadeEsp, &CondRetEsp);
@@ -156,7 +161,7 @@ TST_tpCondRet TST_EfetuarComando(char * ComandoTeste) {
 			return TST_CondRetParm;
 		} /* if */
 
-		
+
 		debug = PER_ObterPerfil(pGrafo, email, &primeiroNome2, &ultimoNome2, &diaNasc, &mesNasc, &anoNasc, &cidade2);
 
 		CondRet = TST_CompararInt(CondRetEsp, debug, "Condicao de retorno errada ao obter o Perfil.");
@@ -184,8 +189,8 @@ TST_tpCondRet TST_EfetuarComando(char * ComandoTeste) {
 			return debug;
 
 		debug = TST_CompararString(cidadeEsp, cidade2, "Campo Cidade nao e igual ao esperado");
-		return debug;
 
+		return debug;
 	} /* fim ativa: Testar Obter Perfil */
 
 	  /* Testar Numero Perfis */

@@ -177,16 +177,11 @@ PER_tpCondRet PER_ObterPerfil(GRA_tppGrafo pGrafo, char *email, char *primeiroNo
 		return PER_CondRetEmailInexistente;
 	else if (retorno != PER_CondRetEmailJaCadastrado)
 		return retorno;
-	if ((*primeiroNome = (char *)malloc(sizeof(char)*strlen(perfil->primeiroNome))) == NULL)
-		return PER_CondRetFaltouMemoria;
+
 	strcpy(*primeiroNome, perfil->primeiroNome);
 
-	if ((*ultimoNome = (char *)malloc(sizeof(char)*strlen(perfil->ultimoNome))) == NULL)
-		return PER_CondRetFaltouMemoria;
 	strcpy(*ultimoNome, perfil->ultimoNome);
 
-	if ((*cidade = (char *)malloc(sizeof(char)*strlen(perfil->cidade))) == NULL)
-		return PER_CondRetFaltouMemoria;
 	strcpy(*cidade, perfil->cidade);
 
 	*diaNasc = perfil->diaNasc;
