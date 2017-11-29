@@ -52,8 +52,8 @@ AMI_tpCondRet AMI_CriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER
 	int id1;
 	int id2;
 	
-	PER_RetornoId1 = retornaIdPerfil(Usuario1,id1);
-	PER_RetornoId2 = retornaIdPerfil(Usuario2,id2);
+	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,id1);
+	PER_RetornoId2 = PER_retornaIdPerfil(pGrafo, Usuario2,id2);
 	if (PER_RetornoId1 == PER_CondRetPerfilInexistente || PER_RetornoId2 == PER_CondRetPerfilInexistente){
 		return AMI_UsuarioNaoExiste;
 	}
@@ -94,8 +94,8 @@ AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, P
 	int id1;
 	int id2;
 	
-	PER_RetornoId1 = retornaIdPerfil(Usuario1,id1);
-	PER_RetornoId2 = retornaIdPerfil(Usuario2,id2);
+	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,id1);
+	PER_RetornoId2 = PER_retornaIdPerfil(pGrafo, Usuario2,id2);
 	if (PER_RetornoId1 == PER_CondRetPerfilInexistente || PER_RetornoId2 == PER_CondRetPerfilInexistente){
 		return AMI_UsuarioNaoExiste;
 	}
@@ -127,7 +127,7 @@ AMI_tpCondRet AMI_VerificarNumAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario
 	PER_tpCondRet PER_RetornoId1;
 	int id;
 	
-	PER_RetornoId1 = retornaIdPerfil(Usuario1,id);
+	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,id);
 	if (PER_RetornoId1 == PER_CondRetPerfilInexistente){
 		return AMI_UsuarioNaoExiste;
 	}
@@ -172,7 +172,7 @@ AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1
 	int numAmigos;
 	int* IdAmigos;
 	
-	PER_RetornoId1 = retornaIdPerfil(Usuario1,id);
+	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,id);
 	if (PER_RetornoId1 == PER_CondRetPerfilInexistente){
 		return AMI_UsuarioNaoExiste;
 	}
@@ -228,7 +228,7 @@ AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuar
 	int numAmigos;
 	int* IdAmigos;
 	
-	PER_RetornoId1 = retornaIdPerfil(Usuario1,id);
+	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,id);
 	if (PER_RetornoId1 == PER_CondRetPerfilInexistente){
 		return AMI_UsuarioNaoExiste;
 	}
@@ -277,8 +277,8 @@ AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuar
 	int id1;
 	int id2;
 	
-	PER_RetornoId1 = retornaIdPerfil(Usuario1,id1);
-	PER_RetornoId2 = retornaIdPerfil(Usuario2,id2);
+	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,id1);
+	PER_RetornoId2 = PER_retornaIdPerfil(pGrafo, Usuario2,id2);
 	if (PER_RetornoId1 == PER_CondRetPerfilInexistente || PER_RetornoId2 == PER_CondRetPerfilInexistente){
 		return AMI_UsuarioNaoExiste;
 	}
