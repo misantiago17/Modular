@@ -1,8 +1,8 @@
-# Composicao do programa de teste de um grafo generico com cabeca
+# Composicao do programa de teste de modulo amizade
 
 [Diretorios]
 
-Nome        =	TesteGrafo
+Nome        =	TesteAmizade
 PathDefault =	..\Fontes
 err         =	..\Produto
 obj         =	..\Objetos
@@ -10,12 +10,13 @@ c           =	..\Fontes
 h           =	..\Fontes
 
 [Modulos]
-TesteGrafo
+TesteAmizade
+Amizade
 Grafo
-Lista
+Perfil
 
 [BuildInicio]
-/OUT:..\Produto\TRAB1-2.exe
+/OUT:..\Produto\TRAB4-3.exe
 /INCREMENTAL:NO
 /MACHINE:IX86
 

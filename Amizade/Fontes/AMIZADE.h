@@ -1,5 +1,7 @@
 #if ! defined( AMIZADE_ )
 #define AMIZADE_
+#include "grafo.h"
+#include "perfil.h"
 /***************************************************************************
 *  $MCD MÛdulo de definiçÁ„o: AMI  MÛdulo Amizade
 *
@@ -51,6 +53,9 @@ typedef enum {
 
 	AMI_NaoPossuiAmizades,
 	/* O usu·rio n„o possui amizades */
+	
+	AMI_AmizadeJaExiste,
+	/* O usu·rio n„o possui amizades */
 
 	AMI_NaoAceitou,
 	/* O usu·rio n„o aceitou a solicitaçÁ„o de amizade de outro */
@@ -67,14 +72,9 @@ typedef enum {
 	AMI_CondRetRetornoPerIncorreto,
 	/* Condicao de retorno do mÛdulo Perfil imprevista */
 
-	//GRA_CondRetArestaJaExiste,
-	/* Ja existe uma aresta entre os dois vertices passados */
-
-	AMI_UsuarioNaoExiste,
+	AMI_UsuarioNaoExiste
 	/* Usu·rio fornecido n„o existe na rede */
-	
-	//GRA_CondRetArestaParaSiMesmo
-	/* Aresta de vertice tentando apontar para p proprio vertice*/
+
 } AMI_tpCondRet;
 
 /***********************************************************************
@@ -91,7 +91,7 @@ typedef enum {
     AMI_SolicitacaoAceita,
     /* O usu·rio aceitou a solicitaçÁ„o de amizade */
     
-    AMI_SolicitacaoRejeitada,
+    AMI_SolicitacaoRejeitada
     /* O usu·rio rejeitou a solicitaçÁ„o de amizade */
     
 } AMI_tpSolitacao;
@@ -111,7 +111,7 @@ typedef enum {
     AMI_ExisteAmizade,
     /* Foi verificado que a amizade entre dois usu·rios existe */
     
-    AMI_NaoExisteAmizade,
+    AMI_NaoExisteAmizade
     /* Foi verificado que a amizade entre dois usu·rios não existe */
     
 } AMI_tpVerificacao;
@@ -134,12 +134,14 @@ typedef enum {
 *      AMI_CondRetOK
 *      AMI_NaoAceitou
 *	   AMI_UsuarioNaoExiste
+*	   GRA_CondRetArestaParaSiMesmo
+*	   AMI_AmizadeJaExiste
 *	   AMI_CondRetRetornoGraIncorreto
 *	   AMI_CondRetRetornoPerIncorreto
 *
 ***********************************************************************/
 
-AMI_tpCondRet AMI_CriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario1, PER_tpPerfil Usuario2, AMI_tpSolitacao Aceitacao);
+AMI_tpCondRet AMI_CriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil * Usuario2, AMI_tpSolitacao Aceitacao);
 
 
 /***********************************************************************
@@ -155,12 +157,13 @@ AMI_tpCondRet AMI_CriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario1, PER_t
 *  $FV Valor retornado
 *     AMI_CondRetOK
 *	  AMI_UsuarioNaoExiste
+*	  AMI_AmizadeNaoExiste
 *	  AMI_CondRetRetornoGraIncorreto
 *	  AMI_CondRetRetornoPerIncorreto
 *
 ***********************************************************************/
 
-AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario1, PER_tpPerfil Usuario2);
+AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil * Usuario2);
 
 
 /***********************************************************************
@@ -170,7 +173,7 @@ AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario1, PER
 *     Retorna o número de amigos que um usu·rio possui.
 *
 *  $EP Par‚metros
-*     Usuario  - ponteiro para o usu·rio que solicitou o n˙mero de amizades.
+*     Usuario1  - ponteiro para o usu·rio que solicitou o n˙mero de amizades.
 *     numAmizades - vari·vel que ir· armazenar o n˙mero de amizades encontradas.
 *
 *  $FV Valor retornado
@@ -181,7 +184,7 @@ AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario1, PER
 *
 ***********************************************************************/
 
-AMI_tpCondRet AMI_VerificarNumAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario, int* numAmizades);
+AMI_tpCondRet AMI_VerificarNumAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, int* numAmizades);
 
 /***********************************************************************
 *  $FC FunçÁ„o: AMI  &Armazenar Amizades
@@ -190,7 +193,7 @@ AMI_tpCondRet AMI_VerificarNumAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario, 
 *     Exibe as informaçÁıes do perfil de cada amigo do usu·rio.
 *
 *  $EP Par‚metros
-*     Usuario  - ponteiro para o usu·rio que solicitou as informaçÁıes das amizades
+*     Usuario1  - ponteiro para o usu·rio que solicitou as informaçÁıes das amizades
 *
 *  $FV Valor retornado
 *     AMI_CondRetOK
@@ -202,7 +205,7 @@ AMI_tpCondRet AMI_VerificarNumAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario, 
 ***********************************************************************/
 
 
-AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario, PER_tpPerfil **PerfilAmigos);
+AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil **PerfilAmigos);
 
 /***********************************************************************
 *  $FC FunçÁ„o: AMI  &Excluir Todas as Amizades
@@ -211,7 +214,7 @@ AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario, P
 *     Exclui todas as amizades de um usu·rio.
 *
 *  $EP Par‚metros
-*     Usuario - ponteiro para o usuário que ter· suas amizades apagadas
+*     Usuario1 - ponteiro para o usuário que ter· suas amizades apagadas
 *
 *  $FV Valor retornado
 *     AMI_CondRetOK
@@ -222,7 +225,7 @@ AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario, P
 *
 ***********************************************************************/
 
-AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario);
+AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1);
 
 /***********************************************************************
 *  $FC FunçÁ„o: AMI  &Verificar Amizade
@@ -244,7 +247,7 @@ AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario
 *
 ***********************************************************************/
 
-AMI_tpCondRet AMI_VerificarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario1, PER_tpPerfil Usuario2, AMI_tpVerificacao ExisteAmizade);
+AMI_tpCondRet AMI_VerificarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil * Usuario2, AMI_tpVerificacao ExisteAmizade);
 
 
 #undef AMIZADE_EXT

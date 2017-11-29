@@ -29,34 +29,6 @@
 #include   "PERFIL.h"
 #include   "AMIZADE.h"
 
-/***********************************************************************
-*
-*  $TC Tipo de dados: ??????????
-*
-***********************************************************************/
-/*
-typedef struct AMI_tagAmizade {
-
-	PER_tpPerfil *Usuario1;
-	/* Primeiro usuário que compõe a amizade */
-	
-	PER_tpPerfil *Usuario2;
-	/* Segundo usuário que compõe a amizade */
-
-	GRA_tppGrafo *pGrafo;
-	/*  */
-} AMI_tpAmizade;
-*/
-
-/***** Protótipos das funções encapuladas no módulo *****/
-
-AMI_tpCondRet AMI_CriarAmizade(Perfil Usuario1, Perfil Usuario2, AMI_tpSolitacao Aceitacao);
-AMI_tpCondRet AMI_ExcluirAmizade(Perfil Usuario1, Perfil Usuario2);
-AMI_tpCondRet AMI_VerificarNumAmigos(Perfil Usuario, int numAmizades);
-AMI_tpCondRet AMI_ExibirAmizades(Perfil Usuario);
-AMI_tpCondRet AMI_ExcluirTodasAmizades(Perfil Usuario);
-AMI_tpCondRet AMI_VerificarAmizade(Perfil Usuario1, Perfil Usuario2, AMI_tpVerificacao ExisteAmizade) ;
-
 /*****  Código das funções exportadas pelo módulo  *****/
 
 /***************************************************************************
@@ -65,25 +37,27 @@ AMI_tpCondRet AMI_VerificarAmizade(Perfil Usuario1, Perfil Usuario2, AMI_tpVerif
 *      AMI_CondRetOK
 *      AMI_NaoAceitou
 *	   AMI_UsuarioNaoExiste
+*	   AMI_ArestaParaSiMesmo
+*	   AMI_AmizadeJaExiste
 *	   AMI_CondRetRetornoGraIncorreto
 *	   AMI_CondRetRetornoPerIncorreto
 *
 *****/
 
-AMI_tpCondRet AMI_CriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario1, PER_tpPerfil Usuario2, AMI_tpSolitacao Aceitacao){
+AMI_tpCondRet AMI_CriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil * Usuario2, AMI_tpSolitacao Aceitacao){
 	
 	GRA_tpCondRet GRA_RetornoCriarAresta;
 	PER_tpCondRet PER_RetornoEmail1;
 	PER_tpCondRet PER_RetornoEmail2;
 	int id1;
 	int id2;
+	char* email1;
+	char* email2;
 	
-	PER_RetornoEmail1 = buscaEmail(pGrafo, Usuario1->email, &Usuario1, &id1);
-	PER_RetornoEmail2 = buscaEmail(pGrafo, Usuario2->email, &Usuario2, &id2);
-	if (PER_RetornoEmail1 == PER_CondRetEmailInexistente || PER_RetornoEmail2 == PER_CondRetEmailInexistente){
+	PER_RetornoEmail1 = retornaEmailPerfil(Usuario1,email1);
+	PER_RetornoEmail2 = retornaemailPerfil(Usuario2,email2);
+	if (PER_RetornoEmail1 == PER_CondRetPerfilInexistente || PER_RetornoEmail2 == PER_CondRetPerfilInexistente){
 		return AMI_UsuarioNaoExiste;
-	} else if (PER_RetornoEmail1 != PER_CondRetEmailJaCadastrado || PER_RetornoEmail2 != PER_CondRetEmailJaCadastrado){
-		return AMI_CondRetRetornoPerIncorreto;
 	}
 	
 	if (Aceitacao == AMI_SolicitacaoRejeitada){
@@ -91,9 +65,13 @@ AMI_tpCondRet AMI_CriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario1, PER_t
 	}
 		
 	GRA_RetornoCriarAresta = GRA_CriarAresta(pGrafo, id1, id2);
-	if (GRA_RetornoCriarAresta != GRA_CondRetOK){
+	if (GRA_RetornoCriarAresta == GRA_CondRetArestaJaExiste){
+		return AMI_AmizadeJaExiste;
+	} else if (GRA_RetornoCriarAresta == GRA_CondRetArestaParaSiMesmo){
+		return 	AMI_ArestaParaSiMesmo;
+	}else if (GRA_RetornoCriarAresta != GRA_CondRetOK){
 		return AMI_CondRetRetornoGraIncorreto;
-	} 
+	}
 	
 	return AMI_CondRetOK;
 }/* Fim função: AMI  &Criar Amizade */
@@ -104,31 +82,34 @@ AMI_tpCondRet AMI_CriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario1, PER_t
 *
 *	  AMI_CondRetOK
 *	  AMI_UsuarioNaoExiste
+*	  AMI_AmizadeNaoExiste
 *	  AMI_CondRetRetornoGraIncorreto
 *	  AMI_CondRetRetornoPerIncorreto
 *	
 *****/
 
-AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario1, PER_tpPerfil Usuario2){
+AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil Usuario2){
 	
 	GRA_tpCondRet GRA_RetornoExcluirAresta;
 	PER_tpCondRet PER_RetornoEmail1;
 	PER_tpCondRet PER_RetornoEmail2;
 	int id1;
 	int id2;
+	char * email1;
+	char * email2;
 	
-	PER_RetornoEmail1 = buscaEmail(pGrafo, Usuario1->email, &Usuario1, &id1);
-	PER_RetornoEmail2 = buscaEmail(pGrafo, Usuario2->email, &Usuario2, &id2);
-	if (PER_RetornoEmail1 == PER_CondRetEmailInexistente || PER_RetornoEmail2 == PER_CondRetEmailInexistente){
+	PER_RetornoEmail1 = retornaEmailPerfil(Usuario1,email1);
+	PER_RetornoEmail2 = retornaemailPerfil(Usuario2,email2);
+	if (PER_RetornoEmail1 == PER_CondRetPerfilInexistente || PER_RetornoEmail2 == PER_CondRetPerfilInexistente){
 		return AMI_UsuarioNaoExiste;
-	} else if (PER_RetornoEmail1 != PER_CondRetEmailJaCadastrado || PER_RetornoEmail2 != PER_CondRetEmailJaCadastrado){
-		return AMI_CondRetRetornoPerIncorreto;
 	}
 	
 	GRA_RetornoExcluirAresta = GRA_ExcluirAresta(pGrafo, id1, id2);
-	if (GRA_RetornoExcluirAresta != GRA_CondRetOK){
+	if (GRA_RetornoExcluirAresta == GRA_CondRetNaoAchouAresta){
+		return AMI_AmizadeNaoExiste;
+	} else if (GRA_RetornoExcluirAresta != GRA_CondRetOK){
 		return AMI_CondRetRetornoGraIncorreto;
-	} 
+	}
 	
 	return AMI_CondRetOK;
 }/* Fim função: AMI  &Excluir Amizade */
@@ -143,18 +124,17 @@ AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario1, PER
 *	  AMI_CondRetRetornoGraIncorreto
 *
 *****/
-AMI_tpCondRet AMI_VerificarNumAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario, int* numAmizades){
+AMI_tpCondRet AMI_VerificarNumAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, int* numAmizades){
 	
 	GRA_tpCondRet GRA_RetornoNumAmigos;
 	GRA_tpCondRet GRA_RetornoMoverCorrente;
 	PER_tpCondRet PER_RetornoEmail;
 	int id;
+	char * email1;
 	
-	PER_RetornoEmail = buscaEmail(pGrafo, Usuario->email, &Usuario, &id);
-	if (PER_RetornoEmail == PER_CondRetEmailInexistente){
+	PER_RetornoEmail1 = retornaEmailPerfil(Usuario1,email1);
+	if (PER_RetornoEmail1 == PER_CondRetPerfilInexistente){
 		return AMI_UsuarioNaoExiste;
-	} else if (PER_RetornoEmail1 != PER_CondRetEmailJaCadastrado || PER_RetornoEmail2 != PER_CondRetEmailJaCadastrado){
-		return AMI_CondRetRetornoPerIncorreto;
 	}
 	
 	GRA_RetornoMoverCorrente = GRA_IrVertice(pGrafo, id);
@@ -185,15 +165,8 @@ AMI_tpCondRet AMI_VerificarNumAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario, 
 *	  AMI_CondRetRetornoGraIncorreto
 *
 *****/
-// Usar a função GRA_NumArestas(GRA_tppGrafo pGrafo,int *pNumArestas); para criar um espaço 
-// pra cada vetor que vai a	armazenar as informações do cara e depois utilizar 
-// GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo, int* pDado); pra pegar o vetor 
-// com os indices de cada aresta de um cara, com isso fazer um for pra cada valor desse vetor
-// e usar a função GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert); e 
-// GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet); para obter o perfil de cada um deles
-// armazenar cada valor do perfil em um array separado (um array pro nome, outro pro email, etc)
 
-AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario, PER_tpPerfil **PerfilAmigos){
+AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil **PerfilAmigos){
 	
 	GRA_tpCondRet GRA_RetornoIndiceAresta;
 	GRA_tpCondRet GRA_RetornoObterAmigo;
@@ -203,15 +176,14 @@ AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario, P
 	int id;
 	int numAmigos;
 	int* IdAmigos;
+	char* email1;
 	
-	PER_RetornoEmail = buscaEmail(pGrafo, Usuario->email, &Usuario, &id);
-	if (PER_RetornoEmail == PER_CondRetEmailInexistente){
+	PER_RetornoEmail1 = retornaEmailPerfil(Usuario1,email1);
+	if (PER_RetornoEmail1 == PER_CondRetPerfilInexistente){
 		return AMI_UsuarioNaoExiste;
-	} else if (PER_RetornoEmail1 != PER_CondRetEmailJaCadastrado || PER_RetornoEmail2 != PER_CondRetEmailJaCadastrado){
-		return AMI_CondRetRetornoPerIncorreto;
 	}
 	
-	AMI_RetornoNumAmigos = AMI_VerificarNumAmigos(Usuario, numAmigos);
+	AMI_RetornoNumAmigos = AMI_VerificarNumAmigos(Usuario1, numAmigos);
 	if (AMI_RetornoNumAmigos != AMI_CondRetOK){
 		return AMI_RetornoNumAmigos;
 	}
@@ -252,7 +224,7 @@ AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario, P
 *
 *****/
 
-AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario){
+AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1){
 	
 	GRA_tpCondRet GRA_RetornoIndiceAresta;
 	GRA_tpCondRet GRA_RetornoExcluirAresta;
@@ -261,15 +233,14 @@ AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario
 	int id;
 	int numAmigos;
 	int* IdAmigos;
+	char* email1;
 	
-	PER_RetornoEmail = buscaEmail(pGrafo, Usuario->email, &Usuario, &id);
-	if (PER_RetornoEmail == PER_CondRetEmailInexistente){
+	PER_RetornoEmail1 = retornaEmailPerfil(Usuario1,email1);
+	if (PER_RetornoEmail1 == PER_CondRetPerfilInexistente){
 		return AMI_UsuarioNaoExiste;
-	} else if (PER_RetornoEmail1 != PER_CondRetEmailJaCadastrado || PER_RetornoEmail2 != PER_CondRetEmailJaCadastrado){
-		return AMI_CondRetRetornoPerIncorreto;
 	}
 	
-	AMI_RetornoNumAmigos = AMI_VerificarNumAmigos(Usuario, numAmigos);
+	AMI_RetornoNumAmigos = AMI_VerificarNumAmigos(Usuario1, numAmigos);
 	if (AMI_RetornoNumAmigos != AMI_CondRetOK){
 		return AMI_RetornoNumAmigos;
 	}
@@ -305,20 +276,20 @@ AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil Usuario
 *
 *****/
  
- AMI_tpCondRet AMI_VerificarAmizade(GRA_tppGrafo pGrafo, Usuario1, PER_tpPerfil Usuario2, AMI_tpVerificacao ExisteAmizade)[
+ AMI_tpCondRet AMI_VerificarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil * Usuario2, AMI_tpVerificacao ExisteAmizade)[
  
 	GRA_tpCondRet GRA_RetornoVerificaAmizade;
 	PER_tpCondRet PER_RetornoEmail1;
 	PER_tpCondRet PER_RetornoEmail2;
 	int id1;
 	int id2;
+	char* email1;
+	char* email2;
 	
-	PER_RetornoEmail1 = buscaEmail(pGrafo, Usuario1->email, &Usuario1, &id1);
-	PER_RetornoEmail2 = buscaEmail(pGrafo, Usuario2->email, &Usuario2, &id2);
-	if (PER_RetornoEmail1 == PER_CondRetEmailInexistente || PER_RetornoEmail2 == PER_CondRetEmailInexistente){
+	PER_RetornoEmail1 = retornaEmailPerfil(Usuario1,email1);
+	PER_RetornoEmail2 = retornaemailPerfil(Usuario2,email2);
+	if (PER_RetornoEmail1 == PER_CondRetPerfilInexistente || PER_RetornoEmail2 == PER_CondRetPerfilInexistente){
 		return AMI_UsuarioNaoExiste;
-	} else if (PER_RetornoEmail1 != PER_CondRetEmailJaCadastrado || PER_RetornoEmail2 != PER_CondRetEmailJaCadastrado){
-		return AMI_CondRetRetornoPerIncorreto;
 	}
 	
 	GRA_RetornoVerificaAmizade = GRA_ExisteAresta(pGrafo, id1, id2);
