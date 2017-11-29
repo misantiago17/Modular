@@ -323,7 +323,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		if (( numLidos != 23 ) || (!ValidarInxPerfil( inxPerfil1)))
 		{
 			return TST_CondRetParm ;
-		} /* if */
+		}
 		
 		if ((perfis = (PER_tpPerfil **)malloc(3*sizeof(PER_tpPerfil *))) == NULL){
 			return TST_CondRetMemoria;
@@ -444,7 +444,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			}
 			
 		}
-
 	
 		return TST_CondRetOK;
 	

@@ -61,13 +61,13 @@ limpa :
 
 $(Fobj)\testeamizade.obj :  {$(Pc)}\testeamizade.c \
     {$(Ph)}amizade.h            {$(Ph)}cespdin.h            {$(Ph)}generico.h           \
-    {$(Ph)}grafo.h              {$(Ph)}lerparm.h            {$(Ph)}perfil.h             \
-    {$(Ph)}tst_espc.h          
+    {$(Ph)}grafo.h              {$(Ph)}lerparm.h            {$(Ph)}lista.h              \
+    {$(Ph)}perfil.h             {$(Ph)}tst_espc.h          
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
 $(Fobj)\amizade.obj :  {$(Pc)}\amizade.c \
     {$(Ph)}amizade.h            {$(Ph)}cespdin.h            {$(Ph)}grafo.h              \
-    {$(Ph)}perfil.h            
+    {$(Ph)}lista.h              {$(Ph)}perfil.h            
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
 $(Fobj)\grafo.obj :  {$(Pc)}\grafo.c \
@@ -75,8 +75,7 @@ $(Fobj)\grafo.obj :  {$(Pc)}\grafo.c \
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
 $(Fobj)\perfil.obj :  {$(Pc)}\perfil.c \
-    {$(Ph)}cespdin.h            {$(Ph)}grafo.h              {$(Ph)}lista.h              \
-    {$(Ph)}perfil.h            
+    {$(Ph)}grafo.h              {$(Ph)}lista.h              {$(Ph)}perfil.h            
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
 
