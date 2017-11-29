@@ -165,8 +165,8 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email) {
 *     PER_CondRetEmailInexistente
 *     PER_CondRetFaltouMemoria
 */
-PER_tpCondRet PER_ObterPerfil(GRA_tppGrafo pGrafo, char *email, char *primeiroNome[50], char *ultimoNome[50],
-								int *diaNasc, int *mesNasc, int *anoNasc, char *cidade[50])
+PER_tpCondRet PER_ObterPerfil(GRA_tppGrafo pGrafo, char *email, char *primeiroNome, char *ultimoNome,
+								int *diaNasc, int *mesNasc, int *anoNasc, char *cidade)
 {
 	int id;
 	PER_tpPerfil *perfil;
@@ -178,11 +178,11 @@ PER_tpCondRet PER_ObterPerfil(GRA_tppGrafo pGrafo, char *email, char *primeiroNo
 	else if (retorno != PER_CondRetEmailJaCadastrado)
 		return retorno;
 
-	strcpy(*primeiroNome, perfil->primeiroNome);
+	strcpy(primeiroNome, perfil->primeiroNome);
 
-	strcpy(*ultimoNome, perfil->ultimoNome);
+	strcpy(ultimoNome, perfil->ultimoNome);
 
-	strcpy(*cidade, perfil->cidade);
+	strcpy(cidade, perfil->cidade);
 
 	*diaNasc = perfil->diaNasc;
 
@@ -371,7 +371,7 @@ PER_tpCondRet PER_BuscaEmail(GRA_tppGrafo pGrafo, char *email, PER_tpPerfil **pe
 	if (retornoDados != PER_CondRetOK)
 		return retornoDados;
 
-	while (i <= tam) {
+	while (i <= tam  + 1) {
 		retornoDados = GRA_ObterValor(pGrafo, perfil);
 		if (retornoDados != GRA_CondRetOK) {
 			retornoDados = restauraCorrenteGrafo(pGrafo, idCorrente);
@@ -439,10 +439,10 @@ PER_tpCondRet PER_ExcluirTodosPerfis(GRA_tppGrafo pGrafo) {
  *     PER_CondRetRedeVazia
  *     PER_CondRetEmailJaCadastrado
  */
-PER_tpCondRet PER_retornaLisMensagens(PER_tpPerfil *perfil, LIS_tppLista *mensagens) {
+PER_tpCondRet PER_retornaLisMensagens(PER_tpPerfil *perfil, LIS_tppLista mensagens) {
 	if (perfil == NULL)
 		return PER_CondRetPerfilInexistente;
-	*mensagens = perfil->pLisMensagens;
+	mensagens = perfil->pLisMensagens;
 	return PER_CondRetOK;
 }/* Fim função: PER  &Retorna lista de mensagens */
 

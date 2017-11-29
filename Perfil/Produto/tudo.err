@@ -1,10 +1,5 @@
 testeperfil.c
-..\Fontes\testeperfil.c(165) : warning C4047: 'function' : 'unsigned char **' differs in levels of indirection from 'unsigned char (*)[50]'
-..\Fontes\testeperfil.c(165) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 3
-..\Fontes\testeperfil.c(165) : warning C4047: 'function' : 'unsigned char **' differs in levels of indirection from 'unsigned char (*)[50]'
-..\Fontes\testeperfil.c(165) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 4
-..\Fontes\testeperfil.c(165) : warning C4047: 'function' : 'unsigned char **' differs in levels of indirection from 'unsigned char (*)[50]'
-..\Fontes\testeperfil.c(165) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 8
+c:\users\usuario\documents\github\modular\perfil\fontes\testeperfil.c(346) : warning C4700: uninitialized local variable 'mensagens' used
 lista.c
 perfil.c
 grafo.c

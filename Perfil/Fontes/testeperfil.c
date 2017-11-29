@@ -112,7 +112,7 @@ TST_tpCondRet TST_EfetuarComando(char * ComandoTeste) {
 
 	} /* fim ativa: Testar CriarPerfil */
 
-	  /* Testar Destruir Grafo */
+	  /* Testar Excluir Perfil */
 
 	else if (strcmp(ComandoTeste, EXCLUIR_PERFIL_CMD) == 0)
 	{
@@ -136,22 +136,12 @@ TST_tpCondRet TST_EfetuarComando(char * ComandoTeste) {
 		return TST_CondRetOK;
 
 
-	}  /* fim ativa: Testar Destruir Grafo */
+	}  /* fim ativa: Testar Excluir Perfil */
 	   /* Testar Obter Perfil */
 
 	else if (strcmp(ComandoTeste, OBTER_PERFIL_CMD) == 0)
 	{
 		PER_tpCondRet debug;
-		char *primeiroNome2, *ultimoNome2, *cidade2;
-		/*MUDAR DPS*/
-		if ((primeiroNome2 = (char *)malloc(sizeof(char) * 50)) == NULL)
-			return TST_CondRetMemoria;
-
-		if ((ultimoNome2 = (char *)malloc(sizeof(char) * 50)) == NULL)
-			return TST_CondRetMemoria;
-
-		if((cidade2 = (char *)malloc(sizeof(char) * 50)) == NULL)
-			return TST_CondRetMemoria;
 
 		numLidos = LER_LerParametros("sssiiisi", email, primeiroNomeEsp, ultimoNomeEsp, &diaNascEsp, &mesNascEsp, 
 								     &anoNascEsp, cidadeEsp, &CondRetEsp);
@@ -162,17 +152,17 @@ TST_tpCondRet TST_EfetuarComando(char * ComandoTeste) {
 		} /* if */
 
 
-		debug = PER_ObterPerfil(pGrafo, email, &primeiroNome2, &ultimoNome2, &diaNasc, &mesNasc, &anoNasc, &cidade2);
+		debug = PER_ObterPerfil(pGrafo, email, primeiroNome, ultimoNome, &diaNasc, &mesNasc, &anoNasc, cidade);
 
 		CondRet = TST_CompararInt(CondRetEsp, debug, "Condicao de retorno errada ao obter o Perfil.");
-		if (CondRet != TST_CondRetOK)
+		if (CondRet != TST_CondRetOK || debug != PER_CondRetOK)
 			return CondRet;
 
-		debug = TST_CompararString(primeiroNomeEsp, primeiroNome2,"Campo Primeiro Nome nao e igual ao esperado");
+		debug = TST_CompararString(primeiroNomeEsp, primeiroNome,"Campo Primeiro Nome nao e igual ao esperado");
 		if (debug != TST_CondRetOK)
 			return debug;
 
-		debug = TST_CompararString(ultimoNomeEsp, ultimoNome2, "Campo Ultimo Nome nao e igual ao esperado");
+		debug = TST_CompararString(ultimoNomeEsp, ultimoNome, "Campo Ultimo Nome nao e igual ao esperado");
 		if (debug != TST_CondRetOK)
 			return debug;
 
@@ -188,7 +178,7 @@ TST_tpCondRet TST_EfetuarComando(char * ComandoTeste) {
 		if (debug != TST_CondRetOK)
 			return debug;
 
-		debug = TST_CompararString(cidadeEsp, cidade2, "Campo Cidade nao e igual ao esperado");
+		debug = TST_CompararString(cidadeEsp, cidade, "Campo Cidade nao e igual ao esperado");
 
 		return debug;
 	} /* fim ativa: Testar Obter Perfil */
@@ -353,12 +343,12 @@ TST_tpCondRet TST_EfetuarComando(char * ComandoTeste) {
 			return TST_CondRetParm;
 		} /* if */
 
-		CondRet = PER_retornaLisMensagens(vtPerfil[inxPerfil], &mensagens);
+		CondRet = PER_retornaLisMensagens(vtPerfil[inxPerfil], mensagens);
 
 		return TST_CompararInt(CondRetEsp, CondRet, "Erro na condicao de retorno ao excluir mensagem");
 
 	} /* fim ativa: Testar Retornar Lista de mensagens */
-
+	/*MUDAR DPS*/
 	return TST_CondRetNaoImplementado;
 }
 
