@@ -1,0 +1,206 @@
+GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
+   LES / Informática / PUC-Rio    Versão 6.00 (c) 2005
+
+Composição do construto: ..\Composicao\TesteAmizade.comp
+
+   Nome do Construto:           TesteAmizade
+   Diretório base:              D:\Projetos\PUC\Modular\Projeto Git\Amizade\Composicao
+
+   Arquivo composição:          ..\Composicao\TesteAmizade.comp
+   Arquivo plataforma:          gmake.parm
+
+   Arquivo diretivas MAKE:      TesteAmizade.make
+   Arquivo diretivas LINK:      TesteAmizade.build
+   Arquivo listagem:            TesteAmizade.list
+
+Módulos do construto: ..\Composicao\TesteAmizade.comp
+
+   testeamizade.c
+   amizade.c
+   grafo.c
+   perfil.c
+
+Estatísticas do construto
+
+   Estatísticas do arquivo: amizade.c
+      Total linhas:             296
+      Linhas de código:         161
+      Linhas de comentário:      87
+      Linhas em branco:          54
+   Arquivos de inclusão de que necessita
+      amizade.h
+      cespdin.h
+      grafo.h
+      lista.h
+      perfil.h
+
+   Estatísticas do arquivo: amizade.h
+      Total linhas:             258
+      Linhas de código:          37
+      Linhas de comentário:     174
+      Linhas em branco:          47
+   Arquivos de inclusão de que necessita
+      grafo.h
+      lista.h
+      perfil.h
+   Arquivos em que é incluído
+      amizade.c
+      testeamizade.c
+
+   Estatísticas do arquivo: cespdin.h
+      Total linhas:             767
+      Linhas de código:          54
+      Linhas de comentário:     610
+      Linhas em branco:         103
+   Arquivos em que é incluído
+      amizade.c
+      grafo.c
+      testeamizade.c
+
+   Estatísticas do arquivo: generico.h
+      Total linhas:             713
+      Linhas de código:          59
+      Linhas de comentário:     572
+      Linhas em branco:          82
+   Arquivos de inclusão de que necessita
+      tst_espc.h
+   Arquivos em que é incluído
+      testeamizade.c
+
+   Estatísticas do arquivo: grafo.c
+      Total linhas:             765
+      Linhas de código:         475
+      Linhas de comentário:     153
+      Linhas em branco:         151
+   Arquivos de inclusão de que necessita
+      cespdin.h
+      grafo.h
+      lista.h
+
+   Estatísticas do arquivo: grafo.h
+      Total linhas:             410
+      Linhas de código:          37
+      Linhas de comentário:     323
+      Linhas em branco:          50
+   Arquivos em que é incluído
+      amizade.c
+      amizade.h
+      grafo.c
+      perfil.c
+      perfil.h
+      testeamizade.c
+
+   Estatísticas do arquivo: lerparm.h
+      Total linhas:             291
+      Linhas de código:          36
+      Linhas de comentário:     188
+      Linhas em branco:          67
+   Arquivos em que é incluído
+      testeamizade.c
+
+   Estatísticas do arquivo: lista.h
+      Total linhas:             354
+      Linhas de código:          35
+      Linhas de comentário:     268
+      Linhas em branco:          51
+   Arquivos em que é incluído
+      amizade.c
+      amizade.h
+      grafo.c
+      perfil.c
+      perfil.h
+      testeamizade.c
+
+   Estatísticas do arquivo: perfil.c
+      Total linhas:             743
+      Linhas de código:         368
+      Linhas de comentário:     257
+      Linhas em branco:         122
+   Arquivos de inclusão de que necessita
+      grafo.h
+      lista.h
+      perfil.h
+
+   Estatísticas do arquivo: perfil.h
+      Total linhas:             335
+      Linhas de código:          42
+      Linhas de comentário:     247
+      Linhas em branco:          46
+   Arquivos de inclusão de que necessita
+      grafo.h
+      lista.h
+   Arquivos em que é incluído
+      amizade.c
+      amizade.h
+      perfil.c
+      testeamizade.c
+
+   Estatísticas do arquivo: testeamizade.c
+      Total linhas:             547
+      Linhas de código:         203
+      Linhas de comentário:     263
+      Linhas em branco:          90
+   Arquivos de inclusão de que necessita
+      amizade.h
+      cespdin.h
+      generico.h
+      grafo.h
+      lerparm.h
+      lista.h
+      perfil.h
+      tst_espc.h
+
+   Estatísticas do arquivo: tst_espc.h
+      Total linhas:             228
+      Linhas de código:          23
+      Linhas de comentário:     185
+      Linhas em branco:          20
+   Arquivos em que é incluído
+      generico.h
+      testeamizade.c
+
+Totais por tipo de arquivo
+
+  Tipo: h        Path: ..\Fontes
+         Total linhas do tipo:      3356
+         Linhas de código:           323
+         Linhas de comentário:      2567
+         Linhas em branco:           466
+         Arquivos deste tipo:          8
+
+  Tipo: obj      Path: ..\Objetos
+         Total linhas do tipo:         0
+         Linhas de código:             0
+         Linhas de comentário:         0
+         Linhas em branco:             0
+         Arquivos deste tipo:          0
+
+  Tipo: err      Path: ..\Produto
+         Total linhas do tipo:         0
+         Linhas de código:             0
+         Linhas de comentário:         0
+         Linhas em branco:             0
+         Arquivos deste tipo:          0
+
+  Tipo: DEFAULT  Path: ..\Fontes
+         Total linhas do tipo:         0
+         Linhas de código:             0
+         Linhas de comentário:         0
+         Linhas em branco:             0
+         Arquivos deste tipo:          0
+
+  Tipo: c        Path: ..\Fontes
+         Total linhas do tipo:      2351
+         Linhas de código:          1207
+         Linhas de comentário:       760
+         Linhas em branco:           417
+         Arquivos deste tipo:          4
+
+Totais para todo o construto TesteAmizade
+
+   Total linhas:              5707
+   Linhas de código:          1530
+   Linhas de comentário:      3327
+   Linhas em branco:           883
+   Arquivos processados:        12
+
