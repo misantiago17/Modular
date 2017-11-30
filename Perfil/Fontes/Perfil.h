@@ -96,7 +96,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-PER_tpCondRet PER_CriarPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil *perfil, char *email, char *primeiroNome, char *ultimoNome,
+PER_tpCondRet PER_CriarPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil **perfil, char *email, char *primeiroNome, char *ultimoNome,
 							  int diaNasc, int mesNasc, int anoNasc, char *cidade);
 
 /***********************************************************************
@@ -139,7 +139,7 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email);
 *
 ***********************************************************************/
 
-PER_tpCondRet PER_ObterPerfil(GRA_tppGrafo pGrafo, char *email, char *primeiroNome, char *ultimoNome,
+PER_tpCondRet PER_ObterPerfil(PER_tpPerfil *perfil, char *email, char *primeiroNome, char *ultimoNome,
 							  int *diaNasc, int *mesNasc, int *anoNasc, char *cidade);
 
 /***********************************************************************
@@ -309,7 +309,7 @@ PER_tpCondRet PER_ExcluirTodosPerfis(GRA_tppGrafo pGrafo);
 *
 ***********************************************************************/
 
-PER_tpCondRet PER_retornaLisMensagens(PER_tpPerfil *perfil, LIS_tppLista mensagens);
+PER_tpCondRet PER_retornaLisMensagens(PER_tpPerfil *perfil, LIS_tppLista *mensagens);
 
 /***
 *  $FC Função:

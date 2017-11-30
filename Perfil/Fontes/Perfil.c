@@ -90,39 +90,42 @@ PER_tpCondRet deletaPerfil(GRA_tppGrafo pGrafo, int id);
 *     PER_CondRetCidadeInvalida
 *     PER_CondRetFaltouMemoria
 */
-PER_tpCondRet PER_CriarPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil *perfil, char *email, char *primeiroNome, char *ultimoNome, 
+PER_tpCondRet PER_CriarPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil **perfil, char *email, char *primeiroNome, char *ultimoNome, 
 							  int diaNasc, int mesNasc, int anoNasc, char *cidade)
 {
 	PER_tpCondRet retorno;
 	GRA_tpCondRet retornoGra;
+	PER_tpPerfil *perfilRet;
 
 	retorno = confereTudo(pGrafo, email, primeiroNome, ultimoNome, diaNasc, mesNasc, anoNasc, cidade);
 	if (retorno != PER_CondRetOK)
 		return retorno;
 
-	if ((perfil = (PER_tpPerfil *)malloc(sizeof(PER_tpPerfil))) == NULL)
+	if ((perfilRet = (PER_tpPerfil *)malloc(sizeof(PER_tpPerfil))) == NULL)
 		return PER_CondRetFaltouMemoria;
 	
-	strcpy(perfil->email, email);
+	strcpy(perfilRet->email, email);
 
-	strcpy(perfil->primeiroNome, primeiroNome);
+	strcpy(perfilRet->primeiroNome, primeiroNome);
 
-	strcpy(perfil->ultimoNome, ultimoNome);
+	strcpy(perfilRet->ultimoNome, ultimoNome);
 
-	strcpy(perfil->cidade, cidade);
+	strcpy(perfilRet->cidade, cidade);
 
-	perfil->diaNasc = diaNasc;
+	perfilRet->diaNasc = diaNasc;
 
-	perfil->mesNasc = mesNasc;
+	perfilRet->mesNasc = mesNasc;
 
-	perfil->anoNasc = anoNasc;
+	perfilRet->anoNasc = anoNasc;
 
-	if (LIS_CriarLista(NULL, &perfil->pLisMensagens) != LIS_CondRetOK)
+	if (LIS_CriarLista(NULL, &perfilRet->pLisMensagens) != LIS_CondRetOK)
 		return PER_CondRetFaltouMemoria;
 
-	retornoGra = GRA_InserirVertice(pGrafo, (void *)perfil);
+	retornoGra = GRA_InserirVertice(pGrafo, (void *)perfilRet);
 	if (retornoGra != GRA_CondRetOK)
 		return transformaRetGRA(retorno);
+
+	*perfil = perfilRet;
 	return PER_CondRetOK;
 } /* Fim função: PER  &Criar perfil */
 
@@ -160,27 +163,19 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email) {
 
 /*
 *     PER_CondRetOK
-*     PER_CondRetParametroGRAIncorreto
-*     PER_CondRetRetornoLisIncorreto
-*     PER_CondRetEmailInexistente
-*     PER_CondRetFaltouMemoria
+*     PER_CondRetPonteiroParaRetornoInvalido
 */
-PER_tpCondRet PER_ObterPerfil(GRA_tppGrafo pGrafo, char *email, char *primeiroNome, char *ultimoNome,
+PER_tpCondRet PER_ObterPerfil(PER_tpPerfil *perfil, char *email, char *primeiroNome, char *ultimoNome,
 								int *diaNasc, int *mesNasc, int *anoNasc, char *cidade)
 {
-	int id;
-	PER_tpPerfil *perfil;
-	PER_tpCondRet retorno;
-
-	retorno = PER_BuscaEmail(pGrafo, email, &perfil, &id);
-	if (retorno == PER_CondRetRedeVazia)
-		return PER_CondRetEmailInexistente;
-	else if (retorno != PER_CondRetEmailJaCadastrado)
-		return retorno;
+	if (perfil == NULL)
+		return PER_CondRetPonteiroParaRetornoInvalido;
 
 	strcpy(primeiroNome, perfil->primeiroNome);
 
 	strcpy(ultimoNome, perfil->ultimoNome);
+
+	strcpy(email, perfil->email);
 
 	strcpy(cidade, perfil->cidade);
 
@@ -439,10 +434,10 @@ PER_tpCondRet PER_ExcluirTodosPerfis(GRA_tppGrafo pGrafo) {
  *     PER_CondRetRedeVazia
  *     PER_CondRetEmailJaCadastrado
  */
-PER_tpCondRet PER_retornaLisMensagens(PER_tpPerfil *perfil, LIS_tppLista mensagens) {
+PER_tpCondRet PER_retornaLisMensagens(PER_tpPerfil *perfil, LIS_tppLista *mensagens) {
 	if (perfil == NULL)
 		return PER_CondRetPerfilInexistente;
-	mensagens = perfil->pLisMensagens;
+	*mensagens = perfil->pLisMensagens;
 	return PER_CondRetOK;
 }/* Fim função: PER  &Retorna lista de mensagens */
 

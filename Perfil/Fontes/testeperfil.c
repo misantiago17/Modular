@@ -72,7 +72,7 @@ TST_tpCondRet TST_EfetuarComando(char * ComandoTeste) {
 	int i, numLidos = -1, inxPerfil = -1, CondRetEsp = -1, diaNasc, mesNasc, anoNasc, qtd, id;
 	int diaNascEsp, mesNascEsp, anoNascEsp, qtdEsp, idEsp;
 	char email[100], primeiroNome[50], ultimoNome[50], cidade[50], emailNovo[100];
-	char primeiroNomeEsp[50], ultimoNomeEsp[50], cidadeEsp[50];
+	char emailEsp[100], primeiroNomeEsp[50], ultimoNomeEsp[50], cidadeEsp[50];
 	TST_tpCondRet CondRet;
 
 	/* Efetuar reset de teste de PERFIL */
@@ -105,7 +105,7 @@ TST_tpCondRet TST_EfetuarComando(char * ComandoTeste) {
 			return TST_CondRetParm;
 		} /* if */
 
-		CondRet = PER_CriarPerfil(pGrafo, vtPerfil[inxPerfil], email, primeiroNome, ultimoNome,
+		CondRet = PER_CriarPerfil(pGrafo, &vtPerfil[inxPerfil], email, primeiroNome, ultimoNome,
 								  diaNasc, mesNasc, anoNasc, cidade);
 
 		return TST_CompararInt(CondRetEsp, CondRet, "Erro na condicao de retorno ao criar o Perfil");
@@ -143,20 +143,24 @@ TST_tpCondRet TST_EfetuarComando(char * ComandoTeste) {
 	{
 		PER_tpCondRet debug;
 
-		numLidos = LER_LerParametros("sssiiisi", email, primeiroNomeEsp, ultimoNomeEsp, &diaNascEsp, &mesNascEsp, 
+		numLidos = LER_LerParametros("isssiiisi", &inxPerfil, emailEsp, primeiroNomeEsp, ultimoNomeEsp, &diaNascEsp, &mesNascEsp, 
 								     &anoNascEsp, cidadeEsp, &CondRetEsp);
 
-		if ((numLidos != 8))
+		if ((numLidos != 9) || (!ValidarInxPerfil(inxPerfil)))
 		{
 			return TST_CondRetParm;
 		} /* if */
 
 
-		debug = PER_ObterPerfil(pGrafo, email, primeiroNome, ultimoNome, &diaNasc, &mesNasc, &anoNasc, cidade);
+		debug = PER_ObterPerfil(vtPerfil[inxPerfil], email, primeiroNome, ultimoNome, &diaNasc, &mesNasc, &anoNasc, cidade);
 
 		CondRet = TST_CompararInt(CondRetEsp, debug, "Condicao de retorno errada ao obter o Perfil.");
 		if (CondRet != TST_CondRetOK || debug != PER_CondRetOK)
 			return CondRet;
+
+		debug = TST_CompararString(emailEsp, email, "Campo email nao e igual ao esperado");
+		if (debug != TST_CondRetOK)
+			return debug;
 
 		debug = TST_CompararString(primeiroNomeEsp, primeiroNome,"Campo Primeiro Nome nao e igual ao esperado");
 		if (debug != TST_CondRetOK)
@@ -336,20 +340,17 @@ TST_tpCondRet TST_EfetuarComando(char * ComandoTeste) {
 	else if (strcmp(ComandoTeste, RETORNA_LIS_MENSAGENS_CMD) == 0)
 	{
 		LIS_tppLista mensagens;
-		numLidos = LER_LerParametros("i", inxPerfil);
-
-		if (numLidos != 1)
+		numLidos = LER_LerParametros("ii", &inxPerfil, &CondRetEsp);
+		if ((numLidos != 2) || (!ValidarInxPerfil(inxPerfil)))
 		{
 			return TST_CondRetParm;
 		} /* if */
-
-		CondRet = PER_retornaLisMensagens(vtPerfil[inxPerfil], mensagens);
-
+		CondRet = PER_retornaLisMensagens(vtPerfil[inxPerfil], &mensagens);
 		return TST_CompararInt(CondRetEsp, CondRet, "Erro na condicao de retorno ao excluir mensagem");
 
 	} /* fim ativa: Testar Retornar Lista de mensagens */
-	/*MUDAR DPS*/
-	return TST_CondRetNaoImplementado;
+
+	return TST_CondRetNaoConhec;
 }
 
 /*****  Código das funções encapsuladas no módulo  *****/
@@ -370,7 +371,7 @@ void DestruirValor(void * pValor)
 
   /***********************************************************************
   *
-  *  $FC Função: TGRA -Validar indice de Grafo
+  *  $FC Função: TGRA -Validar indice de Perfil
   *
   ***********************************************************************/
 
@@ -384,4 +385,4 @@ int ValidarInxPerfil(int inxPerfil)
 
 	return TRUE;
 
-} /* Fim função: TGRA -Validar indice de Grafo */
+} /* Fim função: TGRA -Validar indice de Perfil */

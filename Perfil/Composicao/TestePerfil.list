@@ -81,10 +81,10 @@ Estatísticas do construto
       testeperfil.c
 
    Estatísticas do arquivo: perfil.c
-      Total linhas:             738
-      Linhas de código:         362
-      Linhas de comentário:     257
-      Linhas em branco:         123
+      Total linhas:             733
+      Linhas de código:         359
+      Linhas de comentário:     254
+      Linhas em branco:         124
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
@@ -103,10 +103,10 @@ Estatísticas do construto
       testeperfil.c
 
    Estatísticas do arquivo: testeperfil.c
-      Total linhas:             387
-      Linhas de código:         215
-      Linhas de comentário:      81
-      Linhas em branco:         104
+      Total linhas:             388
+      Linhas de código:         218
+      Linhas de comentário:      80
+      Linhas em branco:         103
    Arquivos de inclusão de que necessita
       generico.h
       grafo.h
@@ -155,17 +155,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      2431
+         Total linhas do tipo:      2427
          Linhas de código:          1321
-         Linhas de comentário:       630
+         Linhas de comentário:       626
          Linhas em branco:           528
          Arquivos deste tipo:          4
 
 Totais para todo o construto TestePerfil
 
-   Total linhas:              4762
+   Total linhas:              4758
    Linhas de código:          1553
-   Linhas de comentário:      2413
+   Linhas de comentário:      2409
    Linhas em branco:           844
    Arquivos processados:        10
 

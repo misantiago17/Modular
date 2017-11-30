@@ -84,7 +84,7 @@
 =numeroperfis	1 OK
 
 == Obter Dados do perfil 0
-=obterperfil	email0 primeiroNome0 ultimoNome0 diaNasc0 mesNasc0 anoNasc0 cidade0 OK
+=obterperfil perfil0	email0 primeiroNome0 ultimoNome0 diaNasc0 mesNasc0 anoNasc0 cidade0 OK
 
 == Criar Perfil 1 
 =criarperfil perfil1 email1 primeiroNome1 ultimoNome1 diaNasc1 mesNasc1 anoNasc1 cidade1 OK
@@ -93,10 +93,10 @@
 =numeroperfis	2 OK
 
 == Obter Dados do perfil 1
-=obterperfil	email1 primeiroNome1 ultimoNome1 diaNasc1 mesNasc1 anoNasc1 cidade1 OK
+=obterperfil perfil1	email1 primeiroNome1 ultimoNome1 diaNasc1 mesNasc1 anoNasc1 cidade1 OK
 
 == Criar Perfil email ja cadastrado
-=obterperfil	email1 primeiroNome1 ultimoNome1 diaNasc1 mesNasc1 anoNasc1 cidade1 OK
+=obterperfil perfil1	email1 primeiroNome1 ultimoNome1 diaNasc1 mesNasc1 anoNasc1 cidade1 OK
 
 == Criar Perfil email invalido
 =criarperfil perfil2 email3 primeiroNome2 ultimoNome2 diaNasc2 mesNasc2 anoNasc2 cidade2 EmailInvalido
@@ -123,7 +123,7 @@
 =numeroperfis	3 OK
 
 == Obter Dados do perfil 2
-=obterperfil	email2 primeiroNome2 ultimoNome2 diaNasc2 mesNasc2 anoNasc2 cidade2 OK
+=obterperfil perfil2	email2 primeiroNome2 ultimoNome2 diaNasc2 mesNasc2 anoNasc2 cidade2 OK
 
 == Excluir perfil 1
 =excluirperfil email1 OK
@@ -132,7 +132,7 @@
 =numeroperfis	2 OK
 
 == Obter Dados do perfil 1
-=obterperfil	email1 primeiroNome1 ultimoNome1 diaNasc1 mesNasc1 anoNasc1 cidade1 EmailInexistente
+=obterperfil perfil1 email1 primeiroNome1 ultimoNome1 diaNasc1 mesNasc1 anoNasc1 cidade1 EmailInexistente
 
 ==Modificar Dados do perfil 2
 =modificanome email2 primeiroNome4 ultimoNome4 OK
@@ -140,13 +140,13 @@
 =modificacidade email2 cidade4 OK
 
 == Obter Dados do perfil 2
-=obterperfil	email2 primeiroNome4 ultimoNome4 diaNasc4 mesNasc4 anoNasc4 cidade4 OK
+=obterperfil perfil2	email2 primeiroNome4 ultimoNome4 diaNasc4 mesNasc4 anoNasc4 cidade4 OK
 
 ==Modifica email do perfil2
 =modificaemail email2 email4 OK
 
 == Obter Dados do perfil 2
-=obterperfil	email4 primeiroNome4 ultimoNome4 diaNasc4 mesNasc4 anoNasc4 cidade4 OK
+=obterperfil perfil2	email4 primeiroNome4 ultimoNome4 diaNasc4 mesNasc4 anoNasc4 cidade4 OK
 
 ==Modificar Dados do perfil 0 para dados invalidos
 =modificanome email0 primeiroNome3 ultimoNome3 NomeInvalido
@@ -154,16 +154,16 @@
 =modificaemail email0 email3 EmailInvalido
 
 == Obter Dados do perfil 0
-=obterperfil	email3 primeiroNome3 ultimoNome3 diaNasc3 mesNasc3 anoNasc3 cidade0 EmailInexistente
+=obterperfil perfil0	email3 primeiroNome3 ultimoNome3 diaNasc3 mesNasc3 anoNasc3 cidade0 EmailInexistente
 
 == Obter Dados do perfil 0
-=obterperfil	email0 primeiroNome0 ultimoNome0 diaNasc0 mesNasc0 anoNasc0 cidade0 OK
+=obterperfil perfil0	email0 primeiroNome0 ultimoNome0 diaNasc0 mesNasc0 anoNasc0 cidade0 OK
 
 ==Modifica email do perfil 0 para email antigo do perfil 2
 =modificaemail email0 email2 OK
 
 == Obter Dados do perfil 0
-=obterperfil	email2 primeiroNome0 ultimoNome0 diaNasc0 mesNasc0 anoNasc0 cidade0 OK
+=obterperfil perfil0	email2 primeiroNome0 ultimoNome0 diaNasc0 mesNasc0 anoNasc0 cidade0 OK
 
 ==Excluir todos os perfis
 =excluirtodosperfis OK
@@ -174,8 +174,8 @@
 == Criar Perfil 0
 =criarperfil perfil0 email0 primeiroNome0 ultimoNome0 diaNasc0 mesNasc0 anoNasc0 cidade0 OK
 
-==Retorna lista de mensagens do ´perfil  0
-=retornalismensagens perfil0
+==Retorna lista de mensagens do perfil  0
+=retornalismensagens perfil0 OK
 
 == Reseta bateria de testes
 =resetteste
