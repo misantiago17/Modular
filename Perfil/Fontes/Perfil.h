@@ -1,7 +1,7 @@
 #if ! defined(PERFIL_ )
 #define PERFIL_
 /***************************************************************************
-*  $MCD Módulo de definição: GRA  Grafo Generico com Cabeça
+*  $MCD Módulo de definição: PER Gerenciamento de perfil
 *
 *  Arquivo gerado:              PERFIL.h
 *  Letras identificadoras:      PER
@@ -16,8 +16,8 @@
 *
 *  $ED Descrição do módulo
 *
-*	 
-*	 
+*	 Modulo que armazena dados relativo ao usuario que será armazenado na rede.
+*	 Ele utiliza vertices de um grafo para armazenar os usuarios.
 *
 ***************************************************************************/
 
@@ -46,22 +46,31 @@ typedef struct PER_tagPerfil PER_tpPerfil;
 
 typedef enum {
 	PER_CondRetOK,
+	/* Concluiu corretamente */
 
 	PER_CondRetEmailInvalido,
+	/*Email inserido nao é um email valido*/
 
 	PER_CondRetEmailJaCadastrado,
+	/*Email inserido nao já está cadastrado*/
 
 	PER_CondRetDataInvalida,
+	/*Data inserida nao é valida*/
 
 	PER_CondRetNomeInvalido,
+	/*Nome inserido nao é valido*/
 
 	PER_CondRetCidadeInvalida,
+	/*Cidade inserido nao é valido*/
 
 	PER_CondRetEmailInexistente,
+	/*Email buscado nao existe*/
 
 	PER_CondRetFaltouMemoria,
+	/* Faltou memória ao tentar alocar espaço*/
 
 	PER_CondRetRetornoLisIncorreto,
+	/* Condicao de retorno do modulo Lista imprevista*/
 
 	PER_CondRetRedeVazia,
 
@@ -69,7 +78,9 @@ typedef enum {
 	
 	PER_CondRetParametroGRAIncorreto,
 
-	PER_CondRetPonteiroParaRetornoInvalido
+	PER_CondRetPonteiroParaRetornoInvalido,
+
+	PER_CondRetPerfilInvalido
 
 } PER_tpCondRet;
 

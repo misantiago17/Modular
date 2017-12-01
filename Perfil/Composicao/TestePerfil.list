@@ -81,19 +81,19 @@ Estatísticas do construto
       testeperfil.c
 
    Estatísticas do arquivo: perfil.c
-      Total linhas:             733
-      Linhas de código:         359
-      Linhas de comentário:     254
-      Linhas em branco:         124
+      Total linhas:             721
+      Linhas de código:         354
+      Linhas de comentário:     249
+      Linhas em branco:         122
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
       perfil.h
 
    Estatísticas do arquivo: perfil.h
-      Total linhas:             335
+      Total linhas:             344
       Linhas de código:          42
-      Linhas de comentário:     247
+      Linhas de comentário:     256
       Linhas em branco:          46
    Arquivos de inclusão de que necessita
       grafo.h
@@ -103,10 +103,10 @@ Estatísticas do construto
       testeperfil.c
 
    Estatísticas do arquivo: testeperfil.c
-      Total linhas:             388
-      Linhas de código:         218
-      Linhas de comentário:      80
-      Linhas em branco:         103
+      Total linhas:             414
+      Linhas de código:         251
+      Linhas de comentário:      69
+      Linhas em branco:         108
    Arquivos de inclusão de que necessita
       generico.h
       grafo.h
@@ -127,9 +127,9 @@ Estatísticas do construto
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      2331
+         Total linhas do tipo:      2340
          Linhas de código:           232
-         Linhas de comentário:      1783
+         Linhas de comentário:      1792
          Linhas em branco:           316
          Arquivos deste tipo:          6
 
@@ -155,17 +155,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      2427
-         Linhas de código:          1321
-         Linhas de comentário:       626
-         Linhas em branco:           528
+         Total linhas do tipo:      2441
+         Linhas de código:          1349
+         Linhas de comentário:       610
+         Linhas em branco:           531
          Arquivos deste tipo:          4
 
 Totais para todo o construto TestePerfil
 
-   Total linhas:              4758
-   Linhas de código:          1553
-   Linhas de comentário:      2409
-   Linhas em branco:           844
+   Total linhas:              4781
+   Linhas de código:          1581
+   Linhas de comentário:      2402
+   Linhas em branco:           847
    Arquivos processados:        10
 
