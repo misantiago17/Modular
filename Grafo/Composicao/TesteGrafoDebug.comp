@@ -14,6 +14,7 @@ TesteGrafo	/D_DEBUG
 Grafo		/D_DEBUG
 Lista
 
+
 [BuildInicio]
 /OUT:..\Produto\Trab4-8.exe
 /INCREMENTAL:NO

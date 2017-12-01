@@ -19,75 +19,78 @@
 =declararparm	negou	 	int 1
 =declararparm	aceitou	 	int 0
 
-=declararparm	naoExiste	int 1
-=declararparm	existe		int 0 
 
 =declararparm   OK             			int  0
-=declararparm   NaoPossuiAmizades     	int  1
+=declararparm   NaoPossuiAmizades     		int  1
 =declararparm   AmizadeJaExiste   		int  2
-=declararparm   NaoAceitouSolicitacao   int  3
-=declararparm   AmizadeNaoExiste  		int  4
-=declararparm	FaltouMemoria			int	 5
-=declararparm	RetornoGraIncorreto  	int  6
-=declararparm	RetornoPerIncorreto		int	 7
-=declararparm	UsuarioNaoExiste		int	 8
-=declararparm	ArestaParaSiMesmo		int  9
+=declararparm   ArestaParaSiMesmo    		int  3
+=declararparm   NaoAceitouSolicitacao  		int  4
+=declararparm	AmizadeNaoExiste                int 5
+=declararparm	FaltouMemoria			int	6 
+=declararparm	RetornoGraIncorreto  		int  7
+=declararparm	RetornoPerIncorreto		int	 8
+=declararparm	UsuarioNaoExiste		int	 9
+
+
 
 
 == Criar amizade
 =resetteste
 =criaramizade		perfil0	 perfil1  aceitou  OK
-=verificaramizades 	perfil0	 perfil1  existe   OK
-=verificaramizades 	perfil1	 perfil0  existe   OK
+
+=verificaramizades 	perfil0	 perfil1    OK
+=verificaramizades 	perfil1	 perfil0     OK
+
 
 == Criar mais de uma amizade
 =criaramizade		perfil0	 perfil2  aceitou  OK
-=verificaramizades 	perfil0	 perfil2  existe   OK
-=verificaramizades 	perfil2	 perfil0  existe   OK
+=verificaramizades 	perfil0	 perfil2    OK
+=verificaramizades 	perfil2	 perfil0     OK
 =criaramizade		perfil0	 perfil3  aceitou  OK
-=verificaramizades 	perfil0	 perfil3  existe   OK
-=verificaramizades 	perfil3	 perfil0  existe   OK
+=verificaramizades 	perfil0	 perfil3    OK
+=verificaramizades 	perfil3	 perfil0    OK
 
-== Criar um amizade com solicitacao negada
-=criaramizade   	perfil0	 perfil4  negou		  NaoAceitouSolicitacao
-=verificaramizades 	perfil0	 perfil4  naoExiste   AmizadeNaoExiste
+== Criar uma amizade com solicitacao negada
+=criaramizade   	perfil0	 perfil4  negou		NaoAceitouSolicitacao
+=verificaramizades 	perfil0	 perfil4   AmizadeNaoExiste
+
 
 == Criar a mesma amizade duas vezes
 =criaramizade		perfil0	 perfil1  aceitou	  AmizadeJaExiste
 
-== Criar amizade com um perfil que nao existe
-=criaramizade		perfil0	 perfil9  aceitou	  UsuarioNaoExiste
-=verificaramizades 	perfil0	 perfil9  naoExiste   UsuarioNaoExiste
+
 
 == Criar amizade com o mesmo perfil
 =criaramizade		perfil0  perfil0  aceitou	  ArestaParaSiMesmo
-=verificaramizades 	perfil0	 perfil0  naoExiste   AmizadeNaoExiste
+=verificaramizades 	perfil0	 perfil0     AmizadeNaoExiste
+
+==Excluindo uma amizade
+=excluiramizade perfil0  perfil1  OK
+=verificaramizades 	perfil1	 perfil0     AmizadeNaoExiste
+=verificaramizades 	perfil0	 perfil1     AmizadeNaoExiste
 
 
-== Excluir amizade
-=excluiramizade		perfil0	 perfil1  OK
-=verificaramizades 	perfil0	 perfil1  naoExiste   AmizadeNaoExiste
-=verificaramizades 	perfil1	 perfil0  naoExiste   AmizadeNaoExiste
+== Excluir amizade com um perfil que n„o È amigos
 
-== Excluir amizade de um perfil que n√£o existe
-=excluiramizade		perfil0  perfil9  UsuarioNaoExiste
-
-== Excluir amizade com um perfil que n√£o √© amigos
 =excluiramizade		perfil0  perfil6  AmizadeNaoExiste
 
 == Excluir todas as amizades de um perfil individualmente
 =excluiramizade		perfil0	 perfil2  OK
-=verificaramizades 	perfil0	 perfil2  naoExiste   AmizadeNaoExiste
-=verificaramizades 	perfil2	 perfil0  naoExiste   AmizadeNaoExiste
+
+=verificaramizades 	perfil0	 perfil2     AmizadeNaoExiste
+=verificaramizades 	perfil2	 perfil0    AmizadeNaoExiste
 =excluiramizade		perfil0	 perfil3  OK
-=verificaramizades 	perfil0	 perfil3  naoExiste   AmizadeNaoExiste
-=verificaramizades 	perfil3	 perfil0  naoExiste   AmizadeNaoExiste
+=verificaramizades 	perfil0	 perfil3     AmizadeNaoExiste
+=verificaramizades 	perfil3	 perfil0    AmizadeNaoExiste
+
 
 == Tentar excluir uma amizade duas vezes
 =excluiramizade		perfil0	 perfil3  AmizadeNaoExiste  
 
 == Tentar excluir amizade com o mesmo perfil
 =excluiramizade		perfil0	 perfil0  AmizadeNaoExiste
+
+
 
 
 == Verificar numero de amigos de um perfil
@@ -99,32 +102,30 @@
 =verificarnumamigos	 perfil0  4	 	   OK
 =verificarnumamigos	 perfil1  1	 	   OK
 
-== Verificar numero de amigos de um perfil que n√£o tem amigos
+
+== Verificar numero de amigos de um perfil que n„o tem amigos
 =verificarnumamigos	 perfil5  0	  	   NaoPossuiAmizades
 
-== Verificar numero de amigos de um perfil que nao existe
-=verificarnumamigos  perfil9  0		   UsuarioNaoExiste
 
 
 == Excluir todos os amigos 
 =excluirtodasamizades	perfil0  OK
 =verificarnumamigos	 	perfil0  0	 	  NaoPossuiAmizades
-=verificaramizades 		perfil1	 perfil0  naoExiste   AmizadeNaoExiste
+
+=verificaramizades 		perfil1	 perfil0     AmizadeNaoExiste
 
 == Excluir todos os amigos duas vezes para o mesmo perfil
 =excluirtodasamizades	perfil0  NaoPossuiAmizades
-=verificarnumamigos	 	perfil0  0	 	  			NaoPossuiAmizades
-
+=verificarnumamigos	 	perfil0  0	 	  NaoPossuiAmizades
 
 == Armazenar amizades de um perfil
-==resetteste
-==criaramizade		 perfil0  	perfil1  	aceitou  	OK
-==criaramizade		 perfil0  	perfil2  	aceitou  	OK
-==criaramizade		 perfil0  	perfil3  	aceitou  	OK
-==armazenaramizades   perfil0 "usuario2@gmail.com" "Usuario2" "Sobrenome2" "Cidade2" 2 2 2002 "usuario3@gmail.com" "Usuario3" "Sobrenome3" "Cidade3" 3 3 2003 "usuario4@gmail.com" "Usuario4" "Sobrenome4" "Cidade4" 4 4 2004 OK 					
+=resetteste
+=criaramizade		 perfil0  	perfil1  	aceitou  	OK
+=criaramizade		 perfil0  	perfil2  	aceitou  	OK
+=criaramizade		 perfil0  	perfil3 	aceitou  	OK
+=armazenaramizades   perfil0 "usuario2@gmail.com" "UsuarioB" "SobrenomeB" "CidadeB" 2 2 2002  "usuario4@gmail.com" "UsuarioD" "SobrenomeD" "CidadeD" 4 4 2004 "usuario3@gmail.com" "UsuarioC" "SobrenomeC" "CidadeC" 3 3 2003 OK 					
 
 == Armazenar amizades de um perfil que nao tem amigos
-==armazenaramizades	 perfil4 "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" NaoPossuiAmizades
+=armazenaramizades	 perfil4 "???" "???" "???" "???" 0 0 0 "???" "???" "???" "???" 0 0 0 "???" "???" "???" "???" 0 0 0 NaoPossuiAmizades
 
-== Armazenar amizades de um perfil que nao existe
-==armazenaramizades	 perfil9 "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" "???" UsuarioNaoExiste
+

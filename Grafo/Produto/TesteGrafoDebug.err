@@ -1,11 +1,42 @@
 testegrafo.c
 grafo.c
-lista.c
-Microsoft (R) Incremental Linker Version 10.00.40219.01
-Copyright (C) Microsoft Corporation.  All rights reserved.
-
-/OUT:..\Produto\Trab4-8.exe 
-/INCREMENTAL:NO 
-/MACHINE:IX86 
-testegrafo.obj grafo.obj lista.obj 
-ArcaboucoTeste.lib 
+..\Fontes\grafo.c(1033) : error C2065: 'GRA_CondRetErroEstrutural' : undeclared identifier
+..\Fontes\grafo.c(1034) : error C2065: 'GRA_CondRetErroEstrutural' : undeclared identifier
+..\Fontes\grafo.c(1048) : error C2065: 'CondRet_ErroEstrutural' : undeclared identifier
+..\Fontes\grafo.c(1051) : error C2181: illegal else without matching if
+..\Fontes\grafo.c(1051) : error C2065: 'GRA_CondRetErroEstrutural' : undeclared identifier
+..\Fontes\grafo.c(1054) : error C2065: 'GRA_CondRetErroEstrutural' : undeclared identifier
+..\Fontes\grafo.c(1070) : error C2065: 'GRA_CondRetErroEstrutural' : undeclared identifier
+..\Fontes\grafo.c(1072) : error C2065: 'GRA_CondRetErroEstrutural' : undeclared identifier
+..\Fontes\grafo.c(1075) : error C2065: 'GRA_CondRetErroEstrutural' : undeclared identifier
+..\Fontes\grafo.c(1076) : warning C4013: 'CED_ObterTipo' undefined; assuming extern returning int
+..\Fontes\grafo.c(1077) : error C2065: 'GRA_CondRetErroEstrutural' : undeclared identifier
+..\Fontes\grafo.c(1091) : error C2065: 'CondRet_ErroEstrutural' : undeclared identifier
+..\Fontes\grafo.c(1093) : error C2065: 'CondRet_ErroEstrutural' : undeclared identifier
+..\Fontes\grafo.c(1094) : error C2065: 'pGrafo' : undeclared identifier
+..\Fontes\grafo.c(1094) : error C2223: left of '->pLisAresta' must point to struct/union
+..\Fontes\grafo.c(1094) : warning C4133: 'function' : incompatible types - from 'int *' to 'LIS_tppLista'
+..\Fontes\grafo.c(1094) : error C2198: 'LIS_ObterTamanho' : too few arguments for call
+..\Fontes\grafo.c(1095) : error C2065: 'numVerts' : undeclared identifier
+..\Fontes\grafo.c(1095) : error C2065: 'pGrafo' : undeclared identifier
+..\Fontes\grafo.c(1095) : error C2223: left of '->NumArestas' must point to struct/union
+..\Fontes\grafo.c(1096) : error C2065: 'GRA_CondRetErroEstrutural' : undeclared identifier
+..\Fontes\grafo.c(1100) : error C2065: 'pGrafo' : undeclared identifier
+..\Fontes\grafo.c(1100) : error C2223: left of '->pLisAresta' must point to struct/union
+..\Fontes\grafo.c(1100) : error C2198: 'LIS_IrInicioLista' : too few arguments for call
+..\Fontes\grafo.c(1103) : error C2065: 'pGrafo' : undeclared identifier
+..\Fontes\grafo.c(1103) : error C2223: left of '->pElemCorr' must point to struct/union
+..\Fontes\grafo.c(1103) : warning C4047: 'function' : 'LIS_tppLista' differs in levels of indirection from 'void **'
+..\Fontes\grafo.c(1103) : warning C4024: 'LIS_ObterValor' : different types for formal and actual parameter 1
+..\Fontes\grafo.c(1103) : error C2198: 'LIS_ObterValor' : too few arguments for call
+..\Fontes\grafo.c(1105) : error C2065: 'CondRet_ErroEstrutural' : undeclared identifier
+..\Fontes\grafo.c(1107) : error C2065: 'pGrafo' : undeclared identifier
+..\Fontes\grafo.c(1107) : warning C4047: 'function' : 'GRA_tppGrafo' differs in levels of indirection from 'int'
+..\Fontes\grafo.c(1107) : warning C4024: 'GRA_ExisteAresta' : different types for formal and actual parameter 1
+..\Fontes\grafo.c(1109) : error C2065: 'CondRet_ErroEstrutural' : undeclared identifier
+..\Fontes\grafo.c(1109) : error C2146: syntax error : missing ';' before identifier 'CondRetAv'
+..\Fontes\grafo.c(1109) : error C2065: 'pGrafo' : undeclared identifier
+..\Fontes\grafo.c(1109) : error C2223: left of '->pVerticesGrafo' must point to struct/union
+..\Fontes\grafo.c(1109) : warning C4047: 'function' : 'LIS_tppLista' differs in levels of indirection from 'int'
+..\Fontes\grafo.c(1109) : warning C4024: 'LIS_AvancarElementoCorrente' : different types for formal and actual parameter 1
+..\Fontes\grafo.c(1109) : error C2198: 'LIS_AvancarElementoCorrente' : too few arguments for call

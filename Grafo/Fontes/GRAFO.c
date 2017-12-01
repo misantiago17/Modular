@@ -118,6 +118,11 @@ typedef struct GRA_tagGrafo {
 static GRA_tpVertice *CriarVertice( void * pValor,int tam);
 static void DestruirElemVertice(void *Elem);
 static void DestruirElemVertices(void *Elem);
+#if _DEBUG
+	GRA_tpCondRet GRA_VerificarCabeça(GRA_tppGrafo pGrafo);
+	GRA_tpCondRet GRA_VerificarElemento(GRA_tpVertice* pVert);
+#endif
+
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -580,7 +585,6 @@ GRA_tpCondRet GRA_CriarAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 		#endif
 		return GRA_CondRetNaoAchouVertice;	
 	}
-
 	else if(CondRetGra==GRA_CondRetOK)
 	{
 		#ifdef _DEBUG
@@ -1012,3 +1016,99 @@ void DestruirElemVertice(void *Elem)
 	free(vert);
 	LIS_DestruirLista(Lis);
 }
+
+#ifdef _DEBUG
+	GRA_tpCondRet GRA_VerificarEstrutura(GRA_tppGrafo pGrafo)
+	{
+		int IdAnterior;
+		int tam;
+		GRA_tpCondRet retorno;
+		LIS_tppLista verts;
+		GRA_tpVertice* vert;
+		LIS_tpCondRet CondRetAv=LIS_CondRetOK;
+		IdAnterior=pGrafo->pElemCorr->Ident;
+		retorno = GRA_VerificarCabeça(pGrafo);
+		if(retorno==GRA_CondRetParametroIncorreto)
+			return GRA_CondRetParametroIncorreto;
+		else if(retorno==GRA_CondRetErroEstrutural)
+			return GRA_CondRetErroEstrutural;
+		LIS_ObterTamanho(pGrafo->pVerticesGrafo,&tam);
+		if(tam==0)
+		{
+			return GRA_CondRetOK;
+		}
+		LIS_IrInicioLista(pGrafo->pVerticesGrafo);
+		while(CondRetAv!=LIS_CondRetFimLista)
+		{
+			LIS_ObterValor(pGrafo->pVerticesGrafo,(void**) &verts);
+			LIS_ObterValor(verts,(void**) &vert);
+			if(vert==NULL)
+			{
+				GRA_IrVertice(pGrafo,IdAnterior);
+				return CondRet_ErroEstrutural;
+			}
+			retorno = GRA_VerificarElemento(vert);
+			else if(retorno==GRA_CondRetErroEstrutural)
+			{
+				GRA_IrVertice(pGrafo,IdAnterior);
+				return GRA_CondRetErroEstrutural;
+			}
+			CondRetAv=LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo,1);	
+		}
+		GRA_IrVertice(pGrafo,IdAnterior);
+		return GRA_CondRetOK;
+	}
+#endif
+
+#ifdef _DEBUG
+	GRA_tpCondRet GRA_VerificarCabeça(GRA_tppGrafo pGrafo)
+	{
+		int numVerts;
+		if(pGrafo==NULL) 
+			return GRA_CondRetParametroIncorreto;
+		if(pGrafo->pElemCorr==NULL && pGrafo->NumVertices!=0)
+			return GRA_CondRetErroEstrutural;
+		if(pGrafo->pVerticesGrafo==NULL)
+			return GRA_CondRetErroEstrutural;
+		LIS_ObterTamanho(pGrafo->pVerticesGrafo,&numVerts);
+		if(numVerts !=pGrafo->NumVertices)
+			return GRA_CondRetErroEstrutural;
+		if(CED_ObterTipo(pGrafo)!= GRA_TipoEspacoCabecaGrafo)
+			return GRA_CondRetErroEstrutural;
+		return GRA_CondRetOK;
+	}
+#endif
+
+
+
+#ifdef _DEBUG
+	GRA_tpCondRet GRA_VerificarElemento(GRA_tpVertice* pVert)
+	{
+		int numArestas,IdentViz,IdentAtual;
+		GRA_tpVertice* pVertViz;
+		LIS_tpCondRet CondRetAv=LIS_CondRetOK;
+		if(CED_ObterTipo(pVert)!= GRA_TipoEspacoVerticeGrafo)
+			return CondRet_ErroEstrutural;
+		if(pVert->pLisAresta==NULL) 
+			return CondRet_ErroEstrutural;
+		LIS_ObterTamanho(pGrafo->pLisAresta,&numArestas);
+		if(numVerts !=pGrafo->NumArestas)
+			return GRA_CondRetErroEstrutural;
+		if(numArestas==0)
+			return GRA_CondRetOK;
+		IdentAtual=pVert->Ident;
+		LIS_IrInicioLista(pGrafo->pLisAresta);
+		while(CondRetAv!=LIS_CondRetFimLista)
+		{
+			LIS_ObterValor(pGrafo->pElemCorr->pLisAresta,(void**)&pVertViz);
+			if(CED_ObterTipo(pVertViz)!= GRA_TipoEspacoVerticeGrafo)
+				return CondRet_ErroEstrutural;
+			IdentViz=pVertViz->Ident;
+			if(GRA_ExisteAresta(pGrafo,IdentAtual,IdentViz)!=GRA_CondRetOK)
+				return CondRet_ErroEstrutural
+			CondRetAv=LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo,1);
+		}
+		return GRA_CondRetOK;
+}
+
+#endif

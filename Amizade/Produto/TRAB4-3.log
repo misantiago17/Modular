@@ -1,0 +1,36 @@
+
+!!! Inicio dos testes
+!!!      Construto sob teste: ..\Produto\TRAB4-3
+!!!      Script de teste:     ..\Scripts\TesteAmizade.script
+
+!!!    0  Linha:     1  // Script:    TesteAmizade.script 
+!!!    0  Linha:     2  // Autor:     Gabriel, Michelle 
+!!!    0  Linha:     3  // Data:      27/11/2017 
+!!!    0  Linha:     4  // Proposito: Testar o modulo amizade 
+    7  == Inicializar valores
+   37  == Criar amizade
+   45  == Criar mais de uma amizade
+   53  == Criar uma amizade com solicitacao negada
+   58  == Criar a mesma amizade duas vezes
+   63  == Criar amizade com o mesmo perfil
+   67  ==Excluindo uma amizade
+   73  == Excluir amizade com um perfil que não é amigos
+   77  == Excluir todas as amizades de um perfil individualmente
+   87  == Tentar excluir uma amizade duas vezes
+   90  == Tentar excluir amizade com o mesmo perfil
+   96  == Verificar numero de amigos de um perfil
+  106  == Verificar numero de amigos de um perfil que não tem amigos
+  111  == Excluir todos os amigos
+  117  == Excluir todos os amigos duas vezes para o mesmo perfil
+  121  == Armazenar amizades de um perfil
+  128  == Armazenar amizades de um perfil que nao tem amigos
+
+!!! Número de linhas lidas:         131
+!!! Número de casos de teste:        17
+!!! Número comandos corretos:        67
+!!! Número de falhas encontradas:     0
+
+!!! Não foram encontrados problemas
+
+
+!!! Numero de espacos ainda alocados: 0

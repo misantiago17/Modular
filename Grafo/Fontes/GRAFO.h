@@ -390,6 +390,27 @@ GRA_tpCondRet GRA_NumVertices(GRA_tppGrafo pGrafo, int *pNumVerts);
 
 GRA_tpCondRet GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo, int* pDado);
 
+/***********************************************************************
+*
+*  $FC Função: GRA  &Verificar Estrutura
+*
+*  $ED Descrição da função
+*     Função da interface de teste.
+*     Verifica a estrutura do grafo fornecido como parametro.
+*     
+*
+*  $EP Parâmetros
+*     $P pListaParm - ponteiro para um espaço que d.
+*
+*  $FV Valor retornado
+*     Condição de retorno de teste
+*
+***********************************************************************/
+
+#ifdef _DEBUG
+	GRA_tpCondRet GRA_VerificarEstrutura(GRA_tppGrafo pGrafo);
+#endif
+
 #undef GRAFO_EXT
 
 /********** Fim do módulo de definição: GRA  Grafo Genérico com Cabeça **********/

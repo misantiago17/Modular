@@ -4,7 +4,7 @@ GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
 Composição do construto: ..\Composicao\TesteAmizade.comp
 
    Nome do Construto:           TesteAmizade
-   Diretório base:              D:\Projetos\PUC\Modular\Projeto Git\Amizade\Composicao
+   Diretório base:              C:\Users\Usuario\Documents\GitHub\Modular\Amizade\Composicao
 
    Arquivo composição:          ..\Composicao\TesteAmizade.comp
    Arquivo plataforma:          gmake.parm
@@ -19,26 +19,26 @@ Módulos do construto: ..\Composicao\TesteAmizade.comp
    amizade.c
    grafo.c
    perfil.c
+   lista.c
 
 Estatísticas do construto
 
    Estatísticas do arquivo: amizade.c
-      Total linhas:             296
-      Linhas de código:         161
+      Total linhas:             321
+      Linhas de código:         170
       Linhas de comentário:      87
-      Linhas em branco:          54
+      Linhas em branco:          70
    Arquivos de inclusão de que necessita
       amizade.h
-      cespdin.h
       grafo.h
       lista.h
       perfil.h
 
    Estatísticas do arquivo: amizade.h
-      Total linhas:             258
-      Linhas de código:          37
-      Linhas de comentário:     174
-      Linhas em branco:          47
+      Total linhas:             247
+      Linhas de código:          33
+      Linhas de comentário:     165
+      Linhas em branco:          49
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
@@ -53,9 +53,15 @@ Estatísticas do construto
       Linhas de comentário:     610
       Linhas em branco:         103
    Arquivos em que é incluído
-      amizade.c
       grafo.c
-      testeamizade.c
+
+   Estatísticas do arquivo: conta.h
+      Total linhas:             468
+      Linhas de código:          43
+      Linhas de comentário:     349
+      Linhas em branco:          76
+   Arquivos em que é incluído
+      grafo.c
 
    Estatísticas do arquivo: generico.h
       Total linhas:             713
@@ -65,23 +71,27 @@ Estatísticas do construto
    Arquivos de inclusão de que necessita
       tst_espc.h
    Arquivos em que é incluído
+      grafo.c
       testeamizade.c
 
    Estatísticas do arquivo: grafo.c
-      Total linhas:             765
-      Linhas de código:         475
-      Linhas de comentário:     153
-      Linhas em branco:         151
+      Total linhas:            1114
+      Linhas de código:         791
+      Linhas de comentário:     156
+      Linhas em branco:         181
    Arquivos de inclusão de que necessita
       cespdin.h
+      conta.h
+      generico.h
       grafo.h
       lista.h
+      tst_espc.h
 
    Estatísticas do arquivo: grafo.h
-      Total linhas:             410
-      Linhas de código:          37
-      Linhas de comentário:     323
-      Linhas em branco:          50
+      Total linhas:             419
+      Linhas de código:          39
+      Linhas de comentário:     328
+      Linhas em branco:          52
    Arquivos em que é incluído
       amizade.c
       amizade.h
@@ -98,24 +108,33 @@ Estatísticas do construto
    Arquivos em que é incluído
       testeamizade.c
 
+   Estatísticas do arquivo: lista.c
+      Total linhas:             545
+      Linhas de código:         269
+      Linhas de comentário:     139
+      Linhas em branco:         154
+   Arquivos de inclusão de que necessita
+      lista.h
+
    Estatísticas do arquivo: lista.h
-      Total linhas:             354
+      Total linhas:             355
       Linhas de código:          35
-      Linhas de comentário:     268
+      Linhas de comentário:     269
       Linhas em branco:          51
    Arquivos em que é incluído
       amizade.c
       amizade.h
       grafo.c
+      lista.c
       perfil.c
       perfil.h
       testeamizade.c
 
    Estatísticas do arquivo: perfil.c
-      Total linhas:             743
-      Linhas de código:         368
-      Linhas de comentário:     257
-      Linhas em branco:         122
+      Total linhas:             734
+      Linhas de código:         357
+      Linhas de comentário:     246
+      Linhas em branco:         134
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
@@ -136,13 +155,12 @@ Estatísticas do construto
       testeamizade.c
 
    Estatísticas do arquivo: testeamizade.c
-      Total linhas:             547
-      Linhas de código:         203
-      Linhas de comentário:     263
-      Linhas em branco:          90
+      Total linhas:             568
+      Linhas de código:         360
+      Linhas de comentário:      68
+      Linhas em branco:         149
    Arquivos de inclusão de que necessita
       amizade.h
-      cespdin.h
       generico.h
       grafo.h
       lerparm.h
@@ -157,16 +175,17 @@ Estatísticas do construto
       Linhas em branco:          20
    Arquivos em que é incluído
       generico.h
+      grafo.c
       testeamizade.c
 
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      3356
-         Linhas de código:           323
-         Linhas de comentário:      2567
-         Linhas em branco:           466
-         Arquivos deste tipo:          8
+         Total linhas do tipo:      3823
+         Linhas de código:           364
+         Linhas de comentário:      2913
+         Linhas em branco:           546
+         Arquivos deste tipo:          9
 
   Tipo: obj      Path: ..\Objetos
          Total linhas do tipo:         0
@@ -190,17 +209,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      2351
-         Linhas de código:          1207
-         Linhas de comentário:       760
-         Linhas em branco:           417
-         Arquivos deste tipo:          4
+         Total linhas do tipo:      3282
+         Linhas de código:          1947
+         Linhas de comentário:       696
+         Linhas em branco:           688
+         Arquivos deste tipo:          5
 
 Totais para todo o construto TesteAmizade
 
-   Total linhas:              5707
-   Linhas de código:          1530
-   Linhas de comentário:      3327
-   Linhas em branco:           883
-   Arquivos processados:        12
+   Total linhas:              7105
+   Linhas de código:          2311
+   Linhas de comentário:      3609
+   Linhas em branco:          1234
+   Arquivos processados:        14
 

@@ -103,6 +103,7 @@
 =criargrafo grafo0 OK
 =contagemcontador   "GRA_CriarGrafo"  1
 =contagemcontador   "GRA_CriarGrafo: O grafo foi criado"  1
+=verificarespaco grafo0 0
 
 =irvertice   	grafo0 1 GrafoVazio
 =contagemcontador   "GRA_IrVertice"  2
@@ -322,8 +323,9 @@
 =contagemcontador   "GRA_CriarVertice" 5
 =contagemcontador   "GRA_CriarVertice: Faltou memoria ao criar o vertice" 1
 =contagemcontador   "GRA_InserirVertice: Faltou memoria ao criar vertice" 1
-=destruirgrafo grafo1 OK
 =eliminarlimitesespaco
+=destruirgrafo grafo1 OK
+
 
 
 

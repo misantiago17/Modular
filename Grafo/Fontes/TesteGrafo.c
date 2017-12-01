@@ -33,12 +33,9 @@
 #include    "Grafo.h"
 #include    "Generico.h"
 #include    "LerParm.h"
+#include    "CESPDIN.H"
 
-#ifdef _DEBUG
 
-	#include    "CESPDIN.H"
-
-#endif
 
 
 
@@ -57,6 +54,7 @@ static const char NUM_VERTS_CMD           [ ] = "=obternumverts" ;
 static const char NUM_ARESTAS_CMD         [ ] = "=obternumarestas" ;
 static const char INDICES_ARESTAS_CMD     [ ] = "=indicesarestas" ;
 static const char RET_IDENT_CMD           [ ] = "=retornaident" ;
+static const char VerificarEspacoCmd[ ]         = "=verificarespaco" ;
 
 /* Os comandos a seguir somente operam em modo _DEBUG */
 
@@ -92,6 +90,7 @@ GRA_tppGrafo   vtGrafos[ DIM_VT_GRAFO ] ;
 static void DestruirValor( void * pValor ) ;
 static int ValidarInxGrafo( int inxGrafo) ;
 static int ValidarParmIndices(int tamVetor, int *indiceEsp);
+static int VerificarValor( void * pValor ) ;
 
 /*****  Código das funções exportadas pelo módulo  *****/
 /***********************************************************************
@@ -190,6 +189,27 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 	} /* fim ativa: Testar CriarGrafo */
 
+	      /* Testar: CED &Verificar a integridade de um espaço de dados */
+
+         else if ( strcmp( ComandoTeste , VerificarEspacoCmd ) == 0 )
+         {
+			int valEsperado,valObtido;
+            numLidos = LER_LerParametros( "ii" ,
+                               &inxGrafo , &valEsperado ) ;
+
+            if ( ( numLidos != 2 )
+              || !ValidarInxGrafo( inxGrafo))
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+            valObtido = CED_VerificarEspaco( vtGrafos[ inxGrafo ] ,
+                                             VerificarValor ) ;
+
+            return TST_CompararInt( valEsperado , valObtido ,
+                   "Verificação resultou errado." ) ;
+
+         } /* fim ativa: Testar: CED &Verificar a integridade de um espaço de dados */
 
 	/* Testar Destruir Grafo */
 
@@ -677,6 +697,28 @@ int ValidarParmIndices( int tamVetor , int *indiceEsp )
 } /* Fim função: TGRA -Validar indice de Grafo */
 
 
+   int VerificarValor( void * pValor )
+   {
+
+      int Tamanho ;
+      int i ;
+
+      Tamanho = CED_ObterTamanhoValor( pValor ) ;
+
+      if ( (( char * ) pValor )[ 0 ] == '|' )
+      {
+         for( i = 0 ; i < Tamanho ; i++ )
+         {
+            if ( (( char * ) pValor )[ i ] != '|' )
+            {
+               return 0 ;
+            } /* if */
+         } /* for */
+      } /* if */
+
+      return 1 ;
+
+   } /* Fim função: TCED -Verificar valor contido no espaço */
 
 
 /********** Fim do módulo de implementação: TGRA Teste Grafo com cabeca **********/
