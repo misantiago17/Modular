@@ -1,0 +1,54 @@
+
+!!! Inicio dos testes
+!!!      Construto sob teste: ..\Produto\Trab4-8
+!!!      Script de teste:     ..\Scripts\TesteContador.script
+
+!!!    0  Linha:     1  // Script:    TesteContador.script 
+!!!    0  Linha:     2  // Autor:     gab - Gabriel de Andrade Busquim 
+!!!    0  Linha:     3  // Data:      24/11/2017 
+!!!    0  Linha:     4  // Proposito: Ilustrar arquivo de script para controle de cobertura 
+    6  == Inicializar valores
+   12  == struct 0
+   18  == struct 1
+   25  == struct 2
+   43  == Iniciar contagem
+   48  ==Testando funcoes passando um grafo igual a NULL
+  102  ==Testando funcoes passando um grafo vazio
+  144  ==Inserindo dois vertices
+  158  ==Indo para o vertice anterior
+  163  ==Pegando seu identificador e obtendo seu valor
+  172  ==Tentando ir para vertice inexistente
+  177  ==Obtendo o numero de vertices do grafo e de arestas do vertice 1
+  186  ==Tentando obter indice das suas arestas
+  191  ==Tentando criar aresta do vertice para ele mesmo
+  196  ==Tentando criar aresta do vertice para um vertice inexistente
+  203  ==Tentando criar aresta de um vertice inexistente para o vertice
+  210  ==Criando uma aresta entre os vertices 1 e 2
+  217  ==Tentando criar aresta ja existente
+  224  ==Tentando excluir aresta entre o vertice 1 e outro inexistente
+  231  ==Retornando as arestas do vertice 1
+  236  ==Excluindo a aresta entre os vertices 1 e 2
+  245  ==Inserindo um novo vertice
+  253  ==Criando uma aresta entre os vertices 3 e 1
+  260  ==Tentando excluir a novamente a aresta entre os vertices 2 e 1
+  268  ==Excluindo o vertice 3
+  277  ==Excluindo os demais vertices do grafo
+  292  ==Inserindo novamente um vertice
+  299  ==Destruindo o grafo
+  307  ==Testando falta de memoria ao criar o grafo
+!!!    0  Linha:   309  Simula falta de memoria. 
+  314  ==Testando falta de memoria ao inserir vertice
+!!!    0  Linha:   321  Limita numero de espacos alocados. 
+  332  == Terminar contagem
+  337  == Finalizando contagem
+!!!    0  Linha:   340  // Fim 
+
+!!! Número de linhas lidas:         340
+!!! Número de casos de teste:        32
+!!! Número comandos corretos:       229
+!!! Número de falhas encontradas:     0
+
+!!! Não foram encontrados problemas
+
+
+!!! Numero de espacos ainda alocados: 0

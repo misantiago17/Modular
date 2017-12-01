@@ -79,8 +79,11 @@ typedef enum {
 	GRA_CondRetNumArestasZero,
 	/* Não ha arestas neste vertice*/
 	
-	GRA_CondRetArestaParaSiMesmo
+	GRA_CondRetArestaParaSiMesmo,
 	/* Aresta de vertice tentando apontar para p proprio vertice*/
+
+	GRA_CondRetErroEstrutural
+	
 } GRA_tpCondRet;
 
 

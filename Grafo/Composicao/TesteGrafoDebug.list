@@ -4,7 +4,7 @@ GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
 Composição do construto: ..\Composicao\TesteGrafoDebug.comp
 
    Nome do Construto:           TesteGrafoDebug
-   Diretório base:              C:\Users\Usuario\Documents\GitHub\Modular\Grafo\Composicao
+   Diretório base:              C:\Users\Lorene Busquim\Documents\Modular\Grafo\Composicao
 
    Arquivo composição:          ..\Composicao\TesteGrafoDebug.comp
    Arquivo plataforma:          gmake.parm
@@ -51,9 +51,9 @@ Estatísticas do construto
 
    Estatísticas do arquivo: grafo.c
       Total linhas:            1114
-      Linhas de código:         791
-      Linhas de comentário:     156
-      Linhas em branco:         181
+      Linhas de código:         703
+      Linhas de comentário:     249
+      Linhas em branco:         176
    Arquivos de inclusão de que necessita
       cespdin.h
       conta.h
@@ -63,10 +63,10 @@ Estatísticas do construto
       tst_espc.h
 
    Estatísticas do arquivo: grafo.h
-      Total linhas:             419
+      Total linhas:             422
       Linhas de código:          39
-      Linhas de comentário:     328
-      Linhas em branco:          52
+      Linhas de comentário:     329
+      Linhas em branco:          54
    Arquivos em que é incluído
       grafo.c
       testegrafo.c
@@ -121,10 +121,10 @@ Estatísticas do construto
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      3240
+         Total linhas do tipo:      3243
          Linhas de código:           289
-         Linhas de comentário:      2500
-         Linhas em branco:           451
+         Linhas de comentário:      2501
+         Linhas em branco:           453
          Arquivos deste tipo:          7
 
   Tipo: obj      Path: ..\Objetos
@@ -150,16 +150,16 @@ Totais por tipo de arquivo
 
   Tipo: c        Path: ..\Fontes
          Total linhas do tipo:      2384
-         Linhas de código:          1502
-         Linhas de comentário:       409
-         Linhas em branco:           523
+         Linhas de código:          1414
+         Linhas de comentário:       502
+         Linhas em branco:           518
          Arquivos deste tipo:          3
 
 Totais para todo o construto TesteGrafoDebug
 
-   Total linhas:              5624
-   Linhas de código:          1791
-   Linhas de comentário:      2909
-   Linhas em branco:           974
+   Total linhas:              5627
+   Linhas de código:          1703
+   Linhas de comentário:      3003
+   Linhas em branco:           971
    Arquivos processados:        10
 

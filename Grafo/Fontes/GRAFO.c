@@ -1018,7 +1018,7 @@ void DestruirElemVertice(void *Elem)
 }
 
 #ifdef _DEBUG
-	GRA_tpCondRet GRA_VerificarEstrutura(GRA_tppGrafo pGrafo)
+	/*GRA_tpCondRet GRA_VerificarEstrutura(GRA_tppGrafo pGrafo)
 	{
 		int IdAnterior;
 		int tam;
@@ -1045,7 +1045,7 @@ void DestruirElemVertice(void *Elem)
 			if(vert==NULL)
 			{
 				GRA_IrVertice(pGrafo,IdAnterior);
-				return CondRet_ErroEstrutural;
+				return GRA_CondRetErroEstrutural;
 			}
 			retorno = GRA_VerificarElemento(vert);
 			else if(retorno==GRA_CondRetErroEstrutural)
@@ -1110,5 +1110,5 @@ void DestruirElemVertice(void *Elem)
 		}
 		return GRA_CondRetOK;
 }
-
+*/
 #endif
