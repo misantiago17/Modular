@@ -1,7 +1,7 @@
 ##################################################
 ###
-### Diretivas de MAKE para o construto: TesteLista
-### Gerado a partir de: ..\Composicao\TesteLista.comp
+### Diretivas de MAKE para o construto: TesteMensagem
+### Gerado a partir de: ..\Composicao\TesteMensagem.comp
 ###
 ### ----- Arquivo gerado, NÃO EDITE!!! -----
 ###
@@ -9,7 +9,7 @@
 
 ### Nomes globais
 
-NOME            = TesteLista
+NOME            = TesteMensagem
 
 
 ### Nomes de paths
@@ -47,7 +47,8 @@ INCLUDE = $(INCLUDE);$(PDEFAULT)
 ### Regras de geração
 
 all : limpa \
-   $(Fobj)\testelista.obj   $(Fobj)\lista.obj \
+   $(Fobj)\testemensagem.obj   $(Fobj)\lista.obj   $(Fobj)\mensagem.obj \
+   $(Fobj)\perfil.obj \
    Construto
 
 ### Limpar arquivos
@@ -58,8 +59,8 @@ limpa :
 
 ### Dependências de módulos objeto a compilar
 
-$(Fobj)\testelista.obj :  {$(Pc)}\testelista.c \
-    {$(Ph)}generico.h           {$(Ph)}lerparm.h            {$(Ph)}lista.h              \
+$(Fobj)\testemensagem.obj :  {$(Pc)}\testemensagem.c \
+    {$(Ph)}generico.h           {$(Ph)}lerparm.h            {$(Ph)}mensagem.h           \
     {$(Ph)}tst_espc.h          
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
@@ -67,17 +68,26 @@ $(Fobj)\lista.obj :  {$(Pc)}\lista.c \
     {$(Ph)}lista.h             
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
+$(Fobj)\mensagem.obj :  {$(Pc)}\mensagem.c \
+    {$(Ph)}mensagem.h          
+   cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
+
+$(Fobj)\perfil.obj :  {$(Pc)}\perfil.c \
+    {$(Ph)}grafo.h              {$(Ph)}lista.h              {$(Ph)}perfil.h            
+   cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
+
 
 ### Terminação
 
 Construto : \
-   $(Fobj)\testelista.obj   $(Fobj)\lista.obj
+   $(Fobj)\testemensagem.obj   $(Fobj)\lista.obj   $(Fobj)\mensagem.obj \
+   $(Fobj)\perfil.obj
     cd $(Fobj)
     LINK $(L) @$(NOME).build >> $(Ferr)\$(NOME).err
 
 ##################################################
 ###
-### Fim de diretivas MAKE para o construto: TesteLista
+### Fim de diretivas MAKE para o construto: TesteMensagem
 ###
 ##################################################
 

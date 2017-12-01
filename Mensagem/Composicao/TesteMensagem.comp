@@ -1,8 +1,8 @@
-# Composicao do programa de teste de uma lista generica duplamente encadeada
+# Composicao do programa para testar o modulo mensagem
 
 [Diretorios]
 
-Nome        =	TesteLista
+Nome        =	TesteMensagem
 PathDefault =	..\Fontes
 err         =	..\Produto
 obj         =	..\Objetos
@@ -10,11 +10,13 @@ c           =	..\Fontes
 h           =	..\Fontes
 
 [Modulos]
-TesteLista
+TesteMensagem
 Lista
+Mensagem
+Perfil
 
 [BuildInicio]
-/OUT:..\Produto\TRAB1-1.EXE
+/OUT:..\Produto\TRAB4-10.EXE
 /INCREMENTAL:NO
 /MACHINE:IX86
 

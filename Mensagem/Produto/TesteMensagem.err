@@ -53,4 +53,3 @@ testemensagem.c
 ..\Fontes\testemensagem.c(417) : error C2065: 'InxPerfil' : undeclared identifier
 ..\Fontes\testemensagem.c(417) : warning C4133: 'function' : incompatible types - from 'int *' to 'MEN_tpCondMsg *'
 ..\Fontes\testemensagem.c(501) : error C2065: 'DIM_VT_Perfil' : undeclared identifier
-

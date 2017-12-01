@@ -37,7 +37,7 @@
 
 
 
-static const char RESET_PERFIL_CMD        [ ] = "=resetteste"     ;
+
 static const char ESCREVER_MSG_CMD        [ ] = "=escrevermsg"     ;
 static const char EXCLUIR_MSG_CMD         [ ] = "=excluirmsg"     ;
 static const char EXCLUIR_MSGEMAIL_CMD    [ ] = "=excluirmsgemail"     ;
@@ -53,12 +53,12 @@ static const char OBTER_TODASMSGS_CMD     [ ] ="=obtertodasmsgs"   ;
 #define TRUE  1
 #define FALSE 0
 
-#define DIM_VT_PERFIL  10
+#define DIM_VT_PERFIL  8
 
 
 
 
-// VETOR DE PERFIS GRA_tppGrafo   vtPerfis[ DIM_VT_GRAFO ] ;
+PER_tpPerfil *   vtPerfis[ DIM_VT_PERFIL ] ;
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
@@ -72,13 +72,12 @@ static int ValidarInxPerfil( int InxPerfil) ;
 *  $FC Função: TMEN &Testar modulo de mensagnes
 *
 *  $ED Descrição da função
-*     Podem ser criadas até 10 perfis, identificadas pelos índices 0 a 10.
+*     Podem ser criadas até 8 perfis, identificadas pelos índices 0 a 7.
 *	  Esses perfis serao passados para as funcoes do modulo MENSAGEM que
 *	  serao testadas.
 *
 *     Comandos disponíveis:
 *
-*     =resetteste - anula o vetor de perfis. Provoca vazamento de memória
 *     =escrevermsg                  inxPerfilRemetente inxPerfilDestinatario MensagemEnv CondRetEsp
 *     =excluirmsg	                inxPerfil Email FlagMsg Mensagem CondRetEsp
 *	  =excluirmsgemail              inxPerfil Email CondRetEsp
@@ -116,25 +115,24 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 	int numElem = -1 ;
 
+	char * vtEmail  	[DIM_VT_PERFIL] = {"usuario1@gmail.com", "usuario2@gmail.com", "usuario3@gmail.com", "usuario4@gmail.com", "usuario5@gmail.com",
+									  "usuario6@gmail.com", "usuario7@gmail.com", "usuario8@gmail.com"};
+	char * vtPrimNome 	DIM_VT_PERFIL] = {"UsuarioA", "UsuarioB", "UsuarioC", "UsuarioD", "UsuarioE", "UsuarioF", "UsuarioG", "UsuarioH"};
+	char * vtUltNome 	[DIM_VT_PERFIL] = {"SobrenomeA", "SobrenomeB", "SobrenomeC", "SobrenomeD", "SobrenomeE", "SobrenomeF", "SobrenomeG", "SobrenomeH"};
+	char * vtCidade 	[DIM_VT_PERFIL] = {"CidadeA", "CidadeB", "CidadeC", "CidadeD", "CidadeE", "CidadeF", "CidadeG", "CidadeH"};
+	int  vtDia 			[DIM_VT_PERFIL] = {1, 2, 3, 4, 5, 6, 7, 8};
+	int  vtMes 			[DIM_VT_PERFIL] = {1, 2, 3, 4, 5, 6, 7, 8};
+	int  vtAno 			[DIM_VT_PERFIL] = {2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008};
 
-
-	/* Efetuar reset de teste de Perfis */
-
-	if ( strcmp( ComandoTeste , RESET_PERFIL_CMD ) == 0 )
-	{
-
-		for( i = 0 ; i < DIM_VT_PERFIL ; i++ )
-		{
-			vtPerfis[ i ] = NULL ;
-		} /* for */
-
-		return TST_CondRetOK ;
-
-	} /* fim ativa: Efetuar reset de teste de Perfis */
-
+	for (i = 0; i < DIM_VT_PERFIL  ; i++ ){
+		PER_CondRetCriarPerfil = PER_CriarPerfil(vtGrafos[0], &vtPerfil[i], vtEmail[i], vtPrimNome[i], vtUltNome[i],
+							  vtDia[i], vtMes[i], vtAno[i], vtCidade[i]);
+		if (PER_CondRetCriarPerfil == PER_CondRetFaltouMemoria){
+			return TST_CondRetMemoria;
+			}
+		}
 	/* Testar Escrever Mensagem */
-
-	else if ( strcmp( ComandoTeste , ESCREVER_MSG_CMD  ) == 0 )
+	 if ( strcmp( ComandoTeste , ESCREVER_MSG_CMD  ) == 0 )
 	{
 
 		numLidos = LER_LerParametros( "iisi" ,
@@ -146,7 +144,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetParm ;
 		} /* if */
 
-		CondRet=MEN_EscreverMensagem(VetPerfis[inxPerfilRemetente],VetPerfis[inxPerfilDestinatario],Mensagem) ;
+		CondRet=MEN_EscreverMensagem(vtPerfis[inxPerfilRemetente],VetPerfis[inxPerfilDestinatario],Mensagem) ;
 
 		return TST_CompararInt( CondRetEsp , CondRet ,
 			"Erro na condicao de retorno ao escrever mensagem"  ) ;
@@ -187,7 +185,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
             {
                return TST_CondRetParm ;
             } /* if */
-            debug=MEN_ExcluirMensagensEmailvtPerfis[InxPerfil],Email) ;
+            debug=MEN_ExcluirMensagensEmail(vtPerfis[InxPerfil],Email) ;
 			return TST_CompararInt( CondRetEsp , CondRet ,
 			"Erro na condicao de retorno ao excluir mensagem de um email"  ) ;
            
