@@ -1,7 +1,7 @@
 #if ! defined(PERFIL_ )
 #define PERFIL_
 /***************************************************************************
-*  $MCD Módulo de definição: GRA  Grafo Generico com Cabeça
+*  $MCD Módulo de definição: PER Gerenciamento de perfil
 *
 *  Arquivo gerado:              PERFIL.h
 *  Letras identificadoras:      PER
@@ -16,8 +16,8 @@
 *
 *  $ED Descrição do módulo
 *
-*	 
-*	 
+*	 Modulo que armazena dados relativo ao usuario que será armazenado na rede.
+*	 Ele utiliza vertices de um grafo para armazenar os usuarios.
 *
 ***************************************************************************/
 
@@ -27,6 +27,8 @@
 #define PERFIL_EXT extern
 #endif
 
+#include   "GRAFO.h"
+#include   "LISTA.h"
 /***** Declarações exportadas pelo módulo *****/
 
 /* Tipo referência para um perfil */
@@ -44,31 +46,43 @@ typedef struct PER_tagPerfil PER_tpPerfil;
 
 typedef enum {
 	PER_CondRetOK,
+	/* Concluiu corretamente */
 
 	PER_CondRetEmailInvalido,
+	/*Email inserido nao é um email valido*/
 
 	PER_CondRetEmailJaCadastrado,
+	/*Email inserido nao já está cadastrado*/
 
 	PER_CondRetDataInvalida,
+	/*Data inserida nao é valida*/
 
 	PER_CondRetNomeInvalido,
+	/*Nome inserido nao é valido*/
 
 	PER_CondRetCidadeInvalida,
+	/*Cidade inserido nao é valido*/
 
 	PER_CondRetEmailInexistente,
+	/*Email buscado nao existe*/
 
 	PER_CondRetFaltouMemoria,
+	/* Faltou memória ao tentar alocar espaço*/
 
 	PER_CondRetRetornoLisIncorreto,
+	/* Condicao de retorno do modulo Lista imprevista*/
 
 	PER_CondRetRedeVazia,
 
 	PER_CondRetPerfilInexistente,
 	
-	PER_CondRetParametroGRAIncorreto
+	PER_CondRetParametroGRAIncorreto,
+
+	PER_CondRetPonteiroParaRetornoInvalido,
+
+	PER_CondRetPerfilInvalido
 
 } PER_tpCondRet;
-
 
 /***********************************************************************
 *  $FC Função:
@@ -93,7 +107,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-PER_tpCondRet PER_CriarPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil *perfil, char *email, char *primeiroNome, char *ultimoNome,
+PER_tpCondRet PER_CriarPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil **perfil, char *email, char *primeiroNome, char *ultimoNome,
 							  int diaNasc, int mesNasc, int anoNasc, char *cidade);
 
 /***********************************************************************
@@ -136,8 +150,8 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email);
 *
 ***********************************************************************/
 
-PER_tpCondRet PER_ObterPerfil(GRA_tppGrafo pGrafo, char *email, char **primeiroNome, char **ultimoNome,
-							  int *diaNasc, int *mesNasc, int *anoNasc, char **cidade);
+PER_tpCondRet PER_ObterPerfil(PER_tpPerfil *perfil, char *email, char *primeiroNome, char *ultimoNome,
+							  int *diaNasc, int *mesNasc, int *anoNasc, char *cidade);
 
 /***********************************************************************
 *  $FC Função:
@@ -306,7 +320,23 @@ PER_tpCondRet PER_ExcluirTodosPerfis(GRA_tppGrafo pGrafo);
 *
 ***********************************************************************/
 
-PER_tpCondRet PER_retornaLisMensagens(GRA_tppGrafo pGrafo, char *email, LIS_tppLista *mensagens);
+PER_tpCondRet PER_retornaLisMensagens(PER_tpPerfil *perfil, LIS_tppLista *mensagens);
+
+/***
+*  $FC Função:
+*
+*  $ED Descrição da função
+*
+*
+*
+*  $EP Parâmetros
+*
+*
+*  $FV Valor retornado
+*
+*
+***/
+PER_tpCondRet PER_retornaIdPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil *perfil, int *id);
 
 #undef PERFIL_EXT
 
