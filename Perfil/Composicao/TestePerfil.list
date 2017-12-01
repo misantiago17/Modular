@@ -81,9 +81,9 @@ Estatísticas do construto
       testeperfil.c
 
    Estatísticas do arquivo: perfil.c
-      Total linhas:             721
-      Linhas de código:         354
-      Linhas de comentário:     249
+      Total linhas:             728
+      Linhas de código:         353
+      Linhas de comentário:     257
       Linhas em branco:         122
    Arquivos de inclusão de que necessita
       grafo.h
@@ -91,10 +91,10 @@ Estatísticas do construto
       perfil.h
 
    Estatísticas do arquivo: perfil.h
-      Total linhas:             344
-      Linhas de código:          42
+      Total linhas:             346
+      Linhas de código:          43
       Linhas de comentário:     256
-      Linhas em branco:          46
+      Linhas em branco:          47
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
@@ -127,10 +127,10 @@ Estatísticas do construto
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      2340
-         Linhas de código:           232
+         Total linhas do tipo:      2342
+         Linhas de código:           233
          Linhas de comentário:      1792
-         Linhas em branco:           316
+         Linhas em branco:           317
          Arquivos deste tipo:          6
 
   Tipo: obj      Path: ..\Objetos
@@ -155,17 +155,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      2441
-         Linhas de código:          1349
-         Linhas de comentário:       610
+         Total linhas do tipo:      2448
+         Linhas de código:          1348
+         Linhas de comentário:       618
          Linhas em branco:           531
          Arquivos deste tipo:          4
 
 Totais para todo o construto TestePerfil
 
-   Total linhas:              4781
+   Total linhas:              4790
    Linhas de código:          1581
-   Linhas de comentário:      2402
-   Linhas em branco:           847
+   Linhas de comentário:      2410
+   Linhas em branco:           848
    Arquivos processados:        10
 

@@ -69,9 +69,6 @@ typedef enum {
 
 	GRA_CondRetFaltouMemoria,
 	/* Faltou memória ao tentar criar um vértice do grafo */
-
-	GRA_CondRetRetornoLisIncorreto,
-	/* Condicao de retorno do modulo Lista imprevista*/
 	
 	GRA_CondRetParametroIncorreto,
 	/* Parametro passado esta diferente do especificado*/
@@ -125,7 +122,6 @@ GRA_tpCondRet GRA_CriarGrafo(void(*ExcluirValor) (void * pDado), GRA_tppGrafo* G
 *  $FV Valor retornado
 *     GRA_CondRetOK
 *	  GRA_CondRetParametroIncorreto
-*	  GRA_CondRetRetornoLisIncorreto
 *
 ***********************************************************************/
 
@@ -146,7 +142,6 @@ GRA_tpCondRet GRA_DestruirGrafo(GRA_tppGrafo pGrafo);
 *  $FV Valor retornado
 *     GRA_CondRetOK
 *     GRA_CondRetParametroIncorreto
-*     GRA_CondRetRetornoLisIncorreto
 *     GRA_CondRetGrafoVazio
 *     GRA_CondRetNaoAchouVertice
 *
@@ -167,7 +162,6 @@ GRA_tpCondRet GRA_IrVertice(GRA_tppGrafo pGrafo, int numVert);
 *  $FV Valor retornado
 *     GRA_CondRetOK
 *     GRA_CondRetParametroIncorreto
-*     GRA_CondRetRetornoLisIncorreto
 *     GRA_CondRetGrafoVazio
 *
 ***********************************************************************/
@@ -211,7 +205,8 @@ GRA_tpCondRet GRA_ObterValor(GRA_tppGrafo pGrafo, void** pValorRet);
 *
 ***********************************************************************/
 
-GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent) ;
+GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent);
+
 /***********************************************************************
 *  $FC Função: GRA  &Inserir vértice
 *
@@ -227,7 +222,6 @@ GRA_tpCondRet GRA_RetornaIdentificador(GRA_tppGrafo pGrafo, int* numIdent) ;
 *  $FV Valor retornado
 *     GRA_CondRetOK
 *     GRA_CondRetParametroIncorreto
-*     GRA_CondRetRetornoLisIncorreto
 *     GRA_CondRetFaltouMemoria
 *
 ***********************************************************************/
@@ -252,7 +246,6 @@ GRA_tpCondRet GRA_InserirVertice(GRA_tppGrafo pGrafo, void * pValor);
 *     GRA_CondRetOK
 *     GRA_CondRetParametroIncorreto
 *     GRA_CondRetGrafoVazio
-*     GRA_CondRetRetornoLisIncorreto
 *
 ***********************************************************************/
 
@@ -280,7 +273,6 @@ GRA_tpCondRet GRA_ExcluirVertice(GRA_tppGrafo pGrafo);
 *     GRA_CondRetOK
 *     GRA_CondRetArestaParaSiMesmo
 *     GRA_CondRetParametroIncorreto
-*	  GRA_CondRetRetornoLisIncorreto
 *     GRA_CondRetGrafoVazio
 *     GRA_CondRetNaoAchouVertice
 *     GRA_CondRetArestaJaExiste
@@ -336,7 +328,6 @@ GRA_tpCondRet GRA_ExisteAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2);
 *     GRA_CondRetGrafoVazio
 *     GRA_CondRetNaoAchouAresta
 *     GRA_CondRetNaoAchouVertice
-*     GRA_CondRetRetornoLisIncorreto
 *
 ***********************************************************************/
 
@@ -356,7 +347,6 @@ GRA_tpCondRet GRA_ExcluirAresta(GRA_tppGrafo pGrafo, int numVert1, int numVert2)
 *     GRA_CondRetOK
 *	  GRA_CondRetParametroIncorreto
 *     GRA_CondRetGrafoVazio
-*     GRA_CondRetRetornoLisIncorreto
 *
 ***********************************************************************/
 
@@ -375,7 +365,6 @@ GRA_tpCondRet GRA_NumArestas(GRA_tppGrafo pGrafo,int *pNumArestas);
 *  $FV Valor retornado
 *     GRA_CondRetOK
 *	  GRA_CondRetParametroIncorreto
-*     GRA_CondRetRetornoLisIncorreto
 *
 ***********************************************************************/
 
@@ -396,11 +385,31 @@ GRA_tpCondRet GRA_NumVertices(GRA_tppGrafo pGrafo, int *pNumVerts);
 *	  GRA_CondRetGrafoVazio
 *	  GRA_CondRetNumArestasZero
 *	  GRA_CondRetParametroIncorreto
-*	  GRA_CondRetRetornoLisIncorreto
 *
 ***********************************************************************/
 
 GRA_tpCondRet GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo, int* pDado);
+
+/***********************************************************************
+*
+*  $FC Função: GRA  &Verificar Estrutura
+*
+*  $ED Descrição da função
+*     Função da interface de teste.
+*     Verifica a estrutura do grafo fornecido como parametro.
+*     
+*
+*  $EP Parâmetros
+*     $P pListaParm - ponteiro para um espaço que d.
+*
+*  $FV Valor retornado
+*     Condição de retorno de teste
+*
+***********************************************************************/
+
+#ifdef _DEBUG
+	GRA_tpCondRet GRA_VerificarEstrutura(GRA_tppGrafo pGrafo);
+#endif
 
 #undef GRAFO_EXT
 
