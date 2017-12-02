@@ -4,7 +4,7 @@ GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
 Composição do construto: ..\Composicao\TesteMenu.comp
 
    Nome do Construto:           TesteMenu
-   Diretório base:              C:\Users\Lorene Busquim\Documents\Modular\Menu\Composicao
+   Diretório base:              D:\Projetos\PUC\Modular\Projeto Git\Menu\Composicao
 
    Arquivo composição:          ..\Composicao\TesteMenu.comp
    Arquivo plataforma:          gmake.parm
@@ -55,6 +55,7 @@ Estatísticas do construto
       Linhas em branco:          97
    Arquivos em que é incluído
       grafo.c
+      menu.c
 
    Estatísticas do arquivo: conta.h
       Total linhas:             468
@@ -140,21 +141,22 @@ Estatísticas do construto
       menu.c
 
    Estatísticas do arquivo: menu.c
-      Total linhas:              52
-      Linhas de código:          18
-      Linhas de comentário:      22
-      Linhas em branco:          12
+      Total linhas:             216
+      Linhas de código:         124
+      Linhas de comentário:      37
+      Linhas em branco:          53
    Arquivos de inclusão de que necessita
       amizade.h
+      cespdin.h
       grafo.h
       lista.h
       mensagem.h
       perfil.h
 
    Estatísticas do arquivo: perfil.c
-      Total linhas:             728
+      Total linhas:             743
       Linhas de código:         353
-      Linhas de comentário:     257
+      Linhas de comentário:     272
       Linhas em branco:         122
    Arquivos de inclusão de que necessita
       grafo.h
@@ -162,10 +164,10 @@ Estatísticas do construto
       perfil.h
 
    Estatísticas do arquivo: perfil.h
-      Total linhas:             348
-      Linhas de código:          43
-      Linhas de comentário:     256
-      Linhas em branco:          49
+      Total linhas:             331
+      Linhas de código:          42
+      Linhas de comentário:     243
+      Linhas em branco:          46
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
@@ -187,10 +189,10 @@ Estatísticas do construto
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      3667
-         Linhas de código:           360
-         Linhas de comentário:      2798
-         Linhas em branco:           509
+         Total linhas do tipo:      3650
+         Linhas de código:           359
+         Linhas de comentário:      2785
+         Linhas em branco:           506
          Arquivos deste tipo:          9
 
   Tipo: obj      Path: ..\Objetos
@@ -215,17 +217,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      3177
-         Linhas de código:          1795
-         Linhas de comentário:       835
-         Linhas em branco:           593
+         Total linhas do tipo:      3356
+         Linhas de código:          1901
+         Linhas de comentário:       865
+         Linhas em branco:           634
          Arquivos deste tipo:          6
 
 Totais para todo o construto TesteMenu
 
-   Total linhas:              6844
-   Linhas de código:          2155
-   Linhas de comentário:      3633
-   Linhas em branco:          1102
+   Total linhas:              7006
+   Linhas de código:          2260
+   Linhas de comentário:      3650
+   Linhas em branco:          1140
    Arquivos processados:        15
 

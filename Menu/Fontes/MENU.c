@@ -24,20 +24,26 @@
 #include   <memory.h>
 #include   <malloc.h>
 #include   <assert.h>
+#include   <stdlib.h>
 #include   "CESPDIN.H"
 #include   "GRAFO.h"
 #include   "PERFIL.h"
 #include   "AMIZADE.h"
 #include   "MENSAGEM.H"
 
+void MENU_Menu1(GRA_tppGrafo pGrafo);
+void MENU_Menu2(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
+void MENU_Menu3();
+void MENU_Menu4();
+void MENU_Menu5();
+void DestruirValor( void * pValor );
+
 int main () {
+	GRA_tppGrafo Grafo;
     
-	GRA_tppGrafo *Grafo;
+	GRA_CriarGrafo(DestruirValor, &Grafo);
 	
-	if ((Grafo = (GRA_tppGrafo *)malloc(sizeof(GRA_tppGrafo))) == NULL)
-		return exit(0);
-    
-    MENU_Menu1();
+    MENU_Menu1(Grafo);
     
     
     return 0;
@@ -49,15 +55,6 @@ int main () {
 /***************************************************************************
  *  FunÁ„o: MENU  &Menu 1 - Menu inicial
  *
- *      MENU_CondRetOK
- *      MENU_UsuarioNaoExiste
- *      AMI_NaoAceitou
- *      AMI_UsuarioNaoExiste
- *      AMI_ArestaParaSiMesmo
- *      AMI_AmizadeJaExiste
- *      AMI_CondRetRetornoGraIncorreto
- *      AMI_CondRetRetornoPerIncorreto
- *
  *****/
 
 void MENU_Menu1(GRA_tppGrafo pGrafo) {
@@ -66,15 +63,40 @@ void MENU_Menu1(GRA_tppGrafo pGrafo) {
     int escolhaInvalida = 0;
     int escolhaPerfilInvalido = 0;
     
-    char * emailPerfilProcurado[50];
-    char * primNome[50];
-    char * ultNome[50];
-    char * cidade[50];
+    char * emailPerfilProcurado;
+	char * emailPerfil;
+    char * primNome;
+    char * ultNome;
+    char * cidade;
     int dia;
     int mes;
     int ano;
-    
-    PER_tpCondRet condRetObterPerfil;
+	int id;
+	
+	PER_tpPerfil * pPerfil;
+	PER_tpCondRet condRetObterPerfil;
+	PER_tpCondRet condRetObterEmail;
+	
+	if ((emailPerfilProcurado = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("N„o h· espaÁo para armazenar email do perfil procurado");
+		exit(0);
+	}
+	if ((emailPerfil = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("N„o h· espaÁo para armazenar email do perfil");
+		exit(0);
+	}
+	if ((primNome = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("N„o h· espaÁo para armazenar primeiro nome do perfil");
+		exit(0);
+	}
+	if ((ultNome = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("N„o h· espaÁo para armazenar ultimo nome do perfil");
+		exit(0);
+	}
+	if ((cidade = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("N„o h· espaÁo para armazenar ultimo nome do cidade");
+		exit(0);
+	}
     
     printf("===============================================================================\n");
     printf("Bem-vindo a rede social blábláblá\n\n");
@@ -89,8 +111,8 @@ void MENU_Menu1(GRA_tppGrafo pGrafo) {
     while (escolhaInvalida == 0){
         
         printf("> ");
-        scanf("%d", menuEscolhido);
-        print("\n\n")
+        scanf("%d", &menuEscolhido);
+        printf("\n\n");
         
         // Menu 3
         if (menuEscolhido == 1){
@@ -103,29 +125,36 @@ void MENU_Menu1(GRA_tppGrafo pGrafo) {
             
             while (escolhaPerfilInvalido == 0) {
                 printf("Digite o email do perfil que deseja encontrar: ");
-                scanf("%d", perfilProcurado);
+                scanf("%d", &emailPerfilProcurado);
                 printf("\n\n");
+				
+				condRetObterEmail = PER_BuscaEmail(pGrafo, emailPerfilProcurado, &pPerfil, &id);
                 
-                condRetObterPerfil = PER_ObterPerfil(pGrafo, perfilProcurado, primNome, ultNome,
-                                                     dia, mes, ano, cidade);
-                if (condRetObterPerfil == PER_CondRetEmailInexistente){
-                    prinf("Usuario procurado não existe. Por favor procure novamente. \n\n");
-                } else if (condRetObterPerfil == PER_CondRetFaltouMemoria){
-                    prinf("Faltou memória para executar a ação. \n\n");
-                    break;
-                    exit(0);
-                } else if (condRetObterPerfil != PER_CondRetOK){
-                    prinf("Retorno do módulo perfil inesperado. \n\n");
-                    break;
-                    exit(0);
-                } else {
-                    escolhaPerfilInvalido = 1
-                    escolhaInvalida = 1
+                if (condRetObterEmail == PER_CondRetEmailInexistente){
+                    printf("Usuario procurado não existe. Por favor procure novamente. \n\n");
+				} else if (condRetObterEmail == PER_CondRetRedeVazia) {
+					printf("A rede est· vazia. Crie um usu·rio e tente novamente. \n\n");
+				} else if (condRetObterEmail != PER_CondRetOK){
+					printf("Retorno do módulo perfil inesperado. \n\n");
+					exit(0);
+				} else {
+					condRetObterPerfil = PER_ObterPerfil(pPerfil, emailPerfil, primNome, ultNome,
+                                                     &dia, &mes, &ano, cidade);
+													 
+					if (condRetObterPerfil == PER_CondRetFaltouMemoria){
+						printf("Faltou memória para executar a ação. \n\n");
+						exit(0);
+					} else if (condRetObterPerfil != PER_CondRetOK){
+						printf("Retorno do módulo perfil inesperado. \n\n");
+						exit(0);
+					} else {
+						escolhaPerfilInvalido = 1;
+						escolhaInvalida = 1;
                     
-                    MENU_Menu2(pGrafo, PER_tpPerfil, emailPerfilProcurado, primNome, ultNome, cidade, dia, mes, ano);
-                }
+						MENU_Menu2(pGrafo, pPerfil, emailPerfilProcurado, primNome, ultNome, cidade, dia, mes, ano);
+					}
+				}
             }
-            
             
         // Menu 4
         } else if (menuEscolhido == 3) {
@@ -141,291 +170,47 @@ void MENU_Menu1(GRA_tppGrafo pGrafo) {
             
         } else {
             
-            print("Escolha inválida de menu. Por favor, digite o menu novamente.\n\n")
+            printf("Escolha inválida de menu. Por favor, digite o menu novamente.\n\n");
             
         }
         
     }
     
-}
+}/* Fim funÁ„o: MENU - Menu 1 - Menu Inicial */
+
+/***************************************************************************
+ *  FunÁ„o: MENU  &Menu 2 - Menu inicial
+ *
+ *****/
 
 // Ir para perfil
-MENU_tpCondRet MENU_Menu2(GRA_tppGrafo pGrafo, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
+void MENU_Menu2(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
 
 // Criar novo perfil
-MENU_tpCondRet MENU_Menu3();
+void MENU_Menu3();
 
 // Ver número de perfis cadastrado
-MENU_tpCondRet MENU_Menu4();
+void MENU_Menu4();
 
 // Excluir todos os perfis da rede
-MENU_tpCondRet MENU_Menu5();
-
-
-// =================== TUDO AQUI EMBAIXO NAO É MENU ========================
+void MENU_Menu5();
 
 
 
 /***************************************************************************
-*  FunÁ„o: AMI  &Criar Amizade
-*
-*      AMI_CondRetOK
-*      AMI_NaoAceitou
-*	   AMI_UsuarioNaoExiste
-*	   AMI_ArestaParaSiMesmo
-*	   AMI_AmizadeJaExiste
-*	   AMI_CondRetRetornoGraIncorreto
-*	   AMI_CondRetRetornoPerIncorreto
-*
-*****/
-
-AMI_tpCondRet AMI_CriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil * Usuario2, AMI_tpSolitacao Aceitacao){
-	
-	GRA_tpCondRet GRA_RetornoCriarAresta;
-	PER_tpCondRet PER_RetornoId1;
-	PER_tpCondRet PER_RetornoId2;
-	int id1;
-	int id2;
-	
-	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,id1);
-	PER_RetornoId2 = PER_retornaIdPerfil(pGrafo, Usuario2,id2);
-	if (PER_RetornoId1 == PER_CondRetPerfilInexistente || PER_RetornoId2 == PER_CondRetPerfilInexistente){
-		return AMI_UsuarioNaoExiste;
-	}
-	
-	if (Aceitacao == AMI_SolicitacaoRejeitada){
-		return AMI_NaoAceitou;
-	}
-		
-	GRA_RetornoCriarAresta = GRA_CriarAresta(pGrafo, id1, id2);
-	if (GRA_RetornoCriarAresta == GRA_CondRetArestaJaExiste){
-		return AMI_AmizadeJaExiste;
-	} else if (GRA_RetornoCriarAresta == GRA_CondRetArestaParaSiMesmo){
-		return 	AMI_ArestaParaSiMesmo;
-	}else if (GRA_RetornoCriarAresta != GRA_CondRetOK){
-		return AMI_CondRetRetornoGraIncorreto;
-	}
-	
-	return AMI_CondRetOK;
-}/* Fim funÁ„o: AMI  &Criar Amizade */
-
-
-/***************************************************************************
-*  FunÁ„o: AMI  &Excluir Amizade
-*
-*	  AMI_CondRetOK
-*	  AMI_UsuarioNaoExiste
-*	  AMI_AmizadeNaoExiste
-*	  AMI_CondRetRetornoGraIncorreto
-*	  AMI_CondRetRetornoPerIncorreto
-*	
-*****/
-
-AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil Usuario2){
-	
-	GRA_tpCondRet GRA_RetornoExcluirAresta;
-	PER_tpCondRet PER_RetornoId1;
-	PER_tpCondRet PER_RetornoId2;
-	int id1;
-	int id2;
-	
-	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,id1);
-	PER_RetornoId2 = PER_retornaIdPerfil(pGrafo, Usuario2,id2);
-	if (PER_RetornoId1 == PER_CondRetPerfilInexistente || PER_RetornoId2 == PER_CondRetPerfilInexistente){
-		return AMI_UsuarioNaoExiste;
-	}
-	
-	GRA_RetornoExcluirAresta = GRA_ExcluirAresta(pGrafo, id1, id2);
-	if (GRA_RetornoExcluirAresta == GRA_CondRetNaoAchouAresta){
-		return AMI_AmizadeNaoExiste;
-	} else if (GRA_RetornoExcluirAresta != GRA_CondRetOK){
-		return AMI_CondRetRetornoGraIncorreto;
-	}
-	
-	return AMI_CondRetOK;
-}/* Fim funÁ„o: AMI  &Excluir Amizade */
+ *  FunÁ„o: MENU  &Destriur Valor
+ *
+ *****/
  
-/***************************************************************************
-*  FunÁ„o: AMI  &Verificar N˙mero de Amigos
-*
-*     AMI_CondRetOK
-*	  AMI_UsuarioNaoExiste
-*     AMI_NaoPossuiAmizades
-*	  AMI_CondRetRetornoPerIncorreto
-*	  AMI_CondRetRetornoGraIncorreto
-*
-*****/
-AMI_tpCondRet AMI_VerificarNumAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, int* numAmizades){
-	
-	GRA_tpCondRet GRA_RetornoNumAmigos;
-	GRA_tpCondRet GRA_RetornoMoverCorrente;
-	PER_tpCondRet PER_RetornoId1;
-	int id;
-	
-	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,id);
-	if (PER_RetornoId1 == PER_CondRetPerfilInexistente){
-		return AMI_UsuarioNaoExiste;
-	}
-	
-	GRA_RetornoMoverCorrente = GRA_IrVertice(pGrafo, id);
-	if (GRA_RetornoMoverCorrente != GRA_CondRetOK){
-		return AMI_CondRetRetornoGraIncorreto;
-	}
-	
-	GRA_RetornoNumAmigos = GRA_NumVertices(pGrafo, numAmizades);
-	if (GRA_RetornoNumAmigos == GRA_CondRetOK){
-		return AMI_CondRetRetornoGraIncorreto;
-	}
-	
-	
-	if (numAmizades == 0){
-		return AMI_NaoPossuiAmizades;
-	}
-	
-	return AMI_CondRetOK;
-}/* Fim funÁ„o: AMI  &Verificar N˙mero de Amigos */
+   void DestruirValor( void * pValor )
+   {
+
+      free( pValor ) ;
+
+   } /* Fim funÁ„o: TAMI -Destruir valor */
+
+ // =================== TUDO AQUI EMBAIXO NAO É MENU ========================
 
 
-/***************************************************************************
-*  FunÁ„o: AMI  &Armazenar Amizades
-*
-*     AMI_CondRetOK
-*     AMI_NaoPossuiAmizades
-*	  AMI_UsuarioNaoExiste
-*	  AMI_CondRetRetornoPerIncorreto
-*	  AMI_CondRetRetornoGraIncorreto
-*
-*****/
-
-AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil **PerfilAmigos){
-	
-	GRA_tpCondRet GRA_RetornoIndiceAresta;
-	GRA_tpCondRet GRA_RetornoObterAmigo;
-	AMI_tpCondRet AMI_RetornoNumAmigos;
-	PER_tpCondRet PER_RetornoId1;
-	int id;
-	int numAmigos;
-	int* IdAmigos;
-	
-	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,id);
-	if (PER_RetornoId1 == PER_CondRetPerfilInexistente){
-		return AMI_UsuarioNaoExiste;
-	}
-	
-	AMI_RetornoNumAmigos = AMI_VerificarNumAmigos(Usuario1, numAmigos);
-	if (AMI_RetornoNumAmigos != AMI_CondRetOK){
-		return AMI_RetornoNumAmigos;
-	}
-	if (numAmigos == 0){
-		return AMI_NaoPossuiAmizades;
-	}
-	
-	GRA_RetornoIndiceAresta = GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo, IdAmigos);
-	if (GRA_RetornoIndiceAresta != GRA_CondRetOK){
-		return AMI_CondRetRetornoGraIncorreto;
-	}
-	
-	for(i=0;i<numAmigos;i++) {
-		PER_tpPerfil **perfil;
-		char *email;
-		
-		GRA_RetornoObterAmigo = GRA_ObterValor(pGrafo, perfil);
-		if (GRA_RetornoObterAmigo != GRA_CondRetOK){
-			return AMI_CondRetRetornoGraIncorreto;
-		}
-		PerfilAmigos[i] = *perfil
-		//strcpy((*perfil)->email, email);
-	}
-	
-	return AMI_CondRetOK;
-	
-}/* Fim funÁ„o: AMI  &Armazenar Amizades */
-
-
-/***************************************************************************
-*  FunÁ„o: AMI  &Excluir Todas as Amizades
-*
-*     AMI_CondRetOK
-*	  AMI_UsuarioNaoExiste
-*     AMI_NaoPossuiAmizades
-*	  AMI_CondRetRetornoPerIncorreto
-*	  AMI_CondRetRetornoGraIncorreto
-*
-*****/
-
-AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1){
-	
-	GRA_tpCondRet GRA_RetornoIndiceAresta;
-	GRA_tpCondRet GRA_RetornoExcluirAresta;
-	AMI_tpCondRet AMI_RetornoNumAmigos;
-	PER_tpCondRet PER_RetornoId1;
-	int id;
-	int numAmigos;
-	int* IdAmigos;
-	
-	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,id);
-	if (PER_RetornoId1 == PER_CondRetPerfilInexistente){
-		return AMI_UsuarioNaoExiste;
-	}
-	
-	AMI_RetornoNumAmigos = AMI_VerificarNumAmigos(Usuario1, numAmigos);
-	if (AMI_RetornoNumAmigos != AMI_CondRetOK){
-		return AMI_RetornoNumAmigos;
-	}
-	if (numAmigos == 0){
-		return AMI_NaoPossuiAmizades;
-	}
-	
-	GRA_RetornoIndiceAresta = GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo, IdAmigos);
-	if (GRA_RetornoIndiceAresta != GRA_CondRetOK){
-		return AMI_CondRetRetornoGraIncorreto;
-	}
-	
-	for(i=0;i<numAmigos;i++) {
-		GRA_RetornoExcluirAresta = GRA_ExcluirAresta(pGrafo, id, IdAmigos[i]);
-		if (GRA_RetornoExcluirAresta != GRA_CondRetOK){
-			return AMI_CondRetRetornoGraIncorreto;
-		}
-	}
-	
-	return AMI_CondRetOK;
-	
-}/* Fim funÁ„o: AMI  &Excluir Todas as Amizades */
-
-
-/***************************************************************************
-*  FunÁ„o: AMI  &Verificar Amizade
-*
-*     AMI_CondRetOK
-*     AMI_UsuarioNaoExiste
-*	  AMI_CondRetRetornoPerIncorreto
-*	  AMI_CondRetRetornoGraIncorreto
-*	  AMI_AmizadeNaoExiste
-*
-*****/
- 
- AMI_tpCondRet AMI_VerificarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil * Usuario2, AMI_tpVerificacao ExisteAmizade)[
- 
-	GRA_tpCondRet GRA_RetornoVerificaAmizade;
-	PER_tpCondRet PER_RetornoId1;
-	PER_tpCondRet PER_RetornoId2;
-	int id1;
-	int id2;
-	
-	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,id1);
-	PER_RetornoId2 = PER_retornaIdPerfil(pGrafo, Usuario2,id2);
-	if (PER_RetornoId1 == PER_CondRetPerfilInexistente || PER_RetornoId2 == PER_CondRetPerfilInexistente){
-		return AMI_UsuarioNaoExiste;
-	}
-	
-	GRA_RetornoVerificaAmizade = GRA_ExisteAresta(pGrafo, id1, id2);
-	if (GRA_RetornoVerificaAmizade == GRA_CondRetNaoAchouAresta){
-		return AMI_AmizadeNaoExiste;
-	} else if (GRA_RetornoVerificaAmizade != GRA_CondRetOK){
-		return AMI_CondRetRetornoGraIncorreto;
-	}
-	
-	return AMI_CondRetOK;
- }/* Fim funÁ„o: AMI  &Verificar Amizade */
  
  

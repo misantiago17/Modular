@@ -52,7 +52,7 @@ typedef enum {
 	/*Email inserido nao é um email valido*/
 
 	PER_CondRetEmailJaCadastrado,
-	/*Email inserido nao já está cadastrado*/
+	/*Email inserido já está cadastrado*/
 
 	PER_CondRetDataInvalida,
 	/*Data inserida nao é valida*/
@@ -61,7 +61,7 @@ typedef enum {
 	/*Nome inserido nao é valido*/
 
 	PER_CondRetCidadeInvalida,
-	/*Cidade inserido nao é valido*/
+	/*Cidade inserida nao é valida*/
 
 	PER_CondRetEmailInexistente,
 	/*Email buscado nao existe*/
@@ -73,16 +73,16 @@ typedef enum {
 	/* Condicao de retorno do modulo Lista imprevista*/
 
 	PER_CondRetRedeVazia,
+	/*A rede não possui nenhum perfil criado*/
 
 	PER_CondRetPerfilInexistente,
-	
+	/*Ponteiro para perfil passado como parametro nao existe*/
+
 	PER_CondRetParametroGRAIncorreto,
-
-
-	PER_CondRetPonteiroParaRetornoInvalido,
+	/*Grafo passado como parametro nao é valido*/
 
 	PER_CondRetPerfilInvalido
-
+	/*Ponteiro para perfil passado como parametro nao é valido*/
 
 } PER_tpCondRet;
 
@@ -99,7 +99,6 @@ typedef enum {
 *  $FV Valor retornado
 *     PER_CondRetOK
 *     PER_CondRetParametroGRAIncorreto
-*     PER_CondRetRetornoLisIncorreto
 *     PER_CondRetEmailJaCadastrado
 *     PER_CondRetEmailInvalido
 *     PER_CondRetNomeInvalido
@@ -125,8 +124,8 @@ PER_tpCondRet PER_CriarPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil **perfil, char *
 *  $FV Valor retornado
 *     PER_CondRetOK
 *     PER_CondRetParametroGRAIncorreto
-*     PER_CondRetRetornoLisIncorreto
 *     PER_CondRetEmailInexistente
+*     PER_CondRetRetornoLisIncorreto
 *
 ***********************************************************************/
 
@@ -145,10 +144,7 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email);
 *
 *  $FV Valor retornado
 *     PER_CondRetOK
-*     PER_CondRetParametroGRAIncorreto
-*     PER_CondRetRetornoLisIncorreto
-*     PER_CondRetEmailInexistente
-*     PER_CondRetFaltouMemoria
+*     PER_CondRetPerfilInvalido
 *
 ***********************************************************************/
 
@@ -167,9 +163,7 @@ PER_tpCondRet PER_ObterPerfil(PER_tpPerfil *perfil, char *email, char *primeiroN
 *
 *  $FV Valor retornado
 *     PER_CondRetOK
-*     PER_CondRetParametroGRAIncorreto
-*     PER_CondRetRetornoLisIncorreto
-*     PER_CondRetRedeVazia
+*	  PER_CondRetParametroGRAIncorreto
 *
 ***********************************************************************/
 
@@ -188,11 +182,9 @@ PER_tpCondRet PER_NumeroPerfis(GRA_tppGrafo pGrafo, int *qtd);
 *  $FV Valor retornado
 *     PER_CondRetOK
 *     PER_CondRetParametroGRAIncorreto
-*     PER_CondRetRetornoLisIncorreto
 *     PER_CondRetEmailJaCadastrado
 *     PER_CondRetEmailInvalido
 *     PER_CondRetEmailInexistente
-*     PER_CondRetFaltouMemoria
 *
 ***********************************************************************/
 
@@ -211,10 +203,8 @@ PER_tpCondRet PER_ModificaEmail(GRA_tppGrafo pGrafo, char *emailAtual, char *ema
 *  $FV Valor retornado
 *     PER_CondRetOK
 *     PER_CondRetNomeInvalido
-*     PER_CondRetEmailInexistente
 *     PER_CondRetParametroGRAIncorreto
-*     PER_CondRetRetornoLisIncorreto
-*     PER_CondRetFaltouMemoria
+*     PER_CondRetEmailInexistente
 *
 ***********************************************************************/
 
@@ -233,9 +223,8 @@ PER_tpCondRet PER_ModificaNome(GRA_tppGrafo pGrafo, char *email, char *primeiroN
 *  $FV Valor retornado
 *     PER_CondRetOK
 *     PER_CondRetDataInvalida
-*     PER_CondRetEmailInexistente
 *     PER_CondRetParametroGRAIncorreto
-*     PER_CondRetRetornoLisIncorreto
+*     PER_CondRetEmailInexistente
 *
 ***********************************************************************/
 
@@ -256,8 +245,6 @@ PER_tpCondRet PER_ModificaDataNasc(GRA_tppGrafo pGrafo, char *email, int diaNasc
 *     PER_CondRetCidadeInvalida
 *     PER_CondRetEmailInexistente
 *     PER_CondRetParametroGRAIncorreto
-*     PER_CondRetRetornoLisIncorreto
-*     PER_CondRetFaltouMemoria
 *
 ***********************************************************************/
 
@@ -274,11 +261,11 @@ PER_tpCondRet PER_ModificaCidade(GRA_tppGrafo pGrafo, char *email, char *cidade)
 *
 *
 *  $FV Valor retornado
-*     PER_CondRetEmailInexistente
+*     PER_CondRetOK
 *     PER_CondRetParametroGRAIncorreto
-*     PER_CondRetRetornoLisIncorreto
 *     PER_CondRetRedeVazia
 *     PER_CondRetEmailJaCadastrado
+*     PER_CondRetEmailInexistente
 *
 ***********************************************************************/
 
@@ -297,7 +284,6 @@ PER_tpCondRet PER_BuscaEmail(GRA_tppGrafo pGrafo, char *email, PER_tpPerfil **pe
 *  $FV Valor retornado
 *     PER_CondRetOK
 *     PER_CondRetParametroGRAIncorreto
-*     PER_CondRetRetornoLisIncorreto
 *
 ***********************************************************************/
 
@@ -314,11 +300,8 @@ PER_tpCondRet PER_ExcluirTodosPerfis(GRA_tppGrafo pGrafo);
 *
 *
 *  $FV Valor retornado
-*     PER_CondRetEmailInexistente
-*     PER_CondRetParametroGRAIncorreto
-*     PER_CondRetRetornoLisIncorreto
-*     PER_CondRetRedeVazia
-*     PER_CondRetEmailJaCadastrado
+*     PER_CondRetOK
+*     PER_CondRetPerfilInexistente
 *
 ***********************************************************************/
 
