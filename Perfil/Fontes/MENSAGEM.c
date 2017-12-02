@@ -112,10 +112,10 @@ MEN_tpCondRet MEN_EscreverMensagem(PER_tpPerfil * Remetente,PER_tpPerfil *Destin
 		return MEN_CondRetFaltouMemoria;
 	}
 	if(PER_ObterPerfil(Remetente, emailRem,primeiroNome, ultimoNome,
-		&diaNasc, &mesNasc, &anoNasc, cidade)==PER_CondRetPonteiroParaRetornoInvalido)
+		&diaNasc, &mesNasc, &anoNasc, cidade)==PER_CondRetPerfilInvalido)
 		return MEN_CondRetPerfilInvalido;
 	if (PER_ObterPerfil(Destinatario, emailDest,primeiroNome, ultimoNome,
-		&diaNasc, &mesNasc, &anoNasc, cidade)==PER_CondRetPonteiroParaRetornoInvalido)
+		&diaNasc, &mesNasc, &anoNasc, cidade)==PER_CondRetPerfilInvalido)
 		return MEN_CondRetPerfilInvalido;
 	if(strcmp(emailRem,emailDest)==0)
 		return MEN_CondRetMesmoPerfil;

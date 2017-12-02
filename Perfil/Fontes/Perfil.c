@@ -191,7 +191,7 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email) {
 PER_tpCondRet PER_ObterPerfil(PER_tpPerfil *perfil, char *email, char *primeiroNome, char *ultimoNome,
 								int *diaNasc, int *mesNasc, int *anoNasc, char *cidade)
 {
-	PER_tpCondRet retorno;
+
 	if (perfil == NULL)
 		return PER_CondRetPerfilInvalido;
 
