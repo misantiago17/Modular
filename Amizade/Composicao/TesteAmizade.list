@@ -4,7 +4,7 @@ GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
 Composição do construto: ..\Composicao\TesteAmizade.comp
 
    Nome do Construto:           TesteAmizade
-   Diretório base:              C:\Users\Usuario\Documents\GitHub\Modular\Amizade\Composicao
+   Diretório base:              C:\Users\Lorene Busquim\Documents\Modular\Amizade\Composicao
 
    Arquivo composição:          ..\Composicao\TesteAmizade.comp
    Arquivo plataforma:          gmake.parm
@@ -88,10 +88,10 @@ Estatísticas do construto
       tst_espc.h
 
    Estatísticas do arquivo: grafo.h
-      Total linhas:             419
-      Linhas de código:          39
+      Total linhas:             422
+      Linhas de código:          40
       Linhas de comentário:     328
-      Linhas em branco:          52
+      Linhas em branco:          54
    Arquivos em que é incluído
       amizade.c
       amizade.h
@@ -181,10 +181,10 @@ Estatísticas do construto
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      3823
-         Linhas de código:           364
+         Total linhas do tipo:      3826
+         Linhas de código:           365
          Linhas de comentário:      2913
-         Linhas em branco:           546
+         Linhas em branco:           548
          Arquivos deste tipo:          9
 
   Tipo: obj      Path: ..\Objetos
@@ -217,9 +217,9 @@ Totais por tipo de arquivo
 
 Totais para todo o construto TesteAmizade
 
-   Total linhas:              7105
-   Linhas de código:          2311
+   Total linhas:              7108
+   Linhas de código:          2312
    Linhas de comentário:      3609
-   Linhas em branco:          1234
+   Linhas em branco:          1236
    Arquivos processados:        14
 

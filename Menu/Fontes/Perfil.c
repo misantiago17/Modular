@@ -167,11 +167,22 @@ OK
 *     PER_CondRetOK
 *     PER_CondRetPerfilInvalido
 */
+/*
+OK
+*     PER_CondRetOK
+*     PER_CondRetParametroGRAIncorreto
+*     PER_CondRetRedeVazia
+*     PER_CondRetEmailJaCadastrado
+*     PER_CondRetEmailInexistente
+*/
 PER_tpCondRet PER_ObterPerfil(PER_tpPerfil *perfil, char *email, char *primeiroNome, char *ultimoNome,
 								int *diaNasc, int *mesNasc, int *anoNasc, char *cidade)
 {
+	PER_tpCondRet retorno;
 	if (perfil == NULL)
 		return PER_CondRetPerfilInvalido;
+	/*MUDAR DPS*/
+	retorno = PER_BuscaEmail(GRA_tppGrafo pGrafo, char *email, PER_tpPerfil **perfil, int *id)
 
 	strcpy(primeiroNome, perfil->primeiroNome);
 
@@ -245,12 +256,11 @@ PER_tpCondRet PER_ModificaEmail(GRA_tppGrafo pGrafo, char *emailAtual, char *ema
  *  Função: PER  &Modifica o nome do perfil
  *  ****/
  /*
+ OK
  *     PER_CondRetOK
  *     PER_CondRetNomeInvalido
- *     PER_CondRetEmailInexistente
  *     PER_CondRetParametroGRAIncorreto
- *     PER_CondRetRetornoLisIncorreto
- *     PER_CondRetFaltouMemoria
+ *     PER_CondRetEmailInexistente
  */
 PER_tpCondRet PER_ModificaNome(GRA_tppGrafo pGrafo, char *email, char *primeiroNome, char *ultimoNome) {
 	PER_tpCondRet retorno;
@@ -283,11 +293,11 @@ PER_tpCondRet PER_ModificaNome(GRA_tppGrafo pGrafo, char *email, char *primeiroN
  *  Função: PER  &Modifica a data de nascimento do perfil
  *  ****/
  /*
+ OK
  *     PER_CondRetOK
  *     PER_CondRetDataInvalida
- *     PER_CondRetEmailInexistente
  *     PER_CondRetParametroGRAIncorreto
- *     PER_CondRetRetornoLisIncorreto
+ *     PER_CondRetEmailInexistente
  */
 PER_tpCondRet PER_ModificaDataNasc(GRA_tppGrafo pGrafo, char *email, int diaNasc, int mesNasc, int anoNasc) {
 	PER_tpCondRet retorno;
@@ -316,12 +326,11 @@ PER_tpCondRet PER_ModificaDataNasc(GRA_tppGrafo pGrafo, char *email, int diaNasc
  *  Função: PER  &Modifica a cidade do perfil
  *  ****/
  /*
+ OK
  *     PER_CondRetOK
  *     PER_CondRetCidadeInvalida
  *     PER_CondRetEmailInexistente
  *     PER_CondRetParametroGRAIncorreto
- *     PER_CondRetRetornoLisIncorreto
- *     PER_CondRetFaltouMemoria
  */
 PER_tpCondRet PER_ModificaCidade(GRA_tppGrafo pGrafo, char *email, char *cidade) {
 	PER_tpCondRet retorno;
@@ -413,17 +422,19 @@ PER_tpCondRet PER_BuscaEmail(GRA_tppGrafo pGrafo, char *email, PER_tpPerfil **pe
  *
  *  Função: PER  &Exclui todos os perfis existentes
  *  ****/
-
+/*
+OK
+*     PER_CondRetOK
+*     PER_CondRetParametroGRAIncorreto
+*/
 PER_tpCondRet PER_ExcluirTodosPerfis(GRA_tppGrafo pGrafo) {
 	PER_tpCondRet retorno;
-	retorno = deletaPerfil(pGrafo, 1);
-	if (retorno != PER_CondRetOK && retorno != PER_CondRetRedeVazia)
-		return retorno;
-	while (retorno != PER_CondRetRedeVazia) {
+	do  {
 		retorno = deletaPerfil(pGrafo, 1);
 		if (retorno != PER_CondRetOK && retorno != PER_CondRetRedeVazia)
 			return retorno;
-	}
+	} while (retorno != PER_CondRetRedeVazia);
+
 	return PER_CondRetOK;
 }/* Fim função: PER  &Exclui todos os perfis existentes */
 
@@ -432,6 +443,7 @@ PER_tpCondRet PER_ExcluirTodosPerfis(GRA_tppGrafo pGrafo) {
  *  Função: PER  &Retorna lista de mensagens
  *  ****/
  /*
+ OK
  *     PER_CondRetOK
  *     PER_CondRetPerfilInexistente
  */
@@ -448,16 +460,19 @@ PER_tpCondRet PER_ExcluirTodosPerfis(GRA_tppGrafo pGrafo) {
  *  ****/
 
  /*
- *     PER_CondRetEmailInexistente
+ OK
  *     PER_CondRetOK
+ *     PER_CondRetParametroGRAIncorreto
+ *     PER_CondRetPerfilInexistente
  */
 PER_tpCondRet PER_retornaIdPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil *perfil, int *id) {
 	PER_tpCondRet retorno;
 	retorno = PER_BuscaEmail(pGrafo, perfil->email, &perfil, id);
 	if (retorno == PER_CondRetEmailJaCadastrado)
 		return PER_CondRetOK;
-	else
+	else if(retorno == PER_CondRetRedeVazia || retorno == PER_CondRetEmailInexistente)
 		return PER_CondRetPerfilInexistente;
+	return retorno;
 
 } /* Fim função : PER  &Retorna Identificador de um perfil * /
 
@@ -701,7 +716,7 @@ PER_tpCondRet restauraCorrenteGrafo(GRA_tppGrafo pGrafo, int id) {
 OK
 *     PER_CondRetOK
 *     PER_CondRetParametroGRAIncorreto
-*     PER_CondRetRetornoLisIncorreto
+*     PER_CondRetRedeVazia
 */
 PER_tpCondRet deletaPerfil(GRA_tppGrafo pGrafo, int id) {
 	GRA_tpCondRet retorno_gra;

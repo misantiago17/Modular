@@ -112,10 +112,10 @@ MEN_tpCondRet MEN_EscreverMensagem(PER_tpPerfil * Remetente,PER_tpPerfil *Destin
 		return MEN_CondRetFaltouMemoria;
 	}
 	if(PER_ObterPerfil(Remetente, emailRem,primeiroNome, ultimoNome,
-		&diaNasc, &mesNasc, &anoNasc, cidade)==PER_CondRetPonteiroParaRetornoInvalido)
+		&diaNasc, &mesNasc, &anoNasc, cidade)==PER_CondRetPerfilInvalido)
 		return MEN_CondRetPerfilInvalido;
 	if (PER_ObterPerfil(Destinatario, emailDest,primeiroNome, ultimoNome,
-		&diaNasc, &mesNasc, &anoNasc, cidade)==PER_CondRetPonteiroParaRetornoInvalido)
+		&diaNasc, &mesNasc, &anoNasc, cidade)==PER_CondRetPerfilInvalido)
 		return MEN_CondRetPerfilInvalido;
 	if(strcmp(emailRem,emailDest)==0)
 		return MEN_CondRetMesmoPerfil;
@@ -265,6 +265,43 @@ MEN_tpCondRet MEN_ExcluirMensagensEmail(PER_tpPerfil * Perfil,char Email[])
 
 	
 /* Fim função: MEN  &Excluir Mensagem*/
+
+/***********************************************************************
+  *
+  *  $FC Função: MEN  &Alterar Email da Lista de Mensagem
+  *  ****/
+
+MEN_tpCondRet MEN_AlterarEmailLista(PER_tpPerfil * Perfil,char antigoEmail[],char novoEmail[])
+{ 
+	int numTotalMsgs;
+	LIS_tpCondRet CondRetLis=LIS_CondRetOK;
+	MEN_tppMensagem tpMsg;
+	LIS_tppLista pMensagem;
+	if(MEN_ObterNumTodasMensagens(Perfil,&numTotalMsgs)==MEN_CondRetRetornoLisIncorreto)
+		return MEN_CondRetRetornoLisIncorreto;
+	if(numTotalMsgs==0)
+	{
+		return MEN_CondRetListaVazia;
+	}
+	if(PER_retornaLisMensagens(Perfil,&pMensagem)==PER_CondRetPerfilInexistente)
+		return MEN_CondRetPerfilInvalido;
+	if(LIS_IrInicioLista(pMensagem)!=LIS_CondRetOK)
+		return MEN_CondRetRetornoLisIncorreto;
+	while(CondRetLis!=LIS_CondRetFimLista)
+	{
+		if(LIS_ObterValor(pMensagem,(void**)&tpMsg) == LIS_CondRetListaVazia)
+			return MEN_CondRetOK;
+		if(strcmp(tpMsg->Email,antigoEmail)==0)
+		{
+			strcpy_s(tpMsg->Email,101,novoEmail);
+		}
+		CondRetLis=LIS_AvancarElementoCorrente(pMensagem,1);
+	}
+	return MEN_CondRetOK;
+}
+
+	
+/* Fim função: MEN  &Alterar Email da Lista de Mensagem*/
 
  /***************************************************************************
  *
