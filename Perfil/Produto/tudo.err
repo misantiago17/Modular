@@ -1,0 +1,45 @@
+testeperfil.c
+lista.c
+perfil.c
+..\Fontes\perfil.c(136) : error C2065: 'retorno' : undeclared identifier
+..\Fontes\perfil.c(137) : error C2065: 'retorno' : undeclared identifier
+..\Fontes\perfil.c(139) : error C2065: 'retorno' : undeclared identifier
+..\Fontes\perfil.c(140) : error C2065: 'retorno' : undeclared identifier
+..\Fontes\perfil.c(147) : error C2065: 'idCorrente' : undeclared identifier
+..\Fontes\perfil.c(153) : error C2065: 'idCorrente' : undeclared identifier
+..\Fontes\perfil.c(160) : warning C4047: 'function' : 'void **' differs in levels of indirection from 'PER_tpPerfil *'
+..\Fontes\perfil.c(160) : warning C4022: 'GRA_ObterValor' : pointer mismatch for actual parameter 2
+..\Fontes\perfil.c(162) : error C2065: 'idCorrente' : undeclared identifier
+..\Fontes\perfil.c(175) : error C2065: 'idCorrente' : undeclared identifier
+..\Fontes\perfil.c(182) : error C2065: 'retorno' : undeclared identifier
+..\Fontes\perfil.c(183) : error C2065: 'retorno' : undeclared identifier
+..\Fontes\perfil.c(751) : error C2065: 'pGrafo' : undeclared identifier
+..\Fontes\perfil.c(751) : warning C4047: 'function' : 'GRA_tppGrafo' differs in levels of indirection from 'int'
+..\Fontes\perfil.c(751) : warning C4024: 'PER_NumeroPerfis' : different types for formal and actual parameter 1
+..\Fontes\perfil.c(755) : error C2065: 'pGrafo' : undeclared identifier
+..\Fontes\perfil.c(755) : warning C4047: 'function' : 'GRA_tppGrafo' differs in levels of indirection from 'int'
+..\Fontes\perfil.c(755) : warning C4024: 'salvaCorrenteGrafo' : different types for formal and actual parameter 1
+..\Fontes\perfil.c(759) : error C2065: 'pGrafo' : undeclared identifier
+..\Fontes\perfil.c(759) : warning C4047: 'function' : 'GRA_tppGrafo' differs in levels of indirection from 'int'
+..\Fontes\perfil.c(759) : warning C4024: 'GRA_IrVertice' : different types for formal and actual parameter 1
+..\Fontes\perfil.c(761) : error C2065: 'pGrafo' : undeclared identifier
+..\Fontes\perfil.c(761) : warning C4047: 'function' : 'GRA_tppGrafo' differs in levels of indirection from 'int'
+..\Fontes\perfil.c(761) : warning C4024: 'restauraCorrenteGrafo' : different types for formal and actual parameter 1
+..\Fontes\perfil.c(768) : error C2065: 'pGrafo' : undeclared identifier
+..\Fontes\perfil.c(768) : warning C4047: 'function' : 'GRA_tppGrafo' differs in levels of indirection from 'int'
+..\Fontes\perfil.c(768) : warning C4024: 'GRA_ObterValor' : different types for formal and actual parameter 1
+..\Fontes\perfil.c(768) : error C2065: 'perfil' : undeclared identifier
+..\Fontes\perfil.c(768) : warning C4022: 'GRA_ObterValor' : pointer mismatch for actual parameter 2
+..\Fontes\perfil.c(770) : error C2065: 'pGrafo' : undeclared identifier
+..\Fontes\perfil.c(770) : warning C4047: 'function' : 'GRA_tppGrafo' differs in levels of indirection from 'int'
+..\Fontes\perfil.c(770) : warning C4024: 'restauraCorrenteGrafo' : different types for formal and actual parameter 1
+..\Fontes\perfil.c(780) : error C2065: 'pGrafo' : undeclared identifier
+..\Fontes\perfil.c(780) : warning C4047: 'function' : 'GRA_tppGrafo' differs in levels of indirection from 'int'
+..\Fontes\perfil.c(780) : warning C4024: 'GRA_IrVertice' : different types for formal and actual parameter 1
+..\Fontes\perfil.c(782) : error C2065: 'pGrafo' : undeclared identifier
+..\Fontes\perfil.c(782) : warning C4047: 'function' : 'GRA_tppGrafo' differs in levels of indirection from 'int'
+..\Fontes\perfil.c(782) : warning C4024: 'restauraCorrenteGrafo' : different types for formal and actual parameter 1
+..\Fontes\perfil.c(789) : error C2065: 'pGrafo' : undeclared identifier
+..\Fontes\perfil.c(789) : warning C4047: 'function' : 'GRA_tppGrafo' differs in levels of indirection from 'int'
+..\Fontes\perfil.c(789) : warning C4024: 'restauraCorrenteGrafo' : different types for formal and actual parameter 1
+
