@@ -4,7 +4,7 @@ GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
 Composição do construto: ..\Composicao\TestePerfil.comp
 
    Nome do Construto:           TestePerfil
-   Diretório base:              C:\Users\Usuario\Documents\GitHub\Modular\Perfil\Composicao
+   Diretório base:              C:\Users\Lorene Busquim\Documents\Modular\Perfil\Composicao
 
    Arquivo composição:          ..\Composicao\TestePerfil.comp
    Arquivo plataforma:          gmake.parm
