@@ -28,7 +28,7 @@
 #include   "GRAFO.h"
 #include   "PERFIL.h"
 #include   "AMIZADE.h"
-#include   "MENSAGEM.c"
+#include   "MENSAGEM.H"
 
 int main () {
     

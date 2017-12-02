@@ -4,7 +4,9 @@ cls
 
 if exist ..\Scripts\estatisticas.estat  del ..\Scripts\estatisticas.estat
 
-..\Produto\TRAB4-3  /s..\Scripts\TesteMenu	/l..\Produto\TRAB4-3	/a..\Scripts\estatisticas
 
 
-..\..\Tools\exbestat /e..\Scripts\estatisticas
+level 4 goto sai
+
+
+:sai

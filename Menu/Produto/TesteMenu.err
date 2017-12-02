@@ -1,4 +1,15 @@
-testemenu.c
-..\Fontes\testemenu.c(328) : error C2106: '=' : left operand must be l-value
-..\Fontes\testemenu.c(334) : error C2027: use of undefined type 'PER_tagPerfil'
-        d:\projetos\puc\modular\projeto git\menu\fontes\PERFIL.h(36) : see declaration of 'PER_tagPerfil'
+grafo.c
+menu.c
+amizade.c
+mensagem.c
+perfil.c
+lista.c
+Microsoft (R) Incremental Linker Version 10.00.40219.01
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/OUT:..\Produto\TRAB4-23.exe 
+/INCREMENTAL:NO 
+/MACHINE:IX86 
+grafo.obj menu.obj amizade.obj mensagem.obj perfil.obj 
+lista.obj 
+ArcaboucoTeste.lib 

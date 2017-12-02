@@ -1,4 +1,4 @@
-# Composicao do programa de teste de modulo Menu
+# Composicao do programa do modulo Menu
 
 [Diretorios]
 
@@ -10,15 +10,16 @@ c           =	..\Fontes
 h           =	..\Fontes
 
 [Modulos]
-TesteMenu
+grafo
+Menu
 Amizade
 Mensagem
-Grafo
 Perfil
 Lista
 
+
 [BuildInicio]
-/OUT:..\Produto\TRAB4-3.exe
+/OUT:..\Produto\TRAB4-23.exe
 /INCREMENTAL:NO
 /MACHINE:IX86
 

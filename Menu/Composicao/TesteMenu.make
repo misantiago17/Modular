@@ -47,8 +47,8 @@ INCLUDE = $(INCLUDE);$(PDEFAULT)
 ### Regras de geração
 
 all : limpa \
-   $(Fobj)\testemenu.obj   $(Fobj)\amizade.obj   $(Fobj)\mensagem.obj \
-   $(Fobj)\grafo.obj   $(Fobj)\perfil.obj   $(Fobj)\lista.obj \
+   $(Fobj)\grafo.obj   $(Fobj)\menu.obj   $(Fobj)\amizade.obj \
+   $(Fobj)\mensagem.obj   $(Fobj)\perfil.obj   $(Fobj)\lista.obj \
    Construto
 
 ### Limpar arquivos
@@ -59,23 +59,23 @@ limpa :
 
 ### Dependências de módulos objeto a compilar
 
-$(Fobj)\testemenu.obj :  {$(Pc)}\testemenu.c \
-    {$(Ph)}amizade.h            {$(Ph)}cespdin.h            {$(Ph)}generico.h           \
-    {$(Ph)}grafo.h              {$(Ph)}lerparm.h            {$(Ph)}lista.h              \
-    {$(Ph)}perfil.h             {$(Ph)}tst_espc.h          
+$(Fobj)\grafo.obj :  {$(Pc)}\grafo.c \
+    {$(Ph)}cespdin.h            {$(Ph)}conta.h              {$(Ph)}generico.h           \
+    {$(Ph)}grafo.h              {$(Ph)}lista.h              {$(Ph)}tst_espc.h          
+   cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
+
+$(Fobj)\menu.obj :  {$(Pc)}\menu.c \
+    {$(Ph)}amizade.h            {$(Ph)}grafo.h              {$(Ph)}lista.h              \
+    {$(Ph)}mensagem.h           {$(Ph)}perfil.h            
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
 $(Fobj)\amizade.obj :  {$(Pc)}\amizade.c \
-    {$(Ph)}amizade.h            {$(Ph)}cespdin.h            {$(Ph)}grafo.h              \
-    {$(Ph)}lista.h              {$(Ph)}perfil.h            
+    {$(Ph)}amizade.h            {$(Ph)}grafo.h              {$(Ph)}lista.h              \
+    {$(Ph)}perfil.h            
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
 $(Fobj)\mensagem.obj :  {$(Pc)}\mensagem.c \
-    {$(Ph)}lista.h              {$(Ph)}mensagem.h          
-   cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
-
-$(Fobj)\grafo.obj :  {$(Pc)}\grafo.c \
-    {$(Ph)}cespdin.h            {$(Ph)}grafo.h              {$(Ph)}lista.h             
+    {$(Ph)}mensagem.h          
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
 $(Fobj)\perfil.obj :  {$(Pc)}\perfil.c \
@@ -90,8 +90,8 @@ $(Fobj)\lista.obj :  {$(Pc)}\lista.c \
 ### Terminação
 
 Construto : \
-   $(Fobj)\testemenu.obj   $(Fobj)\amizade.obj   $(Fobj)\mensagem.obj \
-   $(Fobj)\grafo.obj   $(Fobj)\perfil.obj   $(Fobj)\lista.obj
+   $(Fobj)\grafo.obj   $(Fobj)\menu.obj   $(Fobj)\amizade.obj \
+   $(Fobj)\mensagem.obj   $(Fobj)\perfil.obj   $(Fobj)\lista.obj
     cd $(Fobj)
     LINK $(L) @$(NOME).build >> $(Ferr)\$(NOME).err
 
