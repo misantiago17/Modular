@@ -1,7 +1,7 @@
 ##################################################
 ###
-### Diretivas de MAKE para o construto: TesteAmizade
-### Gerado a partir de: ..\Composicao\TesteAmizade.comp
+### Diretivas de MAKE para o construto: TesteMenu
+### Gerado a partir de: ..\Composicao\TesteMenu.comp
 ###
 ### ----- Arquivo gerado, NÃO EDITE!!! -----
 ###
@@ -9,7 +9,7 @@
 
 ### Nomes globais
 
-NOME            = TesteAmizade
+NOME            = TesteMenu
 
 
 ### Nomes de paths
@@ -47,8 +47,8 @@ INCLUDE = $(INCLUDE);$(PDEFAULT)
 ### Regras de geração
 
 all : limpa \
-   $(Fobj)\testeamizade.obj   $(Fobj)\amizade.obj   $(Fobj)\grafo.obj \
-   $(Fobj)\perfil.obj \
+   $(Fobj)\testemenu.obj   $(Fobj)\amizade.obj   $(Fobj)\mensagem.obj \
+   $(Fobj)\grafo.obj   $(Fobj)\perfil.obj   $(Fobj)\lista.obj \
    Construto
 
 ### Limpar arquivos
@@ -59,7 +59,7 @@ limpa :
 
 ### Dependências de módulos objeto a compilar
 
-$(Fobj)\testeamizade.obj :  {$(Pc)}\testeamizade.c \
+$(Fobj)\testemenu.obj :  {$(Pc)}\testemenu.c \
     {$(Ph)}amizade.h            {$(Ph)}cespdin.h            {$(Ph)}generico.h           \
     {$(Ph)}grafo.h              {$(Ph)}lerparm.h            {$(Ph)}lista.h              \
     {$(Ph)}perfil.h             {$(Ph)}tst_espc.h          
@@ -70,6 +70,10 @@ $(Fobj)\amizade.obj :  {$(Pc)}\amizade.c \
     {$(Ph)}lista.h              {$(Ph)}perfil.h            
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
+$(Fobj)\mensagem.obj :  {$(Pc)}\mensagem.c \
+    {$(Ph)}lista.h              {$(Ph)}mensagem.h          
+   cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
+
 $(Fobj)\grafo.obj :  {$(Pc)}\grafo.c \
     {$(Ph)}cespdin.h            {$(Ph)}grafo.h              {$(Ph)}lista.h             
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
@@ -78,18 +82,22 @@ $(Fobj)\perfil.obj :  {$(Pc)}\perfil.c \
     {$(Ph)}grafo.h              {$(Ph)}lista.h              {$(Ph)}perfil.h            
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
+$(Fobj)\lista.obj :  {$(Pc)}\lista.c \
+    {$(Ph)}lista.h             
+   cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
+
 
 ### Terminação
 
 Construto : \
-   $(Fobj)\testeamizade.obj   $(Fobj)\amizade.obj   $(Fobj)\grafo.obj \
-   $(Fobj)\perfil.obj
+   $(Fobj)\testemenu.obj   $(Fobj)\amizade.obj   $(Fobj)\mensagem.obj \
+   $(Fobj)\grafo.obj   $(Fobj)\perfil.obj   $(Fobj)\lista.obj
     cd $(Fobj)
     LINK $(L) @$(NOME).build >> $(Ferr)\$(NOME).err
 
 ##################################################
 ###
-### Fim de diretivas MAKE para o construto: TesteAmizade
+### Fim de diretivas MAKE para o construto: TesteMenu
 ###
 ##################################################
 

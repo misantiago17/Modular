@@ -1,6 +1,7 @@
 /OUT:..\Produto\TRAB4-3.exe
 /INCREMENTAL:NO
 /MACHINE:IX86
-testeamizade.obj  amizade.obj  grafo.obj  perfil.obj  
+testemenu.obj  amizade.obj  mensagem.obj  grafo.obj  perfil.obj  
+lista.obj  
 ArcaboucoTeste.lib
 

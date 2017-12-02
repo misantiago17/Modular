@@ -4,7 +4,7 @@ REM Gera os arquivos .make, .build e .list pelos arquivos .comp
 pushd  .
 
 cd ..\..\Tools
-gmake /b..\Amizade\Composicao /c..\Composicao\TesteAmizade
+gmake /b..\Menu\Composicao /c..\Composicao\TesteMenu
 
 
 popd
