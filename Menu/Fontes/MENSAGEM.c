@@ -242,7 +242,7 @@ MEN_tpCondRet MEN_ExcluirMensagensEmail(PER_tpPerfil * Perfil,char Email[])
 		return MEN_CondRetRetornoLisIncorreto;
 	if(numTotalMsgs==0)
 	{
-		return MEN_CondRetListaVazia;
+		return MEN_CondRetOK;
 	}
 	if(PER_retornaLisMensagens(Perfil,&pMensagem)==PER_CondRetPerfilInexistente)
 		return MEN_CondRetPerfilInvalido;

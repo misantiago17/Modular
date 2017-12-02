@@ -117,22 +117,24 @@ Estatísticas do construto
       Linhas em branco:          43
    Arquivos em que é incluído
       mensagem.c
+      perfil.c
       testemensagem.c
 
    Estatísticas do arquivo: perfil.c
-      Total linhas:             728
-      Linhas de código:         353
-      Linhas de comentário:     257
-      Linhas em branco:         122
+      Total linhas:             744
+      Linhas de código:         373
+      Linhas de comentário:     242
+      Linhas em branco:         141
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
+      mensagem.h
       perfil.h
 
    Estatísticas do arquivo: perfil.h
-      Total linhas:             346
-      Linhas de código:          43
-      Linhas de comentário:     256
+      Total linhas:             374
+      Linhas de código:          44
+      Linhas de comentário:     283
       Linhas em branco:          47
    Arquivos de inclusão de que necessita
       grafo.h
@@ -168,9 +170,9 @@ Estatísticas do construto
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      3869
-         Linhas de código:           366
-         Linhas de comentário:      2960
+         Total linhas do tipo:      3897
+         Linhas de código:           367
+         Linhas de comentário:      2987
          Linhas em branco:           543
          Arquivos deste tipo:          9
 
@@ -196,17 +198,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      3384
-         Linhas de código:          1970
-         Linhas de comentário:       813
-         Linhas em branco:           651
+         Total linhas do tipo:      3400
+         Linhas de código:          1990
+         Linhas de comentário:       798
+         Linhas em branco:           670
          Arquivos deste tipo:          5
 
 Totais para todo o construto TesteMensagem
 
-   Total linhas:              7253
-   Linhas de código:          2336
-   Linhas de comentário:      3773
-   Linhas em branco:          1194
+   Total linhas:              7297
+   Linhas de código:          2357
+   Linhas de comentário:      3785
+   Linhas em branco:          1213
    Arquivos processados:        14
 

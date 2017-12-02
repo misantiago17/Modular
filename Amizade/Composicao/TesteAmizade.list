@@ -130,21 +130,30 @@ Estatísticas do construto
       perfil.h
       testeamizade.c
 
+   Estatísticas do arquivo: mensagem.h
+      Total linhas:             279
+      Linhas de código:          34
+      Linhas de comentário:     202
+      Linhas em branco:          43
+   Arquivos em que é incluído
+      perfil.c
+
    Estatísticas do arquivo: perfil.c
-      Total linhas:             734
-      Linhas de código:         357
-      Linhas de comentário:     246
-      Linhas em branco:         134
+      Total linhas:             744
+      Linhas de código:         373
+      Linhas de comentário:     242
+      Linhas em branco:         141
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
+      mensagem.h
       perfil.h
 
    Estatísticas do arquivo: perfil.h
-      Total linhas:             335
-      Linhas de código:          42
-      Linhas de comentário:     247
-      Linhas em branco:          46
+      Total linhas:             374
+      Linhas de código:          44
+      Linhas de comentário:     283
+      Linhas em branco:          47
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
@@ -181,11 +190,11 @@ Estatísticas do construto
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      3826
-         Linhas de código:           365
-         Linhas de comentário:      2913
-         Linhas em branco:           548
-         Arquivos deste tipo:          9
+         Total linhas do tipo:      4144
+         Linhas de código:           401
+         Linhas de comentário:      3151
+         Linhas em branco:           592
+         Arquivos deste tipo:         10
 
   Tipo: obj      Path: ..\Objetos
          Total linhas do tipo:         0
@@ -209,17 +218,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      3282
-         Linhas de código:          1947
-         Linhas de comentário:       696
-         Linhas em branco:           688
+         Total linhas do tipo:      3292
+         Linhas de código:          1963
+         Linhas de comentário:       692
+         Linhas em branco:           695
          Arquivos deste tipo:          5
 
 Totais para todo o construto TesteAmizade
 
-   Total linhas:              7108
-   Linhas de código:          2312
-   Linhas de comentário:      3609
-   Linhas em branco:          1236
-   Arquivos processados:        14
+   Total linhas:              7436
+   Linhas de código:          2364
+   Linhas de comentário:      3843
+   Linhas em branco:          1287
+   Arquivos processados:        15
 

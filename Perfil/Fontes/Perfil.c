@@ -139,7 +139,7 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email) {
 	else if (retornoPer != PER_CondRetEmailJaCadastrado)
 		return retornoPer;
 
-	/*Apaga mensagens relacionadas a esse perfil de outros perfis/
+	/*Apaga mensagens relacionadas a esse perfil de outros perfis*/
 	retornoPer = PER_NumeroPerfis(pGrafo, &tam);
 	if (retornoPer != PER_CondRetOK)
 		return retornoPer;
@@ -156,7 +156,7 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email) {
 		return transformaRetGRA(retornoGra);
 	}
 
-	while (i <= tam + 1) {
+	/*while (i <= tam + 1) {
 		retornoGra = GRA_ObterValor(pGrafo, &perfil);
 		if (retornoGra != GRA_CondRetOK) {
 			retornoPer = restauraCorrenteGrafo(pGrafo, idCorrente);
@@ -165,8 +165,8 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email) {
 			return transformaRetGRA(retornoGra);
 		}
 
-		if (MEN_ExcluirMensagensEmail(perfil, email) != MEN_CondRetOK)
-			return PER_CondRetRetornoMsgIncorreto;
+		if (MEN_ExcluirMensagensEmail(perfil, email) != MEN_CondRetOK){
+			return PER_CondRetRetornoMsgIncorreto;}
 
 		i++;
 
@@ -176,7 +176,7 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email) {
 			if (retornoPer != PER_CondRetOK)
 				return retornoPer;
 			return transformaRetGRA(retornoGra);
-		}
+		}*
 	}/*Fim apagar mensagens*/
 
 	retornoPer = deletaPerfil(pGrafo, id);

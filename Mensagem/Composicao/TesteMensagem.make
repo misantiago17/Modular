@@ -74,7 +74,8 @@ $(Fobj)\mensagem.obj :  {$(Pc)}\mensagem.c \
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
 $(Fobj)\perfil.obj :  {$(Pc)}\perfil.c \
-    {$(Ph)}grafo.h              {$(Ph)}lista.h              {$(Ph)}perfil.h            
+    {$(Ph)}grafo.h              {$(Ph)}lista.h              {$(Ph)}mensagem.h           \
+    {$(Ph)}perfil.h            
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
 $(Fobj)\grafo.obj :  {$(Pc)}\grafo.c \

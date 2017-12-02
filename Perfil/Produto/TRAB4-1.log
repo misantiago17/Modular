@@ -13,31 +13,44 @@
    33  == struct 2
    42  == Parametros invalidos
    50  ==Parametros para mudanca
-   74  == Criar o grafo
-   77  == Obter Numero de perfis existentes
-   80  == Criar Perfil 0
-   83  == Obter Numero de perfis existentes
-   86  ==Busca email do perfil 0
-   89  ==Busca email inexistente
-   92  == Obter Dados do perfil 0
-   95  == Criar Perfil 1
-   98  == Obter Numero de perfis existentes
-  101  == Obter Dados do perfil 1
-  104  == Criar Perfil email ja cadastrado
-  107  == Criar Perfil email invalido
-  110  == Criar Perfil primeiro nome invalido
-  113  == Criar Perfil ultimo nome invalido
-  116  == Criar Perfil dia invalido
-  119  == Criar Perfil mes invalido
-  122  == Criar Perfil ano invalido
-  125  == Criar Perfil 2
-  128  == Obter Numero de perfis existentes
-  131  == Obter Dados do perfil 2
-  134  == Excluir perfil 1
+   75  == Criar o grafo
+   78  == Obter Numero de perfis existentes
+   81  == Criar Perfil 0
+   84  == Obter Numero de perfis existentes
+   87  ==Busca email do perfil 0
+   90  ==Busca email inexistente
+   93  == Obter Dados do perfil 0
+   96  == Criar Perfil 1
+   99  == Obter Numero de perfis existentes
+  102  == Obter Dados do perfil 1
+  105  == Criar Perfil email ja cadastrado
+  108  == Criar Perfil email invalido
+  111  == Criar Perfil primeiro nome invalido
+  114  == Criar Perfil ultimo nome invalido
+  117  == Criar Perfil dia invalido
+  120  == Criar Perfil mes invalido
+  123  == Criar Perfil ano invalido
+  126  == Criar Perfil 2
+  129  == Obter Numero de perfis existentes
+  132  == Obter Dados do perfil 2
+  135  == Excluir perfil 1
+  138  == Obter Numero de perfis existentes
+  141  ==Modificar Dados do perfil 2
+  147  == Obter Dados do perfil 2
+  150  ==Modificar Dados do perfil 0 para dados invalidos
+  155  == Obter Dados do perfil 0
+  158  ==Modifica email do perfil 0 para email antigo do perfil 2
+  161  == Obter Dados do perfil 0
+  164  ==Excluir todos os perfis
+  167  == Obter Numero de perfis existentes
+  170  == Criar Perfil 0
+  173  ==Retorna lista de mensagens do perfil  0
+  176  ==Retornar id do perfil 0
+  179  == Reseta bateria de testes
 
-!!! Número de linhas lidas:         137
-!!! Número de casos de teste:        27
-!!! Número comandos corretos:        73
+!!! Número de linhas lidas:         182
+!!! Número de casos de teste:        40
+!!! Número comandos corretos:        93
 !!! Número de falhas encontradas:     0
 
 !!! Não foram encontrados problemas
