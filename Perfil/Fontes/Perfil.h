@@ -92,9 +92,11 @@ typedef enum {
 	PER_CondRetPerfilInvalido,
 	/*Ponteiro para perfil passado como parametro nao é valido*/
 
-	PER_CondRetRetornoGRAInesperado
+	PER_CondRetRetornoGRAInesperado,
 	/*Retorno do modulo grafo inesperado*/
 
+	PER_CondRetRetornoMsgIncorreto
+	/*Retorno do modulo mensagem incorreto*/
 } PER_tpCondRet;
 
 /***********************************************************************

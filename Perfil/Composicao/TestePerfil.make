@@ -48,7 +48,7 @@ INCLUDE = $(INCLUDE);$(PDEFAULT)
 
 all : limpa \
    $(Fobj)\testeperfil.obj   $(Fobj)\lista.obj   $(Fobj)\perfil.obj \
-   $(Fobj)\grafo.obj \
+   $(Fobj)\grafo.obj   $(Fobj)\mensagem.obj \
    Construto
 
 ### Limpar arquivos
@@ -69,11 +69,17 @@ $(Fobj)\lista.obj :  {$(Pc)}\lista.c \
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
 $(Fobj)\perfil.obj :  {$(Pc)}\perfil.c \
-    {$(Ph)}grafo.h              {$(Ph)}lista.h              {$(Ph)}perfil.h            
+    {$(Ph)}grafo.h              {$(Ph)}lista.h              {$(Ph)}mensagem.h           \
+    {$(Ph)}perfil.h            
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
 $(Fobj)\grafo.obj :  {$(Pc)}\grafo.c \
-    {$(Ph)}grafo.h              {$(Ph)}lista.h             
+    {$(Ph)}cespdin.h            {$(Ph)}conta.h              {$(Ph)}generico.h           \
+    {$(Ph)}grafo.h              {$(Ph)}lista.h              {$(Ph)}tst_espc.h          
+   cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
+
+$(Fobj)\mensagem.obj :  {$(Pc)}\mensagem.c \
+    {$(Ph)}mensagem.h          
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
 
@@ -81,7 +87,7 @@ $(Fobj)\grafo.obj :  {$(Pc)}\grafo.c \
 
 Construto : \
    $(Fobj)\testeperfil.obj   $(Fobj)\lista.obj   $(Fobj)\perfil.obj \
-   $(Fobj)\grafo.obj
+   $(Fobj)\grafo.obj   $(Fobj)\mensagem.obj
     cd $(Fobj)
     LINK $(L) @$(NOME).build >> $(Ferr)\$(NOME).err
 

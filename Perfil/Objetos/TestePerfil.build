@@ -1,6 +1,6 @@
 /OUT:..\Produto\TRAB4-1.EXE
 /INCREMENTAL:NO
 /MACHINE:IX86
-testeperfil.obj  lista.obj  perfil.obj  grafo.obj  
+testeperfil.obj  lista.obj  perfil.obj  grafo.obj  mensagem.obj  
 ArcaboucoTeste.lib
 

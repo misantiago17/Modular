@@ -27,6 +27,7 @@
 #include   "GRAFO.h"
 #include   "LISTA.h"
 #include   "PERFIL.h"
+#include   "MENSAGEM.h"
 
 /***********************************************************************
 *
@@ -127,15 +128,56 @@ PER_tpCondRet PER_CriarPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil **perfil, char *
 
 
 PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email) {
-	int id;
 	PER_tpPerfil *perfil;
-	PER_tpCondRet retorno;
+	GRA_tpCondRet retornoGra;
+	PER_tpCondRet retornoPer;
+	int id, i = 1, tam;
 
 	retorno = PER_BuscaEmail(pGrafo, email, &perfil, &id);
 	if (retorno == PER_CondRetRedeVazia)
 		return PER_CondRetEmailInexistente;
 	else if (retorno != PER_CondRetEmailJaCadastrado)
 		return retorno;
+
+	/*Apaga mensagens relacionadas a esse perfil de outros perfis*/
+	retornoPer = PER_NumeroPerfis(pGrafo, &tam);
+	if (retornoPer != PER_CondRetOK)
+		return retornoPer;
+
+	retornoGra = salvaCorrenteGrafo(pGrafo, &idCorrente);
+	if (retornoGra != PER_CondRetOK)
+		return retornoGra;
+
+	retornoGra = GRA_IrVertice(pGrafo, i);
+	if (retornoGra != GRA_CondRetOK && retornoGra != GRA_CondRetNaoAchouVertice) {
+		retornoPer = restauraCorrenteGrafo(pGrafo, idCorrente);
+		if (retornoPer != PER_CondRetOK)
+			return retornoPer;
+		return transformaRetGRA(retornoGra);
+	}
+
+	while (i <= tam + 1) {
+		retornoGra = GRA_ObterValor(pGrafo, perfil);
+		if (retornoGra != GRA_CondRetOK) {
+			retornoPer = restauraCorrenteGrafo(pGrafo, idCorrente);
+			if (retornoPer != PER_CondRetOK)
+				return retornoPer;
+			return transformaRetGRA(retornoGra);
+		}
+
+		if (MEN_ExcluirMensagensEmail(perfil, email) != MEN_CondRetOK)
+			return PER_CondRetRetornoMsgIncorreto;
+
+		i++;
+
+		retornoGra = GRA_IrVertice(pGrafo, i);
+		if (retornoGra != GRA_CondRetOK && retornoGra != GRA_CondRetNaoAchouVertice) {
+			retornoPer = restauraCorrenteGrafo(pGrafo, idCorrente);
+			if (retornoPer != PER_CondRetOK)
+				return retornoPer;
+			return transformaRetGRA(retornoGra);
+		}
+	}/*Fim apagar mensagens*/
 
 	retorno = deletaPerfil(pGrafo, id);
 	return retorno;
@@ -205,6 +247,47 @@ PER_tpCondRet PER_ModificaEmail(GRA_tppGrafo pGrafo, char *emailAtual, char *ema
 		return PER_CondRetEmailInexistente;
 	else if (retorno != PER_CondRetEmailJaCadastrado)
 		return retorno;
+
+	/*Modifica email de mensagens relacionadas a esse perfil de outros perfis*
+	retornoPer = PER_NumeroPerfis(pGrafo, &tam);
+	if (retornoPer != PER_CondRetOK)
+		return retornoPer;
+
+	retornoGra = salvaCorrenteGrafo(pGrafo, &idCorrente);
+	if (retornoGra != PER_CondRetOK)
+		return retornoGra;
+
+	retornoGra = GRA_IrVertice(pGrafo, i);
+	if (retornoGra != GRA_CondRetOK && retornoGra != GRA_CondRetNaoAchouVertice) {
+		retornoPer = restauraCorrenteGrafo(pGrafo, idCorrente);
+		if (retornoPer != PER_CondRetOK)
+			return retornoPer;
+		return transformaRetGRA(retornoGra);
+	}
+
+	while (i <= tam + 1) {
+		retornoGra = GRA_ObterValor(pGrafo, perfil);
+		if (retornoGra != GRA_CondRetOK) {
+			retornoPer = restauraCorrenteGrafo(pGrafo, idCorrente);
+			if (retornoPer != PER_CondRetOK)
+				return retornoPer;
+			return transformaRetGRA(retornoGra);
+		}
+
+		if (MEN_AlterarEmailLista(perfil, emailAtual, emailNovo) != MEN_CondRetOK)
+			return PER_CondRetRetornoMsgIncorreto;
+
+		i++;
+
+		retornoGra = GRA_IrVertice(pGrafo, i);
+		if (retornoGra != GRA_CondRetOK && retornoGra != GRA_CondRetNaoAchouVertice) {
+			retornoPer = restauraCorrenteGrafo(pGrafo, idCorrente);
+			if (retornoPer != PER_CondRetOK)
+				return retornoPer;
+			return transformaRetGRA(retornoGra);
+		}
+	}/*Fim modifica mensagens*/
+
 	strcpy(perfil->email, emailNovo);
 	return PER_CondRetOK;
 }/* Fim função: PER  &Modifica o email do perfil */
@@ -299,33 +382,37 @@ PER_tpCondRet PER_ModificaCidade(GRA_tppGrafo pGrafo, char *email, char *cidade)
 
 PER_tpCondRet PER_BuscaEmail(GRA_tppGrafo pGrafo, char *email, PER_tpPerfil **perfil, int *id) {
 
-	GRA_tpCondRet retornoBusca, retornoDados;
+	GRA_tpCondRet retornoGra;
 	PER_tpCondRet retornoPer;
 	int idCorrente, i = 1, tam;
-	
+
 	retornoPer = PER_NumeroPerfis(pGrafo, &tam);
 	if (retornoPer != PER_CondRetOK)
 		return retornoPer;
 
-	retornoDados = salvaCorrenteGrafo(pGrafo, &idCorrente);
-	if (retornoDados != PER_CondRetOK)
-		return retornoDados;
+	retornoGra = salvaCorrenteGrafo(pGrafo, &idCorrente);
+	if (retornoGra != PER_CondRetOK)
+		return retornoGra;
 
-	while (i <= tam  + 1) {
-		retornoDados = GRA_ObterValor(pGrafo, perfil);
-		if (retornoDados != GRA_CondRetOK) {
-			retornoDados = restauraCorrenteGrafo(pGrafo, idCorrente);
-			if (retornoDados != PER_CondRetOK)
-				return retornoDados;
-			return transformaRetGRA(retornoDados);
+	retornoGra = GRA_IrVertice(pGrafo, i);
+	if (retornoGra != GRA_CondRetOK && retornoGra != GRA_CondRetNaoAchouVertice) {
+		retornoPer = restauraCorrenteGrafo(pGrafo, idCorrente);
+		if (retornoPer != PER_CondRetOK)
+			return retornoPer;
+		return transformaRetGRA(retornoGra);
+	}
+
+	while (i <= tam + 1) {
+		retornoGra = GRA_ObterValor(pGrafo, perfil);
+		if (retornoGra != GRA_CondRetOK) {
+			retornoPer = restauraCorrenteGrafo(pGrafo, idCorrente);
+			if (retornoPer != PER_CondRetOK)
+				return retornoPer;
+			return transformaRetGRA(retornoGra);
 		}
-		retornoDados = GRA_RetornaIdentificador(pGrafo, id);
-		if (retornoDados != GRA_CondRetOK) {
-			retornoDados = restauraCorrenteGrafo(pGrafo, idCorrente);
-			if (retornoDados != PER_CondRetOK)
-				return retornoDados;
-			return transformaRetGRA(retornoDados);
-		}
+
+		*id = i;
+
 		if (strcmp((*perfil)->email, email) == 0) {
 			retornoPer = restauraCorrenteGrafo(pGrafo, idCorrente);
 			if (retornoPer != PER_CondRetOK)
@@ -333,14 +420,15 @@ PER_tpCondRet PER_BuscaEmail(GRA_tppGrafo pGrafo, char *email, PER_tpPerfil **pe
 			return PER_CondRetEmailJaCadastrado;
 		}
 
-		retornoBusca = GRA_IrVertice(pGrafo, i);
-		if (retornoBusca != GRA_CondRetOK && retornoBusca != GRA_CondRetNaoAchouVertice) {
+		i++;
+
+		retornoGra = GRA_IrVertice(pGrafo, i);
+		if (retornoGra != GRA_CondRetOK && retornoGra != GRA_CondRetNaoAchouVertice) {
 			retornoPer = restauraCorrenteGrafo(pGrafo, idCorrente);
 			if (retornoPer != PER_CondRetOK)
 				return retornoPer;
-			return retornoPer;
+			return transformaRetGRA(retornoGra);
 		}
-		i++;
 	}
 
 	retornoPer = restauraCorrenteGrafo(pGrafo, idCorrente);
@@ -652,5 +740,54 @@ PER_tpCondRet deletaPerfil(GRA_tppGrafo pGrafo, int id) {
 	retorno_gra = GRA_ExcluirVertice(pGrafo);
 	if (retorno_gra != GRA_CondRetOK)
 		return transformaRetGRA(retorno_gra);
+	return PER_CondRetOK;
+}
+/****************************************************/
+PER_tpCondRet percorre(MEN_tpCondRet func(), char *email) {
+	GRA_tpCondRet retornoGra;
+	PER_tpCondRet retornoPer;
+	int idCorrente, i = 1, tam;
+
+	retornoPer = PER_NumeroPerfis(pGrafo, &tam);
+	if (retornoPer != PER_CondRetOK)
+		return retornoPer;
+
+	retornoGra = salvaCorrenteGrafo(pGrafo, &idCorrente);
+	if (retornoGra != PER_CondRetOK)
+		return retornoGra;
+
+	retornoGra = GRA_IrVertice(pGrafo, i);
+	if (retornoGra != GRA_CondRetOK && retornoGra != GRA_CondRetNaoAchouVertice) {
+		retornoPer = restauraCorrenteGrafo(pGrafo, idCorrente);
+		if (retornoPer != PER_CondRetOK)
+			return retornoPer;
+		return transformaRetGRA(retornoGra);
+	}
+
+	while (i <= tam + 1) {
+		retornoGra = GRA_ObterValor(pGrafo, perfil);
+		if (retornoGra != GRA_CondRetOK) {
+			retornoPer = restauraCorrenteGrafo(pGrafo, idCorrente);
+			if (retornoPer != PER_CondRetOK)
+				return retornoPer;
+			return transformaRetGRA(retornoGra);
+		}
+
+		func();
+
+		i++;
+
+		retornoGra = GRA_IrVertice(pGrafo, i);
+		if (retornoGra != GRA_CondRetOK && retornoGra != GRA_CondRetNaoAchouVertice) {
+			retornoPer = restauraCorrenteGrafo(pGrafo, idCorrente);
+			if (retornoPer != PER_CondRetOK)
+				return retornoPer;
+			return transformaRetGRA(retornoGra);
+		}
+	}
+
+	retornoPer = restauraCorrenteGrafo(pGrafo, idCorrente);
+	if (retornoPer != PER_CondRetOK)
+		return retornoPer;
 	return PER_CondRetOK;
 }
