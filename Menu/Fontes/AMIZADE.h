@@ -1,7 +1,8 @@
 #if ! defined( AMIZADE_ )
 #define AMIZADE_
-#include "grafo.h"
-#include "perfil.h"
+
+#include "Perfil.h"
+
 /***************************************************************************
 *  $MCD MÛdulo de definiçÁ„o: AMI  MÛdulo Amizade
 *
@@ -57,6 +58,10 @@ typedef enum {
 	AMI_AmizadeJaExiste,
 	/* O usu·rio n„o possui amizades */
 
+	AMI_ArestaParaSiMesmo,
+	/* Usuario tentou criar amizade com ele mesmo*/
+
+
 	AMI_NaoAceitou,
 	/* O usu·rio n„o aceitou a solicitaçÁ„o de amizade de outro */
 
@@ -96,25 +101,8 @@ typedef enum {
     
 } AMI_tpSolitacao;
 
-/***********************************************************************
- *  $TC Tipo de dados: AMI VerificaçÁ„o
- *
- *
- *  $ED DescriçÁ„o do tipo
- *     Retorna se o usu·rio possui amizade com um segundo usu·rio ou n„o
- *
- ***********************************************************************/
 
- 
-typedef enum {
-    
-    AMI_ExisteAmizade,
-    /* Foi verificado que a amizade entre dois usu·rios existe */
-    
-    AMI_NaoExisteAmizade
-    /* Foi verificado que a amizade entre dois usu·rios n„o existe */
-    
-} AMI_tpVerificacao;
+
 
 
 /***********************************************************************
@@ -247,7 +235,8 @@ AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuar
 *
 ***********************************************************************/
 
-AMI_tpCondRet AMI_VerificarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil * Usuario2, AMI_tpVerificacao ExisteAmizade);
+
+AMI_tpCondRet AMI_VerificarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil * Usuario2);
 
 
 #undef AMIZADE_EXT

@@ -4,6 +4,6 @@ REM Copia arquivo lib de pasta comum "Biblioteca" para a pasta "Objetos".
 pushd  .
 
 cd ..
-copy   ..\Biblioteca\ArcaboucoTeste.lib ..\Amizade\Objetos
+copy   ..\Biblioteca\ArcaboucoTeste.lib ..\Menu\Objetos
 
 popd

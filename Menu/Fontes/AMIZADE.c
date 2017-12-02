@@ -24,9 +24,6 @@
 #include   <memory.h>
 #include   <malloc.h>
 #include   <assert.h>
-#include   "CESPDIN.H"
-#include   "GRAFO.h"
-#include   "PERFIL.h"
 #include   "AMIZADE.h"
 
 /*****  Código das funções exportadas pelo módulo  *****/
@@ -51,9 +48,9 @@ AMI_tpCondRet AMI_CriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER
 	PER_tpCondRet PER_RetornoId2;
 	int id1;
 	int id2;
-	
-	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,id1);
-	PER_RetornoId2 = PER_retornaIdPerfil(pGrafo, Usuario2,id2);
+	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,&id1);
+	PER_RetornoId2 = PER_retornaIdPerfil(pGrafo, Usuario2,&id2);
+
 	if (PER_RetornoId1 == PER_CondRetPerfilInexistente || PER_RetornoId2 == PER_CondRetPerfilInexistente){
 		return AMI_UsuarioNaoExiste;
 	}
@@ -63,6 +60,7 @@ AMI_tpCondRet AMI_CriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER
 	}
 		
 	GRA_RetornoCriarAresta = GRA_CriarAresta(pGrafo, id1, id2);
+
 	if (GRA_RetornoCriarAresta == GRA_CondRetArestaJaExiste){
 		return AMI_AmizadeJaExiste;
 	} else if (GRA_RetornoCriarAresta == GRA_CondRetArestaParaSiMesmo){
@@ -70,7 +68,7 @@ AMI_tpCondRet AMI_CriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER
 	}else if (GRA_RetornoCriarAresta != GRA_CondRetOK){
 		return AMI_CondRetRetornoGraIncorreto;
 	}
-	
+
 	return AMI_CondRetOK;
 }/* Fim função: AMI  &Criar Amizade */
 
@@ -86,7 +84,9 @@ AMI_tpCondRet AMI_CriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER
 *	
 *****/
 
-AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil Usuario2){
+
+AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil* Usuario2){
+
 	
 	GRA_tpCondRet GRA_RetornoExcluirAresta;
 	PER_tpCondRet PER_RetornoId1;
@@ -94,8 +94,10 @@ AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, P
 	int id1;
 	int id2;
 	
-	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,id1);
-	PER_RetornoId2 = PER_retornaIdPerfil(pGrafo, Usuario2,id2);
+
+	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,&id1);
+	PER_RetornoId2 = PER_retornaIdPerfil(pGrafo, Usuario2,&id2);
+
 	if (PER_RetornoId1 == PER_CondRetPerfilInexistente || PER_RetornoId2 == PER_CondRetPerfilInexistente){
 		return AMI_UsuarioNaoExiste;
 	}
@@ -126,27 +128,31 @@ AMI_tpCondRet AMI_VerificarNumAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario
 	GRA_tpCondRet GRA_RetornoMoverCorrente;
 	PER_tpCondRet PER_RetornoId1;
 	int id;
+	int NumAmigos;
 	
-	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,id);
+
+	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,&id);
+
 	if (PER_RetornoId1 == PER_CondRetPerfilInexistente){
 		return AMI_UsuarioNaoExiste;
 	}
 	
 	GRA_RetornoMoverCorrente = GRA_IrVertice(pGrafo, id);
-	if (GRA_RetornoMoverCorrente != GRA_CondRetOK){
+	if (GRA_RetornoMoverCorrente != GRA_CondRetOK){		
+
 		return AMI_CondRetRetornoGraIncorreto;
 	}
 	
-	GRA_RetornoNumAmigos = GRA_NumVertices(pGrafo, numAmizades);
-	if (GRA_RetornoNumAmigos == GRA_CondRetOK){
+	GRA_RetornoNumAmigos = GRA_NumArestas(pGrafo, &NumAmigos);
+	if (GRA_RetornoNumAmigos != GRA_CondRetOK){
 		return AMI_CondRetRetornoGraIncorreto;
 	}
-	
-	
-	if (numAmizades == 0){
+
+	*numAmizades=NumAmigos;
+	if (NumAmigos == 0){
 		return AMI_NaoPossuiAmizades;
 	}
-	
+
 	return AMI_CondRetOK;
 }/* Fim função: AMI  &Verificar Número de Amigos */
 
@@ -162,7 +168,8 @@ AMI_tpCondRet AMI_VerificarNumAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario
 *
 *****/
 
-AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil **PerfilAmigos){
+AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil *PerfilAmigos[]){
+
 	
 	GRA_tpCondRet GRA_RetornoIndiceAresta;
 	GRA_tpCondRet GRA_RetornoObterAmigo;
@@ -171,37 +178,45 @@ AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1
 	int id;
 	int numAmigos;
 	int* IdAmigos;
+	PER_tpPerfil *perfil;
+
+	int i;
 	
-	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,id);
+
+	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,&id);
 	if (PER_RetornoId1 == PER_CondRetPerfilInexistente){
 		return AMI_UsuarioNaoExiste;
 	}
 	
-	AMI_RetornoNumAmigos = AMI_VerificarNumAmigos(Usuario1, numAmigos);
+
+	AMI_RetornoNumAmigos = AMI_VerificarNumAmigos(pGrafo,Usuario1,&numAmigos);
+
 	if (AMI_RetornoNumAmigos != AMI_CondRetOK){
 		return AMI_RetornoNumAmigos;
 	}
 	if (numAmigos == 0){
 		return AMI_NaoPossuiAmizades;
 	}
-	
-	GRA_RetornoIndiceAresta = GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo, IdAmigos);
+	IdAmigos=(int*)malloc(numAmigos*sizeof(int));
+	if(IdAmigos==NULL)
+		return AMI_CondRetFaltouMemoria;
+	GRA_RetornoIndiceAresta = GRA_RetornaIndiceAresta(pGrafo, IdAmigos);
 	if (GRA_RetornoIndiceAresta != GRA_CondRetOK){
 		return AMI_CondRetRetornoGraIncorreto;
 	}
 	
 	for(i=0;i<numAmigos;i++) {
-		PER_tpPerfil **perfil;
-		char *email;
-		
-		GRA_RetornoObterAmigo = GRA_ObterValor(pGrafo, perfil);
-		if (GRA_RetornoObterAmigo != GRA_CondRetOK){
+		if(GRA_IrVertice(pGrafo,IdAmigos[i])!=GRA_CondRetOK)
 			return AMI_CondRetRetornoGraIncorreto;
-		}
-		PerfilAmigos[i] = *perfil
+		GRA_RetornoObterAmigo = GRA_ObterValor(pGrafo,(void**)&perfil);
+		
+		if (GRA_RetornoObterAmigo != GRA_CondRetOK)
+			return AMI_CondRetRetornoGraIncorreto;
+		 PerfilAmigos[i]= perfil;
+		
 		//strcpy((*perfil)->email, email);
 	}
-	
+	free(IdAmigos);
 	return AMI_CondRetOK;
 	
 }/* Fim função: AMI  &Armazenar Amizades */
@@ -227,21 +242,28 @@ AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuar
 	int id;
 	int numAmigos;
 	int* IdAmigos;
+	int i;
 	
-	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,id);
+
+	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,&id);
+
 	if (PER_RetornoId1 == PER_CondRetPerfilInexistente){
 		return AMI_UsuarioNaoExiste;
 	}
 	
-	AMI_RetornoNumAmigos = AMI_VerificarNumAmigos(Usuario1, numAmigos);
+
+	AMI_RetornoNumAmigos = AMI_VerificarNumAmigos(pGrafo,Usuario1, &numAmigos);
+
 	if (AMI_RetornoNumAmigos != AMI_CondRetOK){
 		return AMI_RetornoNumAmigos;
 	}
 	if (numAmigos == 0){
 		return AMI_NaoPossuiAmizades;
 	}
-	
-	GRA_RetornoIndiceAresta = GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo, IdAmigos);
+	IdAmigos=(int*)malloc(numAmigos*sizeof(int));
+	if(IdAmigos==NULL)
+		return AMI_CondRetFaltouMemoria;
+	GRA_RetornoIndiceAresta = GRA_RetornaIndiceAresta(pGrafo, IdAmigos);
 	if (GRA_RetornoIndiceAresta != GRA_CondRetOK){
 		return AMI_CondRetRetornoGraIncorreto;
 	}
@@ -269,16 +291,19 @@ AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuar
 *
 *****/
  
- AMI_tpCondRet AMI_VerificarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil * Usuario2, AMI_tpVerificacao ExisteAmizade)[
- 
+
+ AMI_tpCondRet AMI_VerificarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil * Usuario2)
+ {
+
 	GRA_tpCondRet GRA_RetornoVerificaAmizade;
 	PER_tpCondRet PER_RetornoId1;
 	PER_tpCondRet PER_RetornoId2;
 	int id1;
 	int id2;
 	
-	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,id1);
-	PER_RetornoId2 = PER_retornaIdPerfil(pGrafo, Usuario2,id2);
+	PER_RetornoId1 = PER_retornaIdPerfil(pGrafo, Usuario1,&id1);
+	PER_RetornoId2 = PER_retornaIdPerfil(pGrafo, Usuario2,&id2);
+
 	if (PER_RetornoId1 == PER_CondRetPerfilInexistente || PER_RetornoId2 == PER_CondRetPerfilInexistente){
 		return AMI_UsuarioNaoExiste;
 	}

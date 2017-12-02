@@ -102,6 +102,21 @@
 *
 *     Ver a descrição do módulo para mais detalhes
 *
+*     =declararparm   <nome>  <idTipo>  <literal>
+*        declara o parâmetro <nome> do <tipo> definido com o valor <literal>
+*        <tipo> pode ser um de:
+*           i - inteiro (long)
+*           f - flutuante (double)
+*           c - caractere
+*           s - string
+*        O valor de literal tem que estar em conformidade com o tipo
+*
+*     =exibirdeclaracao <nome>
+*        exibe a declaração do parâmetro <nome> em formato "dump de memória"
+*
+*     Estes comandos sempres estarão disponíveis. Os demais comandos de
+*     teste estão impementados no módulo TESTLER específico para este módulo.
+*
 ***********************************************************************/
 
    TST_tpCondRet LER_InterpretarComandos( char * ComandoTeste ) ;

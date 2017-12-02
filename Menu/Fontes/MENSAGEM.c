@@ -36,8 +36,8 @@
 #include   <stdio.h>
 #include   <string.h>
 #include   <stdlib.h>
-#include   "LISTA.h"
 #include   "MENSAGEM.h"
+
 
 /***********************************************************************
 *
@@ -59,37 +59,93 @@ typedef struct MEN_tagMensagem {
 } MEN_tpMensagem;
 
 
-/* MUDAR PARA USAR FUNCOES DE PERFIL*/
 
-/*****  Código das funções exportadas pelo módulo  *****/
+
 
 /***************************************************************************
 *
 *  Função: Função: MEN  &Escrever Mensagem 
 *  ****/
-MEN_tpCondRet MEN_EscreverMensagem( char emailRem[],char emailDest [],LIS_tppLista remetente,LIS_tppLista destinatario,char MensagemEnv[]) 
+MEN_tpCondRet MEN_EscreverMensagem(PER_tpPerfil * Remetente,PER_tpPerfil *Destinatario,char MensagemEnv[]) 
 {
 	int tamMsg;
-	LIS_tpCondRet CondRet;
+	char* emailRem;
+	char* emailDest;
+	char *primeiroNome;
+	char *ultimoNome;
+	char *cidade;
+	int diaNasc; 
+	int mesNasc;
+	int anoNasc;
 	MEN_tpMensagem* MsgRem;
 	MEN_tpMensagem* MsgDest;
-	//Assertivas
+	LIS_tppLista LisRem;
+	LIS_tppLista LisDest;
+	LIS_tpCondRet CondRet;
+	emailRem=(char*)malloc(101*sizeof(char));
+	if (emailRem == NULL)
+	{
+		return MEN_CondRetFaltouMemoria;
+	}
+	emailDest=(char*)malloc(101*sizeof(char));
+	if (emailDest == NULL)
+	{
+		return MEN_CondRetFaltouMemoria;
+	}
+		if (emailRem == NULL)
+	{
+		return MEN_CondRetFaltouMemoria;
+	}
+	primeiroNome=(char*)malloc(101*sizeof(char));
+	if (primeiroNome == NULL)
+	{
+		return MEN_CondRetFaltouMemoria;
+	}
+	ultimoNome=(char*)malloc(101*sizeof(char));
+	if (ultimoNome == NULL)
+	{
+		return MEN_CondRetFaltouMemoria;
+	}
+	cidade=(char*)malloc(101*sizeof(char));
+	if (cidade == NULL)
+	{
+		return MEN_CondRetFaltouMemoria;
+	}
+	if(PER_ObterPerfil(Remetente, emailRem,primeiroNome, ultimoNome,
+		&diaNasc, &mesNasc, &anoNasc, cidade)==PER_CondRetPonteiroParaRetornoInvalido)
+		return MEN_CondRetPerfilInvalido;
+	if (PER_ObterPerfil(Destinatario, emailDest,primeiroNome, ultimoNome,
+		&diaNasc, &mesNasc, &anoNasc, cidade)==PER_CondRetPonteiroParaRetornoInvalido)
+		return MEN_CondRetPerfilInvalido;
 	if(strcmp(emailRem,emailDest)==0)
 		return MEN_CondRetMesmoPerfil;
-	//VERIFICAR AMIZADE ->>>else if()
 	tamMsg=strlen(MensagemEnv);
 	if(tamMsg==0)
 		return MEN_CondRetMensagemVazia;
 	else if(tamMsg>400)
 		return MEN_CondRetMensagemExcedeuTamanho;
+
+	PER_retornaLisMensagens(Remetente,&LisRem);
+	PER_retornaLisMensagens(Destinatario,&LisDest);
+
 	MsgRem = (MEN_tpMensagem*)malloc(sizeof(MEN_tpMensagem));
 	if (MsgRem == NULL)
 	{
+		free(cidade);
+		free(primeiroNome);
+		free(ultimoNome);
+		free(emailDest);
+		free(emailRem);
 		return MEN_CondRetFaltouMemoria;
 	}
 	MsgDest = (MEN_tpMensagem*)malloc(sizeof(MEN_tpMensagem));
 	if (MsgDest == NULL)
 	{
+		free(cidade);
+		free(primeiroNome);
+		free(ultimoNome);
+		free(emailDest);
+		free(emailRem);
 		return MEN_CondRetFaltouMemoria;
 	}
 	
@@ -107,22 +163,26 @@ MEN_tpCondRet MEN_EscreverMensagem( char emailRem[],char emailDest [],LIS_tppLis
 
 
 
-	CondRet=LIS_IrFinalLista(remetente);
+	CondRet=LIS_IrFinalLista(LisRem);
 	if(CondRet!=LIS_CondRetOK)
 		return MEN_CondRetRetornoLisIncorreto;
 
-	if(LIS_InserirElementoApos( remetente ,(void*)MsgRem)
+	if(LIS_InserirElementoApos( LisRem ,(void*)MsgRem)
 		!=LIS_CondRetOK)
 		return MEN_CondRetRetornoLisIncorreto;
 
-	CondRet=LIS_IrFinalLista(destinatario);
+	CondRet=LIS_IrFinalLista(LisDest);
 	if(CondRet!=LIS_CondRetOK)
 		return MEN_CondRetRetornoLisIncorreto;
 
-	if(LIS_InserirElementoApos( destinatario ,(void*)MsgDest)
+	if(LIS_InserirElementoApos(LisDest ,(void*)MsgDest)
 		!=LIS_CondRetOK)
 		return MEN_CondRetRetornoLisIncorreto;
-	
+	free(cidade);
+	free(primeiroNome);
+	free(ultimoNome);
+	free(emailDest);
+	free(emailRem);
 	return MEN_CondRetOK;
 	
 } /* Fim função: MEN  &Escrever Mensagem */
@@ -133,17 +193,20 @@ MEN_tpCondRet MEN_EscreverMensagem( char emailRem[],char emailDest [],LIS_tppLis
   *  $FC Função: MEN  &Excluir Mensagem
   *  ****/
 
-MEN_tpCondRet MEN_ExcluirMensagem(LIS_tppLista pMensagem,char Email[],MEN_tpCondMsg flagMsg,char Mensagem[])
+MEN_tpCondRet MEN_ExcluirMensagem(PER_tpPerfil * Perfil,char Email[],MEN_tpCondMsg flagMsg,char Mensagem[])
 { 
 	int numTotalMsgs;
 	LIS_tpCondRet CondRetLis=LIS_CondRetOK;
 	MEN_tppMensagem tpMsg;
-	if(MEN_ObterNumTodasMensagens(pMensagem,&numTotalMsgs)==MEN_CondRetRetornoLisIncorreto)
+	LIS_tppLista pMensagem;
+	if(MEN_ObterNumTodasMensagens(Perfil,&numTotalMsgs)==MEN_CondRetRetornoLisIncorreto)
 		return MEN_CondRetRetornoLisIncorreto;
 	if(numTotalMsgs==0)
 	{
 		return MEN_CondRetListaVazia;
 	}
+	if(PER_retornaLisMensagens(Perfil,&pMensagem)==PER_CondRetPerfilInexistente)
+		return MEN_CondRetPerfilInvalido;
 	if(LIS_IrInicioLista(pMensagem)!=LIS_CondRetOK)
 		return MEN_CondRetRetornoLisIncorreto;
 	while(CondRetLis!=LIS_CondRetFimLista)
@@ -169,23 +232,26 @@ MEN_tpCondRet MEN_ExcluirMensagem(LIS_tppLista pMensagem,char Email[],MEN_tpCond
   *  $FC Função: MEN  &Excluir Mensagens de um Email
   *  ****/
 
-MEN_tpCondRet MEN_ExcluirMensagensEmail(LIS_tppLista pMensagem,char Email[]);
+MEN_tpCondRet MEN_ExcluirMensagensEmail(PER_tpPerfil * Perfil,char Email[])
 { 
 	int numTotalMsgs;
 	LIS_tpCondRet CondRetLis=LIS_CondRetOK;
 	MEN_tppMensagem tpMsg;
-	if(MEN_ObterNumTodasMensagens(pMensagem,&numTotalMsgs)==MEN_CondRetRetornoLisIncorreto)
+	LIS_tppLista pMensagem;
+	if(MEN_ObterNumTodasMensagens(Perfil,&numTotalMsgs)==MEN_CondRetRetornoLisIncorreto)
 		return MEN_CondRetRetornoLisIncorreto;
 	if(numTotalMsgs==0)
 	{
-		return MEN_CondRetOK;
+		return MEN_CondRetListaVazia;
 	}
+	if(PER_retornaLisMensagens(Perfil,&pMensagem)==PER_CondRetPerfilInexistente)
+		return MEN_CondRetPerfilInvalido;
 	if(LIS_IrInicioLista(pMensagem)!=LIS_CondRetOK)
 		return MEN_CondRetRetornoLisIncorreto;
 	while(CondRetLis!=LIS_CondRetFimLista)
 	{
-		if(LIS_ObterValor(pMensagem,(void**)&tpMsg) != LIS_CondRetOK)
-			return MEN_CondRetRetornoLisIncorreto;
+		if(LIS_ObterValor(pMensagem,(void**)&tpMsg) == LIS_CondRetListaVazia)
+			return MEN_CondRetOK;
 		if(strcmp(tpMsg->Email,Email)==0)
 		{
 			if(LIS_ExcluirElemento(pMensagem)!=LIS_CondRetOK)
@@ -205,8 +271,11 @@ MEN_tpCondRet MEN_ExcluirMensagensEmail(LIS_tppLista pMensagem,char Email[]);
  *  Função: Função: MEN  &ObterNumTodasMensagens
  *  ****/
 
-MEN_tpCondRet MEN_ObterNumTodasMensagens(LIS_tppLista pMensagem, int* numTotalMsgs) 
+MEN_tpCondRet MEN_ObterNumTodasMensagens(PER_tpPerfil * Perfil, int* numTotalMsgs) 
 {
+	LIS_tppLista pMensagem;
+	if(PER_retornaLisMensagens(Perfil,&pMensagem)==PER_CondRetPerfilInexistente)
+		return MEN_CondRetPerfilInvalido;
 	if(pMensagem==NULL)
 		return MEN_CondRetParametroIncorreto;
 	if(LIS_ObterTamanho(pMensagem,numTotalMsgs)!=LIS_CondRetOK)
@@ -221,24 +290,24 @@ MEN_tpCondRet MEN_ObterNumTodasMensagens(LIS_tppLista pMensagem, int* numTotalMs
  *  Função:  &ObterNumMensagens
  *  ****/
 
-MEN_tpCondRet MEN_ObterNumMensagens(LIS_tppLista pMensagem,MEN_tpCondMsg flagMsg, int* numMsgs) 
+MEN_tpCondRet MEN_ObterNumMensagens(PER_tpPerfil * Perfil,MEN_tpCondMsg flagMsg, int* numMsgs) 
 {
 	LIS_tpCondRet CondRetLis=LIS_CondRetOK;
 	int numTotalMsgs,contador=0;
 	MEN_tppMensagem tpMsg;
+	LIS_tppLista pMensagem;
 	//Assertivas:
-	if(pMensagem==NULL)
-		return MEN_CondRetParametroIncorreto;
 	if(flagMsg!=MEN_CondMsgEnviada && flagMsg!=MEN_CondMsgRecebida )
 		return MEN_CondRetParametroIncorreto;
-	if(MEN_ObterNumTodasMensagens(pMensagem,&numTotalMsgs)==MEN_CondRetRetornoLisIncorreto)
+	if(MEN_ObterNumTodasMensagens(Perfil,&numTotalMsgs)==MEN_CondRetRetornoLisIncorreto)
 		return MEN_CondRetRetornoLisIncorreto;
-	
 	if(numTotalMsgs==0)
 	{
 		*numMsgs=0;
-		return MEN_CondRetOK;
+		return MEN_CondRetListaVazia;
 	}
+	if(PER_retornaLisMensagens(Perfil,&pMensagem)==PER_CondRetPerfilInexistente)
+		return MEN_CondRetPerfilInvalido;
 	if(LIS_IrInicioLista(pMensagem)!=LIS_CondRetOK)
 		return MEN_CondRetRetornoLisIncorreto;
 	while(CondRetLis!=LIS_CondRetFimLista)
@@ -262,22 +331,26 @@ MEN_tpCondRet MEN_ObterNumMensagens(LIS_tppLista pMensagem,MEN_tpCondMsg flagMsg
 *  Função: MEN  &Obter Todas Mensagens
 *  ****/
 
-MEN_tpCondRet MEN_ObterTodasMensagens(LIS_tppLista pMensagem, MEN_tpCondMsg vetTipos[],char* vetEmails[], char* vetMensagens[] )
+MEN_tpCondRet MEN_ObterTodasMensagens(PER_tpPerfil * Perfil, MEN_tpCondMsg vetTipos[],char* vetEmails[], char* vetMensagens[] )
 {
 	LIS_tpCondRet CondRetLis=LIS_CondRetOK;
 	int numTotalMsgs,i=0;
 	MEN_tppMensagem tpMsg;
+	LIS_tppLista pMensagem;
 	//Assertiva
 	if (vetMensagens== NULL || vetTipos== NULL || vetEmails== NULL )
 	{
 		return MEN_CondRetParametroIncorreto;
-	} 
-	if(MEN_ObterNumTodasMensagens(pMensagem,&numTotalMsgs)==MEN_CondRetRetornoLisIncorreto)
+	}
+	if(MEN_ObterNumTodasMensagens(Perfil,&numTotalMsgs)==MEN_CondRetRetornoLisIncorreto)
 		return MEN_CondRetRetornoLisIncorreto;
 	if(numTotalMsgs==0)
 	{
+
 		return MEN_CondRetListaVazia;
 	}
+	if(PER_retornaLisMensagens(Perfil,&pMensagem)==PER_CondRetPerfilInexistente)
+		return MEN_CondRetPerfilInvalido;
 	if(LIS_IrInicioLista(pMensagem)!=LIS_CondRetOK)
 		return MEN_CondRetRetornoLisIncorreto;
 	while(CondRetLis!=LIS_CondRetFimLista)
@@ -302,22 +375,26 @@ MEN_tpCondRet MEN_ObterTodasMensagens(LIS_tppLista pMensagem, MEN_tpCondMsg vetT
 *  Função: MEN  &Obter Mensagens
 *  ****/
 
-MEN_tpCondRet MEN_ObterMensagens(LIS_tppLista pMensagem, char* vetEmails[], char* vetMensagens[],MEN_tpCondMsg flagMsg)
+MEN_tpCondRet MEN_ObterMensagens(PER_tpPerfil * Perfil, char* vetEmails[], char* vetMensagens[],MEN_tpCondMsg flagMsg)
 {
 	LIS_tpCondRet CondRetLis=LIS_CondRetOK;
 	int numTotalMsgs,i=0;
 	MEN_tppMensagem tpMsg;
+	LIS_tppLista pMensagem;
 	//Assertiva
 	if (vetMensagens== NULL || vetEmails== NULL)
 	{
 		return MEN_CondRetParametroIncorreto;
 	} 
-	if(MEN_ObterNumTodasMensagens(pMensagem,&numTotalMsgs)==MEN_CondRetRetornoLisIncorreto)
+	if(MEN_ObterNumTodasMensagens(Perfil,&numTotalMsgs)==MEN_CondRetRetornoLisIncorreto)
 		return MEN_CondRetRetornoLisIncorreto;
 	if(numTotalMsgs==0)
 	{
+
 		return MEN_CondRetListaVazia;
 	}
+	if(PER_retornaLisMensagens(Perfil,&pMensagem)==PER_CondRetPerfilInexistente)
+		return MEN_CondRetPerfilInvalido;
 	if(LIS_IrInicioLista(pMensagem)!=LIS_CondRetOK)
 		return MEN_CondRetRetornoLisIncorreto;
 	while(CondRetLis!=LIS_CondRetFimLista)
@@ -334,5 +411,7 @@ MEN_tpCondRet MEN_ObterMensagens(LIS_tppLista pMensagem, char* vetEmails[], char
 	return MEN_CondRetOK;
 
 } /* Fim função: MEN  &Armazenar Mensagens */
+
+
 
 /********** Fim do módulo de implementação: MEN  Lista de Mensagens **********/

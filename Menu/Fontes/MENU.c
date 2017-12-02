@@ -28,11 +28,14 @@
 #include   "GRAFO.h"
 #include   "PERFIL.h"
 #include   "AMIZADE.h"
-#include   "MENSAGEM.c"
+#include   "MENSAGEM.H"
 
 int main () {
     
-    // Criar grafo no malloc loko
+	GRA_tppGrafo *Grafo;
+	
+	if ((Grafo = (GRA_tppGrafo *)malloc(sizeof(GRA_tppGrafo))) == NULL)
+		return exit(0);
     
     MENU_Menu1();
     

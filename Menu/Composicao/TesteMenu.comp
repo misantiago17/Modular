@@ -1,8 +1,8 @@
-# Composicao do programa de teste de modulo amizade
+# Composicao do programa do modulo Menu
 
 [Diretorios]
 
-Nome        =	TesteAmizade
+Nome        =	TesteMenu
 PathDefault =	..\Fontes
 err         =	..\Produto
 obj         =	..\Objetos
@@ -10,13 +10,16 @@ c           =	..\Fontes
 h           =	..\Fontes
 
 [Modulos]
-TesteAmizade
+grafo
+Menu
 Amizade
-Grafo
+Mensagem
 Perfil
+Lista
+
 
 [BuildInicio]
-/OUT:..\Produto\TRAB4-3.exe
+/OUT:..\Produto\TRAB4-23.exe
 /INCREMENTAL:NO
 /MACHINE:IX86
 

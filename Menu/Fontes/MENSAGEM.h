@@ -1,5 +1,7 @@
 #if ! defined( MENSAGEM_ )
 #define MENSAGEM_
+
+#include"perfil.h"
 /***************************************************************************
 *  $MCD Módulo de definição: MEN  Lista de Mensagens de cada perfil
 *
@@ -67,6 +69,9 @@ typedef enum {
 
 	MEN_CondRetRetornoLisIncorreto,
 	/* Condicao de retorno do modulo Lista imprevista*/
+
+	MEN_CondRetPerfilInvalido,
+	/* Perfil passado como parametro nao existe*/
 	
 	MEN_CondRetParametroIncorreto,
 	/* Parametro passado esta diferente do especificado*/
@@ -108,8 +113,8 @@ typedef enum {
 *     envia a mensagem quanto no do que recebe.
 *
 *  $EP Parâmetros
-*     PerfilRemetente  - Perfil do usuario que envia a mensagem.
-*	  PerfilDestinatario - Perfil do usuario que recebe a mensagem.
+*     Remetente  - Perfil do usuario que envia a mensagem.
+*	  Destinatario - Perfil do usuario que recebe a mensagem.
 *     MensagemEnv - Conteudo da mensagem
 *
 *  $FV Valor retornado
@@ -117,11 +122,12 @@ typedef enum {
 *	   MEN_CondRetMesmoPerfil
 *	   MEN_CondRetFaltouMemoria
 *	   MEN_CondRetRetornoLisIncorreto
+*	   MEN_CondRetPerfilInvalido
 *	   MEN_CondRetMensagemExcedeuTamanho
 *
 ***********************************************************************/
 
-MEN_tpCondRet MEN_EscreverMensagem( char emailRem[],char emailDest [],LIS_tppLista remetente,LIS_tppLista destinatario,char MensagemEnv[])  ;
+MEN_tpCondRet MEN_EscreverMensagem( PER_tpPerfil * Remetente,PER_tpPerfil *Destinatario,char MensagemEnv[])  ;
 
 
 /***********************************************************************
@@ -143,12 +149,12 @@ MEN_tpCondRet MEN_EscreverMensagem( char emailRem[],char emailDest [],LIS_tppLis
 *  $FV Valor retornado
 *     MEN_CondRetOK
 *	  MEN_CondRetNaoEncontrouMensagem
-*	  MEN_CondRetParametroIncorreto
 *	  MEN_CondRetRetornoLisIncorreto
+*	  MEN_CondRetPerfilInvalido
 *
 ***********************************************************************/
 
-MEN_tpCondRet MEN_ExcluirMensagem(LIS_tppLista pMensagem,char Email[],MEN_tpCondMsg flagMsg,char Mensagem[]);
+MEN_tpCondRet MEN_ExcluirMensagem(PER_tpPerfil * Perfil,char Email[],MEN_tpCondMsg flagMsg,char Mensagem[]);
 
 /***********************************************************************
 *  $FC Função: MEN  &Excluir Mensagens de um Email
@@ -166,13 +172,14 @@ MEN_tpCondRet MEN_ExcluirMensagem(LIS_tppLista pMensagem,char Email[],MEN_tpCond
 *	  
 *
 *  $FV Valor retornado
+*	  MEN_CondRetPerfilInvalido
 *     MEN_CondRetOK
-*	  MEN_CondRetParametroIncorreto
 *	  MEN_CondRetRetornoLisIncorreto
+*	  MEN_CondRetPerfilInvalido
 *
 ***********************************************************************/
 
-MEN_tpCondRet MEN_ExcluirMensagensEmail(LIS_tppLista pMensagem,char Email[]);
+MEN_tpCondRet MEN_ExcluirMensagensEmail(PER_tpPerfil * Perfil,char Email[]);
 
 
 /***********************************************************************
@@ -189,12 +196,12 @@ MEN_tpCondRet MEN_ExcluirMensagensEmail(LIS_tppLista pMensagem,char Email[]);
 *
 *  $FV Valor retornado
 *     MEN_CondRetOK
-*     MEN_CondRetParametroIncorreto
+*	  MEN_CondRetPerfilInvalido
 *     MEN_CondRetRetornoLisIncorreto
 
 ***********************************************************************/
 
-MEN_tpCondRet MEN_ObterNumMensagens(LIS_tppLista pMensagem,MEN_tpCondMsg flagMsg, int* numMsgs) ;
+MEN_tpCondRet MEN_ObterNumMensagens(PER_tpPerfil * Perfil,MEN_tpCondMsg flagMsg, int* numMsgs)  ;
 
 /***********************************************************************
 *  $FC Função: MEN  &Obter Numero Total de Mensagens
@@ -208,12 +215,12 @@ MEN_tpCondRet MEN_ObterNumMensagens(LIS_tppLista pMensagem,MEN_tpCondMsg flagMsg
 *
 *  $FV Valor retornado
 *     MEN_CondRetOK
-*     MEN_CondRetParametroIncorreto
+*	  MEN_CondRetPerfilInvalido
 *     MEN_CondRetRetornoLisIncorreto
 *
 ***********************************************************************/
 
-MEN_tpCondRet MEN_ObterNumTodasMensagens(LIS_tppLista pMensagem, int* numTotalMsgs);
+MEN_tpCondRet MEN_ObterNumTodasMensagens(PER_tpPerfil * Perfil, int* numTotalMsgs) ;
 
 
 /***********************************************************************
@@ -232,12 +239,12 @@ MEN_tpCondRet MEN_ObterNumTodasMensagens(LIS_tppLista pMensagem, int* numTotalMs
 *  $FV Valor retornado
 *     MEN_CondRetOK
 *     MEN_CondRetListaVazia
-*     MEN_CondRetParametroIncorreto
+*	  MEN_CondRetPerfilInvalido
 *	  MEN_CondRetRetornoLisIncorreto
 *
 ***********************************************************************/
 
-MEN_tpCondRet MEN_ObterTodasMensagens(LIS_tppLista pMensagem, MEN_tpCondMsg vetTipos[],char* vetEmails[], char* vetMensagens[] );
+MEN_tpCondRet MEN_ObterTodasMensagens(PER_tpPerfil * Perfil, MEN_tpCondMsg vetTipos[],char* vetEmails[], char* vetMensagens[] );
 
 /***********************************************************************
 *  $FC Função: MEN  &Obter Mensagens
@@ -254,6 +261,7 @@ MEN_tpCondRet MEN_ObterTodasMensagens(LIS_tppLista pMensagem, MEN_tpCondMsg vetT
 *	  flagMsg- tipo de mensagem que deseja-se armazenar(enviada ou recebida).
 *
 *  $FV Valor retornado
+*	  MEN_CondRetPerfilInvalido
 *     MEN_CondRetOK
 *     MEN_CondRetListaVazia
 *     MEN_CondRetParametroIncorreto
@@ -261,7 +269,7 @@ MEN_tpCondRet MEN_ObterTodasMensagens(LIS_tppLista pMensagem, MEN_tpCondMsg vetT
 *
 ***********************************************************************/
 
-MEN_tpCondRet MEN_ObterMensagens(LIS_tppLista pMensagem, char* vetEmails[], char* vetMensagens[],MEN_tpCondMsg flagMsg);
+MEN_tpCondRet MEN_ObterMensagens(PER_tpPerfil * Perfil, char* vetEmails[], char* vetMensagens[],MEN_tpCondMsg flagMsg);
 
 
 

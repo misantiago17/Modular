@@ -1,0 +1,7 @@
+/OUT:..\Produto\TRAB4-23.exe
+/INCREMENTAL:NO
+/MACHINE:IX86
+grafo.obj  menu.obj  amizade.obj  mensagem.obj  perfil.obj  
+lista.obj  
+ArcaboucoTeste.lib
+
