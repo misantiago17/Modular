@@ -78,11 +78,9 @@ typedef enum {
 	
 	PER_CondRetParametroGRAIncorreto,
 
-
 	PER_CondRetPonteiroParaRetornoInvalido,
 
 	PER_CondRetPerfilInvalido
-
 
 } PER_tpCondRet;
 
