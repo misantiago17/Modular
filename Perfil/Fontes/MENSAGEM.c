@@ -235,6 +235,7 @@ MEN_tpCondRet MEN_ExcluirMensagem(PER_tpPerfil * Perfil,char Email[],MEN_tpCondM
 MEN_tpCondRet MEN_ExcluirMensagensEmail(PER_tpPerfil * Perfil,char Email[])
 { 
 	int numTotalMsgs;
+	
 	LIS_tpCondRet CondRetLis=LIS_CondRetOK;
 	MEN_tppMensagem tpMsg;
 	LIS_tppLista pMensagem;
@@ -242,7 +243,7 @@ MEN_tpCondRet MEN_ExcluirMensagensEmail(PER_tpPerfil * Perfil,char Email[])
 		return MEN_CondRetRetornoLisIncorreto;
 	if(numTotalMsgs==0)
 	{
-		return MEN_CondRetListaVazia;
+		return MEN_CondRetOK;
 	}
 	if(PER_retornaLisMensagens(Perfil,&pMensagem)==PER_CondRetPerfilInexistente)
 		return MEN_CondRetPerfilInvalido;

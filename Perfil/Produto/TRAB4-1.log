@@ -1,0 +1,46 @@
+
+!!! Inicio dos testes
+!!!      Construto sob teste: ..\Produto\TRAB4-1
+!!!      Script de teste:     ..\Scripts\TestePerfil.script
+
+!!!    0  Linha:     1  // Script:    TesteGrafo.script 
+!!!    0  Linha:     2  // Autor:     Gabriel, Michelle, Renan 
+!!!    0  Linha:     3  // Data:      15/10/2017 
+!!!    0  Linha:     4  // Proposito: Testar o modulo perfil 
+    7  == Inicializar valores
+   15  == struct 0
+   24  == struct 1
+   33  == struct 2
+   42  == Parametros invalidos
+   50  ==Parametros para mudanca
+   74  == Criar o grafo
+   77  == Obter Numero de perfis existentes
+   80  == Criar Perfil 0
+   83  == Obter Numero de perfis existentes
+   86  ==Busca email do perfil 0
+   89  ==Busca email inexistente
+   92  == Obter Dados do perfil 0
+   95  == Criar Perfil 1
+   98  == Obter Numero de perfis existentes
+  101  == Obter Dados do perfil 1
+  104  == Criar Perfil email ja cadastrado
+  107  == Criar Perfil email invalido
+  110  == Criar Perfil primeiro nome invalido
+  113  == Criar Perfil ultimo nome invalido
+  116  == Criar Perfil dia invalido
+  119  == Criar Perfil mes invalido
+  122  == Criar Perfil ano invalido
+  125  == Criar Perfil 2
+  128  == Obter Numero de perfis existentes
+  131  == Obter Dados do perfil 2
+  134  == Excluir perfil 1
+
+!!! Número de linhas lidas:         137
+!!! Número de casos de teste:        27
+!!! Número comandos corretos:        73
+!!! Número de falhas encontradas:     0
+
+!!! Não foram encontrados problemas
+
+
+!!! Numero de espacos ainda alocados: 0

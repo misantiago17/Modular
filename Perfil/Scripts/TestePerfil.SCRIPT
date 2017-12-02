@@ -135,46 +135,4 @@
 == Excluir perfil 1
 =excluirperfil email1 OK
 
-== Obter Numero de perfis existentes
-=numeroperfis	2 OK
 
-==Modificar Dados do perfil 2
-=modificanome email2 primeiroNome4 ultimoNome4 OK
-=modificadata email2 diaNasc4 mesNasc4 anoNasc4 OK
-=modificacidade email2 cidade4 OK
-=modificaemail email2 email4 OK
-
-== Obter Dados do perfil 2
-=obterperfil perfil2 email4 primeiroNome4 ultimoNome4 diaNasc4 mesNasc4 anoNasc4 cidade4 OK
-
-==Modificar Dados do perfil 0 para dados invalidos
-=modificanome email0 primeiroNome3 ultimoNome3 NomeInvalido
-=modificadata email0 diaNasc3 mesNasc4 anoNasc4 DataInvalida
-=modificaemail email0 email3 EmailInvalido
-
-== Obter Dados do perfil 0
-=obterperfil perfil0	email0 primeiroNome0 ultimoNome0 diaNasc0 mesNasc0 anoNasc0 cidade0 OK
-
-==Modifica email do perfil 0 para email antigo do perfil 2
-=modificaemail email0 email2 OK
-
-== Obter Dados do perfil 0
-=obterperfil perfil0 email2 primeiroNome0 ultimoNome0 diaNasc0 mesNasc0 anoNasc0 cidade0 OK
-
-==Excluir todos os perfis
-=excluirtodosperfis OK
-
-== Obter Numero de perfis existentes
-=numeroperfis	0 OK
-
-== Criar Perfil 0
-=criarperfil perfil0 email0 primeiroNome0 ultimoNome0 diaNasc0 mesNasc0 anoNasc0 cidade0 OK
-
-==Retorna lista de mensagens do perfil  0
-=retornalismensagens perfil0 OK
-
-==Retornar id do perfil 0
-=retornaidperfil perfil0 1 OK
-
-== Reseta bateria de testes
-=resetteste
