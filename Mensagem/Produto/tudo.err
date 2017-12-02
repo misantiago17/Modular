@@ -1,56 +1,14 @@
 testemensagem.c
-..\Fontes\testemensagem.c(120) : error C2143: syntax error : missing ';' before 'constant'
-..\Fontes\testemensagem.c(120) : error C2143: syntax error : missing ';' before ']'
-..\Fontes\testemensagem.c(121) : error C2143: syntax error : missing ';' before 'type'
-..\Fontes\testemensagem.c(122) : error C2143: syntax error : missing ';' before 'type'
-..\Fontes\testemensagem.c(123) : error C2143: syntax error : missing ';' before 'type'
-..\Fontes\testemensagem.c(124) : error C2143: syntax error : missing ';' before 'type'
-..\Fontes\testemensagem.c(125) : error C2143: syntax error : missing ';' before 'type'
-..\Fontes\testemensagem.c(128) : error C2065: 'PER_CondRetCriarPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(128) : error C2065: 'vtGrafos' : undeclared identifier
-..\Fontes\testemensagem.c(128) : error C2109: subscript requires array or pointer type
-..\Fontes\testemensagem.c(128) : error C2065: 'vtPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(128) : error C2109: subscript requires array or pointer type
-..\Fontes\testemensagem.c(128) : warning C4133: 'function' : incompatible types - from 'unsigned char *' to 'GRA_tppGrafo'
-..\Fontes\testemensagem.c(128) : warning C4047: 'function' : 'PER_tpPerfil **' differs in levels of indirection from 'unsigned char'
-..\Fontes\testemensagem.c(128) : warning C4024: 'PER_CriarPerfil' : different types for formal and actual parameter 2
-..\Fontes\testemensagem.c(128) : error C2065: 'vtUltNome' : undeclared identifier
-..\Fontes\testemensagem.c(128) : error C2109: subscript requires array or pointer type
-..\Fontes\testemensagem.c(129) : error C2065: 'vtDia' : undeclared identifier
-..\Fontes\testemensagem.c(129) : error C2109: subscript requires array or pointer type
-..\Fontes\testemensagem.c(129) : error C2065: 'vtMes' : undeclared identifier
-..\Fontes\testemensagem.c(129) : error C2109: subscript requires array or pointer type
-..\Fontes\testemensagem.c(129) : error C2065: 'vtAno' : undeclared identifier
-..\Fontes\testemensagem.c(129) : error C2109: subscript requires array or pointer type
-..\Fontes\testemensagem.c(129) : error C2065: 'vtCidade' : undeclared identifier
-..\Fontes\testemensagem.c(129) : error C2109: subscript requires array or pointer type
-..\Fontes\testemensagem.c(129) : error C2198: 'PER_CriarPerfil' : too few arguments for call
-..\Fontes\testemensagem.c(130) : error C2065: 'PER_CondRetCriarPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(147) : error C2065: 'VetPerfis' : undeclared identifier
-..\Fontes\testemensagem.c(147) : error C2109: subscript requires array or pointer type
-..\Fontes\testemensagem.c(147) : warning C4133: 'function' : incompatible types - from 'unsigned char [400]' to 'PER_tpPerfil *'
-..\Fontes\testemensagem.c(147) : error C2198: 'MEN_EscreverMensagem' : too few arguments for call
-..\Fontes\testemensagem.c(164) : error C2065: 'InxPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(168) : error C2065: 'InxPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(182) : error C2059: syntax error : ','
-..\Fontes\testemensagem.c(184) : error C2065: 'InxPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(188) : error C2065: 'InxPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(203) : error C2065: 'InxPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(207) : error C2065: 'InxPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(212) : error C2065: 'InxPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(233) : error C2065: 'InxPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(237) : error C2065: 'InxPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(242) : error C2065: 'InxPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(266) : error C2065: 'InxPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(270) : error C2065: 'InxPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(308) : error C2065: 'InxPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(308) : error C2440: 'function' : cannot convert from 'MEN_tpCondRet *' to 'MEN_tpCondMsg'
-..\Fontes\testemensagem.c(308) : warning C4024: 'MEN_ObterMensagens' : different types for formal and actual parameter 4
-..\Fontes\testemensagem.c(345) : error C2065: 'vetTipos' : undeclared identifier
-..\Fontes\testemensagem.c(345) : warning C4022: 'free' : pointer mismatch for actual parameter 1
-..\Fontes\testemensagem.c(369) : error C2065: 'InxPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(373) : error C2065: 'InxPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(417) : error C2065: 'InxPerfil' : undeclared identifier
-..\Fontes\testemensagem.c(417) : warning C4133: 'function' : incompatible types - from 'int *' to 'MEN_tpCondMsg *'
-..\Fontes\testemensagem.c(501) : error C2065: 'DIM_VT_Perfil' : undeclared identifier
+lista.c
+mensagem.c
+perfil.c
+grafo.c
+Microsoft (R) Incremental Linker Version 10.00.40219.01
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/OUT:..\Produto\TRAB4-10.EXE 
+/INCREMENTAL:NO 
+/MACHINE:IX86 
+testemensagem.obj lista.obj mensagem.obj perfil.obj grafo.obj 
+ArcaboucoTeste.lib 
 

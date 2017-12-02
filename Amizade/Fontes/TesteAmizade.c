@@ -75,7 +75,7 @@ static int ValidarInxPerfil( int inxPerfil);
 *
 *     Comandos disponíveis:
 *
-*     =resetteste - anula o vetor de grafos e perfiis. Provoca vazamento de memória.
+*     =resetteste - Destroi o grafo e cria novamente os perfis
 *     =criaramizade                   	inxPerfil1 	inxPerfil2 	Solicitacao   CondRetEsp
 *     =excluiramizade                	inxPerfil1 	inxPerfil2 	CondRetEsp
 *     =verificarnumamigos               inxPerfil 	numAmizades CondRetEsp

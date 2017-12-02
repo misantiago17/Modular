@@ -48,7 +48,7 @@ INCLUDE = $(INCLUDE);$(PDEFAULT)
 
 all : limpa \
    $(Fobj)\testemensagem.obj   $(Fobj)\lista.obj   $(Fobj)\mensagem.obj \
-   $(Fobj)\perfil.obj \
+   $(Fobj)\perfil.obj   $(Fobj)\grafo.obj \
    Construto
 
 ### Limpar arquivos
@@ -60,7 +60,8 @@ limpa :
 ### Dependências de módulos objeto a compilar
 
 $(Fobj)\testemensagem.obj :  {$(Pc)}\testemensagem.c \
-    {$(Ph)}generico.h           {$(Ph)}lerparm.h            {$(Ph)}mensagem.h           \
+    {$(Ph)}generico.h           {$(Ph)}grafo.h              {$(Ph)}lerparm.h            \
+    {$(Ph)}lista.h              {$(Ph)}mensagem.h           {$(Ph)}perfil.h             \
     {$(Ph)}tst_espc.h          
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
@@ -76,12 +77,17 @@ $(Fobj)\perfil.obj :  {$(Pc)}\perfil.c \
     {$(Ph)}grafo.h              {$(Ph)}lista.h              {$(Ph)}perfil.h            
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
+$(Fobj)\grafo.obj :  {$(Pc)}\grafo.c \
+    {$(Ph)}cespdin.h            {$(Ph)}conta.h              {$(Ph)}generico.h           \
+    {$(Ph)}grafo.h              {$(Ph)}lista.h              {$(Ph)}tst_espc.h          
+   cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
+
 
 ### Terminação
 
 Construto : \
    $(Fobj)\testemensagem.obj   $(Fobj)\lista.obj   $(Fobj)\mensagem.obj \
-   $(Fobj)\perfil.obj
+   $(Fobj)\perfil.obj   $(Fobj)\grafo.obj
     cd $(Fobj)
     LINK $(L) @$(NOME).build >> $(Ferr)\$(NOME).err
 

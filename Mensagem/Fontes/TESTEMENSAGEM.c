@@ -34,10 +34,11 @@
 #include    "Generico.h"
 #include    "LerParm.h"
 #include    "MENSAGEM.h"
+#include     "perfil.h"
 
 
 
-
+static const char RESET_MENSAGEM_CMD		  [ ] = "=resetteste";
 static const char ESCREVER_MSG_CMD        [ ] = "=escrevermsg"     ;
 static const char EXCLUIR_MSG_CMD         [ ] = "=excluirmsg"     ;
 static const char EXCLUIR_MSGEMAIL_CMD    [ ] = "=excluirmsgemail"     ;
@@ -62,7 +63,7 @@ PER_tpPerfil *   vtPerfis[ DIM_VT_PERFIL ] ;
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
-
+static void DestruirValor( void * pValor );
 static int ValidarInxPerfil( int InxPerfil) ;
 
 
@@ -77,74 +78,95 @@ static int ValidarInxPerfil( int InxPerfil) ;
 *	  serao testadas.
 *
 *     Comandos disponíveis:
-*
-*     =escrevermsg                  inxPerfilRemetente inxPerfilDestinatario MensagemEnv CondRetEsp
-*     =excluirmsg	                inxPerfil Email FlagMsg Mensagem CondRetEsp
-*	  =excluirmsgemail              inxPerfil Email CondRetEsp
-*     =obternummsgs                 inxPerfil FlagMsg numElem  CondRetEsp
-*     =obternumtodasmsgs            inxPerfil numElem  CondRetEsp
-*     =obtermsgs                    inxPerfil tamVetor vetTipos  vetEmails vetMensagens FlagMsg CondRetEsp - Compara os dados recebidos e esperados de até 2 mensagens de um perfil
-*     =obtertodasmsgs               inxPerfil tamVetor vetTipos  vetEmails vetMensagens CondRetEsp - Compara os dados recebidos e esperados de até 2 mensagens de um perfil
+*	  =resetteste					Destroi o grafo e cria novamente os perfis
+*     =escrevermsg                  InxPerfilRemetente InxPerfilDestinatario MensagemEnv CondRetEsp
+*     =excluirmsg	                InxPerfil Email FlagMsg Mensagem CondRetEsp
+*	  =excluirmsgemail              InxPerfil Email CondRetEsp
+*     =obternummsgs                 InxPerfil FlagMsg numElem  CondRetEsp
+*     =obternumtodasmsgs            InxPerfil numElem  CondRetEsp
+*     =obtermsgs                    InxPerfil  vetTipos  vetEmails vetMensagens FlagMsg CondRetEsp - 
+*																			Compara os dados recebidos e esperados para listas de exatamente 2 elementos do tipo procurado
+*     =obtertodasmsgs               InxPerfil  vetTipos  vetEmails vetMensagens CondRetEsp - 
+*																			Compara os dados recebidos e esperados para listas de exatamente 2 elementos
 *
 ***********************************************************************/
 
 TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 {
 
-	int inxPerfil  = -1 ,
-		inxPerfilRemetente =-1,
-		inxPerfilDestinatario=-1,
+	int InxPerfil  = -1 ,
+		InxPerfilRemetente =-1,
+		InxPerfilDestinatario=-1,
 		numLidos   = -1 ,
 		CondRetEsp = -1  ;
-	TST_tpCondRet CondRet ;
+	TST_tpCondRet CondRet=-1 ;
 	MEN_tpCondRet FlagMsg;
-
+	GRA_tpCondRet GRA_CondRetCriarGrafo;
+	PER_tpCondRet PER_CondRetCriarPerfil;
 	char Mensagem[400];
 	char Email[100];
-	char EmailRet[100];
-	char DataRet[12];
+	
 
-	char NomeEsp[100];
-	char CidadeEsp[50];
-	char EmailEsp[100];
-	char DataEsp[12];
 
 
 
 	int i ;
 
 	int numElem = -1 ;
-
 	char * vtEmail  	[DIM_VT_PERFIL] = {"usuario1@gmail.com", "usuario2@gmail.com", "usuario3@gmail.com", "usuario4@gmail.com", "usuario5@gmail.com",
 									  "usuario6@gmail.com", "usuario7@gmail.com", "usuario8@gmail.com"};
-	char * vtPrimNome 	DIM_VT_PERFIL] = {"UsuarioA", "UsuarioB", "UsuarioC", "UsuarioD", "UsuarioE", "UsuarioF", "UsuarioG", "UsuarioH"};
+	char * vtPrimNome 	[DIM_VT_PERFIL] = {"UsuarioA", "UsuarioB", "UsuarioC", "UsuarioD", "UsuarioE", "UsuarioF", "UsuarioG", "UsuarioH"};
 	char * vtUltNome 	[DIM_VT_PERFIL] = {"SobrenomeA", "SobrenomeB", "SobrenomeC", "SobrenomeD", "SobrenomeE", "SobrenomeF", "SobrenomeG", "SobrenomeH"};
 	char * vtCidade 	[DIM_VT_PERFIL] = {"CidadeA", "CidadeB", "CidadeC", "CidadeD", "CidadeE", "CidadeF", "CidadeG", "CidadeH"};
 	int  vtDia 			[DIM_VT_PERFIL] = {1, 2, 3, 4, 5, 6, 7, 8};
 	int  vtMes 			[DIM_VT_PERFIL] = {1, 2, 3, 4, 5, 6, 7, 8};
 	int  vtAno 			[DIM_VT_PERFIL] = {2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008};
+	GRA_tppGrafo gr=NULL;
 
-	for (i = 0; i < DIM_VT_PERFIL  ; i++ ){
-		PER_CondRetCriarPerfil = PER_CriarPerfil(vtGrafos[0], &vtPerfil[i], vtEmail[i], vtPrimNome[i], vtUltNome[i],
+		/* Efetuar reset de teste de mensagem */
+	
+	if ( strcmp( ComandoTeste , RESET_MENSAGEM_CMD ) == 0 )
+	{
+
+			GRA_DestruirGrafo(gr);
+			GRA_CondRetCriarGrafo = GRA_CriarGrafo(DestruirValor, &gr);
+			if (GRA_CondRetCriarGrafo == GRA_CondRetFaltouMemoria){
+				return TST_CondRetMemoria;
+				}
+			
+	
+			for (i = 0; i < DIM_VT_PERFIL  ; i++ ){
+			PER_CondRetCriarPerfil = PER_CriarPerfil(gr, &vtPerfis[i], vtEmail[i], vtPrimNome[i], vtUltNome[i],
 							  vtDia[i], vtMes[i], vtAno[i], vtCidade[i]);
-		if (PER_CondRetCriarPerfil == PER_CondRetFaltouMemoria){
-			return TST_CondRetMemoria;
+			if (PER_CondRetCriarPerfil == PER_CondRetFaltouMemoria){
+				return TST_CondRetMemoria;
+				}
 			}
-		}
+
+
+		return TST_CondRetOK ;
+
+	} 
+	
+	/* fim ativa: Efetuar reset de teste de mensagem */
+
+
 	/* Testar Escrever Mensagem */
-	 if ( strcmp( ComandoTeste , ESCREVER_MSG_CMD  ) == 0 )
+
+
+	 else if ( strcmp( ComandoTeste , ESCREVER_MSG_CMD  ) == 0 )
 	{
 
 		numLidos = LER_LerParametros( "iisi" ,
-			&inxPerfilRemetente,&inxPerfilDestinatario,Mensagem, &CondRetEsp ) ;
+			&InxPerfilRemetente,&InxPerfilDestinatario,Mensagem, &CondRetEsp ) ;
 
 		if ( ( numLidos != 4 )
-			|| ( ! ValidarInxPerfil( inxPerfilRemetente)) || ( ! ValidarInxPerfil( inxPerfilDestinatario)) )
+			|| ( ! ValidarInxPerfil( InxPerfilRemetente)) || ( ! ValidarInxPerfil( InxPerfilDestinatario)) )
 		{
 			return TST_CondRetParm ;
 		} /* if */
 
-		CondRet=MEN_EscreverMensagem(vtPerfis[inxPerfilRemetente],VetPerfis[inxPerfilDestinatario],Mensagem) ;
+		CondRet=MEN_EscreverMensagem(vtPerfis[InxPerfilRemetente],vtPerfis[InxPerfilDestinatario],Mensagem) ;
 
 		return TST_CompararInt( CondRetEsp , CondRet ,
 			"Erro na condicao de retorno ao escrever mensagem"  ) ;
@@ -159,14 +181,14 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 			MEN_tpCondRet debug;
             numLidos = LER_LerParametros( "iissi" ,
-            &inxPerfil,&FlagMsg,Email,Mensagem,&CondRetEsp ) ;
-            if ( ( numLidos != 4 )
-              || ( ! ValidarInxPerfil( InxPerfil)))
+            &InxPerfil,&FlagMsg,Email,Mensagem,&CondRetEsp ) ;
+            if ( ( numLidos != 5 )
+              || ( ! ValidarInxPerfil(InxPerfil)))
             {
                return TST_CondRetParm ;
             } /* if */
             debug=MEN_ExcluirMensagem( vtPerfis[InxPerfil],Email,FlagMsg,Mensagem) ;
-			return TST_CompararInt( CondRetEsp , CondRet ,
+			return TST_CompararInt( CondRetEsp , debug ,
 			"Erro na condicao de retorno ao excluir mensagem"  ) ;
            
 
@@ -174,20 +196,19 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 		/* Testar Excluir Mensagens de um Email */
 
-	else if ( strcmp( ComandoTeste , EXCLUIR_MSG_CMD ) == 0 )
+	else if ( strcmp( ComandoTeste , EXCLUIR_MSGEMAIL_CMD ) == 0 )
 	{
 
 			MEN_tpCondRet debug;
-            numLidos = LER_LerParametros( "isi" ,
-            &inxPerfil,Email,,&CondRetEsp ) ;
+            numLidos = LER_LerParametros( "isi" ,&InxPerfil,Email,&CondRetEsp ) ;
             if ( ( numLidos != 3 )
-              || ( ! ValidarInxPerfil( InxPerfil)))
+              || ( ! ValidarInxPerfil(InxPerfil)))
             {
                return TST_CondRetParm ;
             } /* if */
             debug=MEN_ExcluirMensagensEmail(vtPerfis[InxPerfil],Email) ;
-			return TST_CompararInt( CondRetEsp , CondRet ,
-			"Erro na condicao de retorno ao excluir mensagem de um email"  ) ;
+			return TST_CompararInt( CondRetEsp , debug ,
+			"Erro na condicao de retorno ao excluir todas mensagens de um email"  ) ;
            
 
       }  /* fim ativa: Testar Excluir Mensagens de um Email */
@@ -204,7 +225,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
                                 &CondRetEsp ) ;
 
             if ( ( numLidos != 4 )
-              || ( ! ValidarInxPerfil( InxPerfil )) )
+              || ( ! ValidarInxPerfil(InxPerfil)) )
             {
                return TST_CondRetParm ;
             } /* if */
@@ -234,7 +255,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
                                 &CondRetEsp ) ;
 
             if ( ( numLidos != 3 )
-              || ( ! ValidarInxPerfil( InxPerfil )) )
+              || ( ! ValidarInxPerfil(InxPerfil)) )
             {
                return TST_CondRetParm ;
             } /* if */
@@ -248,7 +269,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			}
 
 			return TST_CompararInt( numElem , numRet
-                       , "Numero de elementos retornado inesperado" ) ;
+           , "Numero de elementos retornado inesperado" ) ;
 
 	} /* fim ativa: Obter Numero Total de Mensagens */
 
@@ -256,23 +277,13 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 	else if ( strcmp( ComandoTeste , OBTER_MSGS_CMD   ) == 0 )
 	{
-		int tamVetor,i;
-		char* vetEmailsEsp[2];
-		char* vetMensagensEsp[2];
+		char Mensagem0[401],Mensagem1[401];
+		char Email0[101],Email1[101];
 		char** vetEmails;
 		char** vetMensagens;
 		MEN_tpCondRet debugMEN;
 
-		numLidos = LER_LerParametros( "iissssii" , &InxPerfil,&tamVetor,&vetEmailsEsp[0],&vetMensagensEsp[0],
-		&vetEmailsEsp[1],&vetMensagensEsp[1],&FlagMsg,&CondRetEsp) ;
-
-		if ( ( numLidos != 8  )
-			|| ( ! ValidarInxPerfil( InxPerfil )) || (tamVetor>2 ) || (tamVetor<0))
-		{
-			return TST_CondRetParm ;
-		} /* Alocando os vetores */
-
-		vetEmails=(char**)malloc(tamVetor*sizeof(char));
+		vetEmails=(char**)malloc(2*sizeof(char));
 		if ( vetEmails == NULL )
 		{
 			return TST_CondRetMemoria ;
@@ -288,7 +299,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetMemoria ;
 		} 	
 
-		vetMensagens=(char**)malloc(tamVetor*sizeof(char));
+		vetMensagens=(char**)malloc(2*sizeof(char));
 		if ( vetMensagens == NULL )
 		{
 			return TST_CondRetMemoria ;
@@ -302,10 +313,20 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		if ( vetMensagens[1] == NULL )
 		{
 			return TST_CondRetMemoria ;
-		} 
+		}
+
+          numLidos = LER_LerParametros( "issssii" , &InxPerfil,Email0,Mensagem0,
+		Email1,Mensagem1,&FlagMsg,&CondRetEsp) ;  
+
+		if ( ( numLidos != 7  )
+			|| ( ! ValidarInxPerfil( InxPerfil )) )
+		{
+			return TST_CondRetParm ;
+		} /* Alocando os vetores */
+		
 
 
-		debugMEN=MEN_ObterMensagens(vtPerfis[InxPerfil],vetEmails,vetMensagens,&FlagMsg);
+		debugMEN=MEN_ObterMensagens(vtPerfis[InxPerfil],vetEmails,vetMensagens,FlagMsg);
 
 		CondRet=TST_CompararInt( CondRetEsp ,debugMEN  ,
 			"Condição de retorno errada ao obter mensagens."   ) ;
@@ -313,36 +334,35 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		if (CondRet != TST_CondRetOK) {
 				return CondRet;
 			}
-		if(tamVetor==0 && debugMEN==MEN_CondRetListaVazia)
+		if(debugMEN==MEN_CondRetListaVazia)
 			return TST_CondRetOK;
 
 
-		for(i=0;i<tamVetor;i++)
-		{
-			CondRet=TST_CompararString( vetEmailsEsp[i] ,vetEmails[i]  ,
-			"Email nao e igual ao esperado" ) ;
-			if (CondRet != TST_CondRetOK) {
-				free(vetEmails[0]);
-				free(vetEmails[1]);
-				free(vetEmails);
-				free(vetMensagens[0]);
-				free(vetMensagens[1]);
-				free(vetMensagens);
-				return CondRet;
-			}
-			CondRet=TST_CompararString( vetMensagensEsp[i] ,vetMensagens[i]  ,
-			"Mensagem nao e igual  a esperada" ) ;
-			if (CondRet != TST_CondRetOK) {
-				free(vetEmails[0]);
-				free(vetEmails[1]);
-				free(vetEmails);
-				free(vetMensagens[0]);
-				free(vetMensagens[1]);
-				free(vetMensagens);
-				return CondRet;
-			}
+		CondRet=TST_CompararString( Email0 ,vetEmails[0]  ,
+		"Email 0 nao e igual ao esperado" ) ;
+		if (CondRet != TST_CondRetOK) {
+
+			return CondRet;
 		}
-		free(vetTipos);
+		CondRet=TST_CompararString( Email1 ,vetEmails[1]  ,
+		"Email 1 nao e igual ao esperado" ) ;
+		if (CondRet != TST_CondRetOK) {
+
+			return CondRet;
+		}
+		CondRet=TST_CompararString( Mensagem0 ,vetMensagens[0]  ,
+		"Mensagem 0 nao e igual  a esperada" ) ;
+		if (CondRet != TST_CondRetOK) {
+
+			return CondRet;
+		}
+		CondRet=TST_CompararString( Mensagem1 ,vetMensagens[1]  ,
+		"Mensagem 1 nao e igual  a esperada" ) ;
+		if (CondRet != TST_CondRetOK) {
+
+			return CondRet;
+		}
+
 		free(vetEmails[0]);
 		free(vetEmails[1]);
 		free(vetEmails);
@@ -357,31 +377,22 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 		else if ( strcmp( ComandoTeste , OBTER_TODASMSGS_CMD ) == 0 )
 	{
-		int tamVetor,i;
-		int vetTiposEsp[2];
-		char* vetEmailsEsp[2];
-		char* vetMensagensEsp[2];
-		int* vetTipos;
+		
+		MEN_tpCondRet tpMsg0,tpMsg1;
+		char Mensagem0[401],Mensagem1[401];
+		char Email0[101],Email1[101];
+		MEN_tpCondRet* vetTipos;
 		char** vetEmails;
 		char** vetMensagens;
 		MEN_tpCondRet debugMEN;
 
-		numLidos = LER_LerParametros( "iiississi" , &InxPerfil,&tamVetor,&vetTiposEsp[0],&vetEmailsEsp[0],&vetMensagensEsp[0],
-		&vetTiposEsp[1],&vetEmailsEsp[1],&vetMensagensEsp[1],&CondRetEsp) ;
-
-		if ( ( numLidos != 9  )
-			|| ( ! ValidarInxPerfil( InxPerfil )) || (tamVetor>2 ) || (tamVetor<0))
-		{
-			return TST_CondRetParm ;
-		} /* Alocando os vetores */
-		vetTipos=(int*)malloc(tamVetor*sizeof(int));
+		vetTipos=(MEN_tpCondRet*)malloc(2*sizeof(MEN_tpCondRet));
 		if ( vetTipos == NULL )
 		{
 			return TST_CondRetMemoria ;
 		} 
 
-
-		vetEmails=(char**)malloc(tamVetor*sizeof(char));
+		vetEmails=(char**)malloc(2*sizeof(char));
 		if ( vetEmails == NULL )
 		{
 			return TST_CondRetMemoria ;
@@ -397,7 +408,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetMemoria ;
 		} 	
 
-		vetMensagens=(char**)malloc(tamVetor*sizeof(char));
+		vetMensagens=(char**)malloc(2*sizeof(char));
 		if ( vetMensagens == NULL )
 		{
 			return TST_CondRetMemoria ;
@@ -411,8 +422,16 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		if ( vetMensagens[1] == NULL )
 		{
 			return TST_CondRetMemoria ;
-		} 
+		}
 
+		numLidos = LER_LerParametros( "iississi" , &InxPerfil,&tpMsg0,Email0,Mensagem0,
+		&tpMsg1,Email1,Mensagem1,&CondRetEsp) ;
+
+		if ( ( numLidos != 8  )
+			|| ( ! ValidarInxPerfil( InxPerfil )) )
+		{
+			return TST_CondRetParm ;
+		}
 
 		debugMEN=MEN_ObterTodasMensagens(vtPerfis[InxPerfil],vetTipos,vetEmails,vetMensagens);
 
@@ -422,49 +441,47 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		if (CondRet != TST_CondRetOK) {
 				return CondRet;
 			}
-		if(tamVetor==0 && debugMEN==MEN_CondRetListaVazia)
+		if(debugMEN==MEN_CondRetListaVazia)
 			return TST_CondRetOK;
 
+	
+	CondRet=TST_CompararInt( tpMsg0 ,vetTipos[0]  ,
+	"Tipo da mensagem 0 nao e igual ao esperado" ) ;
+	if (CondRet != TST_CondRetOK) {
+	
+		return CondRet;
+	}
+	CondRet=TST_CompararInt( tpMsg1 ,vetTipos[1]  ,
+	"Tipo da mensagem 1 nao e igual ao esperado" ) ;
+	if (CondRet != TST_CondRetOK) {
+	
+		return CondRet;
+	}
 
-		for(i=0;i<tamVetor;i++)
-		{
-			CondRet=TST_CompararInt( vetTiposEsp[i] ,vetTipos[i]  ,
-			"Tipo da mensagem nao e igual ao esperado" ) ;
-			if (CondRet != TST_CondRetOK) {
-				free(vetTipos);
-				free(vetEmails[0]);
-				free(vetEmails[1]);
-				free(vetEmails);
-				free(vetMensagens[0]);
-				free(vetMensagens[1]);
-				free(vetMensagens);
-				return CondRet;
-			}
-			CondRet=TST_CompararString( vetEmailsEsp[i] ,vetEmails[i]  ,
-			"Email nao e igual ao esperado" ) ;
-			if (CondRet != TST_CondRetOK) {
-				free(vetTipos);
-				free(vetEmails[0]);
-				free(vetEmails[1]);
-				free(vetEmails);
-				free(vetMensagens[0]);
-				free(vetMensagens[1]);
-				free(vetMensagens);
-				return CondRet;
-			}
-			CondRet=TST_CompararString( vetMensagensEsp[i] ,vetMensagens[i]  ,
-			"Mensagem nao e igual  a esperada" ) ;
-			if (CondRet != TST_CondRetOK) {
-				free(vetTipos);
-				free(vetEmails[0]);
-				free(vetEmails[1]);
-				free(vetEmails);
-				free(vetMensagens[0]);
-				free(vetMensagens[1]);
-				free(vetMensagens);
-				return CondRet;
-			}
-		}
+	CondRet=TST_CompararString( Email0 ,vetEmails[0]  ,
+	"Email 0 nao e igual ao esperado" ) ;
+	if (CondRet != TST_CondRetOK) {
+
+		return CondRet;
+	}
+	CondRet=TST_CompararString( Email1 ,vetEmails[1]  ,
+	"Email 1 nao e igual ao esperado" ) ;
+	if (CondRet != TST_CondRetOK) {
+
+		return CondRet;
+	}
+	CondRet=TST_CompararString( Mensagem0 ,vetMensagens[0]  ,
+	"Mensagem 0 nao e igual  a esperada" ) ;
+	if (CondRet != TST_CondRetOK) {
+
+		return CondRet;
+	}
+	CondRet=TST_CompararString( Mensagem1 ,vetMensagens[1]  ,
+	"Mensagem 1 nao e igual  a esperada" ) ;
+	if (CondRet != TST_CondRetOK) {
+
+		return CondRet;
+	}
 		free(vetTipos);
 		free(vetEmails[0]);
 		free(vetEmails[1]);
@@ -485,6 +502,18 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 /*****  Código das funções encapsuladas no módulo  *****/
 
 
+/***********************************************************************
+*
+*  $FC Função: TMEN -Destruir valor
+*
+***********************************************************************/
+
+   void DestruirValor( void * pValor )
+   {
+
+      free( pValor ) ;
+
+   } /* Fim função: TAMI -Destruir valor */
 
 
 
@@ -498,7 +527,7 @@ int ValidarInxPerfil( int InxPerfil)
 {
 
 	if ( ( InxPerfil <  0 )
-		|| ( InxPerfil >= DIM_VT_Perfil ))
+		|| ( InxPerfil >= DIM_VT_PERFIL ))
 	{
 		return FALSE ;
 	} /* if */

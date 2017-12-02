@@ -19,8 +19,25 @@ Módulos do construto: ..\Composicao\TesteMensagem.comp
    lista.c
    mensagem.c
    perfil.c
+   grafo.c
 
 Estatísticas do construto
+
+   Estatísticas do arquivo: cespdin.h
+      Total linhas:             767
+      Linhas de código:          54
+      Linhas de comentário:     610
+      Linhas em branco:         103
+   Arquivos em que é incluído
+      grafo.c
+
+   Estatísticas do arquivo: conta.h
+      Total linhas:             468
+      Linhas de código:          43
+      Linhas de comentário:     349
+      Linhas em branco:          76
+   Arquivos em que é incluído
+      grafo.c
 
    Estatísticas do arquivo: generico.h
       Total linhas:             713
@@ -30,7 +47,21 @@ Estatísticas do construto
    Arquivos de inclusão de que necessita
       tst_espc.h
    Arquivos em que é incluído
+      grafo.c
       testemensagem.c
+
+   Estatísticas do arquivo: grafo.c
+      Total linhas:            1114
+      Linhas de código:         703
+      Linhas de comentário:     249
+      Linhas em branco:         176
+   Arquivos de inclusão de que necessita
+      cespdin.h
+      conta.h
+      generico.h
+      grafo.h
+      lista.h
+      tst_espc.h
 
    Estatísticas do arquivo: grafo.h
       Total linhas:             422
@@ -38,8 +69,10 @@ Estatísticas do construto
       Linhas de comentário:     329
       Linhas em branco:          54
    Arquivos em que é incluído
+      grafo.c
       perfil.c
       perfil.h
+      testemensagem.c
 
    Estatísticas do arquivo: lerparm.h
       Total linhas:             291
@@ -63,15 +96,17 @@ Estatísticas do construto
       Linhas de comentário:     269
       Linhas em branco:          51
    Arquivos em que é incluído
+      grafo.c
       lista.c
       perfil.c
       perfil.h
+      testemensagem.c
 
    Estatísticas do arquivo: mensagem.c
-      Total linhas:             385
-      Linhas de código:         254
-      Linhas de comentário:      82
-      Linhas em branco:          54
+      Total linhas:             417
+      Linhas de código:         282
+      Linhas de comentário:      81
+      Linhas em branco:          59
    Arquivos de inclusão de que necessita
       mensagem.h
 
@@ -85,35 +120,39 @@ Estatísticas do construto
       testemensagem.c
 
    Estatísticas do arquivo: perfil.c
-      Total linhas:             734
-      Linhas de código:         357
-      Linhas de comentário:     246
-      Linhas em branco:         134
+      Total linhas:             728
+      Linhas de código:         353
+      Linhas de comentário:     257
+      Linhas em branco:         122
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
       perfil.h
 
    Estatísticas do arquivo: perfil.h
-      Total linhas:             335
-      Linhas de código:          42
-      Linhas de comentário:     247
-      Linhas em branco:          46
+      Total linhas:             348
+      Linhas de código:          43
+      Linhas de comentário:     256
+      Linhas em branco:          49
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
    Arquivos em que é incluído
       perfil.c
+      testemensagem.c
 
    Estatísticas do arquivo: testemensagem.c
-      Total linhas:             514
-      Linhas de código:         340
-      Linhas de comentário:      73
-      Linhas em branco:         111
+      Total linhas:             543
+      Linhas de código:         335
+      Linhas de comentário:      82
+      Linhas em branco:         136
    Arquivos de inclusão de que necessita
       generico.h
+      grafo.h
       lerparm.h
+      lista.h
       mensagem.h
+      perfil.h
       tst_espc.h
 
    Estatísticas do arquivo: tst_espc.h
@@ -123,16 +162,17 @@ Estatísticas do construto
       Linhas em branco:          20
    Arquivos em que é incluído
       generico.h
+      grafo.c
       testemensagem.c
 
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      2623
-         Linhas de código:           268
-         Linhas de comentário:      1992
-         Linhas em branco:           363
-         Arquivos deste tipo:          7
+         Total linhas do tipo:      3871
+         Linhas de código:           366
+         Linhas de comentário:      2960
+         Linhas em branco:           545
+         Arquivos deste tipo:          9
 
   Tipo: obj      Path: ..\Objetos
          Total linhas do tipo:         0
@@ -156,17 +196,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      2178
-         Linhas de código:          1220
-         Linhas de comentário:       540
-         Linhas em branco:           453
-         Arquivos deste tipo:          4
+         Total linhas do tipo:      3347
+         Linhas de código:          1942
+         Linhas de comentário:       808
+         Linhas em branco:           647
+         Arquivos deste tipo:          5
 
 Totais para todo o construto TesteMensagem
 
-   Total linhas:              4801
-   Linhas de código:          1488
-   Linhas de comentário:      2532
-   Linhas em branco:           816
-   Arquivos processados:        11
+   Total linhas:              7218
+   Linhas de código:          2308
+   Linhas de comentário:      3768
+   Linhas em branco:          1192
+   Arquivos processados:        14
 

@@ -1,138 +1,81 @@
-// Script:    TesteLista.script
-// Autor:     Arndt von Staa, Michelle, gabriel, Renan
-// Data:      02/abr/2008, 27/09/2017
-// Propósito: Testar superficialmente o módulo lista genérica duplamente encadeada
-//
+//Script: TesteMensagem.script
+//Autor: Gabriel
+//Data: 15/10/2017
+//Proposito: Testar o modulo mensagem
 
 == Inicializar valores
-=declararparm   lista0  int 0
-=declararparm   lista1  int 1
-=declararparm   lista2  int 2
-
-== struct 0
-=declararparm   nome0    string  "Michelle"
-=declararparm   data0    string  "17/09/1996"
-=declararparm   cidade0     string  "Rio de Janeiro"
-=declararparm   email0   string  "michelle@gmail.com"
-
-== struct 1
-
-=declararparm   nome1    string  "Renan"
-=declararparm   data1    string  "01/01/2001"
-=declararparm   cidade1     string  "São Paulo"
-=declararparm   email1   string  "renan@gmail.com"
-
-== struct 2
-
-=declararparm   nome2    string  "Gabriel"
-=declararparm   data2    string  "10/10/1910"
-=declararparm   cidade2     string  "Maranhão"
-=declararparm   email2   string  "gabriel@gmail.com"
-
-== struct 3
-
-=declararparm   nome3    string  "Alessandro"
-=declararparm   data3    string  "15/11/2010"
-=declararparm   cidade3     string  "Natal"
-=declararparm   email3   string  "alessandro@gmail.com"
-
-=declararparm   OK             int  0
-=declararparm   ListaVazia     int  1
-=declararparm   FimLista       int  2
-=declararparm   NaoAchou       int  3
-=declararparm   FaltouMemoria  int  4
-
-== Criar a lista 0
-=criarlista      lista0  OK 
-=obtertamanho    lista0  0      OK
+=declararparm   perfil0  int 0
+=declararparm   perfil1  int 1
+=declararparm   perfil2  int 2
+=declararparm   perfil3  int 3
+=declararparm   perfil4  int 4
+=declararparm   perfil5  int 5
+=declararparm   perfil6  int 6
+=declararparm   perfil7  int 7
 
 
-== Verificar ObterValor relativo a lista vazia
-=obtervalorelem  lista0  "???"  "???"  "???"  "???"  ListaVazia
+=declararparm   email0  string "usuario1@gmail.com"
+=declararparm   email1  string "usuario2@gmail.com"
+=declararparm   email2  string "usuario3@gmail.com"
 
 
-== Inserir elemento em lista vazia
-=inselemantes    lista0  nome0  data0  cidade0  email0  OK
-=obtervalorelem  lista0  nome0  data0  cidade0  email0  OK
+=declararparm mensagem0 string "Ola!"
+=declararparm mensagem1 string ""
+=declararparm mensagem2 string "Tudo bem?"
+=declararparm mensagem3 string "Tudo!"
 
-== Inserir elemento após primeiro
-=inselemapos     lista0  nome1  data1  cidade1  email1  OK
-=obtervalorelem  lista0  nome1  data1  cidade1  email1  OK
-=obtertamanho    lista0  2      OK
-
-== Inserir elemento antes do último
-=inselemantes    lista0  nome2  data2  cidade2  email2   OK
-=obtervalorelem  lista0  nome2  data2  cidade2  email2   OK
-
-== Excluir elemento do meio
-=obtervalorelem  lista0   nome2  data2  cidade2  email2   OK
-=excluirelem     lista0   OK
-
-== Excluir elemento do início
-=obtervalorelem  lista0  nome0  data0  cidade0  email0  OK
-=excluirelem     lista0   OK
-
-== Excluir elemento final, único 
-=obtervalorelem  lista0  nome1  data1  cidade1  email1  OK
-=excluirelem     lista0   OK
-
-== Ver se a lista ficou vazia
-=obtervalorelem  lista0   "???"  "???"  "???"  "???"   ListaVazia
-
-== Destruir a lista
-=destruirlista   lista0   OK
+=declararparm Enviada int 0
+=declararparm Recebida int 1
 
 
-== Criar uma lista com dois elementos
-=criarlista      lista1  OK
-=inselemapos     lista1  nome0  data0  cidade0  email0  OK
-=inselemapos     lista1  nome1  data1  cidade1  email1  OK
+=declararparm   OK             		int  0
+=declararparm   ListaVazio     		int  1
+=declararparm   FaltouMemoria   	int  2
+=declararparm   MesmoPerfil	   	int  3
+=declararparm   RetornoListaIncorreto	int  4
+=declararparm	PerfilInvalido		int  6
+=declararparm	parametroIncorreto      int  5
+=declararparm	MensagemVazia		int  7
+=declararparm	MensagemExcedeuTamanho	int  8
+=declararparm	NaoEncontrouMensagem	int  9
 
-== Esvaziar a lista e ver se ficou vazia
-=esvaziarlista   lista1   OK
-=obtervalorelem  lista1   "???"  "???"  "???"  "???" ListaVazia
-=obtertamanho    lista1    0      OK
+==Enviando mensagem de um perfil para ele mesmo
+=resetteste
+=escrevermsg perfil0 perfil0 mensagem0 MesmoPerfil
+=obternumtodasmsgs perfil0 0 OK
 
-== Destruir a lista
-=destruirlista   lista1   OK
+==Enviando uma mensagem vazia
+=escrevermsg perfil0 perfil1 mensagem1 MensagemVazia
+=obternumtodasmsgs perfil0 0 OK
+
+==Enviando tres mensagens
+=escrevermsg perfil0 perfil1 mensagem0 OK
+=escrevermsg perfil1 perfil0 mensagem2 OK
+=escrevermsg perfil0 perfil1 mensagem3 OK
+=obternumtodasmsgs perfil0 3 OK
+=obternumtodasmsgs perfil1 3 OK
+=obternummsgs perfil0 Enviada  2 OK
+=obternummsgs perfil1 Enviada  1 OK
+=obternummsgs perfil0 Recebida 1 OK 
+=obternummsgs perfil1 Recebida 2 OK
+
+==Excluindo uma mensagem 
+=excluirmsg perfil0 Enviada email1 mensagem0 OK
+=obternummsgs perfil0 Enviada  1 OK
+=obternumtodasmsgs perfil0 2 OK
+=obternumtodasmsgs perfil1 3 OK
+
+==Obtendo todas as mensagens do perfil0
+=obtertodasmsgs perfil0 Recebida email1 mensagem2 Enviada email1 mensagem3 OK
+
+==Excluindo todas as mensagens do perfil1 associadas ao email do perfil0
+=excluirmsgemail perfil1 email0 OK
+=obternumtodasmsgs perfil1 0 OK
+
+==Enviando uma mensagem do perfil0 para o perfil2 e obtendo somente as mensagens enviadas
+=escrevermsg perfil0 perfil2 mensagem2 OK
+=obtermsgs perfil0 email1 mensagem3 email2 mensagem2 Enviada OK
 
 
-== Criar uma lista com quatro elementos
-=criarlista      lista2  OK
-=inselemapos     lista2  nome0  data0  cidade0  email0  OK
-=inselemapos     lista2  nome1  data1  cidade1  email1  OK
-=inselemapos     lista2  nome2  data2  cidade2  email2  OK
-=inselemapos     lista2  nome3  data3  cidade3  email3  OK
 
-== Verificar a lista de trás para diante
-=obtervalorelem  lista2  nome3  data3  cidade3  email3  OK
-=avancarelem     lista2   -1     OK
-=obtervalorelem  lista2  nome2  data2  cidade2  email2  OK
-=avancarelem     lista2   -1     OK
-=obtervalorelem  lista2  nome1  data1  cidade1  email1  OK
-=avancarelem     lista2   -1     OK
-=obtervalorelem  lista2  nome0  data0  cidade0  email0  OK
-=avancarelem     lista2   -1     FimLista
 
-== Verificar a lista de frente para trás
-=obtervalorelem  lista2  nome0  data0  cidade0  email0  OK
-=avancarelem     lista2   1      OK
-=obtervalorelem  lista2  nome1  data1  cidade1  email1  OK
-=avancarelem     lista2   1      OK
-=obtervalorelem  lista2  nome2  data2  cidade2  email2  OK
-=avancarelem     lista2   1      OK
-=obtervalorelem  lista2  nome3  data3  cidade3  email3  OK
-=avancarelem     lista2   1      FimLista
-
-== Verificar a lista andando demais de trás para diante
-=avancarelem     lista2   -10     FimLista
-=obtervalorelem  lista2  nome0  data0  cidade0  email0  OK
-
-== Verificar a lista andando demais de frente para trás
-=avancarelem     lista2   10     FimLista
-=obtervalorelem  lista2  nome3  data3  cidade3  email3  OK
-
-== Destruir a lista
-=destruirlista   lista2   OK
-
-// fim
