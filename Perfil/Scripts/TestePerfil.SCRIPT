@@ -56,20 +56,21 @@
 =declararparm   anoNasc4		int		1960
 =declararparm   cidade4			string  "Brasilia"
 
-=declararparm   OK							int  0
-=declararparm   EmailInvalido				int  1
-=declararparm   EmailJaCadastrado			int  2
-=declararparm   DataInvalida				int  3
-=declararparm   NomeInvalido				int  4
-=declararparm	CidadeInvalida				int  5
-=declararparm	EmailInexistente			int  6
-=declararparm	FaltouMemoria				int  7
-=declararparm	RetornoLisIncorreto			int  8
-=declararparm	RedeVazia					int  9
-=declararparm	PerfilInexistente			int  10
-=declararparm	ParametroGRAIncorreto		int  11
-=declararparm	PonteiroParaRetornoInvalido	int  12
-
+=declararparm   OK						int  0
+=declararparm   EmailInvalido			int  1
+=declararparm   EmailJaCadastrado		int  2
+=declararparm   DataInvalida			int  3
+=declararparm   NomeInvalido			int  4
+=declararparm	CidadeInvalida			int  5
+=declararparm	EmailInexistente		int  6
+=declararparm	FaltouMemoria			int  7
+=declararparm	RetornoLisIncorreto		int  8
+=declararparm	RedeVazia				int  9
+=declararparm	PerfilInexistente		int  10
+=declararparm	ParametroGRAIncorreto	int  11
+=declararparm	PerfilInvalido			int  12
+=declararparm	RetornoGRAInesperado	int  13
+=declararparm	RetornoMsgIncorreto		int  14
 
 == Criar o grafo
 =resetteste

@@ -146,6 +146,7 @@ PER_tpCondRet PER_CriarPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil **perfil, char *
 *     PER_CondRetParametroGRAIncorreto
 *     PER_CondRetEmailInexistente
 *     PER_CondRetRetornoLisIncorreto
+*	  PER_CondRetRetornoMsgIncorreto
 *
 ***********************************************************************/
 
@@ -214,6 +215,7 @@ PER_tpCondRet PER_NumeroPerfis(GRA_tppGrafo pGrafo, int *qtd);
 *     PER_CondRetEmailJaCadastrado
 *     PER_CondRetEmailInvalido
 *     PER_CondRetEmailInexistente
+*	  PER_CondRetRetornoMsgIncorreto
 *
 ***********************************************************************/
 

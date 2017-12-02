@@ -139,7 +139,7 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email) {
 	else if (retornoPer != PER_CondRetEmailJaCadastrado)
 		return retornoPer;
 
-	/*Apaga mensagens relacionadas a esse perfil de outros perfis*/
+	/*Apaga mensagens relacionadas a esse perfil de outros perfis/
 	retornoPer = PER_NumeroPerfis(pGrafo, &tam);
 	if (retornoPer != PER_CondRetOK)
 		return retornoPer;
