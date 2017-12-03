@@ -8,17 +8,18 @@
 !!!    0  Linha:     3  //Data: 15/10/2017 
 !!!    0  Linha:     4  //Proposito: Testar o modulo mensagem 
     6  == Inicializar valores
-   42  ==Enviando mensagem de um perfil para ele mesmo
-   47  ==Enviando uma mensagem vazia
-   51  ==Enviando tres mensagens
-   62  ==Excluindo uma mensagem
-   68  ==Obtendo todas as mensagens do perfil0
-   71  ==Excluindo todas as mensagens do perfil1 associadas ao email do perfil0
-   75  ==Enviando uma mensagem do perfil0 para o perfil2 e obtendo somente as mensagens enviadas
+   43  ==Enviando mensagem de um perfil para ele mesmo
+   48  ==Enviando uma mensagem vazia
+   52  ==Enviando tres mensagens
+   63  ==Excluindo uma mensagem
+   69  ==Obtendo todas as mensagens do perfil0
+   72  ==Excluindo todas as mensagens do perfil1 associadas ao perfil0
+   76  ==Enviando uma mensagem do perfil0 para o perfil2 e obtendo somente as mensagens enviadas
+   80  ==Modificando email mensagens da lista do perfil0
 
-!!! Número de linhas lidas:          81
-!!! Número de casos de teste:         8
-!!! Número comandos corretos:        50
+!!! Número de linhas lidas:          86
+!!! Número de casos de teste:         9
+!!! Número comandos corretos:        53
 !!! Número de falhas encontradas:     0
 
 !!! Não foram encontrados problemas

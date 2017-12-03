@@ -17,6 +17,7 @@
 =declararparm   email0  string "usuario1@gmail.com"
 =declararparm   email1  string "usuario2@gmail.com"
 =declararparm   email2  string "usuario3@gmail.com"
+=declararparm 	emailNovo string "usuario100@gmail.com"
 
 
 =declararparm mensagem0 string "Ola!"
@@ -68,13 +69,17 @@
 ==Obtendo todas as mensagens do perfil0
 =obtertodasmsgs perfil0 Recebida email1 mensagem2 Enviada email1 mensagem3 OK
 
-==Excluindo todas as mensagens do perfil1 associadas ao email do perfil0
+==Excluindo todas as mensagens do perfil1 associadas ao perfil0
 =excluirmsgemail perfil1 email0 OK
 =obternumtodasmsgs perfil1 0 OK
 
 ==Enviando uma mensagem do perfil0 para o perfil2 e obtendo somente as mensagens enviadas
 =escrevermsg perfil0 perfil2 mensagem2 OK
 =obtermsgs perfil0 email1 mensagem3 email2 mensagem2 Enviada OK
+
+==Modificando email mensagens da lista do perfil0
+=modificaremail perfil0 email2 emailNovo OK
+=obtermsgs perfil0 email1 mensagem3 emailNovo mensagem2 Enviada OK
 
 
 

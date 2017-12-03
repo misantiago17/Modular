@@ -271,7 +271,7 @@ MEN_tpCondRet MEN_ExcluirMensagensEmail(PER_tpPerfil * Perfil,char Email[])
   *  $FC Função: MEN  &Alterar Email da Lista de Mensagem
   *  ****/
 
-MEN_tpCondRet MEN_AlterarEmailLista(PER_tpPerfil * Perfil,char antigoEmail[],char novoEmail[])
+MEN_tpCondRet MEN_ModificarEmailLista(PER_tpPerfil * Perfil,char antigoEmail[],char novoEmail[])
 { 
 	int numTotalMsgs;
 	LIS_tpCondRet CondRetLis=LIS_CondRetOK;
@@ -281,7 +281,7 @@ MEN_tpCondRet MEN_AlterarEmailLista(PER_tpPerfil * Perfil,char antigoEmail[],cha
 		return MEN_CondRetRetornoLisIncorreto;
 	if(numTotalMsgs==0)
 	{
-		return MEN_CondRetListaVazia;
+		return MEN_CondRetOK;
 	}
 	if(PER_retornaLisMensagens(Perfil,&pMensagem)==PER_CondRetPerfilInexistente)
 		return MEN_CondRetPerfilInvalido;

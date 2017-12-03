@@ -181,6 +181,33 @@ MEN_tpCondRet MEN_ExcluirMensagem(PER_tpPerfil * Perfil,char Email[],MEN_tpCondM
 
 MEN_tpCondRet MEN_ExcluirMensagensEmail(PER_tpPerfil * Perfil,char Email[]);
 
+/***********************************************************************
+*  $FC Função: MEN  &Alterar Email da lista de mensagens
+*
+*  $ED Descrição da função
+*	Modifica o email todas as mensagens de uma lista de mensagens cujo email é
+*	igual ao passado como parametro.O novo email sera o outro email passado
+*	como parametro.
+*	  
+*		
+*
+*  $EP Parâmetros
+*	  Perfil  - perfil do usuário o qual deseja-se modificar as mensagens
+*	  antigoEmail - antigo email do perfil relacionado a mensagem
+*	  novoEmail - novo email do perfil relacionado a mensagem
+*	  
+*
+*  $FV Valor retornado
+*	  MEN_CondRetPerfilInvalido
+*     MEN_CondRetOK
+*	  MEN_CondRetRetornoLisIncorreto
+*	  MEN_CondRetPerfilInvalido
+*
+***********************************************************************/
+
+MEN_tpCondRet MEN_ModificarEmailLista(PER_tpPerfil * Perfil,char antigoEmail[],char novoEmail[]);
+
+
 
 /***********************************************************************
 *  $FC Função: MEN  &Obter Numero de Mensagens

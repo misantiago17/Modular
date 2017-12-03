@@ -120,7 +120,7 @@ static void DestruirElemVertice(void *Elem);
 static void DestruirElemVertices(void *Elem);
 #if _DEBUG
 	GRA_tpCondRet GRA_VerificarCabeça(GRA_tppGrafo pGrafo);
-	GRA_tpCondRet GRA_VerificarElemento(GRA_tpVertice* pVert);
+	GRA_tpCondRet GRA_VerificarElemento(GRA_tppGrafo pGrafo,void* Vert);
 #endif
 
 
@@ -1018,13 +1018,14 @@ void DestruirElemVertice(void *Elem)
 }
 
 #ifdef _DEBUG
-	/*GRA_tpCondRet GRA_VerificarEstrutura(GRA_tppGrafo pGrafo)
+	GRA_tpCondRet GRA_VerificarEstrutura(void* Gra)
 	{
 		int IdAnterior;
 		int tam;
 		GRA_tpCondRet retorno;
 		LIS_tppLista verts;
 		GRA_tpVertice* vert;
+		GRA_tppGrafo pGrafo;
 		LIS_tpCondRet CondRetAv=LIS_CondRetOK;
 		IdAnterior=pGrafo->pElemCorr->Ident;
 		retorno = GRA_VerificarCabeça(pGrafo);
@@ -1032,6 +1033,8 @@ void DestruirElemVertice(void *Elem)
 			return GRA_CondRetParametroIncorreto;
 		else if(retorno==GRA_CondRetErroEstrutural)
 			return GRA_CondRetErroEstrutural;
+		CED_MarcarEspacoAtivo( pGrafo ) ;
+		pGrafo=(GRA_tppGrafo)Gra;
 		LIS_ObterTamanho(pGrafo->pVerticesGrafo,&tam);
 		if(tam==0)
 		{
@@ -1047,8 +1050,8 @@ void DestruirElemVertice(void *Elem)
 				GRA_IrVertice(pGrafo,IdAnterior);
 				return GRA_CondRetErroEstrutural;
 			}
-			retorno = GRA_VerificarElemento(vert);
-			else if(retorno==GRA_CondRetErroEstrutural)
+			retorno = GRA_VerificarElemento(pGrafo,(void*)vert);
+			if(retorno==GRA_CondRetErroEstrutural)
 			{
 				GRA_IrVertice(pGrafo,IdAnterior);
 				return GRA_CondRetErroEstrutural;
@@ -1061,19 +1064,23 @@ void DestruirElemVertice(void *Elem)
 #endif
 
 #ifdef _DEBUG
-	GRA_tpCondRet GRA_VerificarCabeça(GRA_tppGrafo pGrafo)
+	GRA_tpCondRet GRA_VerificarCabeça(void* pGrafo)
 	{
+		if(Gra==NULL) 
+			return GRA_CondRetErroEstrutural;
+		if(CED_ObterTipoEspaco(Gra)!= GRA_TipoEspacoCabecaGrafo)
+			return GRA_CondRetErroEstrutural;
+		if ( ! CED_VerificarEspaco( Gra , NULL ))
+        {
+            return GRA_CondRetErroEstrutural ;
+        } 
 		int numVerts;
-		if(pGrafo==NULL) 
-			return GRA_CondRetParametroIncorreto;
 		if(pGrafo->pElemCorr==NULL && pGrafo->NumVertices!=0)
 			return GRA_CondRetErroEstrutural;
 		if(pGrafo->pVerticesGrafo==NULL)
 			return GRA_CondRetErroEstrutural;
 		LIS_ObterTamanho(pGrafo->pVerticesGrafo,&numVerts);
 		if(numVerts !=pGrafo->NumVertices)
-			return GRA_CondRetErroEstrutural;
-		if(CED_ObterTipo(pGrafo)!= GRA_TipoEspacoCabecaGrafo)
 			return GRA_CondRetErroEstrutural;
 		return GRA_CondRetOK;
 	}
@@ -1082,33 +1089,40 @@ void DestruirElemVertice(void *Elem)
 
 
 #ifdef _DEBUG
-	GRA_tpCondRet GRA_VerificarElemento(GRA_tpVertice* pVert)
+	GRA_tpCondRet GRA_VerificarElemento(GRA_tppGrafo pGrafo,void* Vert)
 	{
 		int numArestas,IdentViz,IdentAtual;
 		GRA_tpVertice* pVertViz;
+		GRA_tpVertice* pVert;
 		LIS_tpCondRet CondRetAv=LIS_CondRetOK;
-		if(CED_ObterTipo(pVert)!= GRA_TipoEspacoVerticeGrafo)
-			return CondRet_ErroEstrutural;
+		if(CED_ObterTipoEspaco(Vert)!= GRA_TipoEspacoVerticeGrafo)
+			return GRA_CondRetErroEstrutural;
+		pVert=(GRA_tpVertice*)Vert;
 		if(pVert->pLisAresta==NULL) 
-			return CondRet_ErroEstrutural;
-		LIS_ObterTamanho(pGrafo->pLisAresta,&numArestas);
-		if(numVerts !=pGrafo->NumArestas)
+			return GRA_CondRetErroEstrutural;
+		LIS_ObterTamanho(pVert->pLisAresta,&numArestas);
+		if(numArestas !=pVert->NumArestas)
 			return GRA_CondRetErroEstrutural;
 		if(numArestas==0)
 			return GRA_CondRetOK;
 		IdentAtual=pVert->Ident;
-		LIS_IrInicioLista(pGrafo->pLisAresta);
+		LIS_IrInicioLista(pVert->pLisAresta);
 		while(CondRetAv!=LIS_CondRetFimLista)
 		{
-			LIS_ObterValor(pGrafo->pElemCorr->pLisAresta,(void**)&pVertViz);
-			if(CED_ObterTipo(pVertViz)!= GRA_TipoEspacoVerticeGrafo)
-				return CondRet_ErroEstrutural;
+			LIS_ObterValor(pVert->pLisAresta,(void**)&pVertViz);
+			if(CED_ObterTipoEspaco(pVertViz)!= GRA_TipoEspacoVerticeGrafo)
+				return GRA_CondRetErroEstrutural;
 			IdentViz=pVertViz->Ident;
 			if(GRA_ExisteAresta(pGrafo,IdentAtual,IdentViz)!=GRA_CondRetOK)
-				return CondRet_ErroEstrutural
+				return GRA_CondRetErroEstrutural;
 			CondRetAv=LIS_AvancarElementoCorrente(pGrafo->pVerticesGrafo,1);
 		}
 		return GRA_CondRetOK;
 }
-*/
+
 #endif
+
+//#ifdef _DEBUG
+	/*GRA_tpCondRet GRA_DeturparGrafo(GRA_tppGrafo pGrafo,int ModoDeturpacao)
+	{
+	}*/
