@@ -1,16 +1,62 @@
 grafo.c
 menu.c
-amizade.c
-mensagem.c
-perfil.c
-lista.c
-Microsoft (R) Incremental Linker Version 10.00.40219.01
-Copyright (C) Microsoft Corporation.  All rights reserved.
-
-/OUT:..\Produto\TRAB4-23.exe 
-/INCREMENTAL:NO 
-/MACHINE:IX86 
-grafo.obj menu.obj amizade.obj mensagem.obj perfil.obj 
-lista.obj 
-ArcaboucoTeste.lib 
+..\Fontes\menu.c(44) : warning C4028: formal parameter 2 different from declaration
+..\Fontes\menu.c(267) : warning C4047: 'function' : 'PER_tpPerfil **' differs in levels of indirection from 'PER_tpPerfil *'
+..\Fontes\menu.c(267) : warning C4024: 'PER_BuscaEmail' : different types for formal and actual parameter 3
+..\Fontes\menu.c(267) : warning C4047: 'function' : 'int *' differs in levels of indirection from 'int'
+..\Fontes\menu.c(267) : warning C4024: 'PER_BuscaEmail' : different types for formal and actual parameter 4
+..\Fontes\menu.c(655) : warning C4047: 'function' : 'int *' differs in levels of indirection from 'int'
+..\Fontes\menu.c(655) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 5
+..\Fontes\menu.c(655) : warning C4047: 'function' : 'int *' differs in levels of indirection from 'int'
+..\Fontes\menu.c(655) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 6
+..\Fontes\menu.c(655) : warning C4047: 'function' : 'int *' differs in levels of indirection from 'int'
+..\Fontes\menu.c(655) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 7
+..\Fontes\menu.c(661) : warning C4047: 'function' : 'int *' differs in levels of indirection from 'int'
+..\Fontes\menu.c(661) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 5
+..\Fontes\menu.c(661) : warning C4047: 'function' : 'int *' differs in levels of indirection from 'int'
+..\Fontes\menu.c(661) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 6
+..\Fontes\menu.c(661) : warning C4047: 'function' : 'int *' differs in levels of indirection from 'int'
+..\Fontes\menu.c(661) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 7
+..\Fontes\menu.c(667) : error C2065: 'verificaAmigos' : undeclared identifier
+..\Fontes\menu.c(667) : error C2065: 'pPerfil' : undeclared identifier
+..\Fontes\menu.c(667) : warning C4047: 'function' : 'PER_tpPerfil *' differs in levels of indirection from 'int'
+..\Fontes\menu.c(667) : warning C4024: 'AMI_VerificarNumAmigos' : different types for formal and actual parameter 2
+..\Fontes\menu.c(668) : error C2065: 'verificaAmigos' : undeclared identifier
+..\Fontes\menu.c(670) : error C2065: 'verificaAmigos' : undeclared identifier
+..\Fontes\menu.c(679) : error C2065: 'email' : undeclared identifier
+..\Fontes\menu.c(680) : error C2065: 'diaNasc' : undeclared identifier
+..\Fontes\menu.c(680) : error C2065: 'mesNasc' : undeclared identifier
+..\Fontes\menu.c(680) : error C2065: 'anoNasc' : undeclared identifier
+..\Fontes\menu.c(691) : error C2065: 'escolhaValida' : undeclared identifier
+..\Fontes\menu.c(694) : error C2065: 'menuEscolhido' : undeclared identifier
+..\Fontes\menu.c(698) : error C2065: 'menuEscolhido' : undeclared identifier
+..\Fontes\menu.c(699) : error C2065: 'pPerfil' : undeclared identifier
+..\Fontes\menu.c(699) : warning C4047: 'function' : 'PER_tpPerfil *' differs in levels of indirection from 'int'
+..\Fontes\menu.c(699) : warning C4024: 'MENU_Menu16' : different types for formal and actual parameter 3
+..\Fontes\menu.c(700) : error C2065: 'escolhaInvalida' : undeclared identifier
+..\Fontes\menu.c(702) : error C2065: 'menuEscolhido' : undeclared identifier
+..\Fontes\menu.c(704) : error C2065: 'escolhaInvalida' : undeclared identifier
+..\Fontes\menu.c(706) : error C2065: 'menuEscolhido' : undeclared identifier
+..\Fontes\menu.c(708) : error C2065: 'escolhaInvalida' : undeclared identifier
+..\Fontes\menu.c(710) : error C2065: 'menuEscolhido' : undeclared identifier
+..\Fontes\menu.c(713) : error C2065: 'escolhaInvalida' : undeclared identifier
+..\Fontes\menu.c(727) : warning C4028: formal parameter 2 different from declaration
+..\Fontes\menu.c(727) : warning C4029: declared formal parameter list different from definition
+..\Fontes\menu.c(769) : warning C4028: formal parameter 1 different from declaration
+..\Fontes\menu.c(769) : warning C4029: declared formal parameter list different from definition
+..\Fontes\menu.c(1305) : warning C4047: 'function' : 'int *' differs in levels of indirection from 'int'
+..\Fontes\menu.c(1305) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 5
+..\Fontes\menu.c(1305) : warning C4047: 'function' : 'int *' differs in levels of indirection from 'int'
+..\Fontes\menu.c(1305) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 6
+..\Fontes\menu.c(1305) : warning C4047: 'function' : 'int *' differs in levels of indirection from 'int'
+..\Fontes\menu.c(1305) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 7
+..\Fontes\menu.c(1311) : error C2065: 'pPerfil' : undeclared identifier
+..\Fontes\menu.c(1311) : warning C4047: 'function' : 'PER_tpPerfil *' differs in levels of indirection from 'int'
+..\Fontes\menu.c(1311) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 1
+..\Fontes\menu.c(1311) : warning C4047: 'function' : 'int *' differs in levels of indirection from 'int'
+..\Fontes\menu.c(1311) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 5
+..\Fontes\menu.c(1311) : warning C4047: 'function' : 'int *' differs in levels of indirection from 'int'
+..\Fontes\menu.c(1311) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 6
+..\Fontes\menu.c(1311) : warning C4047: 'function' : 'int *' differs in levels of indirection from 'int'
+..\Fontes\menu.c(1311) : warning C4024: 'PER_ObterPerfil' : different types for formal and actual parameter 7
 
