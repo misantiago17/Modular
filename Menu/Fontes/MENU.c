@@ -595,7 +595,9 @@ void MENU_Menu6(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char 
  *
  *****/
 // Procurar novos amigos
-void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPerfil2){
+void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pPerfil2){
+	
+	int amigos;
 	
 	char * emailPerfil;
     char * primNome;
@@ -605,7 +607,16 @@ void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPer
     int mes;
     int ano;
 	
+	char * emailPerfil1;
+    char * primNome1;
+    char * ultNome1;
+    char * cidade1;
+    int dia1;
+    int mes1;
+    int ano1;
+	
 	PER_tpCondRet condRetObterPerfil;
+	PER_tpCondRet condRetObterPerfil1;
 	
 	if ((emailPerfil = (char *)malloc(sizeof(char)*50)) == NULL){
 		printf("Não há espaço para armazenar email do perfil");
@@ -624,13 +635,42 @@ void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPer
 		exit(0);
 	}
 	
+	if ((emailPerfil1 = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("Não há espaço para armazenar email do perfil");
+		exit(0);
+	}
+	if ((primNome1 = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("Não há espaço para armazenar primeiro nome do perfil");
+		exit(0);
+	}
+	if ((ultNome1 = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("Não há espaço para armazenar ultimo nome do perfil");
+		exit(0);
+	}
+	if ((cidade1 = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("Não há espaço para armazenar ultimo nome do cidade");
+		exit(0);
+	}
+	
 	condRetObterPerfil = PER_ObterPerfil(pPerfil2, emailPerfil, primNome, ultNome, dia, mes, ano, cidade);
 	if (condRetObterPerfil != PER_CondRetOK){
 		printf("Erro inesperado no modulo perfil.");
 		exit(0);
 	}
-							  
 	
+	condRetObterPerfil1 = PER_ObterPerfil(pPerfil1, emailPerfil1, primNome1, ultNome1, dia1, mes1, ano1, cidade1);
+	if (condRetObterPerfil != PER_CondRetOK){
+		printf("Erro inesperado no modulo perfil.");
+		exit(0);
+	}
+	
+	verificaAmigos = AMI_VerificarNumAmigos(pGrafo, pPerfil, &amigos);
+	if (verificaAmigos == AMI_NaoPossuiAmizades){
+		amigos = 0;
+	} else if (verificaAmigos != AMI_CondRetOK){
+		printf("Erro inesperado no modulo amizade\n");
+		exit(0);
+	}
 	
 	printf("===============================================================================\n");
     printf("Bem-vindo ao perfil de %s\n\n",primNome);
@@ -643,13 +683,10 @@ void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPer
 	
     printf("O que deseja fazer? \n\n");
     
-    printf("1. Modificar dados \n");
-    printf("2. Procurar novos amigos \n");
-    printf("3. Ver amigos \n");
-    printf("4. Ir para mensagens \n");
-	printf("5. Excluir todas as amizades \n");
-    printf("6. Excluir perfil \n");
-    printf("7. Voltar para o menu \n\n");
+    printf("1. Criar Amizade \n");
+    printf("2. Acessar perfil de %s \n",primNome);
+    printf("3. Voltar para perfil de %s \n",primNome1);
+    printf("4. Voltar para o menu \n\n");
 	
 	while (escolhaValida == 0){
 		
@@ -657,13 +694,43 @@ void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPer
 		scanf("%d", &menuEscolhido);
 		printf("\n\n");
 		
+		//Menu 16
+		if (menuEscolhido == 1){
+			MENU_Menu16(pGrafo, pPerfil2, pPerfil);
+			escolhaInvalida = 1;
+		// Menu 2
+		} else if (menuEscolhido == 2){
+			MENU_Menu2(pGrafo, pPerfil2, emailPerfil, primNome, ultNome, cidade, dia, mes, ano);
+			escolhaInvalida = 1;
+		// Menu 2
+		} else if (menuEscolhido == 3){
+			MENU_Menu2(pGrafo, pPerfil1, emailPerfil1, primNome1, ultNome1, cidade1, dia1, mes1, ano1);
+			escolhaInvalida = 1;
+		// Menu 1
+		} else if (menuEscolhido == 4){
+			
+			MENU_Menu1(pGrafo);
+			escolhaInvalida = 1;
+			
+		} else {
+			printf("Escolha inválida de menu. Por favor, digite o menu novamente.\n\n");
+		}
+		
 	}
 	
 } /* Fim função: MENU - Menu 7 - Procurar Novos Amigos */
 
+/***************************************************************************
+ *  Função: MENU  &Menu 8 - Ver Amigos
+ *
+ *****/
 // Ver amigos
 void MENU_Menu8(GRA_tppGrafo pGrafo, char ** listaEmails);
 
+/***************************************************************************
+ *  Função: MENU  &Menu 9 - Ir para mensagens
+ *
+ *****/
 // Ir para mensagens
 void MENU_Menu9(PER_tpPerfil * pPerfil) {
 	int escolhaInvalida = 0;
@@ -770,7 +837,7 @@ void MENU_Menu9(PER_tpPerfil * pPerfil) {
 		}
 
 	}
-}
+} /* Fim função: MENU -Menu 9 - Ir para mensagens */
 
 /***************************************************************************
  *  Função: MENU  &Menu 10 - Excluir Todas as Amizades
@@ -1131,8 +1198,117 @@ void MENU_Menu15(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char
 	
 } /* Fim função: MENU - Menu 15 - Modificar cidade do perfil */
 
-// Criar amizade
-void MENU_Menu16(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPerfil2);
+/***************************************************************************
+ *  Função: MENU  &Menu 16 - Criar Amizade
+ *
+ *****/
+
+ // Criar amizade - COMPLETE
+void MENU_Menu16(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pPerfil2){
+	
+	int menuEscolhido;
+	int escolhaValida = 0;
+	
+	char * emailPerfil;
+    char * primNome;
+    char * ultNome;
+    char * cidade;
+    int dia;
+    int mes;
+    int ano;
+	
+	char * emailPerfil1;
+    char * primNome1;
+    char * ultNome1;
+    char * cidade1;
+    int dia1;
+    int mes1;
+    int ano1;
+	
+	PER_tpCondRet condRetObterPerfil;
+	PER_tpCondRet condRetObterPerfil1;
+	
+	if ((emailPerfil = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("Não há espaço para armazenar email do perfil");
+		exit(0);
+	}
+	if ((primNome = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("Não há espaço para armazenar primeiro nome do perfil");
+		exit(0);
+	}
+	if ((ultNome = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("Não há espaço para armazenar ultimo nome do perfil");
+		exit(0);
+	}
+	if ((cidade = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("Não há espaço para armazenar ultimo nome do cidade");
+		exit(0);
+	}
+	
+	if ((emailPerfil1 = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("Não há espaço para armazenar email do perfil");
+		exit(0);
+	}
+	if ((primNome1 = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("Não há espaço para armazenar primeiro nome do perfil");
+		exit(0);
+	}
+	if ((ultNome1 = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("Não há espaço para armazenar ultimo nome do perfil");
+		exit(0);
+	}
+	if ((cidade1 = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("Não há espaço para armazenar ultimo nome do cidade");
+		exit(0);
+	}
+	
+	condRetObterPerfil = PER_ObterPerfil(pPerfil2, emailPerfil, primNome, ultNome, dia, mes, ano, cidade);
+	if (condRetObterPerfil != PER_CondRetOK){
+		printf("Erro inesperado no modulo perfil.");
+		exit(0);
+	}
+	
+	condRetObterPerfil1 = PER_ObterPerfil(pPerfil, emailPerfil1, primNome1, ultNome1, dia1, mes1, ano1, cidade1);
+	if (condRetObterPerfil != PER_CondRetOK){
+		printf("Erro inesperado no modulo perfil.");
+		exit(0);
+	}
+	
+	printf("===============================================================================\n");
+    printf("A Amizade entre %s e %s foi criada.\n\n",emailPerfil,emailPerfil1);
+	
+	printf("O que deseja fazer? \n\n");
+    
+    printf("2. Voltar para o perfil de %s \n",primNome);
+	printf("2. Voltar para o perfil de %s \n",primNome1);
+    printf("3. Voltar para o menu \n");
+    
+	
+	while (escolhaValida == 0){
+		
+		printf("> ");
+		scanf("%d", &menuEscolhido);
+		printf("\n\n");
+		
+		if (menuEscolhido == 1){
+			escolhaValida = 1;
+			MENU_Menu2(pGrafo, pPerfil2, emailPerfil, primNome, ultNome, cidade, dia, mes, ano);
+			
+		} else if (menuEscolhido == 2){
+			escolhaValida = 1;
+			MENU_Menu2(pGrafo, pPerfil1, emailPerfil1, primNome1, ultNome1, cidade1, dia1, mes1, ano1);
+			
+		} else if (menuEscolhido == 3){
+			escolhaValida = 1;
+			MENU_Menu1(pGrafo);
+			
+		} else {
+			printf("Escolha inválida de menu. Por favor, digite o menu novamente.\n\n");
+		}
+		
+	}
+	
+} /* Fim função: MENU - Menu 16 - Criar Amizade */
 
 // Excluir amizade
 void MENU_Menu17(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPerfil2);
