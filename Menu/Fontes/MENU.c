@@ -37,7 +37,7 @@ void MENU_Menu4(GRA_tppGrafo pGrafo);
 void MENU_Menu5(GRA_tppGrafo pGrafo);
 void MENU_Menu6(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
 void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPerfil2);
-void MENU_Menu8(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil, char ** listaEmails);
+void MENU_Menu8(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil);
 void MENU_Menu9(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil);
 void MENU_Menu10(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil);
 void MENU_Menu11(GRA_tppGrafo pGrafo, char * email);
@@ -263,7 +263,7 @@ void MENU_Menu2(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char 
 				scanf("%s", &email2);
 				printf("\n\n");
 				
-				obtemEmailPerfil2 = PER_BuscaEmail(pGrafo, email2, pPerfil2, id2);
+				obtemEmailPerfil2 = PER_BuscaEmail(pGrafo, email2, &pPerfil2, &id2);
 				if (obtemEmailPerfil2 == PER_CondRetEmailInexistente){
 					printf("O email procurado nao existe na rede. Por favor, procure outro email.\n\n");
 				} else if (obtemEmailPerfil2 != PER_CondRetEmailJaCadastrado){
@@ -287,7 +287,7 @@ void MENU_Menu2(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char 
 		// Menu 9
 		} else if (menuEscolhido == 4){
 			
-			MENU_Menu9(pPerfil);
+			MENU_Menu9(pGrafo, pPerfil);
 			escolhaValida = 1;
 		
 		// Menu 10
@@ -724,14 +724,13 @@ void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pPe
   *  Função: MENU  &Menu 8 - Ver amigos
   *
   *****/
-void MENU_Menu8(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil, char ** listaEmails) {
+void MENU_Menu8(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil) {
 	AMI_tpCondRet retornoAmi;
 	PER_tpPerfil *vetAmigos;
 	PER_tpCondRet retornoPer;
 	int qtd, i;
 	char email[101], primeiroNome[51], ultimoNome[51], cidade[51];
 	int diaNasc, mesNasc, anoNasc;
->>>>>>> 99f3e626a14ac4d6fefe7d2ad5a383ec0b08011e
 
 	retornoAmi = AMI_ArmazenarAmizades(pGrafo, pPerfil, &vetAmigos);
 	if (retornoAmi == AMI_NaoPossuiAmizades) {
@@ -769,7 +768,6 @@ void MENU_Menu8(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil, char ** listaEmails)
  *****/
 
 void MENU_Menu9(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
->>>>>>> 99f3e626a14ac4d6fefe7d2ad5a383ec0b08011e
 	int escolhaInvalida = 0;
 	int escolha, qtd, i, j = 0, num;
 	MEN_tpCondRet retorno;
@@ -1309,13 +1307,13 @@ void MENU_Menu16(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pP
 		exit(0);
 	}
 	
-	condRetObterPerfil = PER_ObterPerfil(pPerfil2, emailPerfil, primNome, ultNome, dia, mes, ano, cidade);
+	condRetObterPerfil = PER_ObterPerfil(pPerfil2, emailPerfil, primNome, ultNome, &dia, &mes, &ano, cidade);
 	if (condRetObterPerfil != PER_CondRetOK){
 		printf("Erro inesperado no modulo perfil.");
 		exit(0);
 	}
 	
-	condRetObterPerfil1 = PER_ObterPerfil(pPerfil, emailPerfil1, primNome1, ultNome1, dia1, mes1, ano1, cidade1);
+	condRetObterPerfil1 = PER_ObterPerfil(pPerfil1, emailPerfil1, primNome1, ultNome1, &dia1, &mes1, &ano1, cidade1);
 	if (condRetObterPerfil != PER_CondRetOK){
 		printf("Erro inesperado no modulo perfil.");
 		exit(0);
@@ -1330,14 +1328,14 @@ void MENU_Menu16(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pP
 		printf("\n\n");
 		
 		if (aceitou == 0){
-			solicitacaoInvalida = 1
+			solicitacaoInvalida = 1;
 			printf("%s negou a solicitação de amizade.\n\n",primNome);
 		} else if (aceitou == 1){
-			solicitacaoInvalida = 1
-			criarAmizade = AMI_CriarAmizade(pGrafo, pPerfil, pPerfil2, 1);
+			solicitacaoInvalida = 1;
+			criarAmizade = AMI_CriarAmizade(pGrafo, pPerfil1, pPerfil2, AMI_SolicitacaoAceita);
 			if (criarAmizade == AMI_AmizadeJaExiste){
 				printf("A amizade já existe entre esses usuários.\n\n");
-			} else if (criarAmizade == AMI_CondRetArestaParaSiMesmo) {
+			} else if (criarAmizade == AMI_ArestaParaSiMesmo) {
 				printf("Não é poss~ivel criar uma amizade com si mesmo.\n\n");
 			} else if (criarAmizade != AMI_CondRetOK){
 				printf("Erro inesperado do modulo amizade.\n\n");
@@ -1447,13 +1445,13 @@ void MENU_Menu17(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPe
 		exit(0);
 	}
 	
-	condRetObterPerfil = PER_ObterPerfil(pPerfil2, emailPerfil, primNome, ultNome, dia, mes, ano, cidade);
+	condRetObterPerfil = PER_ObterPerfil(pPerfil2, emailPerfil, primNome, ultNome, &dia, &mes, &ano, cidade);
 	if (condRetObterPerfil != PER_CondRetOK){
 		printf("Erro inesperado no modulo perfil.");
 		exit(0);
 	}
 	
-	condRetObterPerfil1 = PER_ObterPerfil(pPerfil, emailPerfil1, primNome1, ultNome1, dia1, mes1, ano1, cidade1);
+	condRetObterPerfil1 = PER_ObterPerfil(pPerfil, emailPerfil1, primNome1, ultNome1, &dia1, &mes1, &ano1, cidade1);
 	if (condRetObterPerfil != PER_CondRetOK){
 		printf("Erro inesperado no modulo perfil.");
 		exit(0);
@@ -1481,7 +1479,7 @@ void MENU_Menu17(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPe
 			
 		} else if (menuEscolhido == 2){
 			escolhaValida = 1;
-			MENU_Menu2(pGrafo, pPerfil1, emailPerfil1, primNome1, ultNome1, cidade1, dia1, mes1, ano1);
+			MENU_Menu2(pGrafo, pPerfil, emailPerfil1, primNome1, ultNome1, cidade1, dia1, mes1, ano1);
 			
 		} else if (menuEscolhido == 3){
 			escolhaValida = 1;
