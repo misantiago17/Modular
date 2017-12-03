@@ -2,11 +2,6 @@ REM Executa os testes de todos os scripts através dos constructos .exe
 
 cls
 
-if exist ..\Scripts\estatisticas.estat  del ..\Scripts\estatisticas.estat
+cd../Produto
+TRAB4-23
 
-
-
-level 4 goto sai
-
-
-:sai
