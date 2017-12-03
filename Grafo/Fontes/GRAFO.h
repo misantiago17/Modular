@@ -83,6 +83,7 @@ typedef enum {
 	/* Aresta de vertice tentando apontar para p proprio vertice*/
 
 	GRA_CondRetErroEstrutural
+	/* Foi encontrado um erro na estrutura no grafo*/
 	
 } GRA_tpCondRet;
 
@@ -411,7 +412,7 @@ GRA_tpCondRet GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo, int* pDado);
 ***********************************************************************/
 
 #ifdef _DEBUG
-	//GRA_tpCondRet GRA_VerificarEstrutura(GRA_tppGrafo pGrafo);
+	GRA_tpCondRet GRA_VerificarEstrutura(void* Gra);
 #endif
 
 #undef GRAFO_EXT

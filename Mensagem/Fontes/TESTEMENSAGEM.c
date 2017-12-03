@@ -42,6 +42,7 @@ static const char RESET_MENSAGEM_CMD		  [ ] = "=resetteste";
 static const char ESCREVER_MSG_CMD        [ ] = "=escrevermsg"     ;
 static const char EXCLUIR_MSG_CMD         [ ] = "=excluirmsg"     ;
 static const char EXCLUIR_MSGEMAIL_CMD    [ ] = "=excluirmsgemail"     ;
+static const char MODIFICAR_EMAIL_CMD    [ ] = "=modificaremail"     ;
 static const char OBTER_NUM_MSGS_CMD      [ ] = "=obternummsgs"  ;
 static const char OBTER_NUM_TODASMSGS_CMD [ ] = "=obternumtodasmsgs"  ;
 static const char OBTER_MSGS_CMD          [ ] = "=obtermsgs"   ;
@@ -88,6 +89,7 @@ static int ValidarInxPerfil( int InxPerfil) ;
 *																			Compara os dados recebidos e esperados para listas de exatamente 2 elementos do tipo procurado
 *     =obtertodasmsgs               InxPerfil  vetTipos  vetEmails vetMensagens CondRetEsp - 
 *																			Compara os dados recebidos e esperados para listas de exatamente 2 elementos
+*	  =modificaremail				InxPerfil  Email	novoEmail CondRetEsp
 *
 ***********************************************************************/
 
@@ -212,6 +214,26 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
            
 
       }  /* fim ativa: Testar Excluir Mensagens de um Email */
+
+			/* Testar Modificar Mensagens de um Email */
+
+	else if ( strcmp( ComandoTeste , MODIFICAR_EMAIL_CMD ) == 0 )
+	{
+
+			MEN_tpCondRet debug;
+			char novoEmail[101];
+            numLidos = LER_LerParametros( "issi" ,&InxPerfil,Email,novoEmail,&CondRetEsp ) ;
+            if ( ( numLidos != 4 )
+              || ( ! ValidarInxPerfil(InxPerfil)))
+            {
+               return TST_CondRetParm ;
+            } /* if */
+            debug=MEN_ModificarEmailLista(vtPerfis[InxPerfil],Email,novoEmail) ;
+			return TST_CompararInt( CondRetEsp , debug ,
+			"Erro na condicao de retorno ao modificar os emails"  ) ;
+           
+
+      }  /* fim ativa: Testar Modificar Mensagens de um Email */
 
 	/* Testar Obter Numero de Mensagens */
 

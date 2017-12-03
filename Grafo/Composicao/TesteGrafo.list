@@ -50,10 +50,10 @@ Estatísticas do construto
       testegrafo.c
 
    Estatísticas do arquivo: grafo.c
-      Total linhas:            1114
-      Linhas de código:         703
-      Linhas de comentário:     249
-      Linhas em branco:         176
+      Total linhas:            1124
+      Linhas de código:         796
+      Linhas de comentário:     160
+      Linhas em branco:         182
    Arquivos de inclusão de que necessita
       cespdin.h
       conta.h
@@ -63,8 +63,8 @@ Estatísticas do construto
       tst_espc.h
 
    Estatísticas do arquivo: grafo.h
-      Total linhas:             422
-      Linhas de código:          39
+      Total linhas:             423
+      Linhas de código:          40
       Linhas de comentário:     329
       Linhas em branco:          54
    Arquivos em que é incluído
@@ -121,8 +121,8 @@ Estatísticas do construto
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      3243
-         Linhas de código:           289
+         Total linhas do tipo:      3244
+         Linhas de código:           290
          Linhas de comentário:      2501
          Linhas em branco:           453
          Arquivos deste tipo:          7
@@ -149,17 +149,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      2384
-         Linhas de código:          1414
-         Linhas de comentário:       502
-         Linhas em branco:           518
+         Total linhas do tipo:      2394
+         Linhas de código:          1507
+         Linhas de comentário:       413
+         Linhas em branco:           524
          Arquivos deste tipo:          3
 
 Totais para todo o construto TesteGrafo
 
-   Total linhas:              5627
-   Linhas de código:          1703
-   Linhas de comentário:      3003
-   Linhas em branco:           971
+   Total linhas:              5638
+   Linhas de código:          1797
+   Linhas de comentário:      2914
+   Linhas em branco:           977
    Arquivos processados:        10
 
