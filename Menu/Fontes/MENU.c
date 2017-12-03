@@ -38,7 +38,7 @@ void MENU_Menu5(GRA_tppGrafo pGrafo);
 void MENU_Menu6(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
 void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPerfil2);
 void MENU_Menu8(GRA_tppGrafo pGrafo, char ** listaEmails);
-void MENU_Menu9(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil);
+void MENU_Menu9(PER_tpPerfil * pPerfil);
 void MENU_Menu10(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil);
 void MENU_Menu11(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil);
 void MENU_Menu12(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
@@ -263,7 +263,7 @@ void MENU_Menu2(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char 
 		// Menu 9
 		} else if (menuEscolhido == 4){
 			
-			//MENU_Menu9(pGrafo,pPerfil);
+			MENU_Menu9(pPerfil);
 			escolhaValida = 1;
 		
 		// Menu 10
@@ -572,13 +572,12 @@ void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPer
 void MENU_Menu8(GRA_tppGrafo pGrafo, char ** listaEmails);
 
 // Ir para mensagens
-void MENU_Menu9(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
+void MENU_Menu9(PER_tpPerfil * pPerfil) {
 	int escolhaInvalida = 0;
-	int escolha, qtd, i, j, num;
+	int escolha, qtd, i, j = 0, num;
 	MEN_tpCondRet retorno;
 	MEN_tpCondMsg *vetTipos;
 	char **vetEmails, **vetMensagens;
-	char mensagem[401], email[101];
 
 	/*Exibir todas  as mensagens*/
 	retorno = MEN_ObterNumTodasMensagens(pPerfil, &qtd);
@@ -605,8 +604,10 @@ void MENU_Menu9(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 	}
 	for (i = 0; i < qtd; i++) {
 		printf("Mensagem %d:\n", i);
-		while (vetMensagens[i][j] != '\0')
+		while (vetMensagens[i][j] != '\0') {
 			printf("%c", vetMensagens[i][j]);
+			j++;
+		}
 		printf("\n");
 	}
 	/*Fim exibir todas  as mensagens*/
@@ -635,7 +636,7 @@ void MENU_Menu9(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 				printf("Numero invalido, digite novamente:");
 				scanf("%d", &num);
 			}
-			retorno = MEN_ExcluirMensagem(pPerfil, vetEmails[i], vetTipos[i], char vetMensagens[i]);
+			retorno = MEN_ExcluirMensagem(pPerfil, vetEmails[i], vetTipos[i], vetMensagens[i]);
 			if (retorno != MEN_CondRetOK) {
 				perror("Excluir mensagem");
 				exit(EXIT_FAILURE);

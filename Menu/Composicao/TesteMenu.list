@@ -141,9 +141,9 @@ Estatísticas do construto
       perfil.c
 
    Estatísticas do arquivo: menu.c
-      Total linhas:            1013
-      Linhas de código:         665
-      Linhas de comentário:     116
+      Total linhas:            1014
+      Linhas de código:         667
+      Linhas de comentário:     115
       Linhas em branco:         234
    Arquivos de inclusão de que necessita
       amizade.h
@@ -217,17 +217,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      4154
-         Linhas de código:          2462
-         Linhas de comentário:       914
+         Total linhas do tipo:      4155
+         Linhas de código:          2464
+         Linhas de comentário:       913
          Linhas em branco:           834
          Arquivos deste tipo:          6
 
 Totais para todo o construto TesteMenu
 
-   Total linhas:              7847
-   Linhas de código:          2823
-   Linhas de comentário:      3739
+   Total linhas:              7848
+   Linhas de código:          2825
+   Linhas de comentário:      3738
    Linhas em branco:          1341
    Arquivos processados:        15
 
