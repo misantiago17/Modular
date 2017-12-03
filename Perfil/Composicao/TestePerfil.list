@@ -4,7 +4,7 @@ GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
 Composição do construto: ..\Composicao\TestePerfil.comp
 
    Nome do Construto:           TestePerfil
-   Diretório base:              C:\Users\Lorene Busquim\Documents\Modular\Perfil\Composicao
+   Diretório base:              C:\Users\Usuario\Documents\GitHub\Modular\Perfil\Composicao
 
    Arquivo composição:          ..\Composicao\TestePerfil.comp
    Arquivo plataforma:          gmake.parm
@@ -120,10 +120,10 @@ Estatísticas do construto
       perfil.c
 
    Estatísticas do arquivo: perfil.c
-      Total linhas:             744
-      Linhas de código:         373
-      Linhas de comentário:     242
-      Linhas em branco:         141
+      Total linhas:             746
+      Linhas de código:         394
+      Linhas de comentário:     221
+      Linhas em branco:         144
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
@@ -196,17 +196,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      3235
-         Linhas de código:          1878
-         Linhas de comentário:       780
-         Linhas em branco:           639
+         Total linhas do tipo:      3237
+         Linhas de código:          1899
+         Linhas de comentário:       759
+         Linhas em branco:           642
          Arquivos deste tipo:          5
 
 Totais para todo o construto TestePerfil
 
-   Total linhas:              7131
-   Linhas de código:          2245
-   Linhas de comentário:      3766
-   Linhas em branco:          1182
+   Total linhas:              7133
+   Linhas de código:          2266
+   Linhas de comentário:      3745
+   Linhas em branco:          1185
    Arquivos processados:        14
 

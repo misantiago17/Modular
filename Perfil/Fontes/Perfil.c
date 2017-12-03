@@ -156,7 +156,7 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email) {
 		return transformaRetGRA(retornoGra);
 	}
 
-	/*while (i <= tam + 1) {
+	while (i <= tam + 1) {
 		retornoGra = GRA_ObterValor(pGrafo, &perfil);
 		if (retornoGra != GRA_CondRetOK) {
 			retornoPer = restauraCorrenteGrafo(pGrafo, idCorrente);
@@ -165,8 +165,8 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email) {
 			return transformaRetGRA(retornoGra);
 		}
 
-		if (MEN_ExcluirMensagensEmail(perfil, email) != MEN_CondRetOK){
-			return PER_CondRetRetornoMsgIncorreto;}
+		if (MEN_ExcluirMensagensEmail(perfil, email) != MEN_CondRetOK)
+			return PER_CondRetRetornoMsgIncorreto;
 
 		i++;
 
@@ -176,10 +176,12 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email) {
 			if (retornoPer != PER_CondRetOK)
 				return retornoPer;
 			return transformaRetGRA(retornoGra);
-		}*
+		}
 	}/*Fim apagar mensagens*/
 
 	retornoPer = deletaPerfil(pGrafo, id);
+	if (retornoPer != PER_CondRetOK)
+		return retornoPer;
 	return retornoPer;
 }/* Fim função: PER  &Excluir Perfil */
 
