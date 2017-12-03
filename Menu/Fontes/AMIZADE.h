@@ -122,7 +122,7 @@ typedef enum {
 *      AMI_CondRetOK
 *      AMI_NaoAceitou
 *	   AMI_UsuarioNaoExiste
-*	   GRA_CondRetArestaParaSiMesmo
+*	   AMI_CondRetArestaParaSiMesmo
 *	   AMI_AmizadeJaExiste
 *	   AMI_CondRetRetornoGraIncorreto
 *	   AMI_CondRetRetornoPerIncorreto
