@@ -665,7 +665,111 @@ void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPer
 void MENU_Menu8(GRA_tppGrafo pGrafo, char ** listaEmails);
 
 // Ir para mensagens
-void MENU_Menu9(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil);
+void MENU_Menu9(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
+	int escolhaInvalida = 0;
+	int escolha, qtd, i, j, num;
+	MEN_tpCondRet retorno;
+	MEN_tpCondMsg *vetTipos;
+	char **vetEmails, **vetMensagens;
+	char mensagem[401], email[101];
+
+	/*Exibir todas  as mensagens*/
+	retorno = MEN_ObterNumTodasMensagens(pPerfil, &qtd);
+	if (retorno != MEN_CondRetOK) {
+		perror("Obter Todas Mensagens");
+		exit(EXIT_FAILURE);
+	}
+	if ((vetTipos = (MEN_tpCondMsg *)malloc(sizeof(MEN_tpCondMsg)*qtd)) == NULL) {
+		perror("Malloc");
+		exit(EXIT_FAILURE);
+	}
+	if ((vetEmails = (char **)malloc(sizeof(char)*qtd)) == NULL) {
+		perror("Malloc");
+		exit(EXIT_FAILURE);
+	}
+	if ((vetMensagens = (char **)malloc(sizeof(char)*qtd)) == NULL) {
+		perror("Malloc");
+		exit(EXIT_FAILURE);
+	}
+	retorno = MEN_ObterTodasMensagens(pPerfil, vetTipos, vetEmails, vetMensagens);
+	if (retorno != MEN_CondRetOK) {
+		perror("Obter Todas Mensagens");
+		exit(EXIT_FAILURE);
+	}
+	for (i = 0; i < qtd; i++) {
+		printf("Mensagem %d:\n", i);
+		while (vetMensagens[i][j] != '\0')
+			printf("%c", vetMensagens[i][j]);
+		printf("\n");
+	}
+	/*Fim exibir todas  as mensagens*/
+	printf("===============================================================================\n");
+	printf("O que deseja fazer com suas mensagens?\n\n");
+
+	printf("1. Excluir mensagem \n");
+	printf("2. Obter total de mensagens\n");
+	printf("3. Obter total de mensagens enviadas\n");
+	printf("4. Obter total de mensagens recebidas\n");
+
+	while (escolhaInvalida == 0) {
+
+		printf("> ");
+		scanf("%d", &escolha);
+		printf("\n\n");
+
+		switch (escolha)
+		{
+			/*Excluir mensagem*/
+		case 1:
+			escolhaInvalida = 1;
+			printf("Escreva o numero da mensagem que deseja excluir:");
+			scanf("%d", &num);
+			while (num < 0 || num > qtd) {
+				printf("Numero invalido, digite novamente:");
+				scanf("%d", &num);
+			}
+			retorno = MEN_ExcluirMensagem(pPerfil, vetEmails[i], vetTipos[i], char vetMensagens[i]);
+			if (retorno != MEN_CondRetOK) {
+				perror("Excluir mensagem");
+				exit(EXIT_FAILURE);
+			}
+			printf("\nMensagem excluida\n");
+			break; /*Fim excluir mensagem*/
+
+				   /*Obter total de mensagens*/
+		case 2:
+			escolhaInvalida = 1;
+			printf("Total de mensagens = %d\n", qtd);
+			break;/*Fim obter total de mensagens*/
+
+				  /*Obter total de mensagens enviadas*/
+		case 3:
+			escolhaInvalida = 1;
+			retorno = MEN_ObterNumMensagens(pPerfil, MEN_CondMsgEnviada, &qtd);
+			if (retorno != MEN_CondRetOK) {
+				perror("Excluir mensagem");
+				exit(EXIT_FAILURE);
+			}
+			printf("Total de mensagens = %d\n", qtd);
+			break;/*Fim obter total de mensagens enviadas*/
+
+				  /*Obter total de mensagens recebidas*/
+		case 4:
+			escolhaInvalida = 1;
+			retorno = MEN_ObterNumMensagens(pPerfil, MEN_CondMsgRecebida, &qtd);
+			if (retorno != MEN_CondRetOK) {
+				perror("Excluir mensagem");
+				exit(EXIT_FAILURE);
+			}
+			printf("Total de mensagens = %d\n", qtd);
+			break;/*Fim obter total de mensagens recebidas*/
+		default:
+			printf("Escolha inválida. Por favor, digite o menu novamente.\n\n");
+			break;
+		}
+
+	}
+}
 
 /***************************************************************************
  *  Função: MENU  &Menu 10 - Excluir Todas as Amizades
