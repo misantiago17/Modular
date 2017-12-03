@@ -720,19 +720,53 @@ void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pPe
 	
 } /* Fim função: MENU - Menu 7 - Procurar Novos Amigos */
 
-/***************************************************************************
- *  Função: MENU  &Menu 8 - Ver Amigos
- *
- *****/
-// Ver amigos
-void MENU_Menu8(GRA_tppGrafo pGrafo, char ** listaEmails);
+  /***************************************************************************
+  *  Função: MENU  &Menu 8 - Ver amigos
+  *
+  *****/
+void MENU_Menu8(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil, char ** listaEmails) {
+	AMI_tpCondRet retornoAmi;
+	PER_tpPerfil *vetAmigos;
+	PER_tpCondRet retornoPer;
+	int qtd, i;
+	char email[101], primeiroNome[51], ultimoNome[51], cidade[51];
+	int diaNasc, mesNasc, anoNasc;
 
-/***************************************************************************
- *  Função: MENU  &Menu 9 - Ir para mensagens
+	retornoAmi = AMI_ArmazenarAmizades(pGrafo, pPerfil, &vetAmigos);
+	if (retornoAmi == AMI_NaoPossuiAmizades) {
+		printf("Nao possui amizades\n");
+		MENU_Menu1(pGrafo);
+	}
+	else if (retornoAmi == AMI_UsuarioNaoExiste) {
+		printf("Usuario nao existe\n");
+		MENU_Menu1(pGrafo);
+	}
+	else if (retornoAmi != MEN_CondRetOK) {
+		perror("Armazenar Amizades");
+		exit(EXIT_FAILURE);
+	}
+
+	retornoPer = PER_NumeroPerfis(pGrafo, &qtd);
+	if (retornoPer != PER_CondRetOK) {
+		perror("Numero de perfis");
+		exit(EXIT_FAILURE);
+	}
+
+	for (i = 0; i < qtd; i++) {
+		retornoPer = PER_ObterPerfil(pPerfil, email, primeiroNome, ultimoNome, &diaNasc, &mesNasc, &anoNasc, cidade);
+		if (retornoPer != PER_CondRetOK) {
+			perror("Obter perfil");
+			exit(EXIT_FAILURE);
+		}
+		printf("%s", email);
+	}
+}/* Fim função: MENU - Menu 8 - Ver amigos */
+
+ /***************************************************************************
+ *  Função: MENU  &Menu 10 - Ir para mensagens
  *
  *****/
-// Ir para mensagens
-void MENU_Menu9(PER_tpPerfil * pPerfil) {
+void MENU_Menu9(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 	int escolhaInvalida = 0;
 	int escolha, qtd, i, j = 0, num;
 	MEN_tpCondRet retorno;
@@ -831,24 +865,30 @@ void MENU_Menu9(PER_tpPerfil * pPerfil) {
 			}
 			printf("Total de mensagens = %d\n", qtd);
 			break;/*Fim obter total de mensagens recebidas*/
+
 		default:
 			printf("Escolha inválida. Por favor, digite o menu novamente.\n\n");
 			break;
 		}
-
 	}
-} /* Fim função: MENU -Menu 9 - Ir para mensagens */
+	MENU_Menu1(pGrafo);
+} /* Fim função: MENU - Menu 9 - Ir para mensagens */
 
-/***************************************************************************
- *  Função: MENU  &Menu 10 - Excluir Todas as Amizades
- *
- *****/
- 
-// Excluir todas as amizades
-void MENU_Menu10(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil){
-	
-	
-	
+  /***************************************************************************
+  *  Função: MENU  &Menu 10 - Excluir Todas as Amizades
+  *
+  *****/
+
+void MENU_Menu10(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
+	AMI_tpCondRet retorno;
+
+	retorno = AMI_ExcluirTodasAmizades(pGrafo, pPerfil);
+	if (retorno != MEN_CondRetOK) {
+		perror("Obter Todas Mensagens");
+		exit(EXIT_FAILURE);
+	}
+	printf("Amizades excluidas");
+	MENU_Menu1(pGrafo);
 } /* Fim função: MENU - Menu 10 - Excluir Todas as Amizades */
 
 /***************************************************************************
