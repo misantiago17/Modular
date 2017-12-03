@@ -37,8 +37,6 @@ void MENU_Menu4(GRA_tppGrafo pGrafo);
 void MENU_Menu5(GRA_tppGrafo pGrafo);
 void MENU_Menu6(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
 void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPerfil2);
-void MENU_Menu8(GRA_tppGrafo pGrafo, char ** listaEmails);
-void MENU_Menu9(PER_tpPerfil * pPerfil);
 void MENU_Menu8(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil, char ** listaEmails);
 void MENU_Menu9(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil);
 void MENU_Menu10(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil);
@@ -599,7 +597,7 @@ void MENU_Menu6(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char 
  // Procurar novos amigos - COMPLETE
 void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pPerfil2){
 	
-	int amigos;
+	int amigos, verificaAmigos, escolhaValida = 0, menuEscolhido;
 	
 	char * emailPerfil;
     char * primNome;
@@ -654,19 +652,19 @@ void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pPe
 		exit(0);
 	}
 	
-	condRetObterPerfil = PER_ObterPerfil(pPerfil2, emailPerfil, primNome, ultNome, dia, mes, ano, cidade);
+	condRetObterPerfil = PER_ObterPerfil(pPerfil2, emailPerfil, primNome, ultNome, &dia, &mes, &ano, cidade);
 	if (condRetObterPerfil != PER_CondRetOK){
 		printf("Erro inesperado no modulo perfil.");
 		exit(0);
 	}
 	
-	condRetObterPerfil1 = PER_ObterPerfil(pPerfil1, emailPerfil1, primNome1, ultNome1, dia1, mes1, ano1, cidade1);
+	condRetObterPerfil1 = PER_ObterPerfil(pPerfil1, emailPerfil1, primNome1, ultNome1, &dia1, &mes1, &ano1, cidade1);
 	if (condRetObterPerfil != PER_CondRetOK){
 		printf("Erro inesperado no modulo perfil.");
 		exit(0);
 	}
 	
-	verificaAmigos = AMI_VerificarNumAmigos(pGrafo, pPerfil, &amigos);
+	verificaAmigos = AMI_VerificarNumAmigos(pGrafo, pPerfil2, &amigos);
 	if (verificaAmigos == AMI_NaoPossuiAmizades){
 		amigos = 0;
 	} else if (verificaAmigos != AMI_CondRetOK){
@@ -677,9 +675,9 @@ void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pPe
 	printf("===============================================================================\n");
     printf("Bem-vindo ao perfil de %s\n\n",primNome);
 	
-	printf("Nome: %s %s\n",primNome,ultNome);
-    printf("Email: %s\n",email);
-	printf("Data de Nascimento: %d|%d|%d\n",diaNasc,mesNasc,anoNasc);
+	printf("Nome: %s %s\n", primNome, ultNome);
+    printf("Email: %s\n", emailPerfil);
+	printf("Data de Nascimento: %d|%d|%d\n", dia, mes, ano);
 	printf("Cidade: %s\n",cidade);
 	printf("Número de amigos: %d \n",amigos);
 	
@@ -698,21 +696,21 @@ void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pPe
 		
 		//Menu 16
 		if (menuEscolhido == 1){
-			MENU_Menu16(pGrafo, pPerfil2, pPerfil);
-			escolhaInvalida = 1;
+			MENU_Menu16(pGrafo, pPerfil2, pPerfil1);
+			escolhaValida = 1;
 		// Menu 2
 		} else if (menuEscolhido == 2){
 			MENU_Menu2(pGrafo, pPerfil2, emailPerfil, primNome, ultNome, cidade, dia, mes, ano);
-			escolhaInvalida = 1;
+			escolhaValida = 1;
 		// Menu 2
 		} else if (menuEscolhido == 3){
 			MENU_Menu2(pGrafo, pPerfil1, emailPerfil1, primNome1, ultNome1, cidade1, dia1, mes1, ano1);
-			escolhaInvalida = 1;
+			escolhaValida = 1;
 		// Menu 1
 		} else if (menuEscolhido == 4){
 			
 			MENU_Menu1(pGrafo);
-			escolhaInvalida = 1;
+			escolhaValida = 1;
 			
 		} else {
 			printf("Escolha inválida de menu. Por favor, digite o menu novamente.\n\n");
@@ -722,15 +720,6 @@ void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pPe
 	
 } /* Fim função: MENU - Menu 7 - Procurar Novos Amigos */
 
-<<<<<<< HEAD
-/***************************************************************************
- *  Função: MENU  &Menu 8 - Ver Amigos
- *
- *****/
-
- // Ver amigos
-void MENU_Menu8(GRA_tppGrafo pGrafo, char ** listaEmails);
-=======
   /***************************************************************************
   *  Função: MENU  &Menu 8 - Ver amigos
   *
@@ -778,11 +767,7 @@ void MENU_Menu8(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil, char ** listaEmails)
  *  Função: MENU  &Menu 10 - Ir para mensagens
  *
  *****/
-<<<<<<< HEAD
 
- // Ir para mensagens
-void MENU_Menu9(PER_tpPerfil * pPerfil) {
-=======
 void MENU_Menu9(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 >>>>>>> 99f3e626a14ac4d6fefe7d2ad5a383ec0b08011e
 	int escolhaInvalida = 0;
