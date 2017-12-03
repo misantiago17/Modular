@@ -65,8 +65,8 @@ $(Fobj)\grafo.obj :  {$(Pc)}\grafo.c \
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
 $(Fobj)\menu.obj :  {$(Pc)}\menu.c \
-    {$(Ph)}amizade.h            {$(Ph)}cespdin.h            {$(Ph)}grafo.h              \
-    {$(Ph)}lista.h              {$(Ph)}mensagem.h           {$(Ph)}perfil.h            
+    {$(Ph)}amizade.h            {$(Ph)}grafo.h              {$(Ph)}lista.h              \
+    {$(Ph)}mensagem.h           {$(Ph)}perfil.h            
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
 $(Fobj)\amizade.obj :  {$(Pc)}\amizade.c \

@@ -4,7 +4,7 @@ GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
 Composição do construto: ..\Composicao\TesteMenu.comp
 
    Nome do Construto:           TesteMenu
-   Diretório base:              D:\Projetos\PUC\Modular\Projeto Git\Menu\Composicao
+   Diretório base:              C:\Users\Usuario\Documents\GitHub\Modular\Menu\Composicao
 
    Arquivo composição:          ..\Composicao\TesteMenu.comp
    Arquivo plataforma:          gmake.parm
@@ -55,7 +55,6 @@ Estatísticas do construto
       Linhas em branco:          97
    Arquivos em que é incluído
       grafo.c
-      menu.c
 
    Estatísticas do arquivo: conta.h
       Total linhas:             468
@@ -142,13 +141,12 @@ Estatísticas do construto
       perfil.c
 
    Estatísticas do arquivo: menu.c
-      Total linhas:             910
-      Linhas de código:         577
-      Linhas de comentário:     106
-      Linhas em branco:         225
+      Total linhas:            1013
+      Linhas de código:         665
+      Linhas de comentário:     116
+      Linhas em branco:         234
    Arquivos de inclusão de que necessita
       amizade.h
-      cespdin.h
       grafo.h
       lista.h
       mensagem.h
@@ -219,17 +217,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      4051
-         Linhas de código:          2374
-         Linhas de comentário:       904
-         Linhas em branco:           825
+         Total linhas do tipo:      4154
+         Linhas de código:          2462
+         Linhas de comentário:       914
+         Linhas em branco:           834
          Arquivos deste tipo:          6
 
 Totais para todo o construto TesteMenu
 
-   Total linhas:              7744
-   Linhas de código:          2735
-   Linhas de comentário:      3729
-   Linhas em branco:          1332
+   Total linhas:              7847
+   Linhas de código:          2823
+   Linhas de comentário:      3739
+   Linhas em branco:          1341
    Arquivos processados:        15
 

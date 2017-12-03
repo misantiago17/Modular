@@ -1,17 +1,3 @@
 grafo.c
 menu.c
-amizade.c
-mensagem.c
-perfil.c
-lista.c
-Microsoft (R) Incremental Linker Version 10.00.40219.01
-Copyright (C) Microsoft Corporation.  All rights reserved.
-
-/OUT:..\Produto\TRAB4-23.exe 
-/INCREMENTAL:NO 
-/MACHINE:IX86 
-grafo.obj menu.obj amizade.obj mensagem.obj perfil.obj 
-lista.obj 
-ArcaboucoTeste.lib 
-ArcaboucoTeste.lib(generico.obj) : error LNK2019: unresolved external symbol _TST_EfetuarComando referenced in function _InterpretarComandos
-..\Produto\TRAB4-23.exe : fatal error LNK1120: 1 unresolved externals
+..\Fontes\menu.c(638) : error C2059: syntax error : 'type'
