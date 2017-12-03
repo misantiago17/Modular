@@ -1,0 +1,6 @@
+TESTADO (para casos que funcionam)
+CriaPerfil
+Todas as de modificar
+Procurar Novos Amigos -> Criar amizade -> aceita/recusa -> TDS opções d voltar
+Procurar Novos Amigos -> Todos
+Ver Amigos
