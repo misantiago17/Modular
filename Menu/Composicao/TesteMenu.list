@@ -139,12 +139,13 @@ Estatísticas do construto
    Arquivos em que é incluído
       mensagem.c
       menu.c
+      perfil.c
 
    Estatísticas do arquivo: menu.c
-      Total linhas:             216
-      Linhas de código:         124
-      Linhas de comentário:      37
-      Linhas em branco:          53
+      Total linhas:             910
+      Linhas de código:         577
+      Linhas de comentário:     106
+      Linhas em branco:         225
    Arquivos de inclusão de que necessita
       amizade.h
       cespdin.h
@@ -154,20 +155,21 @@ Estatísticas do construto
       perfil.h
 
    Estatísticas do arquivo: perfil.c
-      Total linhas:             743
-      Linhas de código:         353
-      Linhas de comentário:     272
-      Linhas em branco:         122
+      Total linhas:             744
+      Linhas de código:         373
+      Linhas de comentário:     242
+      Linhas em branco:         141
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
+      mensagem.h
       perfil.h
 
    Estatísticas do arquivo: perfil.h
-      Total linhas:             331
-      Linhas de código:          42
-      Linhas de comentário:     243
-      Linhas em branco:          46
+      Total linhas:             374
+      Linhas de código:          44
+      Linhas de comentário:     283
+      Linhas em branco:          47
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
@@ -189,10 +191,10 @@ Estatísticas do construto
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      3650
-         Linhas de código:           359
-         Linhas de comentário:      2785
-         Linhas em branco:           506
+         Total linhas do tipo:      3693
+         Linhas de código:           361
+         Linhas de comentário:      2825
+         Linhas em branco:           507
          Arquivos deste tipo:          9
 
   Tipo: obj      Path: ..\Objetos
@@ -217,17 +219,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      3356
-         Linhas de código:          1901
-         Linhas de comentário:       865
-         Linhas em branco:           634
+         Total linhas do tipo:      4051
+         Linhas de código:          2374
+         Linhas de comentário:       904
+         Linhas em branco:           825
          Arquivos deste tipo:          6
 
 Totais para todo o construto TesteMenu
 
-   Total linhas:              7006
-   Linhas de código:          2260
-   Linhas de comentário:      3650
-   Linhas em branco:          1140
+   Total linhas:              7744
+   Linhas de código:          2735
+   Linhas de comentário:      3729
+   Linhas em branco:          1332
    Arquivos processados:        15
 

@@ -25,7 +25,6 @@
 #include   <malloc.h>
 #include   <assert.h>
 #include   <stdlib.h>
-#include   "CESPDIN.H"
 #include   "GRAFO.h"
 #include   "PERFIL.h"
 #include   "AMIZADE.h"
@@ -203,8 +202,8 @@ void MENU_Menu2(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char 
 	int escolhaValida = 0;
 	
 	AMI_tpCondRet verificaAmigos;
-	PER_tpPerfil * pPerfil2;
-	char ** listaEmailPerfis;
+	//PER_tpPerfil * pPerfil2;
+	//char ** listaEmailPerfis;
 	
 	verificaAmigos = AMI_VerificarNumAmigos(pGrafo, pPerfil, &amigos);
 	if (verificaAmigos == AMI_NaoPossuiAmizades){
@@ -219,8 +218,8 @@ void MENU_Menu2(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char 
 	
 	printf("Nome: %s %s\n",primNome,ultNome);
     printf("Email: %s\n",email);
-	printf("Data de Nascimento: %d\%d\%d\n",dia,mes,ano);
-	printf("Cidade: %s %s\n",cidade);
+	printf("Data de Nascimento: %d|%d|%d\n",diaNasc,mesNasc,anoNasc);
+	printf("Cidade: %s\n",cidade);
 	printf("Número de amigos: %d \n",amigos);
 	
     printf("O que deseja fazer? \n\n");
@@ -233,7 +232,7 @@ void MENU_Menu2(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char 
     printf("6. Excluir perfil \n");
     printf("7. Voltar para o menu \n\n");
 	
-	while (escolhaInvalida == 0){
+	while (escolhaValida == 0){
 		
 		printf("> ");
 		scanf("%d", &menuEscolhido);
@@ -243,47 +242,47 @@ void MENU_Menu2(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char 
 		if (menuEscolhido == 1) {
 			
 			MENU_Menu6(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
-			escolhaInvalida = 1;
+			escolhaValida = 1;
 			
 		// Menu 7
 		} else if (menuEscolhido == 2){
 			
 			// Pergar perfil do cara que ele quer ser amigo
 			
-			MENU_Menu7(pGrafo, pPerfil, pPerfil2);
-			escolhaInvalida = 1;
+			//MENU_Menu7(pGrafo, pPerfil, pPerfil2);
+			escolhaValida = 1;
 		
 		// Menu 8
 		} else if (menuEscolhido == 3){
 			
 			// Pegar todos os emails dos amigos do cara
 			
-			MENU_Menu8(pGrafo, listaEmailPerfis);
-			escolhaInvalida = 1;
+			//MENU_Menu8(pGrafo, listaEmailPerfis);
+			escolhaValida = 1;
 		
 		// Menu 9
 		} else if (menuEscolhido == 4){
 			
-			MENU_Menu9(pGrafo);
-			escolhaInvalida = 1;
+			//MENU_Menu9(pGrafo,pPerfil);
+			escolhaValida = 1;
 		
 		// Menu 10
 		} else if (menuEscolhido == 5){
 			
-			MENU_Menu10(pGrafo);
-			escolhaInvalida = 1;
+			//MENU_Menu10(pGrafo,pPerfil);
+			escolhaValida = 1;
 		
 		// Menu 11
 		} else if (menuEscolhido == 6){
 		
-			MENU_Menu11(pGrafo);
-			escolhaInvalida = 1;
+			//MENU_Menu11(pGrafo,pPerfil);
+			escolhaValida = 1;
 		
 		// Menu 1
 		} else if (menuEscolhido == 7){
 			
 			MENU_Menu1(pGrafo);
-			escolhaInvalida = 1;
+			escolhaValida = 1;
 		
 		} else {
 			printf("Escolha inválida de menu. Por favor, digite o menu novamente.\n\n");
@@ -362,7 +361,7 @@ void MENU_Menu3(GRA_tppGrafo pGrafo){
 		scanf("%s", &cidade);
 		printf("\n");
 	
-		criarPerfil = PER_CriarPerfil(pGrafo, &pPerfil, email, primeiroNome, ultimoNome, &diaNasc, &mesNasc, &anoNasc, &cidade);
+		criarPerfil = PER_CriarPerfil(pGrafo, &pPerfil, email, primNome, ultNome, dia, mes, ano, cidade);
 		if (criarPerfil == PER_CondRetEmailJaCadastrado){
 			printf("Já existe um usuário cadastrado na rede com esse email. Por favor cria um com email diferente.\n\n");
 		} else if (criarPerfil == PER_CondRetEmailInvalido || criarPerfil == PER_CondRetNomeInvalido || criarPerfil == PER_CondRetDataInvalida || criarPerfil == PER_CondRetCidadeInvalida){
@@ -416,16 +415,16 @@ void MENU_Menu4(GRA_tppGrafo pGrafo){
 	int menuEscolhido;
 	int escolhaValida = 0;
 	
-	PER_CondRet numPerfis;
+	PER_tpCondRet numPerfis;
 	
-	numPerfis =  PER_NumeroPerfis(pGrafo, perfisCadastrados);
+	numPerfis =  PER_NumeroPerfis(pGrafo, &perfisCadastrados);
 	if (numPerfis != PER_CondRetOK){
 		printf("Ocorreu um erro inesperado no módulo perfis.\n");
 		exit(0);
 	}
 	
 	printf("===============================================================================\n");
-	print("Há %d perfis cadastrados na rede.\n\n",perfisCadastrados);
+	printf("Há %d perfis cadastrados na rede.\n\n",perfisCadastrados);
 	
 	printf("1. Voltar para o menu\n\n");
 	
@@ -436,7 +435,7 @@ void MENU_Menu4(GRA_tppGrafo pGrafo){
 		printf("\n");
 	
 		if (menuEscolhido == 1){
-			escolhaInvalida = 1;
+			escolhaValida = 1;
 			MENU_Menu1(pGrafo);
 			
 		} else {
@@ -458,16 +457,16 @@ void MENU_Menu5(GRA_tppGrafo pGrafo){
 	int menuEscolhido;
 	int escolhaValida = 0;
 	
-	PER_CondRet excluirPerfis;
+	PER_tpCondRet excluirPerfis;
 	
-	excluirPerfis = PER_ExcluirTodosPerfis(GRA_tppGrafo pGrafo);
+	excluirPerfis = PER_ExcluirTodosPerfis(pGrafo);
 	if (excluirPerfis != PER_CondRetOK){
 		printf("Ocorreu um erro inesperado no módulo perfis.\n");
 		exit(0);
 	}
 	
 	printf("===============================================================================\n");
-	print("Todos os perfis foram excluídos.\n\n");
+	printf("Todos os perfis foram excluídos.\n\n");
 	
 	printf("1. Voltar para o menu\n\n");
 	
@@ -478,7 +477,7 @@ void MENU_Menu5(GRA_tppGrafo pGrafo){
 		printf("\n");
 	
 		if (menuEscolhido == 1){
-			escolhavalida = 1;
+			escolhaValida = 1;
 			MENU_Menu1(pGrafo);
 			
 		} else {
@@ -497,15 +496,15 @@ void MENU_Menu5(GRA_tppGrafo pGrafo){
 void MENU_Menu6(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc){
 	
 	int escolhaInvalida = 0;
+	int menuEscolhido;
 	
 	printf("===============================================================================\n");
     printf("Bem-vindo ao perfil de %s\n\n",primNome);
 	
 	printf("Nome: %s %s\n",primNome,ultNome);
     printf("Email: %s\n",primNome,email);
-	printf("Data de Nascimento: %d\%d\%d\n",primNome,dia,mes,ano);
-	printf("Cidade: %s %s\n",primNome,cidade);
-	printf("Número de amigos: %d \n",amigos);
+	printf("Data de Nascimento: %d|%d|%d\n",primNome,diaNasc,mesNasc,anoNasc);
+	printf("Cidade: %s\n",cidade);
 	
     printf("O que deseja fazer? \n\n");
     
@@ -525,31 +524,31 @@ void MENU_Menu6(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char 
 		// Menu 12
 		if (menuEscolhido == 1) {
 			
-			MENU_Menu12(pGrafo, pPerfil, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+			MENU_Menu12(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			escolhaInvalida = 1;
 			
 		// Menu 13
 		} else if (menuEscolhido == 2){
 			
-			MENU_Menu13(pGrafo, pPerfil, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+			MENU_Menu13(pGrafo, pPerfil, primNome, email, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			escolhaInvalida = 1;
 		
 		// Menu 14
 		} else if (menuEscolhido == 3){
 			
-			MENU_Menu14(pGrafo, pPerfil, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+			MENU_Menu14(pGrafo, pPerfil, primNome, email, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			escolhaInvalida = 1;
 		
 		// Menu 15
 		} else if (menuEscolhido == 4){
 			
-			MENU_Menu15(pGrafo, pPerfil, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+			MENU_Menu15(pGrafo, pPerfil, primNome, email, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			escolhaInvalida = 1;
 		
 		// Menu 2
 		} else if (menuEscolhido == 5){
 			
-			MENU_Menu2(pGrafo, pPerfil, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+			MENU_Menu2(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			escolhaInvalida = 1;
 		
 		// Menu 1
@@ -607,7 +606,7 @@ void MENU_Menu12(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char
 	while (avaliaEmail == 0){
 		
 		printf("Digite o novo email de %s: ",primNome);
-		scanf("%d", &emailNovo);
+		scanf("%s", &emailNovo);
 		printf("\n\n");
 		
 		modEmail = PER_ModificaEmail(pGrafo, email, emailNovo);
@@ -637,15 +636,15 @@ void MENU_Menu12(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char
 		printf("\n\n");
 		
 		if (menuEscolhido == 1){
-			escolhavalida = 1;
+			escolhaValida = 1;
 			MENU_Menu6(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			
 		} else if (menuEscolhido == 2){
-			escolhavalida = 1;
+			escolhaValida = 1;
 			MENU_Menu2(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			
 		} else if (menuEscolhido == 3){
-			escolhavalida = 1;
+			escolhaValida = 1;
 			MENU_Menu1(pGrafo);
 			
 		} else {
@@ -664,31 +663,40 @@ void MENU_Menu12(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char
 // Modificar nome - COMPLETE
 void MENU_Menu13(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc){
 	
-	char * nomeNovo;
+	char * primNomeNovo;
+	char * ultNomeNovo;
 	int avaliaNome = 0;
 	int menuEscolhido;
 	int escolhaValida = 0;
 	
-	PER_tpCondRet modEmail;
+	PER_tpCondRet modNome;
 	
-	if ((nomeNovo = (char *)malloc(sizeof(char)*50)) == NULL){
+	if ((primNomeNovo = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("Não há espaço para modificar nome do perfil procurado");
+		exit(0);
+	}
+	if ((ultNomeNovo = (char *)malloc(sizeof(char)*50)) == NULL){
 		printf("Não há espaço para modificar nome do perfil procurado");
 		exit(0);
 	}
 	
 	printf("===============================================================================\n");
-    printf("nome de %s: %s %s\n\n",primNome,email);
+    printf("nome de %s: %s %s\n\n",primNome,ultNome);
 	
 	while (avaliaNome == 0){
 		
-		printf("Digite o novo email de %s: ",primNome);
-		scanf("%d", &emailNovo);
+		printf("Digite o novo primeiro nome de %s: ",primNome);
+		scanf("%s", &primNomeNovo);
 		printf("\n\n");
 		
-		modEmail = PER_ModificaNome(pGrafo, cemail, primNome,ultNome);
-		if (modEmail == PER_CondRetNomeInvalido){
+		printf("Digite o novo ultimo nome de %s: ",primNome);
+		scanf("%s", &ultNomeNovo);
+		printf("\n\n");
+		
+		modNome = PER_ModificaNome(pGrafo, email, primNomeNovo,ultNomeNovo);
+		if (modNome == PER_CondRetNomeInvalido){
 			printf("O nome digitado possui um formato inválido. Por favor reescreva o nome.\n\n");
-		} else if (modEmail != PER_CondRetOK){
+		} else if (modNome != PER_CondRetOK){
 			printf("Ocorreu um erro inesperado no modulo perfil\n\n");
 			exit(0);
 		} else {
@@ -710,15 +718,15 @@ void MENU_Menu13(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char
 		printf("\n\n");
 		
 		if (menuEscolhido == 1){
-			escolhavalida = 1;
+			escolhaValida = 1;
 			MENU_Menu6(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			
 		} else if (menuEscolhido == 2){
-			escolhavalida = 1;
+			escolhaValida = 1;
 			MENU_Menu2(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			
 		} else if (menuEscolhido == 3){
-			escolhavalida = 1;
+			escolhaValida = 1;
 			MENU_Menu1(pGrafo);
 			
 		} else {
@@ -727,11 +735,156 @@ void MENU_Menu13(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char
 	}
 } /* Fim função: MENU - Menu 13 - Modificar nome do perfil */
 
-// Modificar data de nascimento
-void MENU_Menu14(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
+/***************************************************************************
+ *  Função: MENU  &Menu 14 - Modificar data de nascimento do perfil
+ *
+ *****/
 
+// Modificar data de nascimento - COMPLETE
+void MENU_Menu14(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc){
+	
+	int diaNovo;
+	int mesNovo;
+	int anoNovo;
+	int avaliaData = 0;
+	int menuEscolhido;
+	int escolhaValida = 0;
+	
+	PER_tpCondRet modData;
+	
+	
+	printf("===============================================================================\n");
+    printf("Dia de nascimento de %s: %d|%d|%d\n\n",primNome,diaNasc,mesNasc,anoNasc);
+	
+	while (avaliaData == 0){
+		
+		printf("Digite o novo dia de nascimento de %s: ",primNome);
+		scanf("%d", &diaNovo);
+		printf("\n\n");
+		
+		printf("Digite o novo mes de nascimento de %s: ",primNome);
+		scanf("%d", &mesNovo);
+		printf("\n\n");
+		
+		printf("Digite o novo ano de nascimento de %s: ",primNome);
+		scanf("%d", &anoNovo);
+		printf("\n\n");
+		
+		modData = PER_ModificaDataNasc(pGrafo, email, diaNovo, mesNovo, anoNovo);
+		if (modData == PER_CondRetDataInvalida){
+			printf("A data digitada possui um formato inválido. Por favor reescreva a data.\n\n");
+		} else if (modData != PER_CondRetOK){
+			printf("Ocorreu um erro inesperado no modulo perfil\n\n");
+			exit(0);
+		} else {
+			printf("Dia de nascimento modificado com sucesso. \n\n");
+			avaliaData = 1;
+		}
+	}
+	
+	printf("O que deseja fazer? \n\n");
+    
+    printf("1. Voltar para modificar dados \n");
+    printf("2. Voltar para o perfil de %s \n",primNome);
+    printf("3. Voltar para o menu \n");
+    
+	while (escolhaValida == 0){
+		
+		printf("> ");
+		scanf("%d", &menuEscolhido);
+		printf("\n\n");
+		
+		if (menuEscolhido == 1){
+			escolhaValida = 1;
+			MENU_Menu6(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+			
+		} else if (menuEscolhido == 2){
+			escolhaValida = 1;
+			MENU_Menu2(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+			
+		} else if (menuEscolhido == 3){
+			escolhaValida = 1;
+			MENU_Menu1(pGrafo);
+			
+		} else {
+			printf("Escolha inválida de menu. Por favor, digite o menu novamente.\n\n");
+		}	
+	}
+	
+} /* Fim função: MENU - Menu 14 - Modificar data de nascimento do perfil */
+
+/***************************************************************************
+ *  Função: MENU  &Menu 15 - Modificar cidade do perfil
+ *
+ *****/
+ 
 // Modificar cidade
-void MENU_Menu15(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
+void MENU_Menu15(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc){
+	
+	char * cidadeNovo;
+	int avaliaCidade = 0;
+	int menuEscolhido;
+	int escolhaValida = 0;
+	
+	PER_tpCondRet modCidade;
+	
+	if ((cidadeNovo = (char *)malloc(sizeof(char)*50)) == NULL){
+		printf("Não há espaço para modificar cidade do perfil procurado");
+		exit(0);
+	}
+	
+	printf("===============================================================================\n");
+    printf("Cidade de %s: %s %s\n\n",primNome,cidade);
+	
+	while (avaliaCidade == 0){
+		
+		printf("Digite a nova cidade de %s: ",primNome);
+		scanf("%s", &cidadeNovo);
+		printf("\n\n");
+		
+		modCidade = PER_ModificaCidade(pGrafo, email, cidadeNovo);
+		if (modCidade == PER_CondRetCidadeInvalida){
+			printf("A cidade digitado possui um formato inválido. Por favor reescreva o email.\n\n");
+		} else if (modCidade != PER_CondRetOK){
+			printf("Ocorreu um erro inesperado no modulo perfil\n\n");
+			exit(0);
+		} else {
+			printf("Cidade modificada com sucesso. \n\n");
+			avaliaCidade = 1;
+		}
+	}
+	
+	printf("O que deseja fazer? \n\n");
+    
+    printf("1. Voltar para modificar dados \n");
+    printf("2. Voltar para o perfil de %s \n",primNome);
+    printf("3. Voltar para o menu \n");
+    
+	while (escolhaValida == 0){
+		
+		printf("> ");
+		scanf("%d", &menuEscolhido);
+		printf("\n\n");
+		
+		if (menuEscolhido == 1){
+			escolhaValida = 1;
+			MENU_Menu6(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+			
+		} else if (menuEscolhido == 2){
+			escolhaValida = 1;
+			MENU_Menu2(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+			
+		} else if (menuEscolhido == 3){
+			escolhaValida = 1;
+			MENU_Menu1(pGrafo);
+			
+		} else {
+			printf("Escolha inválida de menu. Por favor, digite o menu novamente.\n\n");
+		}
+		
+	}
+	
+} /* Fim função: MENU - Menu 15 - Modificar cidade do perfil */
 
 // Criar amizade
 void MENU_Menu16(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPerfil2);
