@@ -10,19 +10,17 @@
 *
 *  Projeto: INF 1301 / Desenvolvimento de uma rede de relacionamentos em C
 *  Gestor:  DI/PUC-Rio
-*  Autores: Gabriel Busquim (gb)
+*  Autores: Gabriel Busquim (gb), Michelle Santiago (ms)
 *
 *  $HA HistÛrico de evoluÁ„o:
 *     Vers„o  Autor   	 Data     	ObservaÁıes MEN_RetornaIdentificador
-*     9      rm/ms/gb   16/10/2017 	revisoes finais e pequenas correcoes
-*     8        ms       16/10/2017 	alteracao na descricao de MEN_RetornaIdentificador
-*     7        rm       15/10/2017 	descricao das funcoes MEN_NumVertices, MEN_NumArestas, MEN_RetornaIndiceAresta
-*     6        gb       14/10/2017 	inclusao MEN_NumVertices, MEN_NumArestas, MEN_RetornaIndiceAresta
-*     5        gb       10/10/2017 	inclusao MEN_RetornaIdentificador
-*     4        gb       06/10/2017 	inclusao funcao MEN_ExisteAresta
-*     3        rm       05/10/2017 	alteracao nas funcoes referente a mudanca das structs
-*     2      rm/ms/gb   30/09/2017 	inclusao das funcoes
-*     1      gb         01/11/2017 	inicio desenvolvimento
+*     9        ms       06/11/2017 	revisoes finais e pequenas correcoes
+*     6        gb       03/11/2017  alteração no nome de funções
+*     5        gb       02/11/2017  alteração da condição de retorno
+*     4        gb       01/11/2017 	modificação na descrição do retorno das funções
+*     3        gb       27/11/2017  alteração da descricao de funções
+*     2        gb       20/11/2017 	inclusao da função excluir mensagem
+*     1        gb       15/11/2017 	inicio desenvolvimento
 *
 *  $ED DescriÁ„o do mÛdulo
 *

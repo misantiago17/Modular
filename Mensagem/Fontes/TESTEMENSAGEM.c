@@ -9,19 +9,13 @@
 *
 *  Projeto: INF 1301 / 1628 AutomatizaÁ„o dos testes de mÛdulos C
 *  Gestor:  LES/DI/PUC-Rio
-*  Autores: gb, ms, rm
+*  Autores: Gabriel Busquim (gb), Michelle santiago(ms)
 *
 *  $HA HistÛrico de evoluÁ„o:
-*     Vers„o  Autor    Data     ObservaÁıes
-*           rm/ms/gb   16/10/2017 	revisoes finais e pequenas correcoes
-*     8       gb   15/out/2017 ALTERA«’ES
-*     7       gb   14/out/2017 ALTERA«’ES
-*     6       gb   01/out/2017 implementacao dos testes da funcao ObterTamanho e utilizando uma estrutura que guarde Nome, Data, Cidade e Email.
-*     5       gb   01/out/2017 modificacao no mÛdulo de teste para que as funÁıes do mÛdulo Grafo retornem uma condiÁ„o de retorno
-*     4       avs   01/fev/2006 criar linguagem script simbÛlica
-*     3       avs   08/dez/2004 uniformizaÁ„o dos exemplos
-*     2       avs   07/jul/2003 unificaÁ„o de todos os mÛdulos em um sÛ projeto
-*     1       avs   16/abr/2003 inÌcio desenvolvimento
+*     Vers„o  Autor     Data      ObservaÁıes
+*       3       ms    06/11/2017  revisoes finais e pequenas correcoes
+*       2       gb    02/11/2017  alteração na descrição das funções
+*       1       gb    01/11/2017  inicio do desenvolvimento
 *
 ***************************************************************************/
 
@@ -36,8 +30,6 @@
 #include    "MENSAGEM.h"
 #include     "perfil.h"
 
-
-
 static const char RESET_MENSAGEM_CMD		  [ ] = "=resetteste";
 static const char ESCREVER_MSG_CMD        [ ] = "=escrevermsg"     ;
 static const char EXCLUIR_MSG_CMD         [ ] = "=excluirmsg"     ;
@@ -48,17 +40,10 @@ static const char OBTER_NUM_TODASMSGS_CMD [ ] = "=obternumtodasmsgs"  ;
 static const char OBTER_MSGS_CMD          [ ] = "=obtermsgs"   ;
 static const char OBTER_TODASMSGS_CMD     [ ] ="=obtertodasmsgs"   ;
 
-
-
-
-
 #define TRUE  1
 #define FALSE 0
 
 #define DIM_VT_PERFIL  8
-
-
-
 
 PER_tpPerfil *   vtPerfis[ DIM_VT_PERFIL ] ;
 
