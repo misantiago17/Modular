@@ -14,8 +14,9 @@
 *  Autores: Michelle Santiago (ms)
 *
 *  $HA HistÛrico de evoluÁ„o:
-*     Vers„o  Autor   	 Data     	ObservaÁıes
-*     1        ms    20/11/2017 	inicio desenvolvimento
+*     Vers„o    Autor   	 Data     	ObservaÁıes
+*       1        ms        20/11/2017 	inicio desenvolvimento
+*       2        ms        06/12/2017   modificação nas funções do modulo
 *
 ***************************************************************************/
 
@@ -55,7 +56,7 @@ int main () {
     
 	GRA_CriarGrafo(DestruirValor, &Grafo);
 	
-    MENU_Menu1(Grafo);
+    MENU_MenuInicial(Grafo);
     
     
     return 0;
@@ -723,11 +724,11 @@ void MENU_MenuVerAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil) {
 		retornoAmi = AMI_ArmazenarAmizades(pGrafo, pPerfil, vetAmigos);
 		if (retornoAmi == AMI_NaoPossuiAmizades) {
 			printf("Nao possui amizades\n");
-			MENU_Menu1(pGrafo);
+			MENU_MenuInicial(pGrafo);
 		}
 		else if (retornoAmi == AMI_UsuarioNaoExiste) {
 			printf("Usuario nao existe\n");
-			MENU_Menu1(pGrafo);
+			MENU_MenuInicial(pGrafo);
 		}
 		else if (retornoAmi != MEN_CondRetOK) {
 			printf("Erro ao armazenar amizades\n");
