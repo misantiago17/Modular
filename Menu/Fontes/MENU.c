@@ -30,23 +30,23 @@
 #include   "AMIZADE.h"
 #include   "MENSAGEM.H"
 
-void MENU_Menu1(GRA_tppGrafo pGrafo);
-void MENU_Menu2(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
-void MENU_Menu3(GRA_tppGrafo pGrafo);
-void MENU_Menu4(GRA_tppGrafo pGrafo);
-void MENU_Menu5(GRA_tppGrafo pGrafo);
-void MENU_Menu6(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
-void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPerfil2);
-void MENU_Menu8(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil);
-void MENU_Menu9(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil);
-void MENU_Menu10(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil);
-void MENU_Menu11(GRA_tppGrafo pGrafo, char * email);
-void MENU_Menu12(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
-void MENU_Menu13(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
-void MENU_Menu14(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
-void MENU_Menu15(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
-void MENU_Menu16(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPerfil2);
-void MENU_Menu17(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPerfil2);
+void MENU_MenuInicial(GRA_tppGrafo pGrafo);
+void MENU_MenuIrPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
+void MENU_MenuCriarPerfil(GRA_tppGrafo pGrafo);
+void MENU_MenuNumPerfis(GRA_tppGrafo pGrafo);
+void MENU_MenuExcluirTodosPerfis(GRA_tppGrafo pGrafo);
+void MENU_MenuModificarDados(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
+void MENU_MenuProcurarNovosAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPerfil2);
+void MENU_MenuVerAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil);
+void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil);
+void MENU_MenuExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil);
+void MENU_MenuExcluirPerfil(GRA_tppGrafo pGrafo, char * email);
+void MENU_MenuModificarEmail(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
+void MENU_MenuModificarNome(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
+void MENU_MenuModificarData(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
+void MENU_MenuModificarCidade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc);
+void MENU_MenuCriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPerfil2);
+void MENU_MenuExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPerfil2);
 
 void DestruirValor( void * pValor );
 
@@ -69,8 +69,7 @@ int main () {
  *
  *****/
 
- // Menu Inicial - COMPLETE
-void MENU_Menu1(GRA_tppGrafo pGrafo) {
+void MENU_MenuInicial(GRA_tppGrafo pGrafo) {
     
     int menuEscolhido;
     int escolhaInvalida = 0;
@@ -116,7 +115,7 @@ void MENU_Menu1(GRA_tppGrafo pGrafo) {
 			// Menu 3
 			if (menuEscolhido == 1) {
 
-				MENU_Menu3(pGrafo);
+				MENU_MenuCriarPerfil(pGrafo);
 				escolhaInvalida = 1;
 
 				// Menu 2
@@ -151,7 +150,7 @@ void MENU_Menu1(GRA_tppGrafo pGrafo) {
 							escolhaPerfilInvalido = 1;
 							escolhaInvalida = 1;
 
-							MENU_Menu2(pGrafo, pPerfil, emailPerfilProcurado, primNome, ultNome, cidade, dia, mes, ano);
+							MENU_MenuIrPerfil(pGrafo, pPerfil, emailPerfilProcurado, primNome, ultNome, cidade, dia, mes, ano);
 						}
 					}
 				}
@@ -160,14 +159,14 @@ void MENU_Menu1(GRA_tppGrafo pGrafo) {
 			}
 			else if (menuEscolhido == 3) {
 
-				MENU_Menu4(pGrafo);
+				MENU_MenuNumPerfis(pGrafo);
 				escolhaInvalida = 1;
 
 				// Menu 5
 			}
 			else if (menuEscolhido == 4) {
 
-				MENU_Menu5(pGrafo);
+				MENU_MenuExcluirTodosPerfis(pGrafo);
 				escolhaInvalida = 1;
 
 			}
@@ -184,8 +183,7 @@ void MENU_Menu1(GRA_tppGrafo pGrafo) {
  *
  *****/
 
-// Ir para perfil - Perfil do Usuario
-void MENU_Menu2(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc) {
+void MENU_MenuIrPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc) {
 	
 	int amigos;
 	int menuEscolhido;
@@ -235,7 +233,7 @@ void MENU_Menu2(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char 
 		// Menu 6
 		if (menuEscolhido == 1) {
 			
-			MENU_Menu6(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+			MENU_MenuModificarDados(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			escolhaValida = 1;
 			
 		// Menu 7
@@ -253,7 +251,7 @@ void MENU_Menu2(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char 
 					exit(0);
 				} else {
 					escolhaEmailValida = 1;
-					MENU_Menu7(pGrafo, pPerfil, pPerfil2);
+					MENU_MenuProcurarNovosAmigos(pGrafo, pPerfil, pPerfil2);
 					escolhaValida = 1;
 				}
 			}
@@ -262,13 +260,13 @@ void MENU_Menu2(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char 
 		} else if (menuEscolhido == 3){
 			
 			// Pegar todos os emails dos amigos do cara
-			MENU_Menu8(pGrafo, pPerfil);
+			MENU_MenuVerAmigos(pGrafo, pPerfil);
 			escolhaValida = 1;
 		
 		// Menu 9
 		} else if (menuEscolhido == 4){
 			
-			MENU_Menu9(pGrafo, pPerfil);
+			MENU_MenuIrMensagens(pGrafo, pPerfil);
 			escolhaValida = 1;
 		
 		// Menu 10
@@ -280,13 +278,13 @@ void MENU_Menu2(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char 
 		// Menu 11
 		} else if (menuEscolhido == 6){
 		
-			MENU_Menu11(pGrafo,email);
+			MENU_MenuExcluirPerfil(pGrafo,email);
 			escolhaValida = 1;
 		
 		// Menu 1
 		} else if (menuEscolhido == 7){
 			
-			MENU_Menu1(pGrafo);
+			MENU_MenuInicial(pGrafo);
 			escolhaValida = 1;
 		
 		} else {
@@ -303,8 +301,7 @@ void MENU_Menu2(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char 
  *
  *****/
 
-// Criar novo perfil - COMPLETO
-void MENU_Menu3(GRA_tppGrafo pGrafo){
+void MENU_MenuCriarPerfil(GRA_tppGrafo pGrafo){
 	
 	char primNome[51], ultNome[51], email[101], cidade[51], email2[101];
 	int dia, mes, ano, i;
@@ -375,7 +372,7 @@ void MENU_Menu3(GRA_tppGrafo pGrafo){
 				// Menu 1
 				if (menuEscolhido == 1){
 					menuValido = 1;
-					MENU_Menu6(pGrafo, pPerfil, email, primNome, ultNome, cidade, dia, mes, ano);
+					MENU_MenuModificarDados(pGrafo, pPerfil, email, primNome, ultNome, cidade, dia, mes, ano);
 				
 				// Menu 2
 				} else if (menuEscolhido == 2){
@@ -394,7 +391,7 @@ void MENU_Menu3(GRA_tppGrafo pGrafo){
 						}
 						else {
 							escolhaEmailValida = 1;
-							MENU_Menu7(pGrafo, pPerfil, pPerfil2);
+							MENU_MenuProcurarNovosAmigos(pGrafo, pPerfil, pPerfil2);
 							menuValido = 1;
 						}
 					}
@@ -403,7 +400,7 @@ void MENU_Menu3(GRA_tppGrafo pGrafo){
 				else if (menuEscolhido == 3) {
 					menuValido = 1;
 					printf("Retornando ao menu\n\n");
-					MENU_Menu1(pGrafo);
+					MENU_MenuInicial(pGrafo);
 				}
 				else {
 					printf("Escolha invalida de menu. Por favor, digite o menu novamente.\n\n");
@@ -420,8 +417,7 @@ void MENU_Menu3(GRA_tppGrafo pGrafo){
  *
  *****/
 
-// Ver número de perfis cadastrado - COMPLETE
-void MENU_Menu4(GRA_tppGrafo pGrafo){
+void MENU_MenuNumPerfis(GRA_tppGrafo pGrafo){
 	
 	int perfisCadastrados;
 	int menuEscolhido;
@@ -448,7 +444,7 @@ void MENU_Menu4(GRA_tppGrafo pGrafo){
 	
 		if (menuEscolhido == 1){
 			escolhaValida = 1;
-			MENU_Menu1(pGrafo);
+			MENU_MenuInicial(pGrafo);
 			
 		} else {
 			printf("Escolha invalida de menu. Por favor, digite o menu novamente.\n\n");
@@ -463,8 +459,7 @@ void MENU_Menu4(GRA_tppGrafo pGrafo){
  *
  *****/
  
-// Excluir todos os perfis da rede - COMPLETE
-void MENU_Menu5(GRA_tppGrafo pGrafo){
+void MENU_MenuExcluirTodosPerfis(GRA_tppGrafo pGrafo){
 	
 	int menuEscolhido;
 	int escolhaValida = 0;
@@ -490,7 +485,7 @@ void MENU_Menu5(GRA_tppGrafo pGrafo){
 	
 		if (menuEscolhido == 1){
 			escolhaValida = 1;
-			MENU_Menu1(pGrafo);
+			MENU_MenuInicial(pGrafo);
 			
 		} else {
 			printf("Escolha invalida de menu. Por favor, digite o menu novamente.\n\n");
@@ -504,8 +499,7 @@ void MENU_Menu5(GRA_tppGrafo pGrafo){
  *
  *****/
 
-// Modificar dados - COMPLETE
-void MENU_Menu6(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc){
+void MENU_MenuModificarDados(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc){
 	
 	int escolhaInvalida = 0;
 	int menuEscolhido;
@@ -536,36 +530,36 @@ void MENU_Menu6(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char 
 		// Menu 12
 		if (menuEscolhido == 1) {
 			
-			MENU_Menu12(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+			MENU_MenuModificarEmail(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			escolhaInvalida = 1;
 			
 		// Menu 13
 		} else if (menuEscolhido == 2){
-			MENU_Menu13(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+			MENU_MenuModificarNome(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			escolhaInvalida = 1;
 		
 		// Menu 14
 		} else if (menuEscolhido == 3){
 			
-			MENU_Menu14(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+			MENU_MenuModificarData(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			escolhaInvalida = 1;
 		
 		// Menu 15
 		} else if (menuEscolhido == 4){
 			
-			MENU_Menu15(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+			MENU_MenuModificarCidade(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			escolhaInvalida = 1;
 		
 		// Menu 2
 		} else if (menuEscolhido == 5){
 			
-			MENU_Menu2(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+			MENU_MenuIrPerfil(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			escolhaInvalida = 1;
 		
 		// Menu 1
 		} else if (menuEscolhido == 6){
 		
-			MENU_Menu1(pGrafo);
+			MENU_MenuInicial(pGrafo);
 			escolhaInvalida = 1;
 		
 		} else {
@@ -581,8 +575,7 @@ void MENU_Menu6(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char 
  *
  *****/
 
- // Procurar novos amigos - COMPLETE
-void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pPerfil2){
+void MENU_MenuProcurarNovosAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pPerfil2){
 	
 	int amigos, verificaAmigos, escolhaValida = 0, menuEscolhido;
 	
@@ -683,20 +676,20 @@ void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pPe
 		
 		//Menu 16
 		if (menuEscolhido == 1){
-			MENU_Menu16(pGrafo, pPerfil2, pPerfil1);
+			MENU_MenuCriarAmizade(pGrafo, pPerfil2, pPerfil1);
 			escolhaValida = 1;
 		// Menu 2
 		} else if (menuEscolhido == 2){
-			MENU_Menu2(pGrafo, pPerfil2, emailPerfil, primNome, ultNome, cidade, dia, mes, ano);
+			MENU_MenuIrPerfil(pGrafo, pPerfil2, emailPerfil, primNome, ultNome, cidade, dia, mes, ano);
 			escolhaValida = 1;
 		// Menu 2
 		} else if (menuEscolhido == 3){
-			MENU_Menu2(pGrafo, pPerfil1, emailPerfil1, primNome1, ultNome1, cidade1, dia1, mes1, ano1);
+			MENU_MenuIrPerfil(pGrafo, pPerfil1, emailPerfil1, primNome1, ultNome1, cidade1, dia1, mes1, ano1);
 			escolhaValida = 1;
 		// Menu 1
 		} else if (menuEscolhido == 4){
 			
-			MENU_Menu1(pGrafo);
+			MENU_MenuInicial(pGrafo);
 			escolhaValida = 1;
 			
 		} else {
@@ -711,7 +704,8 @@ void MENU_Menu7(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pPe
   *  Função: MENU  &Menu 8 - Ver amigos
   *
   *****/
-void MENU_Menu8(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil) {
+
+void MENU_MenuVerAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil) {
 	AMI_tpCondRet retornoAmi;
 	PER_tpPerfil **vetAmigos;
 	PER_tpCondRet retornoPer;
@@ -777,12 +771,12 @@ void MENU_Menu8(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil) {
 
 		if (menuEscolhido == 1) {
 			escolhaValida = 1;
-			MENU_Menu2(pGrafo, pPerfil, email, primeiroNome, ultimoNome, cidade, diaNasc, mesNasc, anoNasc);
+			MENU_MenuIrPerfil(pGrafo, pPerfil, email, primeiroNome, ultimoNome, cidade, diaNasc, mesNasc, anoNasc);
 
 		}
 		else if (menuEscolhido == 2) {
 			escolhaValida = 1;
-			MENU_Menu1(pGrafo);
+			MENU_MenuInicial(pGrafo);
 
 		}
 		else {
@@ -793,11 +787,11 @@ void MENU_Menu8(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil) {
 }/* Fim função: MENU - Menu 8 - Ver amigos */
 
  /***************************************************************************
- *  Função: MENU  &Menu 10 - Ir para mensagens
+ *  Função: MENU  &Menu 9 - Ir para mensagens
  *
  *****/
 
-void MENU_Menu9(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
+void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 	int escolhaInvalida = 0;
 	int escolha, qtd, i, j = 0, num;
 	MEN_tpCondRet retorno;
@@ -902,7 +896,7 @@ void MENU_Menu9(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 			break;
 		}
 	}
-	MENU_Menu1(pGrafo);
+	MENU_MenuInicial(pGrafo);
 } /* Fim função: MENU - Menu 9 - Ir para mensagens */
 
   /***************************************************************************
@@ -910,7 +904,7 @@ void MENU_Menu9(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
   *
   *****/
 
-void MENU_Menu10(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
+void MENU_MenuExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 	AMI_tpCondRet retorno;
 
 	retorno = AMI_ExcluirTodasAmizades(pGrafo, pPerfil);
@@ -919,7 +913,7 @@ void MENU_Menu10(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 		exit(1);
 	}
 	printf("Amizades excluidas");
-	MENU_Menu1(pGrafo);
+	MENU_MenuInicial(pGrafo);
 } /* Fim função: MENU - Menu 10 - Excluir Todas as Amizades */
 
 /***************************************************************************
@@ -927,8 +921,7 @@ void MENU_Menu10(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
  *
  *****/
 
-// Excluir perfil - COMPLETE
-void MENU_Menu11(GRA_tppGrafo pGrafo, char * email){
+void MENU_MenuExcluirPerfil(GRA_tppGrafo pGrafo, char * email){
 	
 	PER_tpCondRet excluirPerfil;
 	
@@ -952,7 +945,7 @@ void MENU_Menu11(GRA_tppGrafo pGrafo, char * email){
 		
 		if (menuEscolhido == 1){
 			escolhaValida = 1;
-			MENU_Menu1(pGrafo);
+			MENU_MenuInicial(pGrafo);
 			
 		} else {
 			printf("Escolha invalida de menu. Por favor, digite o menu novamente.\n\n");
@@ -968,8 +961,7 @@ void MENU_Menu11(GRA_tppGrafo pGrafo, char * email){
  *
  *****/
  
-// Modificar email - COMPLETE
-void MENU_Menu12(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc){
+void MENU_MenuModificarEmail(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc){
 	
 	char emailNovo[101];
 	int avaliaEmail = 0;
@@ -1015,15 +1007,15 @@ void MENU_Menu12(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char
 		
 		if (menuEscolhido == 1){
 			escolhaValida = 1;
-			MENU_Menu6(pGrafo, pPerfil, emailNovo, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+			MENU_MenuModificarDados(pGrafo, pPerfil, emailNovo, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			
 		} else if (menuEscolhido == 2){
 			escolhaValida = 1;
-			MENU_Menu2(pGrafo, pPerfil, emailNovo, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+			MENU_MenuIrPerfil(pGrafo, pPerfil, emailNovo, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			
 		} else if (menuEscolhido == 3){
 			escolhaValida = 1;
-			MENU_Menu1(pGrafo);
+			MENU_MenuInicial(pGrafo);
 			
 		} else {
 			printf("Escolha invalida de menu. Por favor, digite o menu novamente.\n\n");
@@ -1038,8 +1030,7 @@ void MENU_Menu12(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char
  *
  *****/
  
-// Modificar nome - COMPLETE
-void MENU_Menu13(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc){
+void MENU_MenuModificarNome(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc){
 	
 	char primNomeNovo[51], ultNomeNovo[51];
 	int avaliaNome = 0;
@@ -1086,15 +1077,15 @@ void MENU_Menu13(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char
 		
 		if (menuEscolhido == 1){
 			escolhaValida = 1;
-			MENU_Menu6(pGrafo, pPerfil, email, primNomeNovo, ultNomeNovo, cidade, diaNasc, mesNasc, anoNasc);
+			MENU_MenuModificarDados(pGrafo, pPerfil, email, primNomeNovo, ultNomeNovo, cidade, diaNasc, mesNasc, anoNasc);
 			
 		} else if (menuEscolhido == 2){
 			escolhaValida = 1;
-			MENU_Menu2(pGrafo, pPerfil, email, primNomeNovo, ultNomeNovo, cidade, diaNasc, mesNasc, anoNasc);
+			MENU_MenuIrPerfil(pGrafo, pPerfil, email, primNomeNovo, ultNomeNovo, cidade, diaNasc, mesNasc, anoNasc);
 			
 		} else if (menuEscolhido == 3){
 			escolhaValida = 1;
-			MENU_Menu1(pGrafo);
+			MENU_MenuInicial(pGrafo);
 			
 		} else {
 			printf("Escolha invalida de menu. Por favor, digite o menu novamente.\n\n");
@@ -1107,8 +1098,7 @@ void MENU_Menu13(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char
  *
  *****/
 
-// Modificar data de nascimento - COMPLETE
-void MENU_Menu14(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc){
+void MENU_MenuModificarData(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc){
 	
 	int diaNovo = -1;
 	int mesNovo = -1;
@@ -1163,15 +1153,15 @@ void MENU_Menu14(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char
 		
 		if (menuEscolhido == 1){
 			escolhaValida = 1;
-			MENU_Menu6(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNovo, mesNovo, anoNovo);
+			MENU_MenuModificarDados(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNovo, mesNovo, anoNovo);
 			
 		} else if (menuEscolhido == 2){
 			escolhaValida = 1;
-			MENU_Menu2(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNovo, mesNovo, anoNovo);
+			MENU_MenuIrPerfil(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNovo, mesNovo, anoNovo);
 			
 		} else if (menuEscolhido == 3){
 			escolhaValida = 1;
-			MENU_Menu1(pGrafo);
+			MENU_MenuInicial(pGrafo);
 			
 		} else {
 			printf("Escolha invalida de menu. Por favor, digite o menu novamente.\n\n");
@@ -1185,8 +1175,7 @@ void MENU_Menu14(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char
  *
  *****/
  
-// Modificar cidade - COMPLETE
-void MENU_Menu15(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc){
+void MENU_MenuModificarCidade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc){
 	
 	char cidadeNovo[51];
 	int avaliaCidade = 0, i;
@@ -1236,15 +1225,15 @@ void MENU_Menu15(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char
 		
 		if (menuEscolhido == 1){
 			escolhaValida = 1;
-			MENU_Menu6(pGrafo, pPerfil, email, primNome, ultNome, cidadeNovo, diaNasc, mesNasc, anoNasc);
+			MENU_MenuModificarDados(pGrafo, pPerfil, email, primNome, ultNome, cidadeNovo, diaNasc, mesNasc, anoNasc);
 			
 		} else if (menuEscolhido == 2){
 			escolhaValida = 1;
-			MENU_Menu2(pGrafo, pPerfil, email, primNome, ultNome, cidadeNovo, diaNasc, mesNasc, anoNasc);
+			MENU_MenuIrPerfil(pGrafo, pPerfil, email, primNome, ultNome, cidadeNovo, diaNasc, mesNasc, anoNasc);
 			
 		} else if (menuEscolhido == 3){
 			escolhaValida = 1;
-			MENU_Menu1(pGrafo);
+			MENU_MenuInicial(pGrafo);
 			
 		} else {
 			printf("Escolha invalida de menu. Por favor, digite o menu novamente.\n\n");
@@ -1259,8 +1248,7 @@ void MENU_Menu15(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char
  *
  *****/
 
- // Criar amizade - COMPLETE
-void MENU_Menu16(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pPerfil2){
+void MENU_MenuCriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pPerfil2){
 	
 	int menuEscolhido;
 	int escolhaValida = 0;
@@ -1379,15 +1367,15 @@ void MENU_Menu16(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pP
 		
 		if (menuEscolhido == 1){
 			escolhaValida = 1;
-			MENU_Menu2(pGrafo, pPerfil2, emailPerfil, primNome, ultNome, cidade, dia, mes, ano);
+			MENU_MenuIrPerfil(pGrafo, pPerfil2, emailPerfil, primNome, ultNome, cidade, dia, mes, ano);
 			
 		} else if (menuEscolhido == 2){
 			escolhaValida = 1;
-			MENU_Menu2(pGrafo, pPerfil1, emailPerfil1, primNome1, ultNome1, cidade1, dia1, mes1, ano1);
+			MENU_MenuIrPerfil(pGrafo, pPerfil1, emailPerfil1, primNome1, ultNome1, cidade1, dia1, mes1, ano1);
 			
 		} else if (menuEscolhido == 3){
 			escolhaValida = 1;
-			MENU_Menu1(pGrafo);
+			MENU_MenuInicial(pGrafo);
 			
 		} else {
 			printf("Escolha invalida de menu. Por favor, digite o menu novamente.\n\n");
@@ -1401,8 +1389,8 @@ void MENU_Menu16(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pP
  *  Função: MENU  &Menu 17 - Excluir Amizade
  *
  *****/
-// Excluir amizade
-void MENU_Menu17(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPerfil2) {
+
+void MENU_MenuExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPerfil2) {
 	
 	int menuEscolhido;
 	int escolhaValida = 0;
@@ -1490,15 +1478,15 @@ void MENU_Menu17(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPe
 		
 		if (menuEscolhido == 1){
 			escolhaValida = 1;
-			MENU_Menu2(pGrafo, pPerfil2, emailPerfil, primNome, ultNome, cidade, dia, mes, ano);
+			MENU_MenuIrPerfil(pGrafo, pPerfil2, emailPerfil, primNome, ultNome, cidade, dia, mes, ano);
 			
 		} else if (menuEscolhido == 2){
 			escolhaValida = 1;
-			MENU_Menu2(pGrafo, pPerfil, emailPerfil1, primNome1, ultNome1, cidade1, dia1, mes1, ano1);
+			MENU_MenuIrPerfil(pGrafo, pPerfil, emailPerfil1, primNome1, ultNome1, cidade1, dia1, mes1, ano1);
 			
 		} else if (menuEscolhido == 3){
 			escolhaValida = 1;
-			MENU_Menu1(pGrafo);
+			MENU_MenuInicial(pGrafo);
 			
 		} else {
 			printf("Escolha invalida de menu. Por favor, digite o menu novamente.\n\n");
@@ -1517,7 +1505,6 @@ void MENU_Menu17(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPe
       free( pValor ) ;
    } /* Fim função: TAMI -Destruir valor */
 
- // =================== TUDO AQUI EMBAIXO NAO ƒ MENU ========================
 
 
  
