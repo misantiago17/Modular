@@ -37,7 +37,6 @@
 *	   AMI_ArestaParaSiMesmo
 *	   AMI_AmizadeJaExiste
 *	   AMI_CondRetRetornoGraIncorreto
-*	   AMI_CondRetRetornoPerIncorreto
 *
 *****/
 
@@ -80,8 +79,7 @@ AMI_tpCondRet AMI_CriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER
 *	  AMI_UsuarioNaoExiste
 *	  AMI_AmizadeNaoExiste
 *	  AMI_CondRetRetornoGraIncorreto
-*	  AMI_CondRetRetornoPerIncorreto
-*	
+*
 *****/
 
 
@@ -118,7 +116,6 @@ AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, P
 *     AMI_CondRetOK
 *	  AMI_UsuarioNaoExiste
 *     AMI_NaoPossuiAmizades
-*	  AMI_CondRetRetornoPerIncorreto
 *	  AMI_CondRetRetornoGraIncorreto
 *
 *****/
@@ -163,7 +160,7 @@ AMI_tpCondRet AMI_VerificarNumAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario
 *     AMI_CondRetOK
 *     AMI_NaoPossuiAmizades
 *	  AMI_UsuarioNaoExiste
-*	  AMI_CondRetRetornoPerIncorreto
+*     AMI_CondRetFaltouMemoria
 *	  AMI_CondRetRetornoGraIncorreto
 *
 *****/
@@ -214,7 +211,6 @@ AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1
 			return AMI_CondRetRetornoGraIncorreto;
 		 PerfilAmigos[i]= perfil;
 		
-		//strcpy((*perfil)->email, email);
 	}
 	free(IdAmigos);
 	return AMI_CondRetOK;
@@ -228,7 +224,7 @@ AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1
 *     AMI_CondRetOK
 *	  AMI_UsuarioNaoExiste
 *     AMI_NaoPossuiAmizades
-*	  AMI_CondRetRetornoPerIncorreto
+*     AMI_CondRetFaltouMemoria
 *	  AMI_CondRetRetornoGraIncorreto
 *
 *****/
@@ -285,7 +281,6 @@ AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuar
 *
 *     AMI_CondRetOK
 *     AMI_UsuarioNaoExiste
-*	  AMI_CondRetRetornoPerIncorreto
 *	  AMI_CondRetRetornoGraIncorreto
 *	  AMI_AmizadeNaoExiste
 *
