@@ -17,6 +17,7 @@
 *   Vers„o    Autor   	 Data     	ObservaçÁıes
 *     1        ms      14/11/2017 	criaçÁ„o do arquivo
 *	  2		   ms	   20/11/2017	alteraÁ„o no retorno de funÁıes e tipo de alguns par‚metros
+*     3        ms      06/12/2017   modificação da descrição de retorno de parâmetros de funções
 *
 *  $ED DescriçÁ„o do mÛdulo
 *
@@ -61,7 +62,6 @@ typedef enum {
 	AMI_ArestaParaSiMesmo,
 	/* Usuario tentou criar amizade com ele mesmo*/
 
-
 	AMI_NaoAceitou,
 	/* O usu·rio n„o aceitou a solicitaçÁ„o de amizade de outro */
 
@@ -73,9 +73,6 @@ typedef enum {
 
 	AMI_CondRetRetornoGraIncorreto,
 	/* Condicao de retorno do mÛdulo Grafo imprevista */
-	
-	AMI_CondRetRetornoPerIncorreto,
-	/* Condicao de retorno do mÛdulo Perfil imprevista */
 
 	AMI_UsuarioNaoExiste
 	/* Usu·rio fornecido n„o existe na rede */
@@ -102,9 +99,6 @@ typedef enum {
 } AMI_tpSolitacao;
 
 
-
-
-
 /***********************************************************************
 *  $FC FunçÁ„o: AMI  &Criar Amizade
 *
@@ -112,20 +106,20 @@ typedef enum {
 *     Cria uma relaçÁ„o entre um usu·rio e outro.
 *
 *  $EP Par‚metros
+*     pGrafo    - grafo no qual se encontra a rede de usuários
 *     Usuario1  - ponteiro para um usu·rio da rede (um vÈrtice do grafo) que solicitou a amizade
 *	  Usuario2 	- ponteiro para outro usu·rio da rede (outro vÈrtice diferente do grafo) na 
-				  qual foi solicitada a amizade
+*				  qual foi solicitada a amizade
 *     Aceitacao - vari·vel booleana que contÍm a informaçÁ„o caso o segundo usu·rio aceitou 
-				  ou n„o a solicitaçÁ„o de amizade
+*				  ou n„o a solicitaçÁ„o de amizade
 *
 *  $FV Valor retornado
-*      AMI_CondRetOK
-*      AMI_NaoAceitou
-*	   AMI_UsuarioNaoExiste
-*	   GRA_CondRetArestaParaSiMesmo
-*	   AMI_AmizadeJaExiste
-*	   AMI_CondRetRetornoGraIncorreto
-*	   AMI_CondRetRetornoPerIncorreto
+*     AMI_CondRetOK
+*     AMI_NaoAceitou
+*     AMI_UsuarioNaoExiste
+*     AMI_ArestaParaSiMesmo
+*     AMI_AmizadeJaExiste
+*     AMI_CondRetRetornoGraIncorreto
 *
 ***********************************************************************/
 
@@ -139,15 +133,15 @@ AMI_tpCondRet AMI_CriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER
 *     Exclui uma amizade entre dois usu·rios.
 *
 *  $EP Par‚metros
+*     pGrafo        - grafo no qual se encontra a rede de usuários
 *	  Usuario1 		- ponteiro para o primeiro usu·rio que realizou a exclus„o da amizade.
 *     Usuario2      - ponteiro para o segundo usu·rio que ter· a amizade excluÌda.
 *
 *  $FV Valor retornado
-*     AMI_CondRetOK
-*	  AMI_UsuarioNaoExiste
-*	  AMI_AmizadeNaoExiste
-*	  AMI_CondRetRetornoGraIncorreto
-*	  AMI_CondRetRetornoPerIncorreto
+*      AMI_CondRetOK
+*      AMI_UsuarioNaoExiste
+*      AMI_AmizadeNaoExiste
+*      AMI_CondRetRetornoGraIncorreto
 *
 ***********************************************************************/
 
@@ -161,14 +155,16 @@ AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, P
 *     Retorna o número de amigos que um usu·rio possui.
 *
 *  $EP Par‚metros
-*     Usuario1  - ponteiro para o usu·rio que solicitou o n˙mero de amizades.
-*     numAmizades - vari·vel que ir· armazenar o n˙mero de amizades encontradas.
+*     pGrafo        - grafo no qual se encontra a rede de usuários
+*     Usuario1      - ponteiro para o usu·rio que solicitou o n˙mero de amizades.
+*     numAmizades   - vari·vel que ir· armazenar o n˙mero de amizades encontradas,
+*                   esse ponteiro já deve estar alocado dinâmicamente.
 *
 *  $FV Valor retornado
-*     AMI_CondRetOK
-*	  AMI_UsuarioNaoExiste
-*     AMI_NaoPossuiAmizades
-*	  AMI_CondRetRetornoPerIncorreto
+*      AMI_CondRetOK
+*      AMI_UsuarioNaoExiste
+*      AMI_NaoPossuiAmizades
+*      AMI_CondRetRetornoGraIncorreto
 *
 ***********************************************************************/
 
@@ -181,14 +177,17 @@ AMI_tpCondRet AMI_VerificarNumAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario
 *     Exibe as informaçÁıes do perfil de cada amigo do usu·rio.
 *
 *  $EP Par‚metros
-*     Usuario1  - ponteiro para o usu·rio que solicitou as informaçÁıes das amizades
+*     pGrafo        - grafo no qual se encontra a rede de usuários
+*     Usuario1      - ponteiro para o usu·rio que solicitou as informaçÁıes das amizades
+*     PerfilAmigos  - lista de perfis no qual será armazenados os amigos do usuário.
+*                    Esta lista já deve estar alocada dinâmicamente antes da chamada da função.
 *
 *  $FV Valor retornado
-*     AMI_CondRetOK
-*     AMI_NaoPossuiAmizades
-*	  AMI_UsuarioNaoExiste
-*	  AMI_CondRetRetornoPerIncorreto
-*	  AMI_CondRetRetornoGraIncorreto
+*      AMI_CondRetOK
+*      AMI_NaoPossuiAmizades
+*      AMI_UsuarioNaoExiste
+*      AMI_CondRetFaltouMemoria
+*      AMI_CondRetRetornoGraIncorreto
 *
 ***********************************************************************/
 
@@ -202,14 +201,15 @@ AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1
 *     Exclui todas as amizades de um usu·rio.
 *
 *  $EP Par‚metros
-*     Usuario1 - ponteiro para o usuário que ter· suas amizades apagadas
+*     pGrafo    - grafo no qual se encontra a rede de usuários
+*     Usuario1  - ponteiro para o usuário que ter· suas amizades apagadas
 *
 *  $FV Valor retornado
-*     AMI_CondRetOK
-*	  AMI_UsuarioNaoExiste
-*     AMI_NaoPossuiAmizades
-*	  AMI_CondRetRetornoPerIncorreto
-*	  AMI_CondRetRetornoGraIncorreto
+*      AMI_CondRetOK
+*      AMI_UsuarioNaoExiste
+*      AMI_NaoPossuiAmizades
+*      AMI_CondRetFaltouMemoria
+*      AMI_CondRetRetornoGraIncorreto
 *
 ***********************************************************************/
 
@@ -222,16 +222,15 @@ AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuar
 *     Verifica se o Usuario1 È amigo do Usuario2
 *
 *  $EP Par‚metros
-*     Usuario1 - ponteiro para o primeiro usu·rio que solicitou a verificaçÁ„o
-*	  Usuario2 - ponteiro para o segundo usu·rio na quala  amizade ser· solicitada
-*     ExisteAmizade - vari·vel booleana que afirma se existe amizade ou n„o entre os usu·rios
+*     pGrafo    - grafo no qual se encontra a rede de usuários
+*     Usuario1  - ponteiro para o primeiro usu·rio que solicitou a verificaçÁ„o
+*	  Usuario2  - ponteiro para o segundo usu·rio na quala  amizade ser· solicitada
 *
 *  $FV Valor retornado
-*     AMI_CondRetOK
-*     AMI_UsuarioNaoExiste
-*	  AMI_CondRetRetornoPerIncorreto
-*	  AMI_CondRetRetornoGraIncorreto
-*	  AMI_AmizadeNaoExiste
+*      AMI_CondRetOK
+*      AMI_UsuarioNaoExiste
+*      AMI_CondRetRetornoGraIncorreto
+*      AMI_AmizadeNaoExiste
 *
 ***********************************************************************/
 
