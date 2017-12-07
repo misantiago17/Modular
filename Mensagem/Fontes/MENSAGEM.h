@@ -2,6 +2,7 @@
 #define MENSAGEM_
 
 #include"perfil.h"
+
 /***************************************************************************
 *  $MCD MÛdulo de definiÁ„o: MEN  Lista de Mensagens de cada perfil
 *
@@ -14,17 +15,18 @@
 *
 *  $HA HistÛrico de evoluÁ„o:
 *     Vers„o  Autor   	 Data     	ObservaÁıes MEN_RetornaIdentificador
-*     9        ms       06/11/2017 	revisoes finais e pequenas correcoes
-*     6        gb       03/11/2017  alteração no nome de funções
-*     5        gb       02/11/2017  alteração da condição de retorno
-*     4        gb       01/11/2017 	modificação na descrição do retorno das funções
-*     3        gb       27/11/2017  alteração da descricao de funções
-*     2        gb       20/11/2017 	inclusao da função excluir mensagem
+*     9        ms       06/11/2017 	revisıes finais e pequenas correcıes
+*     6        gb       03/11/2017  alteraçÁıes no nome de funçÁıes
+*     5        gb       02/11/2017  alteraçÁıes da condiçÁ„o de retorno
+*     4        gb       01/11/2017 	modificaçÁ„o na descriçÁ„o do retorno das funçÁıes
+*     3        gb       27/11/2017  alteraçÁ„o da descricao de funçÁıes
+*     2        gb       20/11/2017 	inclus„o da funçÁıo excluir mensagem
 *     1        gb       15/11/2017 	inicio desenvolvimento
 *
 *  $ED DescriÁ„o do mÛdulo
 *
-*	 O modulo Mensagem implementa funcionalidades relacionadas ao envio e manuntencao das mensagens recebidas/enviadas por cada perfil.
+*	 O modulo Mensagem implementa funcionalidades relacionadas ao envio e manuntencao das mensagens 
+*	 recebidas/enviadas por cada perfil.
 *    O modulo Lista foi acoplado a ele para que sua implementacao fosse possivel.
 *	 
 *
@@ -66,22 +68,22 @@ typedef enum {
 	/* Tentou-se escrever uma mensagem de um perfil para ele mesmo. */
 
 	MEN_CondRetRetornoLisIncorreto,
-	/* Condicao de retorno do modulo Lista imprevista*/
+	/* Condicao de retorno do modulo Lista imprevista */
 
 	MEN_CondRetPerfilInvalido,
-	/* Perfil passado como parametro nao existe*/
+	/* Perfil passado como parametro nao existe */
 	
 	MEN_CondRetParametroIncorreto,
-	/* Parametro passado esta diferente do especificado*/
+	/* Parametro passado esta diferente do especificado */
 
 	MEN_CondRetMensagemVazia,
-	/* A mensagem enviada nao possui nenhum caracter*/
+	/* A mensagem enviada nao possui nenhum caracter */
 
 	MEN_CondRetMensagemExcedeuTamanho,
-	/* A mensagem enviada possui mais caracteres do que o maximo permitido*/
+	/* A mensagem enviada possui mais caracteres do que o maximo permitido */
 
 	MEN_CondRetNaoEncontrouMensagem
-	/* A mensagem procurada nao foi encontrada*/
+	/* A mensagem procurada nao foi encontrada */
 
 } MEN_tpCondRet;
 
@@ -111,17 +113,18 @@ typedef enum {
 *     envia a mensagem quanto no do que recebe.
 *
 *  $EP Par‚metros
-*     Remetente  - Perfil do usuario que envia a mensagem.
-*	  Destinatario - Perfil do usuario que recebe a mensagem.
-*     MensagemEnv - Conteudo da mensagem
+*     Remetente  	- Perfil do usuario que envia a mensagem.
+*	  Destinatario 	- Perfil do usuario que recebe a mensagem.
+*     MensagemEnv 	- Conteudo da mensagem
 *
 *  $FV Valor retornado
-*      MEN_CondRetOK
-*	   MEN_CondRetMesmoPerfil
-*	   MEN_CondRetFaltouMemoria
-*	   MEN_CondRetRetornoLisIncorreto
-*	   MEN_CondRetPerfilInvalido
-*	   MEN_CondRetMensagemExcedeuTamanho
+*     MEN_CondRetOK
+*     MEN_CondRetRetornoLisIncorreto
+*     MEN_CondRetMensagemExcedeuTamanho
+*     MEN_CondRetMensagemVazia
+*     MEN_CondRetMesmoPerfil
+*     MEN_CondRetPerfilInvalido
+*     MEN_CondRetFaltouMemoria
 *
 ***********************************************************************/
 
@@ -133,22 +136,20 @@ MEN_tpCondRet MEN_EscreverMensagem( PER_tpPerfil * Remetente,PER_tpPerfil *Desti
 *
 *  $ED DescriÁ„o da funÁ„o
 *     Exclui uma mensagem de uma lista de mensagens. A mensagem e somente apagada
-*	  da lista de mensagens do perfil passado como parametro.
-*	  
-*		
+*	  da lista de mensagens do perfil passado como parametro.	
 *
 *  $EP Par‚metros
-*	  Perfil  - perfil do usu·rio o qual deseja-se apagar uma mensagem
-*     flagMsg- tipo de mensagem que deseja-se excluir(enviada ou recebida).
-*	  Email - email do perfil relacionado a mensagem
-*	  Mensagem - conte˙do da mensagem que deseja-se apagar
-*	  
+*	  Perfil  	- perfil do usu·rio o qual deseja-se apagar uma mensagem
+*     flagMsg	- tipo de mensagem que deseja-se excluir(enviada ou recebida).
+*	  Email 	- email do perfil relacionado a mensagem
+*	  Mensagem 	- conte˙do da mensagem que deseja-se apagar 
 *
 *  $FV Valor retornado
 *     MEN_CondRetOK
-*	  MEN_CondRetNaoEncontrouMensagem
-*	  MEN_CondRetRetornoLisIncorreto
-*	  MEN_CondRetPerfilInvalido
+*     MEN_CondRetRetornoLisIncorreto
+*     MEN_CondRetListaVazia
+*     MEN_CondRetNaoEncontrouMensagem
+*     MEN_CondRetPerfilInvalido
 *
 ***********************************************************************/
 
@@ -160,20 +161,16 @@ MEN_tpCondRet MEN_ExcluirMensagem(PER_tpPerfil * Perfil,char Email[],MEN_tpCondM
 *  $ED DescriÁ„o da funÁ„o
 *	Exclui todas as mensagens de uma lista de mensagens cujo email È
 *	igual ao passado como parametro.As mensagens sao somente apagadas
-*	da lista de mensagens do perfil passado como parametro.
-*	  
-*		
+*	da lista de mensagens do perfil passado como parametro.	
 *
 *  $EP Par‚metros
-*	  Perfil  - perfil do usu·rio o qual deseja-se apagar as mensagens
-*	  Email - email do perfil relacionado a mensagem
-*	  
+*	  Perfil    - perfil do usu·rio o qual deseja-se apagar as mensagens
+*	  Email 	- email do perfil relacionado a mensagem  
 *
 *  $FV Valor retornado
-*	  MEN_CondRetPerfilInvalido
 *     MEN_CondRetOK
-*	  MEN_CondRetRetornoLisIncorreto
-*	  MEN_CondRetPerfilInvalido
+*     MEN_CondRetRetornoLisIncorreto
+*     MEN_CondRetPerfilInvalido
 *
 ***********************************************************************/
 
@@ -185,63 +182,62 @@ MEN_tpCondRet MEN_ExcluirMensagensEmail(PER_tpPerfil * Perfil,char Email[]);
 *  $ED DescriÁ„o da funÁ„o
 *	Modifica o email todas as mensagens de uma lista de mensagens cujo email È
 *	igual ao passado como parametro.O novo email sera o outro email passado
-*	como parametro.
-*	  
-*		
+*	como parametro.	
 *
 *  $EP Par‚metros
-*	  Perfil  - perfil do usu·rio o qual deseja-se modificar as mensagens
-*	  antigoEmail - antigo email do perfil relacionado a mensagem
-*	  novoEmail - novo email do perfil relacionado a mensagem
-*	  
+*	  Perfil  		- perfil do usu·rio o qual deseja-se modificar as mensagens
+*	  antigoEmail 	- antigo email do perfil relacionado a mensagem
+*	  novoEmail 	- novo email do perfil relacionado a mensagem
 *
 *  $FV Valor retornado
-*	  MEN_CondRetPerfilInvalido
 *     MEN_CondRetOK
-*	  MEN_CondRetRetornoLisIncorreto
-*	  MEN_CondRetPerfilInvalido
+*     MEN_CondRetRetornoLisIncorreto
+*     MEN_CondRetPerfilInvalido
 *
 ***********************************************************************/
 
 MEN_tpCondRet MEN_ModificarEmailLista(PER_tpPerfil * Perfil,char antigoEmail[],char novoEmail[]);
 
 
-
 /***********************************************************************
-*  $FC FunÁ„o: MEN  &Obter Numero de Mensagens
+*  $FC FunÁ„o: MEN  &Obter N˙mero de Mensagens
 *
 *  $ED DescriÁ„o da funÁ„o
 *     Retorna por referÍncia o numero de mensagens enviadas ou recebidas,dependendo 
 *     do valor passado como parametro
 *
 *  $EP Par‚metros
-*     Perfil  - perfil do usu·rio o qual deseja-se saber o numero de mensagens
-*     flagMsg- tipo de Mensagem procurada.
-*     numMensagens - ponteiro para armazenar o numero de mensagens
+*     Perfil  		- perfil do usu·rio o qual deseja-se saber o numero de mensagens
+*     flagMsg		- tipo de Mensagem procurada.
+*     numMensagens 	- ponteiro para armazenar o numero de mensagens
 *
 *  $FV Valor retornado
 *     MEN_CondRetOK
-*	  MEN_CondRetPerfilInvalido
+*     MEN_CondRetParametroIncorreto
 *     MEN_CondRetRetornoLisIncorreto
-
+*     MEN_CondRetListaVazia
+*     MEN_CondRetPerfilInvalido
+*
 ***********************************************************************/
 
 MEN_tpCondRet MEN_ObterNumMensagens(PER_tpPerfil * Perfil,MEN_tpCondMsg flagMsg, int* numMsgs)  ;
 
+
 /***********************************************************************
-*  $FC FunÁ„o: MEN  &Obter Numero Total de Mensagens
+*  $FC FunÁ„o: MEN  &Obter N˙mero Total de Mensagens
 *
 *  $ED DescriÁ„o da funÁ„o
 *     Retorna por referÍncia o numero de todas as mensagens referentes a um perfil
 *
 *  $EP Par‚metros
-*     Perfil  - perfil do usu·rio o qual deseja-se saber o numero de mensagens
-*     numMensagens - ponteiro para armazenar o numero de mensagens
+*     Perfil  		- perfil do usu·rio o qual deseja-se saber o numero de mensagens
+*     numMensagens 	- ponteiro para armazenar o numero de mensagens
 *
 *  $FV Valor retornado
 *     MEN_CondRetOK
-*	  MEN_CondRetPerfilInvalido
+*     MEN_CondRetParametroIncorreto
 *     MEN_CondRetRetornoLisIncorreto
+*     MEN_CondRetPerfilInvalido
 *
 ***********************************************************************/
 
@@ -252,24 +248,26 @@ MEN_tpCondRet MEN_ObterNumTodasMensagens(PER_tpPerfil * Perfil, int* numTotalMsg
 *  $FC FunÁ„o: MEN  &Obter Todas Mensagens
 *
 *  $ED DescriÁ„o da funÁ„o
-*     Armazena em 3 vetores passados como parametro as informacoes relativas a cada elemento da lista de Mensagens
+*     Armazena em 3 vetores passados como parametro as informacoes relativas a cada elemento 
+*	da lista de Mensagens
 *
 *  $EP Par‚metros
-*     Perfil  - perfil do usu·rio o qual deseja-se saber as mensagens
-*	  vetTipos - vetor ja alocado para armazenar o tipo de cada mensagem
-*	  vetEmails - vetor ja alocado para armazenar o email relativo a cada mensagem
+*     Perfil  		- perfil do usu·rio o qual deseja-se saber as mensagens
+*	  vetTipos 		- vetor ja alocado para armazenar o tipo de cada mensagem
+*	  vetEmails 	- vetor ja alocado para armazenar o email relativo a cada mensagem
 *	  vetMensagens  - vetor ja alocado para armazenar as mensagens
-*     
 *
 *  $FV Valor retornado
-*     MEN_CondRetOK
-*     MEN_CondRetListaVazia
+*	  MEN_CondRetOK
 *	  MEN_CondRetPerfilInvalido
+*	  MEN_CondRetListaVazia
 *	  MEN_CondRetRetornoLisIncorreto
+*	  MEN_CondRetParametroIncorreto
 *
 ***********************************************************************/
 
 MEN_tpCondRet MEN_ObterTodasMensagens(PER_tpPerfil * Perfil, MEN_tpCondMsg vetTipos[],char* vetEmails[], char* vetMensagens[] );
+
 
 /***********************************************************************
 *  $FC FunÁ„o: MEN  &Obter Mensagens
@@ -280,22 +278,21 @@ MEN_tpCondRet MEN_ObterTodasMensagens(PER_tpPerfil * Perfil, MEN_tpCondMsg vetTi
 *	  parametro fornecido
 *
 *  $EP Par‚metros
-*     Perfil  - perfil do usu·rio o qual deseja-se saber as mensagens
-*	  vetEmails - vetor ja alocado para armazenar o email relativo a cada mensagem
+*     Perfil  		- perfil do usu·rio o qual deseja-se saber as mensagens
+*	  vetEmails 	- vetor ja alocado para armazenar o email relativo a cada mensagem
 *	  vetMensagens  - vetor ja alocado para armazenar as mensagens
-*	  flagMsg- tipo de mensagem que deseja-se armazenar(enviada ou recebida).
+*	  flagMsg		- tipo de mensagem que deseja-se armazenar(enviada ou recebida).
 *
 *  $FV Valor retornado
+*	  MEN_CondRetOK
 *	  MEN_CondRetPerfilInvalido
-*     MEN_CondRetOK
-*     MEN_CondRetListaVazia
-*     MEN_CondRetParametroIncorreto
+*	  MEN_CondRetListaVazia
 *	  MEN_CondRetRetornoLisIncorreto
+*	  MEN_CondRetParametroIncorreto
 *
 ***********************************************************************/
 
 MEN_tpCondRet MEN_ObterMensagens(PER_tpPerfil * Perfil, char* vetEmails[], char* vetMensagens[],MEN_tpCondMsg flagMsg);
-
 
 
 /********** Fim do mÛdulo de definiÁ„o: MEN  MENfo GenÈrico com CabeÁa **********/

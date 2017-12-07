@@ -1,5 +1,5 @@
 /***************************************************************************
-*  $MCI MÛdulo de implementaÁ„o: MEN  Mensagem generico com cabeca
+*  $MCI MÛdulo de implementaÁ„o: MEN  Modulo Mensagem 
 *
 *  Arquivo gerado:              Mensagem.c
 *  Letras identificadoras:      MEN
@@ -8,17 +8,17 @@
 *
 *  Projeto: INF 1301 / 1628 AutomatizaÁ„o dos testes de mÛdulos C
 *  Gestor:  DI/PUC-Rio
-*  Autores: Gabriel Busquim (gb), Michelle Santiago (ms), Renan Moreira (rm)
+*  Autores: Gabriel Busquim (gb), Michelle Santiago (ms)
 *
 *  $HA HistÛrico de evoluÁ„o:
 *  Vers„o     Autor   	  Data     	ObservaÁıes
-*     9        ms       06/12/2017  edição de descrições ao longo do código
-*     8        gb       03/11/2017 	alteração no nome de funções
-*     7        gb       02/11/2017 	alteração da condição de retorno
-*     6        ms       02/11/2017 	alteração nas funções utilizadas do modulo perfil
-*     5        gb       02/11/2017 	verificação da existencia do perfil e número de mensagem
-*     4        gb       01/11/2017 	alterações do código de todas as funções
-*     3        gb       27/11/2017 	alteração da descricao de funções
+*     9        ms       06/12/2017  ediçÁ„o de descriçÁıes ao longo do cÛdigo
+*     8        gb       03/11/2017 	alteraçÁ„o no nome de funçÁıes
+*     7        gb       02/11/2017 	alteraçÁ„o da condiçÁ„o de retorno
+*     6        ms       02/11/2017 	alteraçÁ„o nas funçÁıes utilizadas do modulo perfil
+*     5        gb       02/11/2017 	verificaçÁ„o da existencia do perfil e número de mensagem
+*     4        gb       01/11/2017 	alteraçÁıes do cÛdigo de todas as funçÁıes
+*     3        gb       27/11/2017 	alteraçÁıo da descricao de funçÁıes
 *	  2        gb       20/11/2017  desenvolvimento da função excluir mensagem
 *     1        gb       15/11/2017 	inicio do desenvolvimento
 *
@@ -28,7 +28,6 @@
 #include   <string.h>
 #include   <stdlib.h>
 #include   "MENSAGEM.h"
-
 
 /***********************************************************************
 *
@@ -48,7 +47,6 @@ typedef struct MEN_tagMensagem {
 	/* Email do perfil remetente ou destinatario da mensagem, dependendo do valor de Flag */
 	
 } MEN_tpMensagem;
-
 
 /***************************************************************************
 *
@@ -81,7 +79,7 @@ MEN_tpCondRet MEN_EscreverMensagem(PER_tpPerfil * Remetente,PER_tpPerfil *Destin
 	LIS_tppLista LisDest;
 	LIS_tpCondRet CondRet;
     
-    /* Alocação de memória para o perfil Remetente e Desinatario */
+    /* AlocaçÁ„o de memÛria para o perfil Remetente e Desinat·rio */
 	emailRem=(char*)malloc(101*sizeof(char));
 	if (emailRem == NULL)
 		return MEN_CondRetFaltouMemoria;
@@ -102,7 +100,7 @@ MEN_tpCondRet MEN_EscreverMensagem(PER_tpPerfil * Remetente,PER_tpPerfil *Destin
 	if (cidade == NULL)
 		return MEN_CondRetFaltouMemoria;
     
-    /* Obtenção dos perfis remetentes e destinatários */
+    /* VerificaÁ„o da existÍncia do perfil */
     
 	if(PER_ObterPerfil(Remetente, emailRem,primeiroNome, ultimoNome,
 		&diaNasc, &mesNasc, &anoNasc, cidade)==PER_CondRetPerfilInvalido)
@@ -112,12 +110,12 @@ MEN_tpCondRet MEN_EscreverMensagem(PER_tpPerfil * Remetente,PER_tpPerfil *Destin
 		&diaNasc, &mesNasc, &anoNasc, cidade)==PER_CondRetPerfilInvalido)
 		return MEN_CondRetPerfilInvalido;
     
-    /* Verifica se o perfil é o mesmo */
+    /* Verifica se o perfil È o mesmo para remetente e destinat·rio */
     
     if(strcmp(emailRem,emailDest)==0)
 		return MEN_CondRetMesmoPerfil;
     
-    /* Verifica se excedeu o número de caracteres em uma mensagem ou se ela está vazia */
+    /* Verifica se excedeu o n˙mero de caracteres em uma mensagem ou se ela est· vazia */
     
 	tamMsg=strlen(MensagemEnv);
     if(tamMsg==0) {
@@ -131,7 +129,7 @@ MEN_tpCondRet MEN_EscreverMensagem(PER_tpPerfil * Remetente,PER_tpPerfil *Destin
 	PER_retornaLisMensagens(Remetente,&LisRem);
 	PER_retornaLisMensagens(Destinatario,&LisDest);
     
-    /* Alocamento da mensagem para o rementente e destinatário */
+    /* Alocamento da mensagem para o rementente e destinat·rio */
 
 	MsgRem = (MEN_tpMensagem*)malloc(sizeof(MEN_tpMensagem));
 	if (MsgRem == NULL) {
@@ -163,7 +161,7 @@ MEN_tpCondRet MEN_EscreverMensagem(PER_tpPerfil * Remetente,PER_tpPerfil *Destin
 	MsgDest->Flag=MEN_CondMsgRecebida;
 	strcpy_s(MsgDest->Email,101,emailRem);
 
-    /* Adiciona a mensagem à lista do remetente */
+    /* Adiciona a mensagem ‡ lista do remetente */
     
 	CondRet=LIS_IrFinalLista(LisRem);
     if(CondRet!=LIS_CondRetOK)
@@ -172,7 +170,7 @@ MEN_tpCondRet MEN_EscreverMensagem(PER_tpPerfil * Remetente,PER_tpPerfil *Destin
 	if(LIS_InserirElementoApos(LisRem ,(void*)MsgRem) != LIS_CondRetOK)
 		return MEN_CondRetRetornoLisIncorreto;
 
-    /* Adiciona a mensagem à lista do destinatário */
+    /* Adiciona a mensagem ‡ lista do destinat·rio */
     
 	CondRet=LIS_IrFinalLista(LisDest);
     if(CondRet!=LIS_CondRetOK)
@@ -181,7 +179,7 @@ MEN_tpCondRet MEN_EscreverMensagem(PER_tpPerfil * Remetente,PER_tpPerfil *Destin
     if(LIS_InserirElementoApos(LisDest ,(void*)MsgDest) != LIS_CondRetOK)
 		return MEN_CondRetRetornoLisIncorreto;
     
-    /* Libera o espaço armazenado */
+    /* Libera o espaÁço armazenado */
     
 	free(cidade);
 	free(primeiroNome);
@@ -213,7 +211,7 @@ MEN_tpCondRet MEN_ExcluirMensagem(PER_tpPerfil * Perfil,char Email[],MEN_tpCondM
 	MEN_tppMensagem tpMsg;
 	LIS_tppLista pMensagem;
     
-    /* obtem numero de mensagens do perfil */
+    /* obtem n˙mero de mensagens do perfil */
     
 	if(MEN_ObterNumTodasMensagens(Perfil,&numTotalMsgs) == MEN_CondRetRetornoLisIncorreto)
 		return MEN_CondRetRetornoLisIncorreto;
@@ -326,7 +324,7 @@ MEN_tpCondRet MEN_ModificarEmailLista(PER_tpPerfil * Perfil,char antigoEmail[],c
 	MEN_tppMensagem tpMsg;
 	LIS_tppLista pMensagem;
     
-    /* Obtem número de mensagens */
+    /* Obtem n˙mero de mensagens */
     
 	if(MEN_ObterNumTodasMensagens(Perfil,&numTotalMsgs)==MEN_CondRetRetornoLisIncorreto)
 		return MEN_CondRetRetornoLisIncorreto;
@@ -421,7 +419,7 @@ MEN_tpCondRet MEN_ObterNumMensagens(PER_tpPerfil * Perfil,MEN_tpCondMsg flagMsg,
 	if(MEN_ObterNumTodasMensagens(Perfil,&numTotalMsgs)==MEN_CondRetRetornoLisIncorreto)
 		return MEN_CondRetRetornoLisIncorreto;
     
-    /* Verifica se lista de mensagens tá vazia ou não */
+    /* Verifica se lista de mensagens est· vazia  */
     
 	if(numTotalMsgs==0) {
 		*numMsgs=0;
@@ -433,7 +431,7 @@ MEN_tpCondRet MEN_ObterNumMensagens(PER_tpPerfil * Perfil,MEN_tpCondMsg flagMsg,
 	if(PER_retornaLisMensagens(Perfil,&pMensagem)==PER_CondRetPerfilInexistente)
 		return MEN_CondRetPerfilInvalido;
     
-    /* Contabiliza o número de mensagens da lista */
+    /* Contabiliza o n˙mero de mensagens da lista */
     
 	if(LIS_IrInicioLista(pMensagem)!=LIS_CondRetOK)
 		return MEN_CondRetRetornoLisIncorreto;
@@ -447,7 +445,6 @@ MEN_tpCondRet MEN_ObterNumMensagens(PER_tpPerfil * Perfil,MEN_tpCondMsg flagMsg,
 			contador++;
         
 		CondRetLis=LIS_AvancarElementoCorrente(pMensagem,1);
-        
 	} /* while */
     
 	*numMsgs=contador;
@@ -463,6 +460,13 @@ MEN_tpCondRet MEN_ObterNumMensagens(PER_tpPerfil * Perfil,MEN_tpCondMsg flagMsg,
 /***************************************************************************
 *
 *  FunÁ„o: MEN  &Obter Todas Mensagens
+*
+*	  MEN_CondRetOK
+*	  MEN_CondRetPerfilInvalido
+*	  MEN_CondRetListaVazia
+*	  MEN_CondRetRetornoLisIncorreto
+*	  MEN_CondRetParametroIncorreto
+*
 *  ****/
 
 MEN_tpCondRet MEN_ObterTodasMensagens(PER_tpPerfil * Perfil, MEN_tpCondMsg vetTipos[],char* vetEmails[], char* vetMensagens[] )
@@ -477,12 +481,12 @@ MEN_tpCondRet MEN_ObterTodasMensagens(PER_tpPerfil * Perfil, MEN_tpCondMsg vetTi
 	if (vetMensagens== NULL || vetTipos== NULL || vetEmails == NULL )
 		return MEN_CondRetParametroIncorreto;
     
-    /* Obtem o número de mensagens de um perfil */
+    /* Obtem o n˙mero de mensagens de um perfil */
     
 	if(MEN_ObterNumTodasMensagens(Perfil,&numTotalMsgs) == MEN_CondRetRetornoLisIncorreto)
 		return MEN_CondRetRetornoLisIncorreto;
     
-    /* Verifica se a lista já está vazia */
+    /* Verifica se a lista j· est· vazia */
     
 	if(numTotalMsgs==0)
 		return MEN_CondRetListaVazia;
@@ -519,6 +523,13 @@ MEN_tpCondRet MEN_ObterTodasMensagens(PER_tpPerfil * Perfil, MEN_tpCondMsg vetTi
 /***************************************************************************
 *
 *  FunÁ„o: MEN  &Obter Mensagens
+*
+*	  MEN_CondRetOK
+*	  MEN_CondRetPerfilInvalido
+*	  MEN_CondRetListaVazia
+*	  MEN_CondRetRetornoLisIncorreto
+*	  MEN_CondRetParametroIncorreto
+*
 *  ****/
 
 MEN_tpCondRet MEN_ObterMensagens(PER_tpPerfil * Perfil, char* vetEmails[], char* vetMensagens[],MEN_tpCondMsg flagMsg)
@@ -532,12 +543,12 @@ MEN_tpCondRet MEN_ObterMensagens(PER_tpPerfil * Perfil, char* vetEmails[], char*
 	if (vetMensagens== NULL || vetEmails == NULL)
 		return MEN_CondRetParametroIncorreto;
 	
-    /* Obtem número de mensagens de um perfil */
+    /* Obtem n˙mero de mensagens de um perfil */
     
 	if(MEN_ObterNumTodasMensagens(Perfil,&numTotalMsgs) == MEN_CondRetRetornoLisIncorreto)
 		return MEN_CondRetRetornoLisIncorreto;
     
-    /* Verifica se a lista já está vazia */
+    /* Verifica se a lista j· est· vazia */
     
 	if(numTotalMsgs==0)
 		return MEN_CondRetListaVazia;
@@ -564,7 +575,6 @@ MEN_tpCondRet MEN_ObterMensagens(PER_tpPerfil * Perfil, char* vetEmails[], char*
 		} /* if */
         
 		CondRetLis=LIS_AvancarElementoCorrente(pMensagem,1);
-        
 	} /* while */
     
 	return MEN_CondRetOK;
