@@ -9,11 +9,13 @@
 *
 *  Projeto: INF 1301 / 1628 Automatização dos testes de módulos C
 *  Gestor:  LES/DI/PUC-Rio
-*  Autores: ms
+*  Autores: Michelle Santiago (ms), Gabriel Busquim (gb)
 *
 *  $HA Histórico de evolução:
-*     Versão  Autor    Data     Observações
-*     1       ms   16/abr/2003 início desenvolvimento
+*     Versão  Autor   	  Data     	Observações
+*	    3	   ms       06/12/2017	pequenas correções
+*		2	   gb		02/12/2017  alteração do comentário de um parametro
+*     	1      ms   	25/11/2017 	início desenvolvimento
 *
 ***************************************************************************/
 
@@ -38,8 +40,6 @@ static const char ARMAZENAR_AMIZADES_CMD        [ ] = "=armazenaramizades";
 static const char EXCLUIR_TODAS_AMIZADES_CMD    [ ] = "=excluirtodasamizades";
 static const char VERIFICAR_AMIZADES_CMD        [ ] = "=verificaramizades";
 
-
-
 #define TRUE  1
 #define FALSE 0
 
@@ -52,17 +52,14 @@ static const char VERIFICAR_AMIZADES_CMD        [ ] = "=verificaramizades";
 #define DIM_VT_MES  	8
 #define DIM_VT_ANO  	8
 
-
-PER_tpPerfil *  vtPerfil[ DIM_VT_PERFIL ]; 
-PER_tpPerfil *  vtPerfilTeste[ 3 ];
+PER_tpPerfil *  vtPerfil[DIM_VT_PERFIL]; 
+PER_tpPerfil *  vtPerfilTeste[3];
 GRA_tppGrafo   vtGrafos[1] ;
-
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
 static void DestruirValor( void * pValor );
 static int ValidarInxPerfil( int inxPerfil);
-
 
 
 /*****  Código das funções exportadas pelo módulo  *****/
@@ -101,70 +98,61 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 	AMI_tpSolitacao Solicitacao;
 	int numAmigos = -1;
 
-	
 	PER_tpCondRet PER_CondRetCriarPerfil;
-
 	
-	char * vtEmail  	[DIM_VT_EMAIL] = {"usuario1@gmail.com", "usuario2@gmail.com", "usuario3@gmail.com", "usuario4@gmail.com", "usuario5@gmail.com",
-									  "usuario6@gmail.com", "usuario7@gmail.com", "usuario8@gmail.com"};
-	char * vtPrimNome 	[DIM_VT_PRIMNOME] = {"UsuarioA", "UsuarioB", "UsuarioC", "UsuarioD", "UsuarioE", "UsuarioF", "UsuarioG", "UsuarioH"};
-	char * vtUltNome 	[DIM_VT_ULTNOME] = {"SobrenomeA", "SobrenomeB", "SobrenomeC", "SobrenomeD", "SobrenomeE", "SobrenomeF", "SobrenomeG", "SobrenomeH"};
-	char * vtCidade 	[DIM_VT_CIDADE] = {"CidadeA", "CidadeB", "CidadeC", "CidadeD", "CidadeE", "CidadeF", "CidadeG", "CidadeH"};
+	char * vtEmail  	[DIM_VT_EMAIL] = {"usuario1@gmail.com", "usuario2@gmail.com", "usuario3@gmail.com", 
+										  "usuario4@gmail.com", "usuario5@gmail.com", "usuario6@gmail.com",
+										  "usuario7@gmail.com", "usuario8@gmail.com"};
+	char * vtPrimNome 	[DIM_VT_PRIMNOME] = {"UsuarioA", "UsuarioB", "UsuarioC", "UsuarioD", "UsuarioE",
+											 "UsuarioF", "UsuarioG", "UsuarioH"};
+	char * vtUltNome 	[DIM_VT_ULTNOME] = {"SobrenomeA", "SobrenomeB", "SobrenomeC", "SobrenomeD",
+											"SobrenomeE", "SobrenomeF", "SobrenomeG", "SobrenomeH"};
+	char * vtCidade 	[DIM_VT_CIDADE] = {"CidadeA", "CidadeB", "CidadeC", "CidadeD", "CidadeE",
+										   "CidadeF", "CidadeG", "CidadeH"};
 	int  vtDia 			[DIM_VT_DIA] = {1, 2, 3, 4, 5, 6, 7, 8};
 	int  vtMes 			[DIM_VT_MES] = {1, 2, 3, 4, 5, 6, 7, 8};
 	int  vtAno 			[DIM_VT_ANO] = {2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008};
-	
-
-	
 
 	/* Efetuar reset de teste de Amizade */
 	
-	if ( strcmp( ComandoTeste , RESET_AMIZADE_CMD ) == 0 )
+	if (strcmp(ComandoTeste, RESET_AMIZADE_CMD) == 0)
 	{
-
-			GRA_DestruirGrafo(vtGrafos[0]);
-			GRA_CondRetCriarGrafo = GRA_CriarGrafo(DestruirValor, &vtGrafos[0]);
-			if (GRA_CondRetCriarGrafo == GRA_CondRetFaltouMemoria){
+		GRA_DestruirGrafo(vtGrafos[0]);
+		GRA_CondRetCriarGrafo = GRA_CriarGrafo(DestruirValor, &vtGrafos[0]);
+		if (GRA_CondRetCriarGrafo == GRA_CondRetFaltouMemoria)
+			return TST_CondRetMemoria;
+				
+		for (i = 0; i < DIM_VT_PERFIL  ; i++ ){
+			PER_CondRetCriarPerfil = PER_CriarPerfil(vtGrafos[0], &vtPerfil[i], vtEmail[i], vtPrimNome[i], 
+													 vtUltNome[i], vtDia[i], vtMes[i], vtAno[i], vtCidade[i]);
+			if (PER_CondRetCriarPerfil == PER_CondRetFaltouMemoria)
 				return TST_CondRetMemoria;
-				}
 			
-	
-			for (i = 0; i < DIM_VT_PERFIL  ; i++ ){
-			PER_CondRetCriarPerfil = PER_CriarPerfil(vtGrafos[0], &vtPerfil[i], vtEmail[i], vtPrimNome[i], vtUltNome[i],
-							  vtDia[i], vtMes[i], vtAno[i], vtCidade[i]);
-			if (PER_CondRetCriarPerfil == PER_CondRetFaltouMemoria){
-				return TST_CondRetMemoria;
-				}
-			}
-
+		} /* for */
 
 		return TST_CondRetOK ;
 
 	} /* fim ativa: Efetuar reset de teste de Amizade */
 	
+	
 	/* Testar Criar Amizade */
 
-	else if ( strcmp( ComandoTeste , CRIAR_AMIZADE_CMD ) == 0 )
+	else if (strcmp(ComandoTeste, CRIAR_AMIZADE_CMD) == 0)
 	{
-
-	
 		TST_tpCondRet debug;
 
-
-		numLidos = LER_LerParametros( "iiii" ,&inxPerfil1, &inxPerfil2, &Solicitacao, &CondRetEsp ) ;
+		numLidos = LER_LerParametros("iiii", &inxPerfil1, &inxPerfil2, &Solicitacao, &CondRetEsp);
 		
-		if ( ( numLidos != 4 ) || ( ! ValidarInxPerfil( inxPerfil1)) || ( ! ValidarInxPerfil( inxPerfil2))){
+		if (( numLidos != 4 ) || (!ValidarInxPerfil( inxPerfil1)) || (!ValidarInxPerfil( inxPerfil2))){
 			return TST_CondRetParm ;
 		} /* if */
 
 		CondRet = AMI_CriarAmizade(vtGrafos[0], vtPerfil[inxPerfil1], vtPerfil[inxPerfil2], Solicitacao);
-
-		debug =  TST_CompararInt( CondRetEsp , CondRet ,
+		debug = TST_CompararInt(CondRetEsp, CondRet,
 			"Erro na condicao de retorno ao criar o Amizade" ) ;
 		if (debug != TST_CondRetOK){
 			return debug;
 		}
-		
 
 		return TST_CondRetOK;
 		
@@ -173,19 +161,16 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 	/* Testar Excluir Amizade */
 
-	else if ( strcmp( ComandoTeste , EXCLUIR_AMIZADE_CMD ) == 0 )
+	else if (strcmp(ComandoTeste, EXCLUIR_AMIZADE_CMD) == 0)
 	{
-		
         numLidos = LER_LerParametros("iii" , &inxPerfil1, &inxPerfil2, &CondRetEsp) ;
-		if (( numLidos != 3 ) || ( ! ValidarInxPerfil( inxPerfil1)) || ( ! ValidarInxPerfil( inxPerfil2))){
+		if ((numLidos != 3) || (!ValidarInxPerfil(inxPerfil1)) || (!ValidarInxPerfil(inxPerfil2))){
 			return TST_CondRetParm ;
 		} /* if */
 
-
 		CondRet = AMI_ExcluirAmizade(vtGrafos[0], vtPerfil[inxPerfil1], vtPerfil[inxPerfil2]);
-
 		
-		return TST_CompararInt( CondRetEsp , CondRet ,
+		return TST_CompararInt(CondRetEsp, CondRet,
             "Condicao de retorno errada ao excluir amizade.") ;
 
     }  /* fim ativa: Testar Excluir Amizade */
@@ -193,22 +178,20 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 	
 	/* Testar Verificar Número de Amigos*/
 
-	else if ( strcmp( ComandoTeste , VERIFICAR_NUM_AMIGOS_CMD ) == 0 )
+	else if (strcmp(ComandoTeste, VERIFICAR_NUM_AMIGOS_CMD) == 0)
 	{	
 		TST_tpCondRet NumAmigosCondRet; 
 		TST_tpCondRet debug;
 		int numAmigosFuncao;
 		
-		numLidos = LER_LerParametros( "iii" , &inxPerfil1, &numAmigos, &CondRetEsp ) ;
-		if ( ( numLidos != 3 )|| (!ValidarInxPerfil( inxPerfil1))){
+		numLidos = LER_LerParametros("iii" , &inxPerfil1, &numAmigos, &CondRetEsp);
+		if ((numLidos != 3) || (!ValidarInxPerfil(inxPerfil1))){
 			return TST_CondRetParm ;
 		} /* if */
 
-
 		CondRet = AMI_VerificarNumAmigos(vtGrafos[0], vtPerfil[inxPerfil1], &numAmigosFuncao);
 
-
-		NumAmigosCondRet = TST_CompararInt( CondRetEsp , CondRet ,
+		NumAmigosCondRet = TST_CompararInt(CondRetEsp, CondRet ,
 			"Condicao de retorno errada ao verificar número de amigos." ) ;
 			
 		if (NumAmigosCondRet != TST_CondRetOK){
@@ -228,10 +211,8 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 	
 	/* Testar armazenar amizades */
 
-	else if ( strcmp( ComandoTeste , ARMAZENAR_AMIZADES_CMD ) == 0 )
+	else if (strcmp(ComandoTeste, ARMAZENAR_AMIZADES_CMD) == 0)
 	{
-	
-
 		TST_tpCondRet TST_CondRetVerifica;
 		TST_tpCondRet debug;
 		
@@ -326,20 +307,14 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 						 email2, primNome2, ultNome2, cidade2, &dia2, &mes2, &ano2,
 						 email3, primNome3, ultNome3, cidade3, &dia3, &mes3, &ano3, &CondRetEsp );
 						 
-
-		if (( numLidos != 23 ) || (!ValidarInxPerfil( inxPerfil1)))
-		{
+		if ((numLidos != 23) || (!ValidarInxPerfil(inxPerfil1))){
 			return TST_CondRetParm ;
 		}
 		
-
-
-
 		CondRet = AMI_ArmazenarAmizades(vtGrafos[0], vtPerfil[inxPerfil1], vtPerfilTeste);
-	
 
-		TST_CondRetVerifica = TST_CompararInt( CondRetEsp, CondRet,
-			"Condição de retorno errada ao armazenar amizades."   );
+		TST_CondRetVerifica = TST_CompararInt(CondRetEsp, CondRet,
+			"Condição de retorno errada ao armazenar amizades.");
 			
 		if (TST_CondRetVerifica != TST_CondRetOK){
 			return TST_CondRetVerifica;
@@ -348,107 +323,101 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		if(CondRet!=AMI_CondRetOK)
 			return CondRet;
 
-			
-			PER_ObterPerfil(vtPerfilTeste[0], emailRetornado1, primNomeRetornado1, ultNomeRetornado1,
-							  &diaRetornado1, &mesRetornado1, &anoRetornado1, cidadeRetornado1);
-	
-
+		PER_ObterPerfil(vtPerfilTeste[0], emailRetornado1, primNomeRetornado1, ultNomeRetornado1,
+						&diaRetornado1, &mesRetornado1, &anoRetornado1, cidadeRetornado1);
 		
-			debug = TST_CompararString(email1, emailRetornado1, "Campo email nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
-			debug = TST_CompararString(primNome1, primNomeRetornado1, "Campo primeiro nome nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
-			debug = TST_CompararString(ultNome1, ultNomeRetornado1, "Campo ultimo nome nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
-			debug = TST_CompararString(cidade1, cidadeRetornado1, "Campo cidade nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
-			debug = TST_CompararInt( dia1, diaRetornado1, "Campo dia nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
-			debug = TST_CompararInt( mes1, mesRetornado1, "Campo mes nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
-			debug = TST_CompararInt( ano1, anoRetornado1, "Campo ano nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
+		debug = TST_CompararString(email1, emailRetornado1, "Campo email nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		debug = TST_CompararString(primNome1, primNomeRetornado1, "Campo primeiro nome nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		debug = TST_CompararString(ultNome1, ultNomeRetornado1, "Campo ultimo nome nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		debug = TST_CompararString(cidade1, cidadeRetornado1, "Campo cidade nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		debug = TST_CompararInt( dia1, diaRetornado1, "Campo dia nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		debug = TST_CompararInt( mes1, mesRetornado1, "Campo mes nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		debug = TST_CompararInt( ano1, anoRetornado1, "Campo ano nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
 			
+		PER_ObterPerfil(vtPerfilTeste[1], emailRetornado2, primNomeRetornado2, ultNomeRetornado2,
+						&diaRetornado2, &mesRetornado2, &anoRetornado2, cidadeRetornado2);
 
-			PER_ObterPerfil(vtPerfilTeste[1], emailRetornado2, primNomeRetornado2, ultNomeRetornado2,
-							  &diaRetornado2, &mesRetornado2, &anoRetornado2, cidadeRetornado2);
-
-			debug = TST_CompararString(email2, emailRetornado2, "Campo email nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
-			debug = TST_CompararString(primNome2, primNomeRetornado2, "Campo primeiro nome nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
-			debug = TST_CompararString(ultNome2, ultNomeRetornado2, "Campo ultimo nome nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
-			debug = TST_CompararString(cidade2, cidadeRetornado2, "Campo cidade nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
-			debug = TST_CompararInt( dia2, diaRetornado2, "Campo dia nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
-			debug = TST_CompararInt( mes2, mesRetornado2, "Campo mes nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
-			debug = TST_CompararInt( ano2, anoRetornado2, "Campo ano nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
+		debug = TST_CompararString(email2, emailRetornado2, "Campo email nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		debug = TST_CompararString(primNome2, primNomeRetornado2, "Campo primeiro nome nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		debug = TST_CompararString(ultNome2, ultNomeRetornado2, "Campo ultimo nome nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		debug = TST_CompararString(cidade2, cidadeRetornado2, "Campo cidade nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		debug = TST_CompararInt( dia2, diaRetornado2, "Campo dia nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		debug = TST_CompararInt( mes2, mesRetornado2, "Campo mes nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		debug = TST_CompararInt( ano2, anoRetornado2, "Campo ano nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
 			
+		PER_ObterPerfil(vtPerfilTeste[2], emailRetornado3, primNomeRetornado3, ultNomeRetornado3,
+						&diaRetornado3, &mesRetornado3, &anoRetornado3, cidadeRetornado3);
 
-			PER_ObterPerfil(vtPerfilTeste[2], emailRetornado3, primNomeRetornado3, ultNomeRetornado3,
-							  &diaRetornado3, &mesRetornado3, &anoRetornado3, cidadeRetornado3);
-
-		
-			debug = TST_CompararString(email3, emailRetornado3, "Campo email nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
-			debug = TST_CompararString(primNome3, primNomeRetornado3, "Campo primeiro nome nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
-			debug = TST_CompararString(ultNome3, ultNomeRetornado3, "Campo ultimo nome nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
-			debug = TST_CompararString(cidade3, cidadeRetornado3, "Campo cidade nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
-			debug = TST_CompararInt( dia3, diaRetornado3, "Campo dia nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
-			debug = TST_CompararInt( mes3, mesRetornado3, "Campo mes nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
-			debug = TST_CompararInt( ano3, anoRetornado3, "Campo ano nao e igual ao esperado");
-			if (debug != TST_CondRetOK){
-				return debug;
-			}
+		debug = TST_CompararString(email3, emailRetornado3, "Campo email nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		debug = TST_CompararString(primNome3, primNomeRetornado3, "Campo primeiro nome nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		debug = TST_CompararString(ultNome3, ultNomeRetornado3, "Campo ultimo nome nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		debug = TST_CompararString(cidade3, cidadeRetornado3, "Campo cidade nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		debug = TST_CompararInt( dia3, diaRetornado3, "Campo dia nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		debug = TST_CompararInt( mes3, mesRetornado3, "Campo mes nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
+		debug = TST_CompararInt( ano3, anoRetornado3, "Campo ano nao e igual ao esperado");
+		if (debug != TST_CondRetOK){
+			return debug;
+		}
 
 		free(emailRetornado1);
 		free(cidadeRetornado1);
@@ -463,7 +432,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		free(emailRetornado3);
 		free(cidadeRetornado3);
 		free(ultNomeRetornado3);
-
 	
 		return TST_CondRetOK;
 	
@@ -471,64 +439,52 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 	
 	/* Testar excluir Todas as Amizades */
-	else if ( strcmp( ComandoTeste , EXCLUIR_TODAS_AMIZADES_CMD ) == 0 )
+	else if (strcmp(ComandoTeste, EXCLUIR_TODAS_AMIZADES_CMD) == 0)
 	{
-		numLidos = LER_LerParametros( "ii" ,
-			&inxPerfil, &CondRetEsp ) ;
+		numLidos = LER_LerParametros("ii" ,
+			&inxPerfil, &CondRetEsp) ;
 
-		if (( numLidos != 2 )|| (!ValidarInxPerfil( inxPerfil)))
-		{
+		if (( numLidos != 2 ) || (!ValidarInxPerfil( inxPerfil))){
 			return TST_CondRetParm ;
 		} /* if */
 		
-
 		CondRet = AMI_ExcluirTodasAmizades(vtGrafos[0], vtPerfil[inxPerfil]);
 
-		return TST_CompararInt( CondRetEsp , CondRet ,
+		return TST_CompararInt(CondRetEsp, CondRet,
 			"Condicao de retorno errada ao excluir todas as amizades." ) ;
 
 	} /* fim ativa: Testar excluir Todas as Amizades */
 
 
 	/* Testar verificar amizade */
-	else if ( strcmp( ComandoTeste , VERIFICAR_AMIZADES_CMD ) == 0 )
+	else if (strcmp(ComandoTeste, VERIFICAR_AMIZADES_CMD) == 0)
 	{
-
-		
 		TST_tpCondRet debug;
 		
-		numLidos = LER_LerParametros( "iii" ,
-			&inxPerfil1,&inxPerfil2, &CondRetEsp ) ;
+		numLidos = LER_LerParametros("iii", &inxPerfil1, &inxPerfil2,
+									&CondRetEsp ) ;
 
-
-		if (( numLidos != 3 ) || (!ValidarInxPerfil( inxPerfil1))|| (!ValidarInxPerfil( inxPerfil2)))
-		{
+		if (( numLidos != 3 ) || (!ValidarInxPerfil(inxPerfil1))|| (!ValidarInxPerfil(inxPerfil2))){
 			return TST_CondRetParm ;
 		} /* if */
 
 		CondRet = AMI_VerificarAmizade(vtGrafos[0], vtPerfil[inxPerfil1], vtPerfil[inxPerfil2]);
-
-		
-		debug =  TST_CompararInt( CondRetEsp , CondRet ,
+		debug =  TST_CompararInt(CondRetEsp, CondRet,
 			"Condicao de retorno errada ao verificar amizade." ) ;
 		if (debug != TST_CondRetOK){
 			return debug;
 		}
 		
-
 		return TST_CondRetOK;
 
 	} /* fim ativa: Testar verificar amizade */
 
-
 	return TST_CondRetNaoConhec; 
-
 }
  /* Fim função: TAMI &Testar Amizade */
 
 
 /*****  Código das funções encapsuladas no módulo  *****/
-
 /***********************************************************************
 *
 *  $FC Função: TAMI -Destruir valor
@@ -537,9 +493,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
    void DestruirValor( void * pValor )
    {
-
-      free( pValor ) ;
-
+      free(pValor) ;
    } /* Fim função: TAMI -Destruir valor */
 
 
@@ -552,9 +506,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 int ValidarInxPerfil( int inxPerfil)
 {
-
-	if ( ( inxPerfil <  0 )
-		|| ( inxPerfil >= DIM_VT_PERFIL ))
+	if ((inxPerfil <  0) || (inxPerfil >= DIM_VT_PERFIL))
 	{
 		return FALSE ;
 	} /* if */
@@ -565,4 +517,3 @@ int ValidarInxPerfil( int inxPerfil)
 
 
 /********** Fim do módulo de implementação: TAMI Teste módulo Amizade **********/
-
