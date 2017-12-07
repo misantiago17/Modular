@@ -213,7 +213,7 @@ void MENU_MenuIrPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email
     printf("Email: %s\n",email);
 	printf("Data de Nascimento: %d|%d|%d\n",diaNasc,mesNasc,anoNasc);
 	printf("Cidade: %s\n",cidade);
-	printf("Número de amigos: %d \n",amigos);
+	printf("Numero de amigos: %d \n",amigos);
 	
     printf("O que deseja fazer? \n\n");
     
@@ -338,13 +338,13 @@ void MENU_MenuCriarPerfil(GRA_tppGrafo pGrafo){
 		scanf("%d", &ano);
 		printf("\n");
 		printf("Cidade: ");
-		i = -1;
-		scanf("%c", &cidade[0]);
-		do{
+		i = 0;
+		scanf(" %c", &cidade[i]);
+		while (cidade[i] != '\n' && i < 50) {
 			i++;
 			scanf("%c", &cidade[i]);
-		}while (cidade[i] != '\n' && i < 50);
-		cidade[i + 1] = '\0';
+		}
+		cidade[i] = '\0';
 
 		printf("\n");
 	
@@ -660,7 +660,7 @@ void MENU_MenuProcurarNovosAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, 
     printf("Email: %s\n", emailPerfil);
 	printf("Data de Nascimento: %d|%d|%d\n", dia, mes, ano);
 	printf("Cidade: %s\n",cidade);
-	printf("Número de amigos: %d \n",amigos);
+	printf("Numero de amigos: %d \n",amigos);
 	
     printf("O que deseja fazer? \n\n");
     
@@ -793,11 +793,14 @@ void MENU_MenuVerAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil) {
  *****/
 
 void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
-	int escolhaInvalida = 0;
-	int escolha, qtd, i, j = 0, num;
+	int escolhaMenu = 0;
+	int escolha, qtd, i, j = 0, dia, mes, ano, envMsg;
 	MEN_tpCondRet retorno;
 	MEN_tpCondMsg *vetTipos;
-	char **vetEmails, **vetMensagens;
+	char **vetEmails, **vetMensagens, email[101], primNome[51], ultNome[51], cidade[51], mensagem[401];
+	PER_tpPerfil *pPerfil2;
+	PER_tpCondRet retornoPer;
+	AMI_tpCondRet retornoAmi;
 
 	/*Exibir todas  as mensagens*/
 	retorno = MEN_ObterNumTodasMensagens(pPerfil, &qtd);
@@ -813,33 +816,48 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 		printf("Falha no malloc\n");
 		exit(1);
 	}
+	for (i = 0; i < qtd; i++) {
+		if ((vetEmails[i] = (char *)malloc(sizeof(char) * 101)) == NULL) {
+			printf("Falha no malloc\n");
+			exit(1);
+		}
+	}
 	if ((vetMensagens = (char **)malloc(sizeof(char)*qtd)) == NULL) {
 		printf("Falha no malloc\n");
 		exit(1);
 	}
+	for (i = 0; i < qtd; i++) {
+		if ((vetMensagens[i] = (char *)malloc(sizeof(char) * 401)) == NULL) {
+			printf("Falha no malloc\n");
+			exit(1);
+		}
+	}
 	retorno = MEN_ObterTodasMensagens(pPerfil, vetTipos, vetEmails, vetMensagens);
-	if (retorno != MEN_CondRetOK) {
+	if (retorno == MEN_CondRetListaVazia) {
+		printf("Nao ha mensagens antigas\n");
+	}
+	else if (retorno == MEN_CondRetOK) {
+		for (i = 0; i < qtd; i++) {
+			printf("Mensagem %d:\n", i);
+			printf("%s", vetMensagens[i]);
+			printf("\n");
+		}
+	}
+	else{
 		printf("Erro ao obter todas as mensagens\n");
 		exit(1);
-	}
-	for (i = 0; i < qtd; i++) {
-		printf("Mensagem %d:\n", i);
-		while (vetMensagens[i][j] != '\0') {
-			printf("%c", vetMensagens[i][j]);
-			j++;
-		}
-		printf("\n");
 	}
 	/*Fim exibir todas  as mensagens*/
 	printf("===============================================================================\n");
 	printf("O que deseja fazer com suas mensagens?\n\n");
 
-	printf("1. Excluir mensagem \n");
-	printf("2. Obter total de mensagens\n");
-	printf("3. Obter total de mensagens enviadas\n");
-	printf("4. Obter total de mensagens recebidas\n");
+	printf("1. Escrever mensagem\n");
+	printf("2. Excluir mensagem \n");
+	printf("3. Obter total de mensagens\n");
+	printf("4. Obter total de mensagens enviadas\n");
+	printf("5. Obter total de mensagens recebidas\n");
 
-	while (escolhaInvalida == 0) {
+	while (escolhaMenu == 0) {
 
 		printf("> ");
 		scanf("%d", &escolha);
@@ -847,14 +865,61 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 
 		switch (escolha)
 		{
-			/*Excluir mensagem*/
+			/*Escrever mensagem*/
 		case 1:
-			escolhaInvalida = 1;
+			envMsg = 1;
+			escolhaMenu = 1;
+			printf("Digite o email do amigo que voce quer conversar\n");
+			scanf("%s", email);
+			retornoPer = PER_BuscaEmail(pGrafo, email, &pPerfil2, &i);
+			if (retornoPer == PER_CondRetEmailInexistente) {
+					printf("Email inexistente\n");
+				}
+			else if (retornoPer != PER_CondRetEmailJaCadastrado) {
+					printf("Erro ao procurar email\n");
+					exit(1);
+				}
+			else {
+					retornoAmi = AMI_VerificarAmizade(pGrafo, pPerfil, pPerfil2);
+					if (retornoAmi == AMI_AmizadeNaoExiste) {
+						printf("Usuario nao e seu amigo\nSo e possivel conversar com amigos\n");
+					}
+					else if (retornoAmi != AMI_CondRetOK) {
+						printf("Erro ao verificar amizade\n");
+						exit(1);
+					}
+					else {
+						envMsg = 1;
+						while (envMsg == 1) {
+							printf("Escreva sua mensagem:\n");
+							i = 0;
+							scanf(" %c", &mensagem[i]);
+							while (mensagem[i] != '\n' && i < 400) {
+								i++;
+								scanf("%c", &mensagem[i]);
+							}
+							mensagem[i] = '\0';
+							printf("\n\n");
+							retorno = MEN_EscreverMensagem(pPerfil, pPerfil2, mensagem);
+							if (retorno != MEN_CondRetOK) {
+								printf("Erro ao enviar mensagem\n");
+								exit(1);
+							}
+							printf("Deseja continuar enviando mensagens? (0 = nao, 1 = sim)");
+							scanf("%d", &envMsg);
+						}
+					}
+				}
+			break;/*Fim Escrever mensagem*/
+
+			/*Excluir mensagem*/
+		case 2:
+			escolhaMenu = 1;
 			printf("Escreva o numero da mensagem que deseja excluir:");
-			scanf("%d", &num);
-			while (num < 0 || num > qtd) {
+			scanf("%d", &i);
+			while (i < 0 || i > qtd) {
 				printf("Numero invalido, digite novamente:");
-				scanf("%d", &num);
+				scanf("%d", i);
 			}
 			retorno = MEN_ExcluirMensagem(pPerfil, vetEmails[i], vetTipos[i], vetMensagens[i]);
 			if (retorno != MEN_CondRetOK) {
@@ -865,39 +930,84 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 			break; /*Fim excluir mensagem*/
 
 				   /*Obter total de mensagens*/
-		case 2:
-			escolhaInvalida = 1;
+		case 3:
+			escolhaMenu = 1;
 			printf("Total de mensagens = %d\n", qtd);
 			break;/*Fim obter total de mensagens*/
 
 				  /*Obter total de mensagens enviadas*/
-		case 3:
-			escolhaInvalida = 1;
-			retorno = MEN_ObterNumMensagens(pPerfil, MEN_CondMsgEnviada, &qtd);
-			if (retorno != MEN_CondRetOK) {
-				printf("Erro ao obter numero de mensagens\n");
-				exit(1);
+		case 4:
+			escolhaMenu = 1;
+			if (qtd != 0) {
+				retorno = MEN_ObterNumMensagens(pPerfil, MEN_CondMsgEnviada, &qtd);
+				if (retorno != MEN_CondRetOK) {
+					printf("Erro ao obter numero de mensagens\n");
+					exit(1);
+				}
 			}
 			printf("Total de mensagens = %d\n", qtd);
 			break;/*Fim obter total de mensagens enviadas*/
 
 				  /*Obter total de mensagens recebidas*/
-		case 4:
-			escolhaInvalida = 1;
-			retorno = MEN_ObterNumMensagens(pPerfil, MEN_CondMsgRecebida, &qtd);
-			if (retorno != MEN_CondRetOK) {
-				printf("Erro ao obter numero de mensagens\n");
-				exit(1);
+		case 5:
+			escolhaMenu = 1;
+			if (qtd != 0) {
+				retorno = MEN_ObterNumMensagens(pPerfil, MEN_CondMsgRecebida, &qtd);
+				if (retorno != MEN_CondRetOK) {
+					printf("Erro ao obter numero de mensagens\n");
+					exit(1);
+				}
 			}
 			printf("Total de mensagens = %d\n", qtd);
 			break;/*Fim obter total de mensagens recebidas*/
-
 		default:
 			printf("Escolha invalida. Por favor, digite o menu novamente.\n\n");
 			break;
 		}
 	}
-	MENU_MenuInicial(pGrafo);
+	
+	printf("\nO que deseja fazer com suas mensagens?\n\n");
+
+	printf("1. Continuar em mensagem \n");
+	printf("2. Voltar para perfil\n");
+	printf("3. Voltar ao menu\n");
+
+	escolhaMenu = 0;
+
+	while (escolhaMenu == 0) {
+
+		printf("> ");
+		scanf("%d", &escolha);
+		printf("\n\n");
+
+		switch (escolha)
+		{
+			/*Continuar em mensagem*/
+		case 1:
+			MENU_MenuIrMensagens(pGrafo, pPerfil);
+			escolhaMenu = 1;
+			break; /*Fim Continuar em mensagem*/
+
+				   /*Voltar para perfil*/
+		case 2:
+			if (PER_ObterPerfil(pPerfil, email, primNome, ultNome, &dia, &mes, &ano, cidade) != PER_CondRetOK) {
+				printf("Erro ao obter perfil");
+				exit(1);
+			}
+			MENU_MenuIrPerfil(pGrafo, pPerfil, email, primNome, ultNome, cidade, dia, mes, ano);
+			escolhaMenu = 1;
+			break;/*Fim Voltar para perfil*/
+
+				  /*Voltar ao menu*/
+		case 3:
+			MENU_MenuInicial(pGrafo);
+			escolhaMenu = 1;
+			break;/*Fim Voltar ao menu*/
+		default:
+			printf("Escolha invalida. Por favor, digite o menu novamente.\n\n");
+			break;
+		}
+	}
 } /* Fim função: MENU - Menu 9 - Ir para mensagens */
 
   /***************************************************************************
@@ -1192,12 +1302,12 @@ void MENU_MenuModificarCidade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char 
 		
 		printf("Digite a nova cidade de %s: ",primNome);
 		i = 0;
-		scanf(" %c", &cidadeNovo[0]);
+		scanf(" %c", &cidadeNovo[i]);
 		while (cidadeNovo[i] != '\n' && i < 50) {
 			i++;
 			scanf("%c", &cidadeNovo[i]);
 		} 
-		cidade[i + 1] = '\0';
+		cidadeNovo[i] = '\0';
 		printf("\n\n");
 		
 		modCidade = PER_ModificaCidade(pGrafo, email, cidadeNovo);
