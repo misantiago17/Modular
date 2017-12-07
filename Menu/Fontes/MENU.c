@@ -49,15 +49,14 @@ void MENU_MenuModificarCidade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char 
 void MENU_MenuCriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPerfil2);
 void MENU_MenuExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPerfil2);
 
-void DestruirValor( void * pValor );
+
 
 int main () {
 	GRA_tppGrafo Grafo;
     
-	GRA_CriarGrafo(DestruirValor, &Grafo);
+	GRA_CriarGrafo(NULL, &Grafo);
 	
     MENU_MenuInicial(Grafo);
-    
     
     return 0;
 }
@@ -72,18 +71,17 @@ int main () {
 
 void MENU_MenuInicial(GRA_tppGrafo pGrafo) {
     
-    int menuEscolhido;
     int escolhaInvalida = 0;
-    int escolhaPerfilInvalido = 0;
-
+    int escolhaPerfilInvalido = 0, tentarNovamente;
+	char menuEscolhido;
 	char primNome[51], ultNome[51], emailPerfil[101], emailPerfilProcurado[101], cidade[51] = "Rio";
 	int dia = 25, mes = 01, ano = 1998;
 	int id;
 	PER_tpPerfil * pPerfil;
-	PER_tpCondRet condRetObterPerfil;
+	PER_tpCondRet condRetObterPerfil, retornoPer;
 	PER_tpCondRet condRetObterEmail;
-	
-    /*TIRAR ISSO DEPOIS *
+	GRA_tpCondRet retornoGra;
+    /*TIRAR ISSO DEPOIS */
 	strcpy(primNome, "Renan"); strcpy(ultNome, "Moreira"); strcpy(emailPerfil, "Awybin@gmail.com"); strcpy(cidade, "Rio de Janeiro");
 	dia = 25; mes = 01; ano = 1998;
 	PER_CriarPerfil(pGrafo, &pPerfil, emailPerfil, primNome, ultNome, dia, mes, ano, cidade);
@@ -98,7 +96,7 @@ void MENU_MenuInicial(GRA_tppGrafo pGrafo) {
 	printf("Perfil de %s foi criado!\n\n", primNome);
 	/*FIM: TIRAR ISSO DEPOIS */
     printf("===============================================================================\n");
-    printf("Bem-vindo a rede social blablabla\n\n");
+    printf("Bem-vindo a rede social\n\n");
     
 	printf("O que deseja fazer? \n\n");
 
@@ -106,22 +104,23 @@ void MENU_MenuInicial(GRA_tppGrafo pGrafo) {
 	printf("2. Ir para perfil \n");
 	printf("3. Ver numero de perfis cadastrados \n");
 	printf("4. Excluir todos os perfis da rede \n");
-	printf("5. Destruir rede social (nao implementado) \n\n");
+	printf("5. Destruir rede social\n\n");
+
 	while (escolhaInvalida == 0) {
 
 			printf("> ");
-			scanf("%d", &menuEscolhido);
+			scanf(" %c", &menuEscolhido);
 			printf("\n\n");
 
 			// Menu 3
-			if (menuEscolhido == 1) {
+			if (menuEscolhido == '1') {
 
 				MENU_MenuCriarPerfil(pGrafo);
 				escolhaInvalida = 1;
 
 				// Menu 2
 			}
-			else if (menuEscolhido == 2) {
+			else if (menuEscolhido == '2') {
 
 				while (escolhaPerfilInvalido == 0) {
 
@@ -131,9 +130,17 @@ void MENU_MenuInicial(GRA_tppGrafo pGrafo) {
 					condRetObterEmail = PER_BuscaEmail(pGrafo, emailPerfilProcurado, &pPerfil, &id);
 					if (condRetObterEmail == PER_CondRetEmailInexistente) {
 						printf("Usuario procurado nao existe. Por favor procure novamente. \n\n");
+						printf("Deseja tentar de novo? (0 = nao, 1 = sim)\n\n>");
+						scanf("%d", &tentarNovamente);
+						if (tentarNovamente != 1) {
+							printf("Retornando ao menu\n");
+							MENU_MenuInicial(pGrafo);
+						}
 					}
 					else if (condRetObterEmail == PER_CondRetRedeVazia) {
 						printf("A rede esta vazia. Crie um usuario e tente novamente. \n\n");
+						printf("Retornando ao menu\n");
+						MENU_MenuInicial(pGrafo);
 					}
 					else if (condRetObterEmail != PER_CondRetEmailJaCadastrado) {
 						printf("Retorno do modulo perfil inesperado. \n\n");
@@ -158,18 +165,35 @@ void MENU_MenuInicial(GRA_tppGrafo pGrafo) {
 
 				// Menu 4
 			}
-			else if (menuEscolhido == 3) {
+			else if (menuEscolhido == '3') {
 
 				MENU_MenuNumPerfis(pGrafo);
 				escolhaInvalida = 1;
 
 				// Menu 5
 			}
-			else if (menuEscolhido == 4) {
+			else if (menuEscolhido == '4') {
 
 				MENU_MenuExcluirTodosPerfis(pGrafo);
 				escolhaInvalida = 1;
 
+			}
+			else if (menuEscolhido == '5') {
+				escolhaInvalida = 1;
+
+				retornoPer = PER_ExcluirTodosPerfis(pGrafo);
+				if (retornoPer != PER_CondRetOK) {
+					printf("Ocorreu um erro inesperado no módulo perfis.\n");
+					exit(0);
+				}
+
+				retornoGra = GRA_DestruirGrafo(pGrafo);
+				if (retornoGra != GRA_CondRetOK) {
+					printf("Erro inesperado ao destruir Grafo\n");
+					exit(1);
+				}
+
+				printf("\nRede social destruida\n");
 			}
 			else {
 				printf("Escolha invalida de menu. Por favor, digite o menu novamente.\n\n");
@@ -187,15 +211,15 @@ void MENU_MenuInicial(GRA_tppGrafo pGrafo) {
 void MENU_MenuIrPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc) {
 	
 	int amigos;
-	int menuEscolhido;
-	int escolhaValida = 0;
+	int escolhaValida = 0, tentarNovamente;
 	int id2;
 	int escolhaEmailValida = 0;
 	
 	AMI_tpCondRet verificaAmigos;
 	PER_tpPerfil * pPerfil2;
 	PER_tpCondRet obtemEmailPerfil2;
-	char email2[101];
+	char email2[101], menuEscolhido;
+
 	//char ** listaEmailPerfis;
 	
 	verificaAmigos = AMI_VerificarNumAmigos(pGrafo, pPerfil, &amigos);
@@ -221,24 +245,25 @@ void MENU_MenuIrPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email
     printf("2. Procurar novos amigos \n");
     printf("3. Ver amigos \n");
     printf("4. Ir para mensagens \n");
-	printf("5. Excluir todas as amizades \n");
-    printf("6. Excluir perfil \n");
-    printf("7. Voltar para o menu \n\n");
-	
+	printf("5. Excluir uma amizade \n");
+	printf("6. Excluir todas as amizades \n");
+    printf("7. Excluir perfil \n");
+    printf("8. Voltar para o menu \n\n");
+
 	while (escolhaValida == 0){
 		
 		printf("> ");
-		scanf("%d", &menuEscolhido);
+		scanf(" %c", &menuEscolhido);
 		printf("\n\n");
 	
 		// Menu 6
-		if (menuEscolhido == 1) {
+		if (menuEscolhido == '1') {
 			
 			MENU_MenuModificarDados(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			escolhaValida = 1;
 			
 		// Menu 7
-		} else if (menuEscolhido == 2){
+		} else if (menuEscolhido == '2'){
 			while (escolhaEmailValida == 0){
 				printf("Digite o email do perfil que deseja encontrar: ");
 				scanf("%s", &email2);
@@ -247,6 +272,12 @@ void MENU_MenuIrPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email
 				obtemEmailPerfil2 = PER_BuscaEmail(pGrafo, email2, &pPerfil2, &id2);
 				if (obtemEmailPerfil2 == PER_CondRetEmailInexistente){
 					printf("O email procurado nao existe na rede. Por favor, procure outro email.\n\n");
+					printf("Deseja tentar de novo? (0 = nao, 1 = sim)\n\n>");
+					scanf("%d", &tentarNovamente);
+					if (tentarNovamente != 1) {
+						printf("Retornando ao perfil\n");
+						MENU_MenuIrPerfil(pGrafo,  pPerfil, email,  primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+					}
 				} else if (obtemEmailPerfil2 != PER_CondRetEmailJaCadastrado){
 					printf("Erro inesperado no modulo perfil.\n");
 					exit(0);
@@ -258,32 +289,62 @@ void MENU_MenuIrPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email
 			}
 		
 		// Menu 8
-		} else if (menuEscolhido == 3){
+		} else if (menuEscolhido == '3'){
 			
-			// Pegar todos os emails dos amigos do cara
+			// Pegar todos os emails dos amigos do usuario
 			MENU_MenuVerAmigos(pGrafo, pPerfil);
 			escolhaValida = 1;
 		
 		// Menu 9
-		} else if (menuEscolhido == 4){
+		} else if (menuEscolhido == '4'){
 			
 			MENU_MenuIrMensagens(pGrafo, pPerfil);
 			escolhaValida = 1;
 		
 		// Menu 10
-		} else if (menuEscolhido == 5){
+		}
+		else if (menuEscolhido == '5') {
 			
-			//MENU_Menu10(pGrafo,pPerfil);
+			while (escolhaEmailValida == 0) {
+				printf("Digite o email do amigo  que voce quer excluir\n");
+				scanf("%s", &email2);
+				printf("\n\n");
+
+				obtemEmailPerfil2 = PER_BuscaEmail(pGrafo, email2, &pPerfil2, &id2);
+				if (obtemEmailPerfil2 == PER_CondRetEmailInexistente) {
+					printf("O email procurado nao existe na rede. Por favor, procure outro email.\n\n");
+					printf("Deseja tentar de novo? (0 = nao, 1 = sim)\n\n>");
+					scanf("%d", &tentarNovamente);
+					if (tentarNovamente != 1) {
+						printf("Retornando ao perfil\n");
+						MENU_MenuIrPerfil(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+					}
+				}
+				else if (obtemEmailPerfil2 != PER_CondRetEmailJaCadastrado) {
+					printf("Erro inesperado no modulo perfil.\n");
+					exit(0);
+				}
+				else {
+					escolhaEmailValida = 1;
+					MENU_MenuExcluirAmizade(pGrafo, pPerfil, pPerfil2);
+					escolhaValida = 1;
+				}
+			}
+			 
+		}
+		else if (menuEscolhido == '6') {
+			
+			MENU_MenuExcluirTodasAmizades(pGrafo, pPerfil);
 			escolhaValida = 1;
 		
 		// Menu 11
-		} else if (menuEscolhido == 6){
+		} else if (menuEscolhido == '7'){
 		
 			MENU_MenuExcluirPerfil(pGrafo,email);
 			escolhaValida = 1;
 		
 		// Menu 1
-		} else if (menuEscolhido == 7){
+		} else if (menuEscolhido == '8'){
 			
 			MENU_MenuInicial(pGrafo);
 			escolhaValida = 1;
@@ -309,7 +370,7 @@ void MENU_MenuCriarPerfil(GRA_tppGrafo pGrafo){
 
 	int dadosValidos = 0, escolhaEmailValida = 0;
 	
-	int menuEscolhido;
+	char menuEscolhido;
 	int menuValido = 0;
 	
 	PER_tpPerfil * pPerfil, *pPerfil2;
@@ -367,16 +428,16 @@ void MENU_MenuCriarPerfil(GRA_tppGrafo pGrafo){
 				printf("2. Procurar novos amigos \n");
 				printf("3. Voltar ao menu \n\n");
 				printf("> ");
-				scanf("%d", &menuEscolhido);
+				scanf(" %c", &menuEscolhido);
 				printf("\n\n");
 				
 				// Menu 1
-				if (menuEscolhido == 1){
+				if (menuEscolhido == '1'){
 					menuValido = 1;
 					MENU_MenuModificarDados(pGrafo, pPerfil, email, primNome, ultNome, cidade, dia, mes, ano);
 				
 				// Menu 2
-				} else if (menuEscolhido == 2){
+				} else if (menuEscolhido == '2'){
 					while (escolhaEmailValida == 0) {
 						printf("Digite o email do perfil que deseja encontrar: ");
 						scanf("%s", &email2);
@@ -398,7 +459,7 @@ void MENU_MenuCriarPerfil(GRA_tppGrafo pGrafo){
 					}
 					
 				} 
-				else if (menuEscolhido == 3) {
+				else if (menuEscolhido == '3') {
 					menuValido = 1;
 					printf("Retornando ao menu\n\n");
 					MENU_MenuInicial(pGrafo);
@@ -421,37 +482,19 @@ void MENU_MenuCriarPerfil(GRA_tppGrafo pGrafo){
 void MENU_MenuNumPerfis(GRA_tppGrafo pGrafo){
 	
 	int perfisCadastrados;
-	int menuEscolhido;
-	int escolhaValida = 0;
 	
 	PER_tpCondRet numPerfis;
 	
 	numPerfis =  PER_NumeroPerfis(pGrafo, &perfisCadastrados);
 	if (numPerfis != PER_CondRetOK){
-		printf("Ocorreu um erro inesperado no módulo perfis.\n");
+		printf("Ocorreu um erro inesperado no modulo perfis.\n");
 		exit(0);
 	}
 	
 	printf("===============================================================================\n");
-	printf("Há %d perfis cadastrados na rede.\n\n",perfisCadastrados);
+	printf("Ha %d perfis cadastrados na rede.\n\n", perfisCadastrados);
 	
-	printf("1. Voltar para o menu\n\n");
-	
-	while (escolhaValida == 0){
-		
-		printf("> ");
-		scanf("%d", &menuEscolhido);
-		printf("\n");
-	
-		if (menuEscolhido == 1){
-			escolhaValida = 1;
-			MENU_MenuInicial(pGrafo);
-			
-		} else {
-			printf("Escolha invalida de menu. Por favor, digite o menu novamente.\n\n");
-		}
-		
-	}
+	MENU_MenuInicial(pGrafo);
 	
 } /* Fim função: MENU - Menu 4 - Ver Número de Perfis na Rede */
 
@@ -461,9 +504,6 @@ void MENU_MenuNumPerfis(GRA_tppGrafo pGrafo){
  *****/
  
 void MENU_MenuExcluirTodosPerfis(GRA_tppGrafo pGrafo){
-	
-	int menuEscolhido;
-	int escolhaValida = 0;
 	
 	PER_tpCondRet excluirPerfis;
 	
@@ -476,23 +516,9 @@ void MENU_MenuExcluirTodosPerfis(GRA_tppGrafo pGrafo){
 	printf("===============================================================================\n");
 	printf("Todos os perfis foram excluídos.\n\n");
 	
-	printf("1. Voltar para o menu\n\n");
+	printf("Voltando para o menu\n\n");
 	
-	while (escolhaValida == 0){
-		
-		printf("> ");
-		scanf("%d", &menuEscolhido);
-		printf("\n");
-	
-		if (menuEscolhido == 1){
-			escolhaValida = 1;
-			MENU_MenuInicial(pGrafo);
-			
-		} else {
-			printf("Escolha invalida de menu. Por favor, digite o menu novamente.\n\n");
-		}
-		
-	}
+	MENU_MenuInicial(pGrafo);
 } /* Fim função: MENU - Menu 5 - Excluir todos os perfis da rede */
 
 /***************************************************************************
@@ -503,7 +529,7 @@ void MENU_MenuExcluirTodosPerfis(GRA_tppGrafo pGrafo){
 void MENU_MenuModificarDados(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email, char * primNome, char * ultNome, char * cidade, int diaNasc, int mesNasc, int anoNasc){
 	
 	int escolhaInvalida = 0;
-	int menuEscolhido;
+	char menuEscolhido;
 	
 	printf("===============================================================================\n");
     printf("Bem-vindo ao perfil de %s\n\n",primNome);
@@ -525,40 +551,40 @@ void MENU_MenuModificarDados(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char *
 	while (escolhaInvalida == 0){
 		
 		printf("> ");
-		scanf("%d", &menuEscolhido);
+		scanf(" %c", &menuEscolhido);
 		printf("\n\n");
 				
 		// Menu 12
-		if (menuEscolhido == 1) {
+		if (menuEscolhido == '1') {
 			
 			MENU_MenuModificarEmail(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			escolhaInvalida = 1;
 			
 		// Menu 13
-		} else if (menuEscolhido == 2){
+		} else if (menuEscolhido == '2'){
 			MENU_MenuModificarNome(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			escolhaInvalida = 1;
 		
 		// Menu 14
-		} else if (menuEscolhido == 3){
+		} else if (menuEscolhido == '3'){
 			
 			MENU_MenuModificarData(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			escolhaInvalida = 1;
 		
 		// Menu 15
-		} else if (menuEscolhido == 4){
+		} else if (menuEscolhido == '4'){
 			
 			MENU_MenuModificarCidade(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			escolhaInvalida = 1;
 		
 		// Menu 2
-		} else if (menuEscolhido == 5){
+		} else if (menuEscolhido == '5'){
 			
 			MENU_MenuIrPerfil(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			escolhaInvalida = 1;
 		
 		// Menu 1
-		} else if (menuEscolhido == 6){
+		} else if (menuEscolhido == '6'){
 		
 			MENU_MenuInicial(pGrafo);
 			escolhaInvalida = 1;
@@ -578,8 +604,9 @@ void MENU_MenuModificarDados(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char *
 
 void MENU_MenuProcurarNovosAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pPerfil2){
 	
-	int amigos, verificaAmigos, escolhaValida = 0, menuEscolhido;
-	
+	int amigos, verificaAmigos, escolhaValida = 0;
+	char menuEscolhido;
+
 	char emailPerfil[101];
     char primNome[51];
     char ultNome[51];
@@ -607,7 +634,7 @@ void MENU_MenuProcurarNovosAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, 
 	}
 	
 	condRetObterPerfil1 = PER_ObterPerfil(pPerfil1, emailPerfil1, primNome1, ultNome1, &dia1, &mes1, &ano1, cidade1);
-	if (condRetObterPerfil != PER_CondRetOK){
+	if (condRetObterPerfil1 != PER_CondRetOK){
 		printf("Erro inesperado no modulo perfil.");
 		exit(0);
 	}
@@ -639,23 +666,23 @@ void MENU_MenuProcurarNovosAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, 
 	while (escolhaValida == 0){
 		
 		printf("> ");
-		scanf("%d", &menuEscolhido);
+		scanf(" %c", &menuEscolhido);
 		printf("\n\n");
 		
 		//Menu 16
-		if (menuEscolhido == 1){
+		if (menuEscolhido == '1'){
 			MENU_MenuCriarAmizade(pGrafo, pPerfil2, pPerfil1);
 			escolhaValida = 1;
 		// Menu 2
-		} else if (menuEscolhido == 2){
+		} else if (menuEscolhido == '2'){
 			MENU_MenuIrPerfil(pGrafo, pPerfil2, emailPerfil, primNome, ultNome, cidade, dia, mes, ano);
 			escolhaValida = 1;
 		// Menu 2
-		} else if (menuEscolhido == 3){
+		} else if (menuEscolhido == '3'){
 			MENU_MenuIrPerfil(pGrafo, pPerfil1, emailPerfil1, primNome1, ultNome1, cidade1, dia1, mes1, ano1);
 			escolhaValida = 1;
 		// Menu 1
-		} else if (menuEscolhido == 4){
+		} else if (menuEscolhido == '4'){
 			
 			MENU_MenuInicial(pGrafo);
 			escolhaValida = 1;
@@ -677,8 +704,8 @@ void MENU_MenuVerAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil) {
 	AMI_tpCondRet retornoAmi;
 	PER_tpPerfil **vetAmigos;
 	PER_tpCondRet retornoPer;
-	int qtd, i, escolhaValida = 0, menuEscolhido;
-	char email[101], primeiroNome[51], ultimoNome[51], cidade[51];
+	int qtd, i, escolhaValida = 0;
+	char email[101], primeiroNome[51], ultimoNome[51], cidade[51], menuEscolhido;
 	int diaNasc, mesNasc, anoNasc;
 
 	retornoAmi = AMI_VerificarNumAmigos(pGrafo, pPerfil, &qtd);
@@ -687,7 +714,7 @@ void MENU_MenuVerAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil) {
 			printf("Falha no malloc\n");
 			exit(1);
 		}
-
+		
 		retornoAmi = AMI_ArmazenarAmizades(pGrafo, pPerfil, vetAmigos);
 		if (retornoAmi == AMI_NaoPossuiAmizades) {
 			printf("Nao possui amizades\n");
@@ -711,6 +738,7 @@ void MENU_MenuVerAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil) {
 			}
 			printf("%s\n", email);
 		}
+		free(vetAmigos);
 	}
 	else if (retornoAmi == AMI_NaoPossuiAmizades) {
 		printf("Nao possui amigos\n");
@@ -734,15 +762,15 @@ void MENU_MenuVerAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil) {
 	while (escolhaValida == 0) {
 
 		printf("> ");
-		scanf("%d", &menuEscolhido);
+		scanf(" %c", &menuEscolhido);
 		printf("\n\n");
 
-		if (menuEscolhido == 1) {
+		if (menuEscolhido == '1') {
 			escolhaValida = 1;
 			MENU_MenuIrPerfil(pGrafo, pPerfil, email, primeiroNome, ultimoNome, cidade, diaNasc, mesNasc, anoNasc);
 
 		}
-		else if (menuEscolhido == 2) {
+		else if (menuEscolhido == '2') {
 			escolhaValida = 1;
 			MENU_MenuInicial(pGrafo);
 
@@ -761,10 +789,10 @@ void MENU_MenuVerAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil) {
 
 void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 	int escolhaMenu = 0;
-	int escolha, qtd, i, dia, mes, ano, envMsg;
+	int qtd, i, dia, mes, ano, envMsg;
 	MEN_tpCondRet retorno;
 	MEN_tpCondMsg *vetTipos;
-	char **vetEmails, **vetMensagens, email[101], primNome[51], ultNome[51], cidade[51], mensagem[401];
+	char **vetEmails, **vetMensagens, email[101], primNome[51], ultNome[51], cidade[51], mensagem[401], escolha;
 	PER_tpPerfil *pPerfil2;
 	PER_tpCondRet retornoPer;
 	AMI_tpCondRet retornoAmi;
@@ -827,17 +855,18 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 	printf("3. Obter total de mensagens\n");
 	printf("4. Obter total de mensagens enviadas\n");
 	printf("5. Obter total de mensagens recebidas\n");
+	printf("6. Voltar ao menu\n");
 
 	while (escolhaMenu == 0) {
 
 		printf("> ");
-		scanf("%d", &escolha);
+		scanf(" %c", &escolha);
 		printf("\n\n");
 
 		switch (escolha)
 		{
 			/*Escrever mensagem*/
-		case 1:
+		case '1':
 			envMsg = 1;
 			escolhaMenu = 1;
 			printf("Digite o email do amigo que voce quer conversar\n");
@@ -884,7 +913,7 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 			break;/*Fim Escrever mensagem*/
 
 			/*Excluir mensagem*/
-		case 2:
+		case '2':
 			escolhaMenu = 1;
 			printf("Escreva o numero da mensagem que deseja excluir:");
 			scanf("%d", &i);
@@ -901,13 +930,13 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 			break; /*Fim excluir mensagem*/
 
 				   /*Obter total de mensagens*/
-		case 3:
+		case '3':
 			escolhaMenu = 1;
 			printf("Total de mensagens = %d\n", qtd);
 			break;/*Fim obter total de mensagens*/
 
 				  /*Obter total de mensagens enviadas*/
-		case 4:
+		case '4':
 			escolhaMenu = 1;
 			if (qtd != 0) {
 				retorno = MEN_ObterNumMensagens(pPerfil, MEN_CondMsgEnviada, &qtd);
@@ -920,7 +949,7 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 			break;/*Fim obter total de mensagens enviadas*/
 
 				  /*Obter total de mensagens recebidas*/
-		case 5:
+		case '5':
 			escolhaMenu = 1;
 			if (qtd != 0) {
 				retorno = MEN_ObterNumMensagens(pPerfil, MEN_CondMsgRecebida, &qtd);
@@ -931,13 +960,27 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 			}
 			printf("Total de mensagens = %d\n", qtd);
 			break;/*Fim obter total de mensagens recebidas*/
+			/*Voltar ao menu*/
+		case '6':
+			free(vetTipos);
+			for (i = 0; i < qtd; i++) {
+				free(vetEmails[i]);
+			}
+			free(vetEmails);
+			for (i = 0; i < qtd; i++) {
+				free(vetMensagens[i]);
+			}
+			free(vetMensagens);
+			MENU_MenuInicial(pGrafo);
+			escolhaMenu = 1;
+			break;/*Fim voltar ao menu*/
 		default:
 			printf("Escolha invalida. Por favor, digite o menu novamente.\n\n");
 			break;
 		}
 	}
 	
-	printf("\nO que deseja fazer com suas mensagens?\n\n");
+	printf("\nO que deseja fazer?\n\n");
 
 	printf("1. Continuar em mensagem \n");
 	printf("2. Voltar para perfil\n");
@@ -948,13 +991,13 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 	while (escolhaMenu == 0) {
 
 		printf("> ");
-		scanf("%d", &escolha);
+		scanf(" %c", &escolha);
 		printf("\n\n");
 
 		switch (escolha)
 		{
 			/*Continuar em mensagem*/
-		case 1:
+		case '1':
 			free(vetTipos);
 			for (i = 0; i < qtd; i++) {
 				free(vetEmails[i]);
@@ -969,7 +1012,7 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 			break; /*Fim Continuar em mensagem*/
 
 				   /*Voltar para perfil*/
-		case 2:
+		case '2':
 			free(vetTipos);
 			for (i = 0; i < qtd; i++) {
 				free(vetEmails[i]);
@@ -988,7 +1031,7 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 			break;/*Fim Voltar para perfil*/
 
 				  /*Voltar ao menu*/
-		case 3:
+		case '3':
 			free(vetTipos);
 			for (i = 0; i < qtd; i++) {
 				free(vetEmails[i]);
@@ -1015,14 +1058,43 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 
 void MENU_MenuExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 	AMI_tpCondRet retorno;
+	PER_tpCondRet retornoPer;
+	int escolhaMenu = 0, dia, mes, ano;
+	char email[101], primNome[51], ultNome[51], cidade[51], test;
 
 	retorno = AMI_ExcluirTodasAmizades(pGrafo, pPerfil);
 	if (retorno != MEN_CondRetOK) {
 		printf("Erro ao excluir todas amziades\n");
 		exit(1);
 	}
-	printf("Amizades excluidas");
-	MENU_MenuInicial(pGrafo);
+	printf("Amizades excluidas\n\n");
+
+	
+
+	while (escolhaMenu == 0) {
+		printf("O que deseja fazer?\n\n");
+
+		printf("1. Voltar para perfil\n");
+		printf("2. Voltar ao menu inicial\n>");
+		scanf(" %c", &test);
+		if (test == '1') {
+			escolhaMenu = 1;
+			retornoPer = PER_ObterPerfil(pPerfil, email, primNome, ultNome, &dia, &mes, &ano, cidade);
+			if (retornoPer != PER_CondRetOK) {
+				printf("Retorno inesperado de obter perfil\n");
+				exit(1);
+			}
+			MENU_MenuIrPerfil(pGrafo, pPerfil, email, primNome, ultNome, cidade, dia, mes, ano);
+		}
+		else if (test == '2') {
+			escolhaMenu = 1;
+			MENU_MenuInicial(pGrafo);
+		}
+		else {
+			printf("Menu esclhido invalido, tente novamente\n");
+		}
+	}
+	
 } /* Fim função: MENU - Menu 10 - Excluir Todas as Amizades */
 
 /***************************************************************************
@@ -1033,10 +1105,7 @@ void MENU_MenuExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) 
 void MENU_MenuExcluirPerfil(GRA_tppGrafo pGrafo, char * email){
 	
 	PER_tpCondRet excluirPerfil;
-	
-	int menuEscolhido;
-	int escolhaValida = 0;
-	
+
 	excluirPerfil = PER_ExcluirPerfil(pGrafo, email);
 	if (excluirPerfil != PER_CondRetOK){
 		printf("Erro inesperado no modulo perfil");
@@ -1046,21 +1115,7 @@ void MENU_MenuExcluirPerfil(GRA_tppGrafo pGrafo, char * email){
 	printf("===============================================================================\n");
     printf("O perfil foi excluido.\n\n");
 	
-	while (escolhaValida == 0){
-		
-		printf("> ");
-		scanf("%d", &menuEscolhido);
-		printf("\n\n");
-		
-		if (menuEscolhido == 1){
-			escolhaValida = 1;
-			MENU_MenuInicial(pGrafo);
-			
-		} else {
-			printf("Escolha invalida de menu. Por favor, digite o menu novamente.\n\n");
-		}
-		
-	}
+	MENU_MenuInicial(pGrafo);
 	
 	
 } /* Fim função: MENU - Menu 11 - Excluir Perfil */
@@ -1074,7 +1129,7 @@ void MENU_MenuModificarEmail(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char *
 	
 	char emailNovo[101];
 	int avaliaEmail = 0;
-	int menuEscolhido;
+	char menuEscolhido;
 	int escolhaValida = 0;
 	
 	PER_tpCondRet modEmail;
@@ -1111,18 +1166,18 @@ void MENU_MenuModificarEmail(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char *
 	while (escolhaValida == 0){
 		
 		printf("> ");
-		scanf("%d", &menuEscolhido);
+		scanf(" %c", &menuEscolhido);
 		printf("\n\n");
 		
-		if (menuEscolhido == 1){
+		if (menuEscolhido == '1'){
 			escolhaValida = 1;
 			MENU_MenuModificarDados(pGrafo, pPerfil, emailNovo, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			
-		} else if (menuEscolhido == 2){
+		} else if (menuEscolhido == '2'){
 			escolhaValida = 1;
 			MENU_MenuIrPerfil(pGrafo, pPerfil, emailNovo, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
 			
-		} else if (menuEscolhido == 3){
+		} else if (menuEscolhido == '3'){
 			escolhaValida = 1;
 			MENU_MenuInicial(pGrafo);
 			
@@ -1143,7 +1198,7 @@ void MENU_MenuModificarNome(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * 
 	
 	char primNomeNovo[51], ultNomeNovo[51];
 	int avaliaNome = 0;
-	int menuEscolhido;
+	char menuEscolhido;
 	int escolhaValida = 0;
 	
 	PER_tpCondRet modNome;
@@ -1181,18 +1236,18 @@ void MENU_MenuModificarNome(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * 
 	while (escolhaValida == 0){
 		
 		printf("> ");
-		scanf("%d", &menuEscolhido);
+		scanf(" %c", &menuEscolhido);
 		printf("\n\n");
 		
-		if (menuEscolhido == 1){
+		if (menuEscolhido == '1'){
 			escolhaValida = 1;
 			MENU_MenuModificarDados(pGrafo, pPerfil, email, primNomeNovo, ultNomeNovo, cidade, diaNasc, mesNasc, anoNasc);
 			
-		} else if (menuEscolhido == 2){
+		} else if (menuEscolhido == '2'){
 			escolhaValida = 1;
 			MENU_MenuIrPerfil(pGrafo, pPerfil, email, primNomeNovo, ultNomeNovo, cidade, diaNasc, mesNasc, anoNasc);
 			
-		} else if (menuEscolhido == 3){
+		} else if (menuEscolhido == '3'){
 			escolhaValida = 1;
 			MENU_MenuInicial(pGrafo);
 			
@@ -1213,7 +1268,7 @@ void MENU_MenuModificarData(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * 
 	int mesNovo = -1;
 	int anoNovo = -1;
 	int avaliaData = 0;
-	int menuEscolhido;
+	char menuEscolhido;
 	int escolhaValida = 0;
 	
 	PER_tpCondRet modData;
@@ -1257,18 +1312,18 @@ void MENU_MenuModificarData(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * 
 	while (escolhaValida == 0){
 		
 		printf("> ");
-		scanf("%d", &menuEscolhido);
+		scanf(" %c", &menuEscolhido);
 		printf("\n\n");
 		
-		if (menuEscolhido == 1){
+		if (menuEscolhido == '1'){
 			escolhaValida = 1;
 			MENU_MenuModificarDados(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNovo, mesNovo, anoNovo);
 			
-		} else if (menuEscolhido == 2){
+		} else if (menuEscolhido == '2'){
 			escolhaValida = 1;
 			MENU_MenuIrPerfil(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNovo, mesNovo, anoNovo);
 			
-		} else if (menuEscolhido == 3){
+		} else if (menuEscolhido == '3'){
 			escolhaValida = 1;
 			MENU_MenuInicial(pGrafo);
 			
@@ -1288,7 +1343,7 @@ void MENU_MenuModificarCidade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char 
 	
 	char cidadeNovo[51];
 	int avaliaCidade = 0, i;
-	int menuEscolhido;
+	char menuEscolhido;
 	int escolhaValida = 0;
 	
 	PER_tpCondRet modCidade;
@@ -1329,18 +1384,18 @@ void MENU_MenuModificarCidade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char 
 	while (escolhaValida == 0){
 		
 		printf("> ");
-		scanf("%d", &menuEscolhido);
+		scanf(" %c", &menuEscolhido);
 		printf("\n\n");
 		
-		if (menuEscolhido == 1){
+		if (menuEscolhido == '1'){
 			escolhaValida = 1;
 			MENU_MenuModificarDados(pGrafo, pPerfil, email, primNome, ultNome, cidadeNovo, diaNasc, mesNasc, anoNasc);
 			
-		} else if (menuEscolhido == 2){
+		} else if (menuEscolhido == '2'){
 			escolhaValida = 1;
 			MENU_MenuIrPerfil(pGrafo, pPerfil, email, primNome, ultNome, cidadeNovo, diaNasc, mesNasc, anoNasc);
 			
-		} else if (menuEscolhido == 3){
+		} else if (menuEscolhido == '3'){
 			escolhaValida = 1;
 			MENU_MenuInicial(pGrafo);
 			
@@ -1359,9 +1414,9 @@ void MENU_MenuModificarCidade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char 
 
 void MENU_MenuCriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpPerfil * pPerfil2){
 	
-	int menuEscolhido;
+	char menuEscolhido;
 	int escolhaValida = 0;
-	int aceitou = 0;
+	char aceitou = 0;
 	int solicitacaoInvalida = 0;
 	
 	AMI_tpCondRet criarAmizade;
@@ -1402,13 +1457,13 @@ void MENU_MenuCriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpP
 	while(solicitacaoInvalida == 0){
 		
 		printf("%s, aceita ser amigo de %s? (0 para nao, 1 para sim)",primNome1, primNome);
-		scanf("%d", &aceitou);
+		scanf(" %c", &aceitou);
 		printf("\n\n");
 		
-		if (aceitou == 0){
+		if (aceitou == '0'){
 			solicitacaoInvalida = 1;
 			printf("%s negou a solicitação de amizade.\n\n",primNome);
-		} else if (aceitou == 1){
+		} else if (aceitou == '1'){
 			solicitacaoInvalida = 1;
 			criarAmizade = AMI_CriarAmizade(pGrafo, pPerfil1, pPerfil2, AMI_SolicitacaoAceita);
 			if (criarAmizade == AMI_AmizadeJaExiste){
@@ -1430,25 +1485,25 @@ void MENU_MenuCriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpP
 	printf("O que deseja fazer? \n\n");
     
     printf("1. Voltar para o perfil de %s \n",primNome);
-	printf("2. Voltar para o perfil de %s \n",primNome1);
+	printf("2. Ir para o perfil de %s \n",primNome1);
     printf("3. Voltar para o menu \n");
     
 	
 	while (escolhaValida == 0){
 		
 		printf("> ");
-		scanf("%d", &menuEscolhido);
+		scanf(" %c", &menuEscolhido);
 		printf("\n\n");
 		
-		if (menuEscolhido == 1){
+		if (menuEscolhido == '1'){
 			escolhaValida = 1;
 			MENU_MenuIrPerfil(pGrafo, pPerfil2, emailPerfil, primNome, ultNome, cidade, dia, mes, ano);
 			
-		} else if (menuEscolhido == 2){
+		} else if (menuEscolhido == '2'){
 			escolhaValida = 1;
 			MENU_MenuIrPerfil(pGrafo, pPerfil1, emailPerfil1, primNome1, ultNome1, cidade1, dia1, mes1, ano1);
 			
-		} else if (menuEscolhido == 3){
+		} else if (menuEscolhido == '3'){
 			escolhaValida = 1;
 			MENU_MenuInicial(pGrafo);
 			
@@ -1467,7 +1522,7 @@ void MENU_MenuCriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpP
 
 void MENU_MenuExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tpPerfil * pPerfil2) {
 	
-	int menuEscolhido;
+	char menuEscolhido;
 	int escolhaValida = 0;
 	
 	char emailPerfil[101];
@@ -1487,46 +1542,47 @@ void MENU_MenuExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tp
     int ano1;
 	
 	PER_tpCondRet condRetObterPerfil;
-	PER_tpCondRet condRetObterPerfil1;
+	AMI_tpCondRet retornoAmi;
 	
-	
-	condRetObterPerfil = PER_ObterPerfil(pPerfil2, emailPerfil, primNome, ultNome, &dia, &mes, &ano, cidade);
+	condRetObterPerfil = PER_ObterPerfil(pPerfil, emailPerfil, primNome, ultNome, &dia, &mes, &ano, cidade);
+	if (condRetObterPerfil != PER_CondRetOK) {
+		printf("Erro inesperado no modulo perfil.");
+		exit(0);
+	}
+
+	condRetObterPerfil = PER_ObterPerfil(pPerfil2, emailPerfil1, primNome1, ultNome1, &dia1, &mes1, &ano1, cidade1);
 	if (condRetObterPerfil != PER_CondRetOK){
 		printf("Erro inesperado no modulo perfil.");
 		exit(0);
 	}
-	
-	condRetObterPerfil1 = PER_ObterPerfil(pPerfil, emailPerfil1, primNome1, ultNome1, &dia1, &mes1, &ano1, cidade1);
-	if (condRetObterPerfil != PER_CondRetOK){
-		printf("Erro inesperado no modulo perfil.");
-		exit(0);
-	}
-	
+
+	retornoAmi = AMI_ExcluirAmizade(pGrafo, pPerfil, pPerfil2);
+
 	printf("===============================================================================\n");
-    printf("A Amizade entre %s e %s foi criada.\n\n",emailPerfil,emailPerfil1);
+    printf("A Amizade entre %s e %s foi excluida.\n\n",emailPerfil,emailPerfil1);
 	
 	printf("O que deseja fazer? \n\n");
     
-    printf("2. Voltar para o perfil de %s \n",primNome);
-	printf("2. Voltar para o perfil de %s \n",primNome1);
+    printf("1. Voltar para o perfil de %s \n",primNome);
+	printf("2. Ir para o perfil de %s \n", primNome1);
     printf("3. Voltar para o menu \n");
     
 	
 	while (escolhaValida == 0){
 		
 		printf("> ");
-		scanf("%d", &menuEscolhido);
+		scanf(" %c", &menuEscolhido);
 		printf("\n\n");
 		
-		if (menuEscolhido == 1){
+		if (menuEscolhido == '1'){
 			escolhaValida = 1;
-			MENU_MenuIrPerfil(pGrafo, pPerfil2, emailPerfil, primNome, ultNome, cidade, dia, mes, ano);
+			MENU_MenuIrPerfil(pGrafo, pPerfil, emailPerfil, primNome, ultNome, cidade, dia, mes, ano);
 			
-		} else if (menuEscolhido == 2){
+		} else if (menuEscolhido == '2'){
 			escolhaValida = 1;
 			MENU_MenuIrPerfil(pGrafo, pPerfil, emailPerfil1, primNome1, ultNome1, cidade1, dia1, mes1, ano1);
 			
-		} else if (menuEscolhido == 3){
+		} else if (menuEscolhido == '3'){
 			escolhaValida = 1;
 			MENU_MenuInicial(pGrafo);
 			
@@ -1536,18 +1592,6 @@ void MENU_MenuExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tp
 		
 	}
 } /* Fim função: MENU - Menu 17 - Excluir Amizade */
-
-/***************************************************************************
- *  Função: MENU  &Destriur Valor
- *
- *****/
- 
-   void DestruirValor( void * pValor )
-   {
-      free( pValor ) ;
-   } /* Fim função: TAMI -Destruir valor */
-
-
 
  
  
