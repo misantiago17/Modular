@@ -9,11 +9,13 @@
 *
 *  Projeto: INF 1301 / 1628 Automatização dos testes de módulos C
 *  Gestor:  LES/DI/PUC-Rio
-*  Autores: gb, ms, rm
+*  Autores: gb, ms, Renan Moreira (rm)
 *
 *  $HA Histórico de evolução:
-*     Versão  Autor    Data     Observações
-*     9      rm/ms/gb   16/10/2017 	revisoes finais e pequenas correcoes
+*     Versão  Autor    Data     	Observações
+*     	3      rm    01/12/2017 	Novas correções
+*     	2      rm    30/11/2017 	Pequenas mudanças
+*     	1      rm    29/11/2017 	Inicio do desenvolvimento
 *
 ***************************************************************************/
 
