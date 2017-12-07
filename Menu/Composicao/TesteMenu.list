@@ -25,10 +25,10 @@ Módulos do construto: ..\Composicao\TesteMenu.comp
 Estatísticas do construto
 
    Estatísticas do arquivo: amizade.c
-      Total linhas:             316
-      Linhas de código:         170
-      Linhas de comentário:      82
-      Linhas em branco:          70
+      Total linhas:             363
+      Linhas de código:         169
+      Linhas de comentário:     107
+      Linhas em branco:          93
    Arquivos de inclusão de que necessita
       amizade.h
       grafo.h
@@ -36,10 +36,10 @@ Estatísticas do construto
       perfil.h
 
    Estatísticas do arquivo: amizade.h
-      Total linhas:             246
+      Total linhas:             241
       Linhas de código:          32
-      Linhas de comentário:     170
-      Linhas em branco:          44
+      Linhas de comentário:     168
+      Linhas em branco:          41
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
@@ -123,28 +123,28 @@ Estatísticas do construto
       perfil.h
 
    Estatísticas do arquivo: mensagem.c
-      Total linhas:             453
-      Linhas de código:         310
-      Linhas de comentário:      86
-      Linhas em branco:          62
+      Total linhas:             584
+      Linhas de código:         272
+      Linhas de comentário:     171
+      Linhas em branco:         155
    Arquivos de inclusão de que necessita
       mensagem.h
 
    Estatísticas do arquivo: mensagem.h
-      Total linhas:             306
+      Total linhas:             301
       Linhas de código:          35
-      Linhas de comentário:     225
-      Linhas em branco:          46
+      Linhas de comentário:     219
+      Linhas em branco:          47
    Arquivos em que é incluído
       mensagem.c
       menu.c
       perfil.c
 
    Estatísticas do arquivo: menu.c
-      Total linhas:            1622
-      Linhas de código:        1168
-      Linhas de comentário:     138
-      Linhas em branco:         325
+      Total linhas:            1555
+      Linhas de código:        1093
+      Linhas de comentário:     150
+      Linhas em branco:         321
    Arquivos de inclusão de que necessita
       amizade.h
       grafo.h
@@ -189,10 +189,10 @@ Estatísticas do construto
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      3719
+         Total linhas do tipo:      3709
          Linhas de código:           361
-         Linhas de comentário:      2853
-         Linhas em branco:           505
+         Linhas de comentário:      2845
+         Linhas em branco:           503
          Arquivos deste tipo:          9
 
   Tipo: obj      Path: ..\Objetos
@@ -217,17 +217,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      4797
-         Linhas de código:          3047
-         Linhas de comentário:       878
-         Linhas em branco:           937
+         Total linhas do tipo:      4908
+         Linhas de código:          2933
+         Linhas de comentário:      1000
+         Linhas em branco:          1049
          Arquivos deste tipo:          6
 
 Totais para todo o construto TesteMenu
 
-   Total linhas:              8516
-   Linhas de código:          3408
-   Linhas de comentário:      3731
-   Linhas em branco:          1442
+   Total linhas:              8617
+   Linhas de código:          3294
+   Linhas de comentário:      3845
+   Linhas em branco:          1552
    Arquivos processados:        15
 

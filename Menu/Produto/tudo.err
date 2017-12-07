@@ -1,6 +1,5 @@
 grafo.c
 menu.c
-..\Fontes\menu.c(797) : warning C4189: 'j' : local variable is initialized but not referenced
 amizade.c
 mensagem.c
 perfil.c

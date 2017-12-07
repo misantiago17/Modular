@@ -83,7 +83,7 @@ void MENU_MenuInicial(GRA_tppGrafo pGrafo) {
 	PER_tpCondRet condRetObterPerfil;
 	PER_tpCondRet condRetObterEmail;
 	
-    /*TIRAR ISSO DEPOIS */
+    /*TIRAR ISSO DEPOIS *
 	strcpy(primNome, "Renan"); strcpy(ultNome, "Moreira"); strcpy(emailPerfil, "Awybin@gmail.com"); strcpy(cidade, "Rio de Janeiro");
 	dia = 25; mes = 01; ano = 1998;
 	PER_CriarPerfil(pGrafo, &pPerfil, emailPerfil, primNome, ultNome, dia, mes, ano, cidade);
@@ -580,18 +580,18 @@ void MENU_MenuProcurarNovosAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, 
 	
 	int amigos, verificaAmigos, escolhaValida = 0, menuEscolhido;
 	
-	char * emailPerfil;
-    char * primNome;
-    char * ultNome;
-    char * cidade;
+	char emailPerfil[101];
+    char primNome[51];
+    char ultNome[51];
+    char cidade[51];
     int dia;
     int mes;
     int ano;
 	
-	char * emailPerfil1;
-    char * primNome1;
-    char * ultNome1;
-    char * cidade1;
+	char emailPerfil1[101];
+    char primNome1[51];
+    char ultNome1[51];
+    char cidade1[51];
     int dia1;
     int mes1;
     int ano1;
@@ -599,39 +599,6 @@ void MENU_MenuProcurarNovosAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, 
 	PER_tpCondRet condRetObterPerfil;
 	PER_tpCondRet condRetObterPerfil1;
 	
-	if ((emailPerfil = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Não há espaço para armazenar email do perfil");
-		exit(0);
-	}
-	if ((primNome = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Não há espaço para armazenar primeiro nome do perfil");
-		exit(0);
-	}
-	if ((ultNome = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Não há espaço para armazenar ultimo nome do perfil");
-		exit(0);
-	}
-	if ((cidade = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Não há espaço para armazenar ultimo nome do cidade");
-		exit(0);
-	}
-	
-	if ((emailPerfil1 = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Não há espaço para armazenar email do perfil");
-		exit(0);
-	}
-	if ((primNome1 = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Não há espaço para armazenar primeiro nome do perfil");
-		exit(0);
-	}
-	if ((ultNome1 = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Não há espaço para armazenar ultimo nome do perfil");
-		exit(0);
-	}
-	if ((cidade1 = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Não há espaço para armazenar ultimo nome do cidade");
-		exit(0);
-	}
 	
 	condRetObterPerfil = PER_ObterPerfil(pPerfil2, emailPerfil, primNome, ultNome, &dia, &mes, &ano, cidade);
 	if (condRetObterPerfil != PER_CondRetOK){
@@ -794,7 +761,7 @@ void MENU_MenuVerAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil *pPerfil) {
 
 void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 	int escolhaMenu = 0;
-	int escolha, qtd, i, j = 0, dia, mes, ano, envMsg;
+	int escolha, qtd, i, dia, mes, ano, envMsg;
 	MEN_tpCondRet retorno;
 	MEN_tpCondMsg *vetTipos;
 	char **vetEmails, **vetMensagens, email[101], primNome[51], ultNome[51], cidade[51], mensagem[401];
@@ -812,7 +779,7 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 		printf("Falha no malloc\n");
 		exit(1);
 	}
-	if ((vetEmails = (char **)malloc(sizeof(char)*qtd)) == NULL) {
+	if ((vetEmails = (char **)malloc(sizeof(char *)*qtd)) == NULL) {
 		printf("Falha no malloc\n");
 		exit(1);
 	}
@@ -822,7 +789,7 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 			exit(1);
 		}
 	}
-	if ((vetMensagens = (char **)malloc(sizeof(char)*qtd)) == NULL) {
+	if ((vetMensagens = (char **)malloc(sizeof(char *)*qtd)) == NULL) {
 		printf("Falha no malloc\n");
 		exit(1);
 	}
@@ -839,6 +806,10 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 	else if (retorno == MEN_CondRetOK) {
 		for (i = 0; i < qtd; i++) {
 			printf("Mensagem %d:\n", i);
+			if(vetTipos[i] == MEN_CondMsgEnviada)
+				printf("Enviada para: %s\t", vetEmails[i]);
+			else if (vetTipos[i] == MEN_CondMsgRecebida)
+				printf("Enviada por: %s\t", vetEmails[i]);
 			printf("%s", vetMensagens[i]);
 			printf("\n");
 		}
@@ -919,7 +890,7 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 			scanf("%d", &i);
 			while (i < 0 || i > qtd) {
 				printf("Numero invalido, digite novamente:");
-				scanf("%d", i);
+				scanf("%d", &i);
 			}
 			retorno = MEN_ExcluirMensagem(pPerfil, vetEmails[i], vetTipos[i], vetMensagens[i]);
 			if (retorno != MEN_CondRetOK) {
@@ -984,12 +955,30 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 		{
 			/*Continuar em mensagem*/
 		case 1:
+			free(vetTipos);
+			for (i = 0; i < qtd; i++) {
+				free(vetEmails[i]);
+			}
+			free(vetEmails);
+			for (i = 0; i < qtd; i++) {
+				free(vetMensagens[i]);
+			}
+			free(vetMensagens);
 			MENU_MenuIrMensagens(pGrafo, pPerfil);
 			escolhaMenu = 1;
 			break; /*Fim Continuar em mensagem*/
 
 				   /*Voltar para perfil*/
 		case 2:
+			free(vetTipos);
+			for (i = 0; i < qtd; i++) {
+				free(vetEmails[i]);
+			}
+			free(vetEmails);
+			for (i = 0; i < qtd; i++) {
+				free(vetMensagens[i]);
+			}
+			free(vetMensagens);
 			if (PER_ObterPerfil(pPerfil, email, primNome, ultNome, &dia, &mes, &ano, cidade) != PER_CondRetOK) {
 				printf("Erro ao obter perfil");
 				exit(1);
@@ -1000,6 +989,15 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 
 				  /*Voltar ao menu*/
 		case 3:
+			free(vetTipos);
+			for (i = 0; i < qtd; i++) {
+				free(vetEmails[i]);
+			}
+			free(vetEmails);
+			for (i = 0; i < qtd; i++) {
+				free(vetMensagens[i]);
+			}
+			free(vetMensagens);
 			MENU_MenuInicial(pGrafo);
 			escolhaMenu = 1;
 			break;/*Fim Voltar ao menu*/
@@ -1368,59 +1366,25 @@ void MENU_MenuCriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpP
 	
 	AMI_tpCondRet criarAmizade;
 	
-	char * emailPerfil;
-    char * primNome;
-    char * ultNome;
-    char * cidade;
+	char emailPerfil[101];
+    char primNome[51];
+    char ultNome[51];
+    char cidade[51];
     int dia;
     int mes;
     int ano;
 	
-	char * emailPerfil1;
-    char * primNome1;
-    char * ultNome1;
-    char * cidade1;
+	char emailPerfil1[101];
+    char primNome1[51];
+    char ultNome1[51];
+    char cidade1[51];
     int dia1;
     int mes1;
     int ano1;
 	
 	PER_tpCondRet condRetObterPerfil;
 	PER_tpCondRet condRetObterPerfil1;
-	
-	if ((emailPerfil = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Nao ha espaco para armazenar email do perfil");
-		exit(0);
-	}
-	if ((primNome = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Nao ha espaco para armazenar primeiro nome do perfil");
-		exit(0);
-	}
-	if ((ultNome = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Nao ha espaco para armazenar ultimo nome do perfil");
-		exit(0);
-	}
-	if ((cidade = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Nao ha espaco para armazenar ultimo nome do cidade");
-		exit(0);
-	}
-	
-	if ((emailPerfil1 = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Nao ha espaco para armazenar email do perfil");
-		exit(0);
-	}
-	if ((primNome1 = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Nao ha espaco para armazenar primeiro nome do perfil");
-		exit(0);
-	}
-	if ((ultNome1 = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Nao ha espaco para armazenar ultimo nome do perfil");
-		exit(0);
-	}
-	if ((cidade1 = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Nao ha espaco para armazenar ultimo nome do cidade");
-		exit(0);
-	}
-	
+
 	condRetObterPerfil = PER_ObterPerfil(pPerfil2, emailPerfil, primNome, ultNome, &dia, &mes, &ano, cidade);
 	if (condRetObterPerfil != PER_CondRetOK){
 		printf("Erro inesperado no modulo perfil.");
@@ -1506,18 +1470,18 @@ void MENU_MenuExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tp
 	int menuEscolhido;
 	int escolhaValida = 0;
 	
-	char * emailPerfil;
-    char * primNome;
-    char * ultNome;
-    char * cidade;
+	char emailPerfil[101];
+    char primNome[51];
+    char ultNome[51];
+    char cidade[51];
     int dia;
     int mes;
     int ano;
 	
-	char * emailPerfil1;
-    char * primNome1;
-    char * ultNome1;
-    char * cidade1;
+	char emailPerfil1[101];
+    char primNome1[51];
+    char ultNome1[51];
+    char cidade1[51];
     int dia1;
     int mes1;
     int ano1;
@@ -1525,39 +1489,6 @@ void MENU_MenuExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, PER_tp
 	PER_tpCondRet condRetObterPerfil;
 	PER_tpCondRet condRetObterPerfil1;
 	
-	if ((emailPerfil = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Não há espaço para armazenar email do perfil");
-		exit(0);
-	}
-	if ((primNome = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Não há espaço para armazenar primeiro nome do perfil");
-		exit(0);
-	}
-	if ((ultNome = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Não há espaço para armazenar ultimo nome do perfil");
-		exit(0);
-	}
-	if ((cidade = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Não há espaço para armazenar ultimo nome do cidade");
-		exit(0);
-	}
-	
-	if ((emailPerfil1 = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Não há espaço para armazenar email do perfil");
-		exit(0);
-	}
-	if ((primNome1 = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Não há espaço para armazenar primeiro nome do perfil");
-		exit(0);
-	}
-	if ((ultNome1 = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Não há espaço para armazenar ultimo nome do perfil");
-		exit(0);
-	}
-	if ((cidade1 = (char *)malloc(sizeof(char)*50)) == NULL){
-		printf("Não há espaço para armazenar ultimo nome do cidade");
-		exit(0);
-	}
 	
 	condRetObterPerfil = PER_ObterPerfil(pPerfil2, emailPerfil, primNome, ultNome, &dia, &mes, &ano, cidade);
 	if (condRetObterPerfil != PER_CondRetOK){
