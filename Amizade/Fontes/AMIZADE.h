@@ -11,19 +11,22 @@
 *
 *  Projeto: INF 1301 / Desenvolvimento de uma rede de relacionamentos em C
 *  Gestor:  DI/PUC-Rio
-*  Autores: Michelle Santiago (ms)
+*  Autores: Michelle Santiago (ms), Gabriel Busquim (gb), Renan Moreira (rm)
 *
 *  $HA HistÛrico de evoluçÁ„o:
 *   Vers„o    Autor   	 Data     	ObservaçÁıes
-*     1        ms      14/11/2017 	criaçÁ„o do arquivo
+*	  7		   ms      06/12/2017	pequenas correÁıes
+*	  6		   gb 	   01/12/2017	modificaÁ„o nos parametros das funÁıes
+*	  5		   ms	   29/11/2017	mudanÁa de retorno das funÁıes
+*     4		   ms	   28/11/2017	reajustes de erros mostrados dos testes
+*	  3		   ms	   25/11/2017	modificaÁ„o da funÁ„o verificarNumAmigos
 *	  2		   ms	   20/11/2017	alteraÁ„o no retorno de funÁıes e tipo de alguns par‚metros
-*     3        ms      06/12/2017   modificação da descrição de retorno de parâmetros de funções
+*     1        ms      14/11/2017 	criaçÁ„o do arquivo
 *
 *  $ED DescriçÁ„o do mÛdulo
 *
 *    O mÛdulo Amizade utiliza as funçÁıes do mÛdulo grafo para criar amizades entre usu·rios, ou seja,
 *    arestas entre vÈrtices do grafo.
-*	 
 *
 ***************************************************************************/
 
@@ -33,15 +36,8 @@
 #define AMIZADE_EXT extern
 #endif
 
-/***** DeclaraÁıes exportadas pelo mÛdulo *****/
-
-/* Tipo referÍncia para uma amizade */
-
-//typedef struct AMI_tagAmizade AMI_tpAmizade;
-
 /***********************************************************************
 *  $TC Tipo de dados: AMI CondiçÁıes de retorno
-*
 *
 *  $ED DescriçÁ„o do tipo
 *     CondiçÁıes de retorno das funçÁıes de amizade
@@ -81,7 +77,6 @@ typedef enum {
 
 /***********************************************************************
  *  $TC Tipo de dados: AMI SolicitaçÁ„o
- *
  *
  *  $ED DescriçÁ„o do tipo
  *     Retorna se um usu·rio aceitou ou n„o a solicitaçÁ„o de amizade de um outro usu·rio
@@ -133,7 +128,7 @@ AMI_tpCondRet AMI_CriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER
 *     Exclui uma amizade entre dois usu·rios.
 *
 *  $EP Par‚metros
-*     pGrafo        - grafo no qual se encontra a rede de usuários
+*     pGrafo        - grafo no qual se encontra a rede de usu·rios
 *	  Usuario1 		- ponteiro para o primeiro usu·rio que realizou a exclus„o da amizade.
 *     Usuario2      - ponteiro para o segundo usu·rio que ter· a amizade excluÌda.
 *
@@ -152,13 +147,13 @@ AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, P
 *  $FC FunçÁ„o: AMI  &Verificar N˙mero de Amigos
 *
 *  $ED DescriçÁ„o da funçÁ„o
-*     Retorna o número de amigos que um usu·rio possui.
+*     Retorna o n˙mero de amigos que um usu·rio possui.
 *
 *  $EP Par‚metros
-*     pGrafo        - grafo no qual se encontra a rede de usuários
+*     pGrafo        - grafo no qual se encontra a rede de usu·rios
 *     Usuario1      - ponteiro para o usu·rio que solicitou o n˙mero de amizades.
 *     numAmizades   - vari·vel que ir· armazenar o n˙mero de amizades encontradas,
-*                   esse ponteiro já deve estar alocado dinâmicamente.
+*                   esse ponteiro j· deve estar alocado din‚micamente.
 *
 *  $FV Valor retornado
 *      AMI_CondRetOK
@@ -170,6 +165,7 @@ AMI_tpCondRet AMI_ExcluirAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, P
 
 AMI_tpCondRet AMI_VerificarNumAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, int* numAmizades);
 
+
 /***********************************************************************
 *  $FC FunçÁ„o: AMI  &Armazenar Amizades
 *
@@ -179,8 +175,8 @@ AMI_tpCondRet AMI_VerificarNumAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario
 *  $EP Par‚metros
 *     pGrafo        - grafo no qual se encontra a rede de usuários
 *     Usuario1      - ponteiro para o usu·rio que solicitou as informaçÁıes das amizades
-*     PerfilAmigos  - lista de perfis no qual será armazenados os amigos do usuário.
-*                    Esta lista já deve estar alocada dinâmicamente antes da chamada da função.
+*     PerfilAmigos  - lista de perfis no qual ser· armazenados os amigos do usu·rio.
+*                    Esta lista j· deve estar alocada din‚micamente antes da chamada da função.
 *
 *  $FV Valor retornado
 *      AMI_CondRetOK
@@ -191,8 +187,8 @@ AMI_tpCondRet AMI_VerificarNumAmigos(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario
 *
 ***********************************************************************/
 
-
 AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil **PerfilAmigos);
+
 
 /***********************************************************************
 *  $FC FunçÁ„o: AMI  &Excluir Todas as Amizades
@@ -215,6 +211,7 @@ AMI_tpCondRet AMI_ArmazenarAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1
 
 AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1);
 
+
 /***********************************************************************
 *  $FC FunçÁ„o: AMI  &Verificar Amizade
 *
@@ -222,9 +219,9 @@ AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuar
 *     Verifica se o Usuario1 È amigo do Usuario2
 *
 *  $EP Par‚metros
-*     pGrafo    - grafo no qual se encontra a rede de usuários
+*     pGrafo    - grafo no qual se encontra a rede de usu·rios
 *     Usuario1  - ponteiro para o primeiro usu·rio que solicitou a verificaçÁ„o
-*	  Usuario2  - ponteiro para o segundo usu·rio na quala  amizade ser· solicitada
+*	  Usuario2  - ponteiro para o segundo usu·rio na qual a amizade ser· solicitada
 *
 *  $FV Valor retornado
 *      AMI_CondRetOK
@@ -234,13 +231,11 @@ AMI_tpCondRet AMI_ExcluirTodasAmizades(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuar
 *
 ***********************************************************************/
 
-
 AMI_tpCondRet AMI_VerificarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * Usuario1, PER_tpPerfil * Usuario2);
 
 
 #undef AMIZADE_EXT
-
-/********** Fim do mÛdulo de definiçÁ„o: AMI  MÛdulo Amizade **********/
-
 #else
 #endif
+
+/********** Fim do mÛdulo de definiçÁ„o: AMI  MÛdulo Amizade **********/
