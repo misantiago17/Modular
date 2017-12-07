@@ -15,7 +15,7 @@ Data			Horas Trabalhadas	Tipo de Tarefa				Descrição da Tarefa
 02/12/2017		02:00			Codificar Modulo			Desenvolvimento do modulo menu
 03/12/2017		03:45			Codificar Modulo			Desenvolvimento de mais funções do modulo menu
 03/12/2017		02:45			Realizar testes				Testes e conserto de funções do modulo menu
-06/12/2017		03:15			Revisar projeto				Revis‹o da descri‹o e fun›es do .h e .c dos m—dulos amizade e menu
+06/12/2017		05:15			Revisar projeto				Revisão da descrição e funções do .h e .c dos módulos amizade e menu
 
 - estudar
 - especificar os módulos
