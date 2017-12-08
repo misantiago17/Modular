@@ -1,11 +1,11 @@
 /***************************************************************************
-*  $MCI Módulo de implementação: TGRA Teste grafo com cabeça
+*  $MCI Módulo de implementação: TPER Teste do perfil
 *
-*  Arquivo gerado:              TesteGrafo.c
-*  Letras identificadoras:      TGRA
+*  Arquivo gerado:              TestePerfil.c
+*  Letras identificadoras:      TPER
 *
 *  Nome da base de software:    Arcabouço para a automação de testes de programas redigidos em C
-*  Arquivo da base de software: D:\AUTOTEST\PROJETOS\Grafo.BSW
+*  Arquivo da base de software: D:\AUTOTEST\PROJETOS\Perfil.BSW
 *
 *  Projeto: INF 1301 / 1628 Automatização dos testes de módulos C
 *  Gestor:  LES/DI/PUC-Rio
@@ -58,14 +58,26 @@ static int ValidarInxPerfil(int inxPerfil);
 /*****  Código das funções exportadas pelo módulo  *****/
 /***********************************************************************
 *
-*  $FC Função: TGRA &Testar perfil
+*  $FC Função: TPER &Testar perfil
 *
 *  $ED Descrição da função
 *
 *     Comandos disponíveis:
 *
-*     =resetteste - anula o vetor de grafos. Provoca vazamento de memória
-*
+*     =resetteste 
+*		  - anula o vetor de perfis. Provoca vazamento de memória. Destroi o grafo e cria um novo
+*	  =criarperfil                   inxPerfil email primeiroNome ultimoNome diaNasc mesNasc anoNasc cidade CondRetEsp
+*	  =excluirperfil				 email CondRetEsp
+*	  =obterperfil					 inxPerfil emailEsp primeiroNomeEsp ultimoNomeEsp diaNascEsp mesNascEsp anoNascEsp cidadeEsp CondRetEsp
+*	  =numeroperfis					 qtdEsp CondRetEsp
+*	  =modificaemail				 email emailNovo CondRetEsp
+*	  =modificanome					 email primeiroNome ultimoNome CondRetEsp
+*	  =modificadata					 email emailNovo CondRetEsp
+*	  =modificacidade				 email cidade CondRetEsp
+*	  =buscaemail					 email inxPerfil idEsp CondRetEsp
+*	  =excluirtodosperfis			 CondRetEsp
+*	  =retornalismensagens			 inxPerfil CondRetEsp
+*	  =retornaidperfil				 inxPerfil idEsp CondRetEsp
 *
 ***********************************************************************/
 

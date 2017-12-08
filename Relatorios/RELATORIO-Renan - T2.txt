@@ -19,4 +19,3 @@ Data                          Horas Trabalhadas                Tipo Tarefa      
 15/10 				    0.5 horas 		      Revisar módulo           Comentarios no grafo.h
 16/10 				    6 horas 	              Revisar módulo           Revisão geral do projeto
 16/10 				    3 horas 	              Realizar testes          Testes finais e correções de erros
-
