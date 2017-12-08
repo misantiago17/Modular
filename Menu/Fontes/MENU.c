@@ -81,20 +81,7 @@ void MENU_MenuInicial(GRA_tppGrafo pGrafo) {
 	PER_tpCondRet condRetObterPerfil, retornoPer;
 	PER_tpCondRet condRetObterEmail;
 	GRA_tpCondRet retornoGra;
-    /*TIRAR ISSO DEPOIS */
-	strcpy(primNome, "Renan"); strcpy(ultNome, "Moreira"); strcpy(emailPerfil, "Awybin@gmail.com"); strcpy(cidade, "Rio de Janeiro");
-	dia = 25; mes = 01; ano = 1998;
-	PER_CriarPerfil(pGrafo, &pPerfil, emailPerfil, primNome, ultNome, dia, mes, ano, cidade);
-	printf("Perfil de %s foi criado!\n\n", primNome);
-	strcpy(primNome, "aaa"); strcpy(ultNome, "bbb"); strcpy(emailPerfil, "aaa@bbb.com"); strcpy(cidade, "Macaus");
-	dia = 10; mes = 01; ano = 1998;
-	PER_CriarPerfil(pGrafo, &pPerfil, emailPerfil, primNome, ultNome, dia, mes, ano, cidade);
-	printf("Perfil de %s foi criado!\n\n", primNome);
-	strcpy(primNome, "ccc"); strcpy(ultNome, "ddd"); strcpy(emailPerfil, "ccc@ddd.com"); strcpy(cidade, "Meca");
-	dia = 10; mes = 01; ano = 1998;
-	PER_CriarPerfil(pGrafo, &pPerfil, emailPerfil, primNome, ultNome, dia, mes, ano, cidade);
-	printf("Perfil de %s foi criado!\n\n", primNome);
-	/*FIM: TIRAR ISSO DEPOIS */
+    
     printf("===============================================================================\n");
     printf("Bem-vindo a rede social\n\n");
     
@@ -194,6 +181,7 @@ void MENU_MenuInicial(GRA_tppGrafo pGrafo) {
 				}
 
 				printf("\nRede social destruida\n");
+				exit(0);
 			}
 			else {
 				printf("Escolha invalida de menu. Por favor, digite o menu novamente.\n\n");
