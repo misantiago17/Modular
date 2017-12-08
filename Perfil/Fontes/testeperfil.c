@@ -406,7 +406,6 @@ void DestruirValor(void * pValor)
 	if (retorno != PER_CondRetOK)
 		return;
 	LIS_DestruirLista(mensagens);
-	free(perfil);
 } /* Fim função: TPER -Destruir valor */
 
   /***********************************************************************
