@@ -41,4 +41,4 @@ Data                          Horas Trabalhadas                Tipo Tarefa      
 05/12				    1 hora		     Codificar módulo		funcao: MENU_MenuExcluirTodasAmizades
 06/12				    3.5 horas		     Realizar testes		testes e correcoes no modulo menu
 07/12				    3.5 horas		     Realizar testes		testes e correcoes no modulo menu
-07/12				    6 horas		     Realizar testes		testes e correcoes no modulo menu
+07/12				    7 horas		     Realizar testes		testes e correcoes no modulo menu
