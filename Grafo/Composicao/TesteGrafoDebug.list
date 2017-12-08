@@ -50,10 +50,10 @@ Estatísticas do construto
       testegrafo.c
 
    Estatísticas do arquivo: grafo.c
-      Total linhas:            1124
-      Linhas de código:         796
-      Linhas de comentário:     160
-      Linhas em branco:         182
+      Total linhas:            1321
+      Linhas de código:         941
+      Linhas de comentário:     183
+      Linhas em branco:         212
    Arquivos de inclusão de que necessita
       cespdin.h
       conta.h
@@ -63,10 +63,10 @@ Estatísticas do construto
       tst_espc.h
 
    Estatísticas do arquivo: grafo.h
-      Total linhas:             423
-      Linhas de código:          40
-      Linhas de comentário:     329
-      Linhas em branco:          54
+      Total linhas:             479
+      Linhas de código:          54
+      Linhas de comentário:     364
+      Linhas em branco:          61
    Arquivos em que é incluído
       grafo.c
       testegrafo.c
@@ -97,10 +97,10 @@ Estatísticas do construto
       lista.c
 
    Estatísticas do arquivo: testegrafo.c
-      Total linhas:             725
-      Linhas de código:         442
-      Linhas de comentário:     114
-      Linhas em branco:         188
+      Total linhas:             735
+      Linhas de código:         444
+      Linhas de comentário:     116
+      Linhas em branco:         195
    Arquivos de inclusão de que necessita
       cespdin.h
       generico.h
@@ -121,10 +121,10 @@ Estatísticas do construto
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      3244
-         Linhas de código:           290
-         Linhas de comentário:      2501
-         Linhas em branco:           453
+         Total linhas do tipo:      3300
+         Linhas de código:           304
+         Linhas de comentário:      2536
+         Linhas em branco:           460
          Arquivos deste tipo:          7
 
   Tipo: obj      Path: ..\Objetos
@@ -149,17 +149,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      2394
-         Linhas de código:          1507
-         Linhas de comentário:       413
-         Linhas em branco:           524
+         Total linhas do tipo:      2601
+         Linhas de código:          1654
+         Linhas de comentário:       438
+         Linhas em branco:           561
          Arquivos deste tipo:          3
 
 Totais para todo o construto TesteGrafoDebug
 
-   Total linhas:              5638
-   Linhas de código:          1797
-   Linhas de comentário:      2914
-   Linhas em branco:           977
+   Total linhas:              5901
+   Linhas de código:          1958
+   Linhas de comentário:      2974
+   Linhas em branco:          1021
    Arquivos processados:        10
 

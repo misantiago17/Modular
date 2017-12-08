@@ -4,7 +4,7 @@ GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
 Composição do construto: ..\Composicao\TesteMenu.comp
 
    Nome do Construto:           TesteMenu
-   Diretório base:              C:\Users\Usuario\Documents\GitHub\Modular\Menu\Composicao
+   Diretório base:              C:\Users\Lorene Busquim\Documents\Modular\Menu\Composicao
 
    Arquivo composição:          ..\Composicao\TesteMenu.comp
    Arquivo plataforma:          gmake.parm
@@ -25,10 +25,10 @@ Módulos do construto: ..\Composicao\TesteMenu.comp
 Estatísticas do construto
 
    Estatísticas do arquivo: amizade.c
-      Total linhas:             363
-      Linhas de código:         169
-      Linhas de comentário:     107
-      Linhas em branco:          93
+      Total linhas:             321
+      Linhas de código:         170
+      Linhas de comentário:      87
+      Linhas em branco:          70
    Arquivos de inclusão de que necessita
       amizade.h
       grafo.h
@@ -36,10 +36,10 @@ Estatísticas do construto
       perfil.h
 
    Estatísticas do arquivo: amizade.h
-      Total linhas:             241
-      Linhas de código:          32
-      Linhas de comentário:     168
-      Linhas em branco:          41
+      Total linhas:             247
+      Linhas de código:          33
+      Linhas de comentário:     165
+      Linhas em branco:          49
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
@@ -123,27 +123,27 @@ Estatísticas do construto
       perfil.h
 
    Estatísticas do arquivo: mensagem.c
-      Total linhas:             584
-      Linhas de código:         272
-      Linhas de comentário:     171
-      Linhas em branco:         155
+      Total linhas:             454
+      Linhas de código:         310
+      Linhas de comentário:      86
+      Linhas em branco:          63
    Arquivos de inclusão de que necessita
       mensagem.h
 
    Estatísticas do arquivo: mensagem.h
-      Total linhas:             301
+      Total linhas:             306
       Linhas de código:          35
-      Linhas de comentário:     219
-      Linhas em branco:          47
+      Linhas de comentário:     225
+      Linhas em branco:          46
    Arquivos em que é incluído
       mensagem.c
       menu.c
       perfil.c
 
    Estatísticas do arquivo: menu.c
-      Total linhas:            1585
-      Linhas de código:        1148
-      Linhas de comentário:     132
+      Total linhas:            1518
+      Linhas de código:        1065
+      Linhas de comentário:     144
       Linhas em branco:         314
    Arquivos de inclusão de que necessita
       amizade.h
@@ -153,10 +153,10 @@ Estatísticas do construto
       perfil.h
 
    Estatísticas do arquivo: perfil.c
-      Total linhas:             747
-      Linhas de código:         427
-      Linhas de comentário:     184
-      Linhas em branco:         150
+      Total linhas:             744
+      Linhas de código:         373
+      Linhas de comentário:     242
+      Linhas em branco:         141
    Arquivos de inclusão de que necessita
       grafo.h
       lista.h
@@ -189,10 +189,10 @@ Estatísticas do construto
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      3709
-         Linhas de código:           361
-         Linhas de comentário:      2845
-         Linhas em branco:           503
+         Total linhas do tipo:      3720
+         Linhas de código:           362
+         Linhas de comentário:      2848
+         Linhas em branco:           510
          Arquivos deste tipo:          9
 
   Tipo: obj      Path: ..\Objetos
@@ -217,17 +217,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      4938
-         Linhas de código:          2988
-         Linhas de comentário:       982
-         Linhas em branco:          1042
+         Total linhas do tipo:      4696
+         Linhas de código:          2890
+         Linhas de comentário:       947
+         Linhas em branco:           918
          Arquivos deste tipo:          6
 
 Totais para todo o construto TesteMenu
 
-   Total linhas:              8647
-   Linhas de código:          3349
-   Linhas de comentário:      3827
-   Linhas em branco:          1545
+   Total linhas:              8416
+   Linhas de código:          3252
+   Linhas de comentário:      3795
+   Linhas em branco:          1428
    Arquivos processados:        15
 

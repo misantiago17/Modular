@@ -1,0 +1,29 @@
+
+!!! Inicio dos testes
+!!!      Construto sob teste: ..\Produto\Trab4-8
+!!!      Script de teste:     ..\Scripts\TesteControleEspaco.script
+
+!!!    0  Linha:     1  // Script:    TesteGrafo.script 
+!!!    0  Linha:     2  // Autor:     Gabriel 
+!!!    0  Linha:     3  // Data:      6/12/2017 
+!!!    0  Linha:     4  // Proposito: Testes de controle de memoria 
+    7  == Inicializar valores
+   17  == struct 0
+   23  == struct 1
+   44  ==Testando falta de memoria ao criar grafo
+!!!    0  Linha:    47  Simula falta de memoria. 
+   50  ==Testando falta de memoria ao inserir vertice
+!!!    0  Linha:    53  Limita numero de espacos alocados. 
+   56  ==Inserindo tres vertices,criando uma aresta entre os vertices 1 e 2, e verificando se o numero de espacos alocados esta de acordo com o esperado
+   63  ==Excluindo um vertice e verificando se o numero de espacos alocados
+   67  ==Destruindo o grafo verificando se o numero de espacos alocado e 0
+
+!!! Número de linhas lidas:          78
+!!! Número de casos de teste:         8
+!!! Número comandos corretos:        44
+!!! Número de falhas encontradas:     0
+
+!!! Não foram encontrados problemas
+
+
+!!! Numero de espacos ainda alocados: 0

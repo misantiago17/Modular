@@ -64,11 +64,11 @@
   285  == contar quantas arestas o vertice 1 possui e retornar seus indices
   291  == excluir as duas arestas
   297  == contar quantas arestas o vertice 1 possui
-  303  == excluir grafo
+  302  == excluir grafo
 
-!!! Número de linhas lidas:         304
+!!! Número de linhas lidas:         303
 !!! Número de casos de teste:        58
-!!! Número comandos corretos:       169
+!!! Número comandos corretos:       168
 !!! Número de falhas encontradas:     0
 
 !!! Não foram encontrados problemas

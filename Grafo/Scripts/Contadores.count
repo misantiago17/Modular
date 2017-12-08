@@ -1,8 +1,7 @@
 ////////////////////////////////////////////////
 //
 // Arquivo de declaracao de contadores
-// Conta modulo GRAFO
-//
+// Para o script TesteContador.script
 ///////////////////////////////////////////////
     
 	GRA_CriarGrafo
@@ -76,6 +75,53 @@
 	GRA_CriarVertice: Vertice criado com sucesso
 	GRA_DestruirElemVertices
 	GRA_DestruirElemVertice
+	GRA_VerificarEstrutura   
+	GRA_VerificarEstrutura: Erro estrutural na cabeca do grafo 
+	GRA_VerificarEstrutura: Grafo nao possui vertices
+	GRA_VerificarEstrutura: Erro estrutural no vertice 
+	GRA_VerificarEstrutura: Estrutura do grafo esta correta
+	GRA_DeturparGrafo  
+	GRA_DeturparGrafo: Grafo e NULL 
+	GRA_DeturparGrafo: Deturpando tipo da cabeca do grafo  
+	GRA_DeturparGrafo: Deturpando elemento corrente do grafo  
+	GRA_DeturparGrafo: Deturpando a lista de vertices do grafo  
+	GRA_DeturparGrafo: Deturpando o primeiro elemento da lista de vertices do grafo  
+	GRA_DeturparGrafo: Deturpando tipo do vertice corrente  
+	GRA_DeturparGrafo: Deturpando ponteiro para a lista de arestas do vertice corrente  
+	GRA_DeturparGrafo: Deturpando primeiro elemento da lista de arestas do vertice corrente  
+	GRA_DeturparGrafo: Chegou ao fim da funcao  
+	GRA_VerificarCabeca  
+	GRA_VerificarCabeca: Cabeca do grafo e NULL  
+	GRA_VerificarCabeca: Controlador de Espaco acusou erro \=-1
+	GRA_VerificarCabeca: Cabeca tem tipo diferente de GRA_tpGrafo
+	GRA_VerificarCabeca: Elemento corrente e NULL,porem existem vertices alocados no grafo
+	GRA_VerificarCabeca: Referencia para a lista de vertices foi perdida
+	GRA_VerificarCabeca: Numero de vertices e diferente do esperado
+	GRA_VerificarCabeca: Cabeca possui estrutura correta
+	GRA_VerificarElemento
+	GRA_VerificarElemento: Tipo do vertice e diferente do esperado
+	GRA_VerificarElemento: Referencia para a lista de arestas foi perdida
+	GRA_VerificarElemento: Numero de arestas e diferente do esperado
+	GRA_VerificarElemento: Vertice nao possui arestas
+	GRA_VerificarElemento: Entrou no tratador
+	GRA_VerificarElemento: Vertice possui estrutura correta
+	GRA_TratarVerticeSemAresta
+	GRA_TratarVerticeSemAresta: Encontrou vertice
+	GRA_TratarVerticeSemAresta: Estrutura do grafo foi reparada
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 	
 	
 
