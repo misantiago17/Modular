@@ -172,7 +172,7 @@ void MENU_MenuInicial(GRA_tppGrafo pGrafo) {
 
 				retornoPer = PER_ExcluirTodosPerfis(pGrafo);
 				if (retornoPer != PER_CondRetOK) {
-					printf("Ocorreu um erro inesperado no módulo perfis.\n");
+					printf("Ocorreu um erro inesperado no modulo perfis.\n");
 					exit(0);
 				}
 
@@ -401,7 +401,7 @@ void MENU_MenuCriarPerfil(GRA_tppGrafo pGrafo){
 	
 		criarPerfil = PER_CriarPerfil(pGrafo, &pPerfil, email, primNome, ultNome, dia, mes, ano, cidade);
 		if (criarPerfil == PER_CondRetEmailJaCadastrado){
-			printf("Ja existe um usuario cadastrado na rede com esse email. Por favor cria um com email diferente.\n\n");
+			printf("Ja existe um usuario cadastrado na rede com esse email. Por favor crie um com email diferente.\n\n");
 		} else if (criarPerfil == PER_CondRetEmailInvalido || criarPerfil == PER_CondRetNomeInvalido || criarPerfil == PER_CondRetDataInvalida || criarPerfil == PER_CondRetCidadeInvalida){
 			printf("Os dados inseridos nao sao validos. Por favor tente registrar com dados diferentes.\n\n");
 		} else if (criarPerfil != PER_CondRetOK){
@@ -505,12 +505,12 @@ void MENU_MenuExcluirTodosPerfis(GRA_tppGrafo pGrafo){
 	
 	excluirPerfis = PER_ExcluirTodosPerfis(pGrafo);
 	if (excluirPerfis != PER_CondRetOK){
-		printf("Ocorreu um erro inesperado no módulo perfis.\n");
+		printf("Ocorreu um erro inesperado no modulo perfil.\n");
 		exit(0);
 	}
 	
 	printf("===============================================================================\n");
-	printf("Todos os perfis foram excluídos.\n\n");
+	printf("Todos os perfis foram excluidos.\n\n");
 	
 	printf("Voltando para o menu\n\n");
 	
@@ -901,7 +901,7 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 								printf("Erro ao enviar mensagem\n");
 								exit(1);
 							}
-							printf("Deseja continuar enviando mensagens? (0 = nao, 1 = sim)");
+							printf("Deseja continuar enviando mensagens? (0 = nao, 1 = sim)\n>");
 							scanf("%d", &envMsg);
 						}
 					}
@@ -911,10 +911,10 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 			/*Excluir mensagem*/
 		case '2':
 			escolhaMenu = 1;
-			printf("Escreva o numero da mensagem que deseja excluir:");
+			printf("Escreva o numero da mensagem que deseja excluir: ");
 			scanf("%d", &i);
 			while (i < 0 || i > qtd) {
-				printf("Numero invalido, digite novamente:");
+				printf("Numero invalido, digite novamente: ");
 				scanf("%d", &i);
 			}
 			retorno = MEN_ExcluirMensagem(pPerfil, vetEmails[i], vetTipos[i], vetMensagens[i]);
@@ -1361,7 +1361,7 @@ void MENU_MenuModificarCidade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char 
 		
 		modCidade = PER_ModificaCidade(pGrafo, email, cidadeNovo);
 		if (modCidade == PER_CondRetCidadeInvalida){
-			printf("A cidade digitado possui um formato invalido. Por favor reescreva o email.\n\n");
+			printf("A cidade digitada possui um formato invalido. Por favor reescreva a cidade.\n\n");
 		} else if (modCidade != PER_CondRetOK){
 			printf("Ocorreu um erro inesperado no modulo perfil\n\n");
 			exit(0);
@@ -1458,7 +1458,7 @@ void MENU_MenuCriarAmizade(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil1, PER_tpP
 		
 		if (aceitou == '0'){
 			solicitacaoInvalida = 1;
-			printf("%s negou a solicitação de amizade.\n\n",primNome);
+			printf("%s negou a solicitacao de amizade.\n\n",primNome);
 		} else if (aceitou == '1'){
 			solicitacaoInvalida = 1;
 			criarAmizade = AMI_CriarAmizade(pGrafo, pPerfil1, pPerfil2, AMI_SolicitacaoAceita);
