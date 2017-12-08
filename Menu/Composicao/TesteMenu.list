@@ -4,7 +4,7 @@ GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
 Composição do construto: ..\Composicao\TesteMenu.comp
 
    Nome do Construto:           TesteMenu
-   Diretório base:              C:\Users\Usuario\Documents\GitHub\Modular\Menu\Composicao
+   Diretório base:              C:\Users\Lorene Busquim\Documents\Modular\Menu\Composicao
 
    Arquivo composição:          ..\Composicao\TesteMenu.comp
    Arquivo plataforma:          gmake.parm
@@ -123,18 +123,18 @@ Estatísticas do construto
       perfil.h
 
    Estatísticas do arquivo: mensagem.c
-      Total linhas:             417
-      Linhas de código:         282
-      Linhas de comentário:      81
-      Linhas em branco:          59
+      Total linhas:             454
+      Linhas de código:         310
+      Linhas de comentário:      86
+      Linhas em branco:          63
    Arquivos de inclusão de que necessita
       mensagem.h
 
    Estatísticas do arquivo: mensagem.h
-      Total linhas:             279
-      Linhas de código:          34
-      Linhas de comentário:     202
-      Linhas em branco:          43
+      Total linhas:             306
+      Linhas de código:          35
+      Linhas de comentário:     225
+      Linhas em branco:          46
    Arquivos em que é incluído
       mensagem.c
       menu.c
@@ -189,10 +189,10 @@ Estatísticas do construto
 Totais por tipo de arquivo
 
   Tipo: h        Path: ..\Fontes
-         Total linhas do tipo:      3693
-         Linhas de código:           361
-         Linhas de comentário:      2825
-         Linhas em branco:           507
+         Total linhas do tipo:      3720
+         Linhas de código:           362
+         Linhas de comentário:      2848
+         Linhas em branco:           510
          Arquivos deste tipo:          9
 
   Tipo: obj      Path: ..\Objetos
@@ -217,17 +217,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      4659
-         Linhas de código:          2862
-         Linhas de comentário:       942
-         Linhas em branco:           914
+         Total linhas do tipo:      4696
+         Linhas de código:          2890
+         Linhas de comentário:       947
+         Linhas em branco:           918
          Arquivos deste tipo:          6
 
 Totais para todo o construto TesteMenu
 
-   Total linhas:              8352
-   Linhas de código:          3223
-   Linhas de comentário:      3767
-   Linhas em branco:          1421
+   Total linhas:              8416
+   Linhas de código:          3252
+   Linhas de comentário:      3795
+   Linhas em branco:          1428
    Arquivos processados:        15
 

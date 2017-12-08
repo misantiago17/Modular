@@ -87,6 +87,35 @@ typedef enum {
 	
 } GRA_tpCondRet;
 
+/***********************************************************************
+*
+*  $TC Tipo de dados: LIS Modos de deturpar
+*
+*
+***********************************************************************/
+
+#ifdef _DEBUG
+
+   typedef enum {
+
+        DeturpaTipoCabeca        =  1,
+               /* Modifica o tipo da cabeça do grafo */
+        DeturpaElementoCorrente   =  2 ,
+               /* Anula elemento corrente do grafo*/
+        DeturpaListaVertices    =  3 ,
+               /* Anula ponteiro para a lista de vertices */
+		DeturpaPrimeiroElementoVertice =	    4,
+			  /* Exclui primeiro elemento da lista de vertices,caso ele exista */ 
+		DeturpaTipoVertice    =   5 ,
+              /* Modifica o tipo do vertice que e elemento corrente do grafo,caso ele exista*/ 
+		DeturpaPrimeiroElementoAresta     =  6, 
+               /* Exclui primeiro elemento da lista de arestas do vertice corrente,caso ele exista e possua alguma aresta */
+		DeturpaListaAresta   = 7,
+			   /* Anula ponteiro para a lista de arestas do vertice corrente,caso ele exista */
+
+       } GRA_tpModosDeturpacao ;
+
+#endif
 
 /***********************************************************************
 *  $FC Função: GRA  &Criar grafo
@@ -404,15 +433,42 @@ GRA_tpCondRet GRA_RetornaIndiceAresta(GRA_tppGrafo pGrafo, int* pDado);
 *     
 *
 *  $EP Parâmetros
-*     $P pListaParm - ponteiro para um espaço que d.
+*     Gra - ponteiro para um espaco de dados que deveria ser do tipo GRA_tpGrafo
 *
 *  $FV Valor retornado
-*     Condição de retorno de teste
+*     GRA_CondRetOK
+*	  GRA_CondRetErroEstrutural
 *
 ***********************************************************************/
 
 #ifdef _DEBUG
 	GRA_tpCondRet GRA_VerificarEstrutura(void* Gra);
+#endif
+
+	/***********************************************************************
+*
+*  $FC Função: GRA  &Deturpar Grafo
+*
+*  $ED Descrição da função
+*     Função da interface de teste.
+*     Corrompe elementos específicos da estrutura do grafo.
+*     Essa função destina-se a preparar os cenários de teste dos
+*     casos de teste utilizados ao testar os verificadores estruturais
+*     do grafo.
+*     Esta função não tem proteção contra erros de uso, consequentemente
+*     poderá levar o programa a ser cancelado pelo sistema operacional.
+*
+*  $EP Parâmetros
+*     pGrafo   - Grafo a ser deturpado
+*      
+*     ModoDeturpar - identifica como deve ser feita a deturpação
+*                       GRA_tpModosDeturpacao identifica os modos de
+*                       deturpação conhecidos
+*
+***********************************************************************/
+
+#ifdef _DEBUG
+	void GRA_DeturparGrafo(GRA_tppGrafo pGrafo,GRA_tpModosDeturpacao ModoDeturpar);
 #endif
 
 #undef GRAFO_EXT

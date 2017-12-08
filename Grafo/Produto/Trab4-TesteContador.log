@@ -1,0 +1,94 @@
+
+!!! Inicio dos testes
+!!!      Construto sob teste: ..\Produto\Trab4-8
+!!!      Script de teste:     ..\Scripts\TesteContador.script
+
+!!!    0  Linha:     1  // Script:    TesteContador.script 
+!!!    0  Linha:     2  // Autor:     gab - Gabriel de Andrade Busquim 
+!!!    0  Linha:     3  // Data:      24/11/2017 
+!!!    0  Linha:     4  // Proposito: Ilustrar arquivo de script para controle de cobertura. Este script inicializa todos os contadores do modulo Grafo, inclusive os da funcoes de verificacao e deturpacao. 
+    6  == Inicializar valores
+   19  == struct 0
+   25  == struct 1
+   32  == struct 2
+   39  == struct 3
+   58  == Iniciar contagem
+   63  ==Testando funcoes passando um grafo igual a NULL
+  117  ==Testando funcoes passando um grafo vazio
+  159  ==Inserindo dois vertices
+  173  ==Indo para o vertice anterior
+  178  ==Pegando seu identificador e obtendo seu valor
+  187  ==Tentando ir para vertice inexistente
+  192  ==Obtendo o numero de vertices do grafo e de arestas do vertice 1
+  201  ==Tentando obter indice das suas arestas
+  206  ==Tentando criar aresta do vertice para ele mesmo
+  211  ==Tentando criar aresta do vertice para um vertice inexistente
+  218  ==Tentando criar aresta de um vertice inexistente para o vertice
+  225  ==Criando uma aresta entre os vertices 1 e 2
+  232  ==Tentando criar aresta ja existente
+  239  ==Tentando excluir aresta entre o vertice 1 e outro inexistente
+  246  ==Retornando as arestas do vertice 1
+  251  ==Excluindo a aresta entre os vertices 1 e 2
+  260  ==Inserindo um novo vertice
+  268  ==Criando uma aresta entre os vertices 3 e 1
+  275  ==Tentando excluir a novamente a aresta entre os vertices 2 e 1
+  283  ==Excluindo o vertice 3
+  292  ==Excluindo os demais vertices do grafo
+  307  ==Inserindo novamente um vertice
+  314  ==Destruindo o grafo
+  322  ==Testando falta de memoria ao criar o grafo
+!!!    0  Linha:   324  Simula falta de memoria. 
+  329  ==Testando falta de memoria ao inserir vertice
+!!!    0  Linha:   336  Limita numero de espacos alocados. 
+  343  ==Destruindo o grafo
+  346  ==Testando parte dos contadores da funcao de Verificacao
+  349  == Chamando funcao de verificacao para um grafo igual a NULL
+>>>    1  Linha:   351  Tentou verificar cabeça inexistente. 
+<<<    0  Linha:   352  Falhas registradas eram esperadas e foram recuperadas. 
+  354  ==Chamando funcao de verificacao para um grafo sem nenhum vertice
+  358  ==Inserindo quatro vertices,mas nenhuma aresta
+  365  ==Inserindo uma aresta entre os vertices 1 e 2, 1 e 3 e 1 e 4
+  371  ==Excluindo uma aresta
+  375  ==Excluindo um vertice
+  379  ==Destruindo o grafo
+>>>    1  Linha:   381  Tentou verificar cabeça inexistente. 
+<<<    0  Linha:   382  Falhas registradas eram esperadas e foram recuperadas. 
+  384  ==Testando contadores da funcao de Deturpacao e contadores restantes da funcao de Verificacao
+  387  ==Chamando a funcao de deturpacao para um grafo que e NULL
+  390  == Criando o grafo0 e deturpando o tipo de sua cabeca
+>>>    1  Linha:   394  Tipo diferente de GRA_tpGrafo. 
+<<<    0  Linha:   395  Falhas registradas eram esperadas e foram recuperadas. 
+  398  == Criando o grafo1,inserindo dois vertices e deturpando seu elemento corrente
+>>>    1  Linha:   403  Referencia para o corrente foi perdida 
+<<<    0  Linha:   404  Falhas registradas eram esperadas e foram recuperadas. 
+  408  == Criando o grafo3,inserindo dois vertices e deturpando a lista Vertices excluindo um dos vertices
+>>>    1  Linha:   413  Numero de vertices e diferente do esperado 
+<<<    0  Linha:   414  Falhas registradas eram esperadas e foram recuperadas. 
+  416  ==Destruindo o grafo (sobra um espaco alocado, que e o campo pDado do vertice que foi excluido apos a deturpacao)
+  419  == Criando o grafo4,inserindo um vertice e deturpando o tipo do vertice corrente
+>>>    1  Linha:   423  Tipo diferente de GRA_tpVertice. 
+<<<    0  Linha:   424  Falhas registradas eram esperadas e foram recuperadas. 
+  427  == Criando o grafo5,inserindo dois vertices e deturpando a lista de arestas do primeiro
+>>>    1  Linha:   432  Referencia para a lista de arestas foi perdida. 
+<<<    0  Linha:   433  Falhas registradas eram esperadas e foram recuperadas. 
+  436  == Criando o grafo6,inserindo dois vertices,criando uma aresta entre eles e depois a apagando para testar numero de arestas diferentes
+>>>    1  Linha:   443  Numero de arestas e diferente do esperado 
+<<<    0  Linha:   444  Falhas registradas eram esperadas e foram recuperadas. 
+  447  == Criando o grafo7,inserindo dois vertices,criando uma aresta entre eles e depois a apagando para testar vertice que aponta para outro, porem este nao aponta para o vertice.
+  454  == Testando a funcao que trata esta deturpacao
+  459  == Criando o grafo2,inserindo dois vertices e deturpando a lista de Vertices
+>>>    1  Linha:   464  Referencia para a lista de vertices foi perdida 
+<<<    0  Linha:   465  Falhas registradas eram esperadas e foram recuperadas. 
+  469  == Terminar contagem e verificar se algum contador ainda e 0
+  474  == Finalizando contagem
+!!!    0  Linha:   477  // Fim 
+
+!!! Número de linhas lidas:         477
+!!! Número de casos de teste:        54
+!!! Número comandos corretos:       318
+!!! Número de falhas encontradas:     0
+
+!!! Não foram encontrados problemas
+
+
+!!! Numero de espacos ainda alocados: 6

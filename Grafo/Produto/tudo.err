@@ -11,7 +11,6 @@ testegrafo.obj grafo.obj lista.obj
 ArcaboucoTeste.lib 
 testegrafo.c
 grafo.c
-c:\users\lorene busquim\documents\modular\grafo\fontes\grafo.c(1030) : warning C4700: uninitialized local variable 'pGrafo' used
 lista.c
 Microsoft (R) Incremental Linker Version 10.00.40219.01
 Copyright (C) Microsoft Corporation.  All rights reserved.

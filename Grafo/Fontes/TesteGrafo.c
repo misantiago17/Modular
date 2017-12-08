@@ -54,13 +54,11 @@ static const char NUM_VERTS_CMD           [ ] = "=obternumverts" ;
 static const char NUM_ARESTAS_CMD         [ ] = "=obternumarestas" ;
 static const char INDICES_ARESTAS_CMD     [ ] = "=indicesarestas" ;
 static const char RET_IDENT_CMD           [ ] = "=retornaident" ;
-static const char VerificarEspacoCmd[ ]         = "=verificarespaco" ;
 
 /* Os comandos a seguir somente operam em modo _DEBUG */
 
 #ifdef _DEBUG
-	static const char VER_CABECA_CMD		  [ ] = "=verificarcabeca" ;
-	static const char VER_VERTICE_CMD	      [ ] = "=verificarvertice"  ;
+	static const char VER_GRAFO_CMD		      [ ] = "=verificargrafo" ;
 	static const char VER_MEMORIA_CMD		  [ ] = "=verificarmemoria";
 	static const char DETURPAR_CMD			  [ ] = "=deturpargrafo"   ;
 #endif
@@ -90,7 +88,6 @@ GRA_tppGrafo   vtGrafos[ DIM_VT_GRAFO ] ;
 static void DestruirValor( void * pValor ) ;
 static int ValidarInxGrafo( int inxGrafo) ;
 static int ValidarParmIndices(int tamVetor, int *indiceEsp);
-static int VerificarValor( void * pValor ) ;
 
 /*****  Código das funções exportadas pelo módulo  *****/
 /***********************************************************************
@@ -120,10 +117,9 @@ static int VerificarValor( void * pValor ) ;
 *	  Comandos que podem ser executados somente se o modulo tiver sido
 *     compilado com _DEBUG ligado
 *
-*     =verificarcabeca			    inxGrafo  CondRetEsp
-*     =verificarvertice			    inxGrafo  CondRetEsp
+*     =verificargrafo			    inxGrafo CondRetEsp
 *     =verificarmemoria
-*     =deturparlista	 		    inxGrafo  idModoDeturp
+*     =deturpargrafo	 		    inxGrafo  idModoDeturp
 *
 ***********************************************************************/
 
@@ -189,27 +185,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 
 	} /* fim ativa: Testar CriarGrafo */
 
-	      /* Testar: CED &Verificar a integridade de um espaço de dados */
-
-         else if ( strcmp( ComandoTeste , VerificarEspacoCmd ) == 0 )
-         {
-			int valEsperado,valObtido;
-            numLidos = LER_LerParametros( "ii" ,
-                               &inxGrafo , &valEsperado ) ;
-
-            if ( ( numLidos != 2 )
-              || !ValidarInxGrafo( inxGrafo))
-            {
-               return TST_CondRetParm ;
-            } /* if */
-
-            valObtido = CED_VerificarEspaco( vtGrafos[ inxGrafo ] ,
-                                             VerificarValor ) ;
-
-            return TST_CompararInt( valEsperado , valObtido ,
-                   "Verificação resultou errado." ) ;
-
-         } /* fim ativa: Testar: CED &Verificar a integridade de um espaço de dados */
 
 	/* Testar Destruir Grafo */
 
@@ -579,6 +554,64 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		return TST_CondRetOK;
 
 	} /* fim ativa: Retornar indice das arestas  */
+
+      /* Testar verificador do grafo */
+      #ifdef _DEBUG
+
+         else if ( strcmp( ComandoTeste , VER_GRAFO_CMD ) == 0 )
+         {
+
+            numLidos = LER_LerParametros( "ii" ,
+                                          &inxGrafo , &CondRetEsp ) ;
+            if ( ( numLidos != 2 )
+              || !ValidarInxGrafo( inxGrafo ))
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+            return TST_CompararInt( CondRetEsp ,
+                             GRA_VerificarEstrutura( vtGrafos[inxGrafo] ) ,
+                             "Retorno incorreto ao verificar grafo." ) ;
+
+         } /* fim ativa: Testar verificador de grafo */
+      #endif
+
+      /* Deturpar um grafo */
+
+	  #ifdef _DEBUG
+
+         else if ( strcmp( ComandoTeste , DETURPAR_CMD ) == 0 )
+         {
+			int idCodigoDeturpa;
+            numLidos = LER_LerParametros( "ii" ,
+                               &inxGrafo , &idCodigoDeturpa ) ;
+
+            if ( ( numLidos != 2 )
+              || ! (ValidarInxGrafo( inxGrafo ) ))
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+            GRA_DeturparGrafo( vtGrafos[ inxGrafo ] , idCodigoDeturpa ) ;
+
+            return TST_CondRetOK ;
+
+         }  /*fim ativa: Deturpar uma lista */
+      #endif
+     
+
+      /* Verificar vazamento de memória */
+      #ifdef _DEBUG
+
+         else if ( strcmp( ComandoTeste , VER_MEMORIA_CMD ) == 0 )
+         {
+
+            CED_ExibirTodosEspacos( CED_ExibirTodos ) ;
+
+            return TST_CondRetOK ;
+
+         } /* fim ativa: Verificar vazamento de memória */
+      #endif
 	
 	return TST_CondRetNaoConhec;
 }
@@ -696,29 +729,6 @@ int ValidarParmIndices( int tamVetor , int *indiceEsp )
 	}
 } /* Fim função: TGRA -Validar indice de Grafo */
 
-
-   int VerificarValor( void * pValor )
-   {
-
-      int Tamanho ;
-      int i ;
-
-      Tamanho = CED_ObterTamanhoValor( pValor ) ;
-
-      if ( (( char * ) pValor )[ 0 ] == '|' )
-      {
-         for( i = 0 ; i < Tamanho ; i++ )
-         {
-            if ( (( char * ) pValor )[ i ] != '|' )
-            {
-               return 0 ;
-            } /* if */
-         } /* for */
-      } /* if */
-
-      return 1 ;
-
-   } /* Fim função: TCED -Verificar valor contido no espaço */
 
 
 /********** Fim do módulo de implementação: TGRA Teste Grafo com cabeca **********/

@@ -1,0 +1,35 @@
+
+!!! Inicio dos testes
+!!!      Construto sob teste: ..\Produto\Trab4-8
+!!!      Script de teste:     ..\Scripts\TesteVerificadorSemDeturparcao.script
+
+!!!    0  Linha:     1  // Script:    TesteGrafo.script 
+!!!    0  Linha:     2  // Autor:     Gabriel 
+!!!    0  Linha:     3  // Data:      6/12/2017 
+!!!    0  Linha:     4  // Proposito: Testar a funcao verificadora do grafo sem deturpacoes 
+    7  == Inicializar valores
+   17  == struct 0
+   23  == struct 1
+   30  == struct 2
+   37  == struct 3
+   60  == Chamando funcao de verificacao para um grafo igual a NULL
+>>>    1  Linha:    62  Tentou verificar cabeça inexistente. 
+<<<    0  Linha:    63  Falhas registradas eram esperadas e foram recuperadas. 
+   65  ==Chamando funcao de verificacao para um grafo sem nenhum vertice
+   69  ==Inserindo quatro vertices,mas nenhuma aresta
+   76  ==Inserindo uma aresta entre os vertices 1 e 2, 1 e 3 e 1 e 4
+   82  ==Excluindo uma aresta
+   86  ==Excluindo um vertice
+   90  ==Destruindo o grafo
+>>>    1  Linha:    92  Tentou verificar cabeça inexistente. 
+<<<    0  Linha:    93  Falhas registradas eram esperadas e foram recuperadas. 
+
+!!! Número de linhas lidas:         101
+!!! Número de casos de teste:        12
+!!! Número comandos corretos:        57
+!!! Número de falhas encontradas:     0
+
+!!! Não foram encontrados problemas
+
+
+!!! Numero de espacos ainda alocados: 0

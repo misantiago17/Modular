@@ -1,0 +1,50 @@
+
+!!! Inicio dos testes
+!!!      Construto sob teste: ..\Produto\Trab4-8
+!!!      Script de teste:     ..\Scripts\TesteVerificadorComDeturparcao.script
+
+!!!    0  Linha:     1  // Script:    TesteGrafo.script 
+!!!    0  Linha:     2  // Autor:     Gabriel 
+!!!    0  Linha:     3  // Data:      6/12/2017 
+!!!    0  Linha:     4  // Proposito: Testar a funcao verificadora do grafo com deturpacoes 
+    7  == Inicializar valores
+   22  == struct 0
+   28  == struct 1
+   35  == struct 2
+   42  == struct 3
+   65  ==Chamando a funcao de deturpacao para um grafo que e NULL
+   69  == Criando o grafo0 e deturpando o tipo de sua cabeca
+>>>    1  Linha:    73  Tipo diferente de GRA_tpGrafo. 
+<<<    0  Linha:    74  Falhas registradas eram esperadas e foram recuperadas. 
+   77  == Criando o grafo1,inserindo dois vertices e deturpando seu elemento corrente
+>>>    1  Linha:    82  Referencia para o corrente foi perdida 
+<<<    0  Linha:    83  Falhas registradas eram esperadas e foram recuperadas. 
+   87  == Criando o grafo3,inserindo dois vertices e deturpando a lista Vertices excluindo um dos vertices
+>>>    1  Linha:    92  Numero de vertices e diferente do esperado 
+<<<    0  Linha:    93  Falhas registradas eram esperadas e foram recuperadas. 
+   95  ==Destruindo o grafo (sobra um espaco alocado, que e o campo pDado do vertice que foi excluido apos a deturpacao)
+   98  == Criando o grafo4,inserindo um vertice e deturpando o tipo do vertice corrente
+>>>    1  Linha:   102  Tipo diferente de GRA_tpVertice. 
+<<<    0  Linha:   103  Falhas registradas eram esperadas e foram recuperadas. 
+  106  == Criando o grafo5,inserindo dois vertices e deturpando a lista de arestas do primeiro
+>>>    1  Linha:   111  Referencia para a lista de arestas foi perdida. 
+<<<    0  Linha:   112  Falhas registradas eram esperadas e foram recuperadas. 
+  115  == Criando o grafo6,inserindo dois vertices,criando uma aresta entre eles e depois a apagando para testar numero de arestas diferentes
+>>>    1  Linha:   122  Numero de arestas e diferente do esperado 
+<<<    0  Linha:   123  Falhas registradas eram esperadas e foram recuperadas. 
+  126  == Criando o grafo7,inserindo dois vertices,criando uma aresta entre eles e depois a apagando para testar vertice que aponta para outro, porem este nao aponta para o vertice.
+  133  == Testando a funcao que trata esta deturpacao
+  138  == Criando o grafo2,inserindo dois vertices e deturpando a lista de Vertices
+>>>    1  Linha:   143  Referencia para o corrente foi perdida 
+<<<    0  Linha:   144  Falhas registradas eram esperadas e foram recuperadas. 
+  147  ==Verificando se o numero de espacos ainda alocados e 6(5 que foram alocados no caso de teste anterior e nao puderam ser desalocados apos a perda da referencia para a lista de vertices e 1 que foi alocado no terceiro caso de teste deste script)
+
+!!! Número de linhas lidas:         158
+!!! Número de casos de teste:        17
+!!! Número comandos corretos:        95
+!!! Número de falhas encontradas:     0
+
+!!! Não foram encontrados problemas
+
+
+!!! Numero de espacos ainda alocados: 6

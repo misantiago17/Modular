@@ -297,7 +297,6 @@
 == contar quantas arestas o vertice 1 possui
 
 =obternumarestas	grafo6	0 	OK
-=verificarespaco grafo6 0
 
 
 == excluir grafo

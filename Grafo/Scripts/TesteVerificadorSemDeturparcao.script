@@ -1,0 +1,101 @@
+// Script:    TesteGrafo.script
+// Autor:     Gabriel
+// Data:      6/12/2017
+// Proposito: Testar a funcao verificadora do grafo sem deturpacoes
+
+
+== Inicializar valores
+=declararparm   grafo0  int 0
+=declararparm   grafo1  int 1
+=declararparm   grafo2  int 2
+=declararparm   grafo3  int 3
+=declararparm   grafo4  int 4
+=declararparm   grafo5  int 5
+=declararparm   grafo6  int 6
+
+
+== struct 0
+=declararparm   nome0    string  "Michelle"
+=declararparm   data0    string  "17/09/1996"
+=declararparm   cidade0  string  "Rio de Janeiro"
+=declararparm   email0   string  "michelle@gmail.com"
+
+== struct 1
+
+=declararparm   nome1    string  "Renan"
+=declararparm   data1    string  "01/01/2001"
+=declararparm   cidade1  string  "Sao Paulo"
+=declararparm   email1   string  "renan@gmail.com"
+
+== struct 2
+
+=declararparm   nome2    string  "Gabriel"
+=declararparm   data2    string  "10/10/1910"
+=declararparm   cidade2  string  "Maranhao"
+=declararparm   email2   string  "gabriel@gmail.com"
+
+== struct 3
+
+=declararparm   nome3    string  "Alessandro"
+=declararparm   data3    string  "15/11/2010"
+=declararparm   cidade3  string  "Tocantins"
+=declararparm   email3   string  "alessandro@gmail.com"
+
+
+=declararparm   OK             		int  0
+=declararparm   GrafoVazio     		int  1
+=declararparm   NaoAchouVertice   	int  2
+=declararparm   NaoAchouAresta   	int  3
+=declararparm   FaltouMemoria  		int  4
+=declararparm	parametroIncorreto      int  5
+=declararparm	jaExisteAresta		int  6
+=declararparm	numArestasZero		int  7
+=declararparm	arestaParaSiMesmo	int  8
+=declararparm	ErroEstrutural    	int  9
+
+
+=inicializarcontadores  ""
+
+
+== Chamando funcao de verificacao para um grafo igual a NULL
+=resetteste
+=verificargrafo grafo0 ErroEstrutural
+=AceitaFalhasAcumuladas 1
+
+==Chamando funcao de verificacao para um grafo sem nenhum vertice
+=criargrafo grafo0 OK
+=verificargrafo grafo0 OK
+
+==Inserindo quatro vertices,mas nenhuma aresta
+=inserirvertice  	grafo0  nome0  data0  cidade0  email0  OK
+=inserirvertice  	grafo0  nome1  data1  cidade1  email1  OK
+=inserirvertice  	grafo0  nome2  data2  cidade2  email2  OK
+=inserirvertice  	grafo0  nome3  data3  cidade3  email3  OK
+=verificargrafo grafo0 OK
+
+==Inserindo uma aresta entre os vertices 1 e 2, 1 e 3 e 1 e 4
+=criararesta		grafo0	1	2	OK
+=criararesta		grafo0	1	3	OK
+=criararesta		grafo0	1	4	OK
+=verificargrafo grafo0 OK
+
+==Excluindo uma aresta
+=excluiraresta grafo0 1 3 OK
+=verificargrafo grafo0 OK
+
+==Excluindo um vertice
+=excluirvertice grafo0 OK
+=verificargrafo grafo0 OK
+
+==Destruindo o grafo
+=destruirgrafo grafo0 OK
+=verificargrafo grafo0 ErroEstrutural
+=AceitaFalhasAcumuladas 1
+
+
+=pararcontagem
+=terminarcontadores
+
+
+
+
