@@ -436,6 +436,12 @@ void MENU_MenuCriarPerfil(GRA_tppGrafo pGrafo){
 						obtemEmailPerfil2 = PER_BuscaEmail(pGrafo, email2, &pPerfil2, &i);
 						if (obtemEmailPerfil2 == PER_CondRetEmailInexistente) {
 							printf("O email procurado nao existe na rede. Por favor, procure outro email.\n\n");
+							printf("Deseja tentar de novo? (0 = nao, 1 = sim)\n\n>");
+							scanf("%d", &tentarNovamente);
+							if (tentarNovamente != 1) {
+								printf("Retornando ao perfil\n");
+								MENU_MenuIrPerfil(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+							}
 						}
 						else if (obtemEmailPerfil2 != PER_CondRetEmailJaCadastrado) {
 							printf("Erro inesperado no modulo perfil.\n");
