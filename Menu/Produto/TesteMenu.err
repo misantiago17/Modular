@@ -7,7 +7,7 @@ lista.c
 Microsoft (R) Incremental Linker Version 10.00.40219.01
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
-/OUT:..\Produto\TRAB4-23.exe 
+/OUT:..\Produto\TRAB4-7.exe 
 /INCREMENTAL:NO 
 /MACHINE:IX86 
 grafo.obj menu.obj amizade.obj mensagem.obj perfil.obj 

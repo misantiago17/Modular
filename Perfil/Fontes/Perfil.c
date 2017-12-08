@@ -11,19 +11,19 @@
 *
 *  Projeto: INF 1301 / 1628 Automatização dos testes de módulos C
 *  Gestor:  DI/PUC-Rio
-*  Autores: Renan Moreira (rm), Gabriel Busquim (gb), Michelle Santiago (ms)
+*  Autores: Renan Moreira (rm), Michelle Santiago (ms)
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor   	 Data     	Observações
-*     	9      ms      07/12/2017 	Pequenas Alterações
-*     	8     rm/gb    02/12/2017 	Mudanças nos retornos e correções
-*     	7      rm      01/12/2017 	Novas correções
-*     	6      rm      30/11/2017 	Mudança no corpo da função
-*     	5      rm      29/11/2017 	mudança no malloc da função
-*     	4      rm      25/11/2017 	mudança na busca email
-*     	3      rm      24/11/2017 	função busca email
-*     	2      rm      20/11/2017 	mudança no retorno das funções
-*     	1      rm      19/11/2017 	inicio desenvolvimento
+*     	9     ms/rm    07/12/2017 	Pequenas Alterações
+*     	8      rm      30/11/2017 	Novas correções
+*     	7      rm      28/11/2017 	Novas correções
+*     	6      rm      24/11/2017   funcao: PER_ExcluirTodosPerfis, deletaPerfil, alteração em PER_ExcluirPerfil
+*     	5      rm      21/11/2017 	funcoes: PER_ModificaEmail, PER_ModificaNome, PER_ModificaDataNasc, PER_ModificaCidade
+*     	4      rm      19/11/2017 	funcoes: PER_NumeroPerfis, restauraCorrenteGrafo, salvaCorrenteGrafo, transformaRetGRA, modificação em PER_BuscaEmail
+*     	3      rm      18/11/2017 	funcoes: PER_ExcluirPerfil, PER_ObterPerfil, confereTudo, confereCidade, confereDataNasc, confereNome, confereEmail
+*     	2      rm      17/11/2017 	funcoes: PER_CriarPerfil, PER_BuscaEmail
+*     	1      rm      15/11/2017 	inicio desenvolvimento
 *
 ***************************************************************************/
 

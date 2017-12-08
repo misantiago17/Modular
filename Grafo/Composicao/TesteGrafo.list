@@ -4,7 +4,7 @@ GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
 Composição do construto: ..\Composicao\TesteGrafo.comp
 
    Nome do Construto:           TesteGrafo
-   Diretório base:              C:\Users\Lorene Busquim\Documents\Modular\Grafo\Composicao
+   Diretório base:              C:\Users\Usuario\Documents\GitHub\Modular\Grafo\Composicao
 
    Arquivo composição:          ..\Composicao\TesteGrafo.comp
    Arquivo plataforma:          gmake.parm

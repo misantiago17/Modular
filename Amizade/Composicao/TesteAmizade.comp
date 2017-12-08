@@ -15,9 +15,10 @@ Amizade
 Grafo
 Perfil
 Lista
+Mensagem
 
 [BuildInicio]
-/OUT:..\Produto\TRAB4-3.exe
+/OUT:..\Produto\TRAB4-6.exe
 /INCREMENTAL:NO
 /MACHINE:IX86
 

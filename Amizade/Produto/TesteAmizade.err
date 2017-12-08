@@ -3,11 +3,13 @@ amizade.c
 grafo.c
 perfil.c
 lista.c
+mensagem.c
 Microsoft (R) Incremental Linker Version 10.00.40219.01
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
-/OUT:..\Produto\TRAB4-3.exe 
+/OUT:..\Produto\TRAB4-6.exe 
 /INCREMENTAL:NO 
 /MACHINE:IX86 
 testeamizade.obj amizade.obj grafo.obj perfil.obj lista.obj 
+mensagem.obj 
 ArcaboucoTeste.lib 

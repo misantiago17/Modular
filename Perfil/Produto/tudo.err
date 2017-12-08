@@ -6,7 +6,7 @@ mensagem.c
 Microsoft (R) Incremental Linker Version 10.00.40219.01
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
-/OUT:..\Produto\TRAB4-1.EXE 
+/OUT:..\Produto\TRAB4-4.EXE 
 /INCREMENTAL:NO 
 /MACHINE:IX86 
 testeperfil.obj lista.obj perfil.obj grafo.obj mensagem.obj 

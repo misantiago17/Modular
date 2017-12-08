@@ -5,23 +5,24 @@ Todos os registros foram realizados no ano de 2017.
 
 Data                          Horas Trabalhadas                Tipo Tarefa           Descrição da Tarefa Realizada
 
-15/11				    2 horas		    Codificar módulo		modulo perfil
-17/11				    2 horas		    Codificar módulo		modulo perfil
-18/11				    2.5 horas		    Codificar módulo		modulo perfil
-19/11				    3 horas		    Codificar módulo		modulo perfil
-21/11				    1 hora		    Codificar módulo		modulo perfil
-24/11				    1 hora		    Codificar módulo		modulo perfil
-25/11				    4 horas		    Codificar módulo		modulo perfil testes
-28/11				    3 horas		    Codificar módulo		modulo perfil testes
-28/11				    3 horas		     Realizar testes		modulo perfil
-28/11				    1 hora		     Revisar módulo		modulo perfil
-29/11				    1 hora		     Revisar módulo		modulo perfil
-30/11				    2 horas		     Revisar módulo		modulo perfil
-30/11				    2 horas		     Realizar testes		modulo perfil
-02/12				    3 horas		     Codificar módulo		modulo perfil
-02/12				    2.5 horas		     Realizar testes		modulo perfil
-02/12				    3 horas		     Codificar módulo		modulo menu
-05/12				    1 hora		     Codificar módulo		modulo menu
-06/12				    3,5 horas		     Codificar módulo		modulo menu
-07/12				    3.5 horas		     Codificar módulo		modulo menu
-07/12				    3 horas		     Realizar testes		modulo menu
+15/11				    2 horas		    Codificar módulo		inicio desenvolvimento do modulo perfil
+17/11				    2 horas		    Codificar módulo		funcoes: PER_CriarPerfil, PER_BuscaEmail
+18/11				    2.5 horas		    Codificar módulo		funcoes: PER_ExcluirPerfil, PER_ObterPerfil, confereTudo, confereCidade, confereDataNasc, confereNome, confereEmail
+19/11				    3 horas		    Codificar módulo		funcoes: PER_NumeroPerfis, restauraCorrenteGrafo, salvaCorrenteGrafo, transformaRetGRA, modificação em PER_BuscaEmail
+21/11				    1 hora		    Codificar módulo		funcoes: PER_ModificaEmail, PER_ModificaNome, PER_ModificaDataNasc, PER_ModificaCidade
+24/11				    2 hora		    Codificar módulo		funcao: PER_ExcluirTodosPerfis, deletaPerfil, alteração em PER_ExcluirPerfil
+25/11				    4 horas		    Codificar módulo	 	inicio desenvolvimento testePerfil.c
+28/11				    1.5 horas		    Codificar módulo		novas funções de testePerfil.c
+28/11				    2 horas		    redigir script de teste 	desenvolvimento do escript de teste do modulo perfil
+28/11				    3 horas		     Realizar testes		realizações de testes no modulo perfil
+28/11				    1 hora		     Revisar módulo		Correções em perfil.c e em testePerfil.c
+29/11				    1 hora		     Revisar módulo		Correções em perfil.c e em testePerfil.c
+30/11				    2 horas		     Revisar módulo		Correções em perfil.c e em testePerfil.c
+30/11				    2 horas		     Realizar testes		realizações de testes no modulo perfil
+02/12				    3 horas		     Codificar módulo		funcoes: PER_retornaLisMensagens, PER_retornaIdPerfil
+02/12				    2.5 horas		     Realizar testes		realizações de testes no modulo perfil
+02/12				    3 horas		     Codificar módulo		funcoes: MENU_MenuVerAmigos, MENU_MenuIrMensagens
+05/12				    1 hora		     Codificar módulo		funcao: MENU_MenuExcluirTodasAmizades
+06/12				    3.5 horas		     Realizar testes		testes e correcoes no modulo menu
+07/12				    3.5 horas		     Realizar testes		testes e correcoes no modulo menu
+07/12				    3 horas		     Realizar testes		testes e correcoes no modulo menu

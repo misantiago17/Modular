@@ -17,7 +17,7 @@ Perfil
 Grafo
 
 [BuildInicio]
-/OUT:..\Produto\TRAB4-10.EXE
+/OUT:..\Produto\TRAB4-5.EXE
 /INCREMENTAL:NO
 /MACHINE:IX86
 

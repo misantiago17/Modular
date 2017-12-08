@@ -11,12 +11,14 @@
 *
 *  Projeto: INF 1301 / 1628 AutomatizaÁ„o dos testes de mÛdulos C
 *  Gestor:  DI/PUC-Rio
-*  Autores: Michelle Santiago (ms)
+*  Autores: Michelle Santiago (ms), Renan Moreira (rm)
 *
 *  $HA HistÛrico de evoluÁ„o:
 *     Vers„o    Autor   	 Data     	ObservaÁıes
 *       1        ms        20/11/2017 	inicio desenvolvimento
-*       2        ms        06/12/2017   modificação nas funções do modulo
+*       2        rm        02/12/2017   funcoes: MENU_MenuVerAmigos, MENU_MenuIrMensagens
+*       3        rm        05/12/2017   funcao: MENU_MenuExcluirTodasAmizades
+*       4        ms        06/12/2017   modificaçcao nas funçcoes do modulo
 *
 ***************************************************************************/
 

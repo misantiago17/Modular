@@ -4,7 +4,7 @@ lista.c
 Microsoft (R) Incremental Linker Version 10.00.40219.01
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
-/OUT:..\Produto\Trab4-7.exe 
+/OUT:..\Produto\Trab4-2.exe 
 /INCREMENTAL:NO 
 /MACHINE:IX86 
 testegrafo.obj grafo.obj lista.obj 
@@ -15,7 +15,7 @@ lista.c
 Microsoft (R) Incremental Linker Version 10.00.40219.01
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
-/OUT:..\Produto\Trab4-8.exe 
+/OUT:..\Produto\Trab4-3.exe 
 /INCREMENTAL:NO 
 /MACHINE:IX86 
 testegrafo.obj grafo.obj lista.obj 

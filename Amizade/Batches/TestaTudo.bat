@@ -5,7 +5,7 @@ cls
 if exist ..\Scripts\estatisticas.estat  del ..\Scripts\estatisticas.estat
 
 
-..\Produto\TRAB4-3  /s..\Scripts\TesteAmizade	/l..\Produto\TRAB4-3	/a..\Scripts\estatisticas
+..\Produto\TRAB4-6  /s..\Scripts\TesteAmizade	/l..\Produto\TRAB4-6	/a..\Scripts\estatisticas
 
 
 

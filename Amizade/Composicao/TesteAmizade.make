@@ -48,7 +48,7 @@ INCLUDE = $(INCLUDE);$(PDEFAULT)
 
 all : limpa \
    $(Fobj)\testeamizade.obj   $(Fobj)\amizade.obj   $(Fobj)\grafo.obj \
-   $(Fobj)\perfil.obj   $(Fobj)\lista.obj \
+   $(Fobj)\perfil.obj   $(Fobj)\lista.obj   $(Fobj)\mensagem.obj \
    Construto
 
 ### Limpar arquivos
@@ -84,12 +84,16 @@ $(Fobj)\lista.obj :  {$(Pc)}\lista.c \
     {$(Ph)}lista.h             
    cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
 
+$(Fobj)\mensagem.obj :  {$(Pc)}\mensagem.c \
+    {$(Ph)}mensagem.h          
+   cl $(O) $(OPT) /Fo$(Fobj)\ $(Fc)\$(@B).c >> $(Ferr)\$(NOME).err
+
 
 ### Terminação
 
 Construto : \
    $(Fobj)\testeamizade.obj   $(Fobj)\amizade.obj   $(Fobj)\grafo.obj \
-   $(Fobj)\perfil.obj   $(Fobj)\lista.obj
+   $(Fobj)\perfil.obj   $(Fobj)\lista.obj   $(Fobj)\mensagem.obj
     cd $(Fobj)
     LINK $(L) @$(NOME).build >> $(Ferr)\$(NOME).err
 

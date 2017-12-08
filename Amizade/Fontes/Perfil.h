@@ -8,11 +8,13 @@
 *
 *  Projeto: INF 1301 / Desenvolvimento de uma rede de relacionamentos em C
 *  Gestor:  DI/PUC-Rio
-*  Autores: Renan Moreira (rm)
+*  Autores: Renan Moreira (rm), Michelle Santiago (ms)
 *
 *  $HA Histórico de evolução:
-*     Versão  Autor   	 Data     	Observações
-*     1      rm       27/09/2017 	inicio desenvolvimento
+*     Versão   Autor   	  Data     	Observações
+*     	3       ms      07/12/2017 	Pequenas Alterações
+*     	2       rm      02/12/2017 	Mudanças e correções
+*       1      	rm      19/11/2017 	inicio desenvolvimento
 *
 *  $ED Descrição do módulo
 *
@@ -158,7 +160,6 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email);
 *
 *  $ED Descrição da função
 *	  Retorna os dados de um perfil
-*
 *
 *  $EP Parâmetros
 *     perfil		- Ponteiro para o perfil no qual se busca os dados

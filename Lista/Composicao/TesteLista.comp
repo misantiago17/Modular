@@ -14,7 +14,7 @@ TesteLista
 Lista
 
 [BuildInicio]
-/OUT:..\Produto\TRAB1-1.EXE
+/OUT:..\Produto\TRAB4-1.EXE
 /INCREMENTAL:NO
 /MACHINE:IX86
 

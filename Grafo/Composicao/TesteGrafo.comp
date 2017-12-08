@@ -16,7 +16,7 @@ Grafo
 Lista
 
 [BuildInicio]
-/OUT:..\Produto\Trab4-7.exe
+/OUT:..\Produto\Trab4-2.exe
 /INCREMENTAL:NO
 /MACHINE:IX86
 
