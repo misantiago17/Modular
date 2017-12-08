@@ -86,12 +86,10 @@ Fontes:
 							vsvars32.bat
 
 - Arquivos de Relatorio:
-							Relatorios/RELATORIO-Gabriel-T2.txt
-							Relatorios/RELATORIO-Michelle-T2.txt
-							Relatorios/RELATORIO-Renan-T2.txt
-							Relatorios/RELATORIO-Gabriel-T4.txt
-							Relatorios/RELATORIO-Michelle-T4.txt
-							Relatorios/RELATORIO-Renan-T4.txt
+
+							Relatorios/RELATORIO-Gabriel.txt
+							Relatorios/RELATORIO-Michelle.txt
+							Relatorios/RELATORIO-Renan.txt
 
 - Arquivo Leiame:
 
@@ -102,6 +100,8 @@ Fontes:
 							Arquitetura.pdf
 							Modelo Físico.pdf
 							descricaoTratador.txt
+							LinguagemTeste.pdf
+							MudancasRealizadas.pdf
 
 -------------  Modo de uso  -------------
 
