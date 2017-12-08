@@ -16,10 +16,10 @@
 *     8        gb       03/11/2017 	alteração no nome de funções
 *     7        gb       02/11/2017 	alteração da condição de retorno
 *     6        ms       02/11/2017 	alteração nas funções utilizadas do modulo perfil
-*     5        gb       02/11/2017 	verificação da existencia do perfil e nœmero de mensagem
+*     5        gb       02/11/2017 	verificação da existencia do perfil e numero de mensagem
 *     4        gb       01/11/2017 	alterações do código de todas as funções
 *     3        gb       27/11/2017 	alteraçõo da descricao de funções
-*	  2        gb       20/11/2017  desenvolvimento da fun‹o excluir mensagem
+*	  2        gb       20/11/2017  desenvolvimento da funcao excluir mensagem
 *     1        gb       15/11/2017 	inicio do desenvolvimento
 *
 ***************************************************************************/
@@ -309,7 +309,7 @@ MEN_tpCondRet MEN_ExcluirMensagensEmail(PER_tpPerfil * Perfil,char Email[])
 
 /***********************************************************************
 *
-*  $FC Função: MEN  &Alterar Email da Lista de Mensagem
+*  $FC Função: MEN  &Modificar Email da Lista de Mensagem
 *
 *       MEN_CondRetOK
 *       MEN_CondRetRetornoLisIncorreto
@@ -357,7 +357,7 @@ MEN_tpCondRet MEN_ModificarEmailLista(PER_tpPerfil * Perfil,char antigoEmail[],c
     
 	return MEN_CondRetOK;
     
-} /* Fim função: MEN  &Alterar Email da Lista de Mensagem*/
+} /* Fim função: MEN  &Modificar Email da Lista de Mensagem*/
 
 /***************************************************************************
 *

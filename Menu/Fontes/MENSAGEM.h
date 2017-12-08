@@ -177,7 +177,7 @@ MEN_tpCondRet MEN_ExcluirMensagem(PER_tpPerfil * Perfil,char Email[],MEN_tpCondM
 MEN_tpCondRet MEN_ExcluirMensagensEmail(PER_tpPerfil * Perfil,char Email[]);
 
 /***********************************************************************
-*  $FC Função: MEN  &Alterar Email da lista de mensagens
+*  $FC Função: MEN  &Modificar Email da lista de mensagens
 *
 *  $ED Descrição da função
 *	Modifica o email todas as mensagens de uma lista de mensagens cujo email é
