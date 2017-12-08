@@ -1,0 +1,44 @@
+Renan Araujo de Barros Moreira
+Todos os registros foram realizados no ano de 2017.
+
+
+
+Data                          Horas Trabalhadas                Tipo Tarefa           Descrição da Tarefa Realizada
+26/09                               0.5 hora                    Projetar               Melhoria da Especificação de Requisitos do programa
+26/09                               1 hora                  Codificar módulo           Modificação no módulo Lista para que as funções retornassem uma condição
+								        	        de retorno.
+26/09                               1 hora                  Codificar módulo           Modificação no módulo Teste_Lista para que as funções estivessem de acordo
+											com seu respectivo módulo
+27/09                               2 horas                     Projetar               Criação das estruturas do modulo grafo
+27/09                               2 horas                  Codificar módulo          Inicio desenvolvimento modulo grafo
+30/09                               5 horas                  Codificar módulo          Desenvolvimento funções do modulo grafo
+04/10    			    3 horas 		      Revisar módulo           Revisao nas structs do modulo grafo, remocao das funções: CriarElemento e LimparCabeca
+06/10    			    3 horas 		      Revisar módulo           Alteracao nas funcoes: GRA_InserirVertice, GRA_ExcluirVertice
+10/10 				    4 horas                  Codificar módulo          Funções GRA_IrVertice e GRA_DestruirGrafo
+11/10 				    3 horas 		      Revisar módulo           Revisao nas structs do modulo grafo; alteracao GRA_IrVertice, GRA_DestruirGrafo
+15/10 				    0.5 horas 		      Revisar módulo           Comentarios no grafo.h
+16/10 				    6 horas 	              Revisar módulo           Revisão geral do projeto
+16/10 				    3 horas 	              Realizar testes          Testes finais e correções de erros
+
+
+15/11				    2 horas		    Codificar módulo		inicio desenvolvimento do modulo perfil
+17/11				    2 horas		    Codificar módulo		funcoes: PER_CriarPerfil, PER_BuscaEmail
+18/11				    2.5 horas		    Codificar módulo		funcoes: PER_ExcluirPerfil, PER_ObterPerfil, confereTudo, confereCidade, confereDataNasc, confereNome, confereEmail
+19/11				    3 horas		    Codificar módulo		funcoes: PER_NumeroPerfis, restauraCorrenteGrafo, salvaCorrenteGrafo, transformaRetGRA, modificação em PER_BuscaEmail
+21/11				    1 hora		    Codificar módulo		funcoes: PER_ModificaEmail, PER_ModificaNome, PER_ModificaDataNasc, PER_ModificaCidade
+24/11				    2 hora		    Codificar módulo		funcao: PER_ExcluirTodosPerfis, deletaPerfil, alteração em PER_ExcluirPerfil
+25/11				    4 horas		    Codificar módulo	 	inicio desenvolvimento testePerfil.c
+28/11				    1.5 horas		    Codificar módulo		novas funções de testePerfil.c
+28/11				    2 horas		    redigir script de teste 	desenvolvimento do escript de teste do modulo perfil
+28/11				    3 horas		     Realizar testes		realizações de testes no modulo perfil
+28/11				    1 hora		     Revisar módulo		Correções em perfil.c e em testePerfil.c
+29/11				    1 hora		     Revisar módulo		Correções em perfil.c e em testePerfil.c
+30/11				    2 horas		     Revisar módulo		Correções em perfil.c e em testePerfil.c
+30/11				    2 horas		     Realizar testes		realizações de testes no modulo perfil
+02/12				    3 horas		     Codificar módulo		funcoes: PER_retornaLisMensagens, PER_retornaIdPerfil
+02/12				    2.5 horas		     Realizar testes		realizações de testes no modulo perfil
+02/12				    3 horas		     Codificar módulo		funcoes: MENU_MenuVerAmigos, MENU_MenuIrMensagens
+05/12				    1 hora		     Codificar módulo		funcao: MENU_MenuExcluirTodasAmizades
+06/12				    3.5 horas		     Realizar testes		testes e correcoes no modulo menu
+07/12				    3.5 horas		     Realizar testes		testes e correcoes no modulo menu
+07/12				    6 horas		     Realizar testes		testes e correcoes no modulo menu

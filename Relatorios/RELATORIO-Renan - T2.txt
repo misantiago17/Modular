@@ -1,21 +1,0 @@
-Renan Araujo de Barros Moreira
-Todos os registros foram realizados no ano de 2017.
-
-
-
-Data                          Horas Trabalhadas                Tipo Tarefa           Descrição da Tarefa Realizada
-26/09                               0.5 hora                    Projetar               Melhoria da Especificação de Requisitos do programa
-26/09                               1 hora                  Codificar módulo           Modificação no módulo Lista para que as funções retornassem uma condição
-								        	        de retorno.
-26/09                               1 hora                  Codificar módulo           Modificação no módulo Teste_Lista para que as funções estivessem de acordo
-											com seu respectivo módulo
-27/09                               2 horas                     Projetar               Criação das estruturas do modulo grafo
-27/09                               2 horas                  Codificar módulo          Inicio desenvolvimento modulo grafo
-30/09                               5 horas                  Codificar módulo          Desenvolvimento funções do modulo grafo
-04/10    			    3 horas 		      Revisar módulo           Revisao nas structs do modulo grafo, remocao das funções: CriarElemento e LimparCabeca
-06/10    			    3 horas 		      Revisar módulo           Alteracao nas funcoes: GRA_InserirVertice, GRA_ExcluirVertice
-10/10 				    4 horas                  Codificar módulo          Funções GRA_IrVertice e GRA_DestruirGrafo
-11/10 				    3 horas 		      Revisar módulo           Revisao nas structs do modulo grafo; alteracao GRA_IrVertice, GRA_DestruirGrafo
-15/10 				    0.5 horas 		      Revisar módulo           Comentarios no grafo.h
-16/10 				    6 horas 	              Revisar módulo           Revisão geral do projeto
-16/10 				    3 horas 	              Realizar testes          Testes finais e correções de erros

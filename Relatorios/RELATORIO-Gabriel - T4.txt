@@ -1,42 +1,0 @@
-Gabriel de Andrade Busquim-1510549
-Todos os registros foram realizados no ano de 2017.
-
-
-
-Data                          Horas Trabalhadas            Tipo Tarefa            			 	Descrição da Tarefa Realizada 									       
-04/11                               1 hora              Codificar módulo            		       		Início da codificação do módulo Mensagem
-07/11                               0.5 hora            Codificar módulo              		        	Implementação da função EscreverMensagem
-09/11                               2 hora              Codificar módulo             			  	Implementação das demais funções do módulo Mensagem
-13/11				    1 hora              Estudo			       				Estudo da documentação do módulo CESPDIN.h e de exemplos
-13/11				    3 horas             Diagnosticar e corrigir os problemas encontrados        Correção do módulo Grafo.c para impedir vazamento de memória.
-14/11				    2 horas 		Diagnosticar e corrigir os problemas encontrados	Correção de bugs existentes no módulo Mensagem.c
-19/11				    2 horas 		Codificar módulo	       				Implementação do módulo TesteMensagem.c
-20/11				    2 horas 		Codificar módulo	       				Implementação do módulo TesteMensagem.c
-23/11				    1 hora 		Codificar módulo	      				Início da implementação de contadores no módulo Grafo
-25/11				    3 horas 		Codificar módulo	       				Fim da implementação de contadores no módulo Grafo
-25/11				    1 hora 		Redigir Script de Teste	       				Início da redação do script de teste para testar os contadores do módulo Grafo.c
-26/11				    3 horas 		Redigir Script de Teste	       				Continuação da redação do script de teste para testar os contadores do módulo Grafo.c
-27/11				    3 horas 		Redigir Script de Teste	       				Finalização do script de teste para testar os contadores do módulo Grafo.c
-28/11			            2 horas             Redigir Script de Teste        				Início da redação do script de teste do módulo Mensagem
-29/11   		            1 horas             Diagnosticar e corrigir os problemas encontrados        Correção de bugs no módulo Amizade
-30/11   		            2 horas             Diagnosticar e corrigir os problemas encontrados        Correção de bugs no módulo Amizade
-1/12    		            1 hora              Redigir Script de Teste        		 		Modificação de casos de teste no script do módulo Amizade
-2/12    		            1.5 horas           Redigir Script de Teste         			Finalização do script de teste do módulo Mensagem
-6/12				    6 horas		Codificar módulo					Implementação das funções de Verificação e de Deturpação do módulo Grafo.
-7/12                                3 horas		Codificar módulo					Implementação da função que trata um dos vértices não apontar corretamente para outro 
-														e de contadores dentro das funções de verificação,deturpação e tratamento.					
-7/12 				    3.5 horas           Redigir Script de Teste 				Redação de scripts de testes para testar as funções de verificação, deturpação e
-														tratamento, bem como seus contadores.
-7/12				    1.5 horas          	Redigir Script de Teste					Redação de um script para testar vazamento de memória e revisão geral do trabalho.
-
-
-
-
-
-
-
-
-   
-
-
-
