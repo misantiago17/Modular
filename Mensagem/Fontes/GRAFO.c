@@ -12,6 +12,8 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor   	 Data     	Observações
+*    20         gb      7/12/2017   implementacao das funcoes de verificacao,deturpacao e tratamento
+*	 19         gb      23/11/2017  implementacao de contadores
 *    18      rm/ms/gb   16/10/2017 	revisoes finais e pequenas correcoes
 *    17        gb    	14/10/2017 	funcoes: GRA_NumArestas, GRA_RetornaIndiceAresta,GRA_NumVertices
 *    16        ms    	13/10/2017 	alteracao GRA_IrVertice, GRA_CriarAresta, GRA_ExisteAresta, GRA_ExcluirAresta

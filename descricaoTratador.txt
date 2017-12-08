@@ -1,0 +1,4 @@
+A função de tratamento é chamada logo após detectar um erro nas redundâncias das arestas entre dois vértices,
+isto é,caso a função ExisteAresta indique um erro. Caso um vértice possua aresta com outro,
+porém este não possua aresta com o primeiro, a função apaga a aresta. 
+O primeiro vértice recebido como parâmetro é o que possui a aresta com o segundo.
