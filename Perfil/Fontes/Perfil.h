@@ -11,8 +11,12 @@
 *  Autores: Renan Moreira (rm)
 *
 *  $HA Histórico de evolução:
-*     Versão  Autor   	 Data     	Observações
-*     1      rm       27/09/2017 	inicio desenvolvimento
+*     Versão   Autor   	  Data     	Observações
+*     	5       ms      07/12/2017 	Pequenas Alterações
+*     	4      rm/gb    02/12/2017 	Mudanças nos retornos e correções
+*     	3       rm      24/11/2017 	função busca email
+*     	2      	rm      20/11/2017 	mudança no retorno das funções
+*       1      	rm      19/11/2017 	inicio desenvolvimento
 *
 *  $ED Descrição do módulo
 *
@@ -158,7 +162,6 @@ PER_tpCondRet PER_ExcluirPerfil(GRA_tppGrafo pGrafo, char *email);
 *
 *  $ED Descrição da função
 *	  Retorna os dados de um perfil
-*
 *
 *  $EP Parâmetros
 *     perfil		- Ponteiro para o perfil no qual se busca os dados
