@@ -143,8 +143,8 @@ Estatísticas do construto
       testeperfil.c
 
    Estatísticas do arquivo: testeperfil.c
-      Total linhas:             428
-      Linhas de código:         251
+      Total linhas:             427
+      Linhas de código:         250
       Linhas de comentário:      83
       Linhas em branco:         108
    Arquivos de inclusão de que necessita
@@ -196,16 +196,16 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:      3633
-         Linhas de código:          2160
+         Total linhas do tipo:      3632
+         Linhas de código:          2159
          Linhas de comentário:       770
          Linhas em branco:           777
          Arquivos deste tipo:          5
 
 Totais para todo o construto TestePerfil
 
-   Total linhas:              7609
-   Linhas de código:          2543
+   Total linhas:              7608
+   Linhas de código:          2542
    Linhas de comentário:      3809
    Linhas em branco:          1331
    Arquivos processados:        14

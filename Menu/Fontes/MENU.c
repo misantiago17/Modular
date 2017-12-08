@@ -368,7 +368,7 @@ void MENU_MenuCriarPerfil(GRA_tppGrafo pGrafo){
 	printf("===============================================================================\n");
 	
 	while (dadosValidos == 0){
-		printf("Digite as informações do novo perfil\n\n",primNome);
+		printf("Digite as informacoes do novo perfil\n\n",primNome);
 	
 		printf("Primeiro Nome: ");
 		scanf("%s", &primNome);
@@ -913,9 +913,17 @@ void MENU_MenuIrMensagens(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil) {
 			escolhaMenu = 1;
 			printf("Escreva o numero da mensagem que deseja excluir: ");
 			scanf("%d", &i);
-			while (i < 0 || i > qtd) {
-				printf("Numero invalido, digite novamente: ");
+			while (i < 0 || i >= qtd) {
+				printf("Numero invalido, deseja continuar? (0 = nao, 1 = sim)\n\n>");
 				scanf("%d", &i);
+				if (i == 0) {
+					printf("Retornando as mensagens\n\n>");
+					MENU_MenuIrMensagens(pGrafo, pPerfil);
+				}
+				else {
+					printf("Escreva o numero da mensagem que deseja excluir: ");
+					scanf("%d", &i);
+				}
 			}
 			retorno = MEN_ExcluirMensagem(pPerfil, vetEmails[i], vetTipos[i], vetMensagens[i]);
 			if (retorno != MEN_CondRetOK) {
