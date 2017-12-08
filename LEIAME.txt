@@ -4,9 +4,8 @@ Michelle Beadle
 Renan Moreira
 
 ---------  Descrição  ------------
-
-Módulos Grafo genérico com cabeça e Lista genérica duplamente encadeada 
-e seus respectivos módulos de teste.
+Programa que implementa uma Rede Social.
+Todas as suas funcionalidades estão de acordo com a especificação de requisitos.
 
 Fontes:
 			
@@ -15,7 +14,15 @@ Fontes:
 							LISTA.C
 							GRAFO.C
 							TESTELISTA.C
-							TESTEGRAFO.C	
+							TESTEGRAFO.C
+							PERFIL.C
+							MENSAGEM.C
+							AMIZADE.C
+							TESTEPERFIL.C	
+							TESTEAMIZADE.C
+							TESTEMENSAGEM.C
+							MENU.C
+		
 
 
 								
@@ -23,9 +30,9 @@ Fontes:
 
 							LISTA.H
 							GRAFO.H
-							TESTELISTA.H
-							TESTEGRAFO.H											DEFINICOES.H
-
+							PERFIL.H
+							AMIZADE.H
+							MENSAGEM.H										
 			
 - Arcabouco de teste:
 							ArcaboucoTeste.lib
@@ -34,15 +41,36 @@ Fontes:
 							
 							TESTELISTA.script
 							TESTEGRAFO.script
+							TESTEVERIFICADORCOMDETURPACAO.script
+							TESTEVERIFICADORSEMDETURPACAO.script
+							TESTECONTROLEESPACO.script
+							TESTECONTADOR.script
+							TESTEAMIZADE.script
+							TESTEPERFIL.script
+							TESTEMENSAGEM.script
 
 - Arquivos de Log:
 
-							TRAB1-1.log
-							TRAB1-2.log
+							TRAB4-1.log
+							Trab4-TesteGrafo.log
+							Trab4-ControleEspaco.log
+							Trab4-TesteContador.log
+							Trab4-TesteVerificadorComDeturpacao.log
+							Trab4-TesteVerificadorSemDeturpacao.log
+							TRAB4-4.log
+							TRAB4-5.log
+							TRAB4-6.log
+	
 								
 - Arquivos Executáveis:
-							TRAB1-1.exe
-							TRAB1-2.exe
+							TRAB4-1.exe
+							TRAB4-2.exe
+							TRAB4-3.exe
+							TRAB4-4.exe
+							TRAB4-5.exe
+							TRAB4-6.exe
+							TRAB4-7.exe
+
 
 - Arquivos Bat:
 
@@ -58,9 +86,12 @@ Fontes:
 							vsvars32.bat
 
 - Arquivos de Relatorio:
-							Relatorios/RELATORIO-Gabriel de Andrade Busquim.txt
-							Relatorios/RELATORIO-Michelle.txt
-							Relatorios/RELATORIO-Renan.txt
+							Relatorios/RELATORIO-Gabriel-T2.txt
+							Relatorios/RELATORIO-Michelle-T2.txt
+							Relatorios/RELATORIO-Renan-T2.txt
+							Relatorios/RELATORIO-Gabriel-T4.txt
+							Relatorios/RELATORIO-Michelle-T4.txt
+							Relatorios/RELATORIO-Renan-T4.txt
 
 - Arquivo Leiame:
 
@@ -70,6 +101,7 @@ Fontes:
 							Requisitos.pdf
 							Arquitetura.pdf
 							Modelo Físico.pdf
+							descricaoTratador.txt
 
 -------------  Modo de uso  -------------
 
@@ -80,4 +112,8 @@ Para compilar e executar os testes:
 	- Entrar na pasta "Batches" do respectivo modulo
 	- Executar vsvars32.bat e Tudo.bat
 	- Executavel com o programa e o log de saída será gerado em "Produto"
+Para executar o programa,basta seguir os passos acima para o modulo MENU
+
+Observação:
+O arquivo de totalização dos contadores será gerado na pasta "Batches" do módulo Grafo
 

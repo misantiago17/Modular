@@ -11,12 +11,12 @@
 *
 *  Projeto: INF 1301 / 1628 Automatização dos testes de módulos C
 *  Gestor:  DI/PUC-Rio
-*  Autores: Michelle Santiago (ms)
+*  Autores: Gabriel Busquim (gb) e Michelle Santiago (ms)
 *
 *  $HA Histórico de evolução:
 *     Versão  	Autor   	 Data     	Observações
 *	  	4		 ms		   06/12/2017	pequenas correções
-*	  	3		 ms	   	   29/11/2017	mudança de retorno das funções
+*	  	3		 ms	   	   29/11/2017	mudança de retorno das funções e correcao de bugs
 *     	2        ms        20/11/2017 	inicio desenvolvimento
 *     	1        ms        14/11/2017 	criação do arquivo
 *
