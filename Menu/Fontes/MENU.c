@@ -356,7 +356,7 @@ void MENU_MenuIrPerfil(GRA_tppGrafo pGrafo, PER_tpPerfil * pPerfil, char * email
 void MENU_MenuCriarPerfil(GRA_tppGrafo pGrafo){
 	
 	char primNome[51], ultNome[51], email[101], cidade[51], email2[101];
-	int dia, mes, ano, i;
+	int dia, mes, ano, i, tentarNovamente;
 
 	int dadosValidos = 0, escolhaEmailValida = 0;
 	
@@ -439,8 +439,8 @@ void MENU_MenuCriarPerfil(GRA_tppGrafo pGrafo){
 							printf("Deseja tentar de novo? (0 = nao, 1 = sim)\n\n>");
 							scanf("%d", &tentarNovamente);
 							if (tentarNovamente != 1) {
-								printf("Retornando ao perfil\n");
-								MENU_MenuIrPerfil(pGrafo, pPerfil, email, primNome, ultNome, cidade, diaNasc, mesNasc, anoNasc);
+								printf("Retornando ao menu\n");
+								MENU_MenuInicial(pGrafo);
 							}
 						}
 						else if (obtemEmailPerfil2 != PER_CondRetEmailJaCadastrado) {
